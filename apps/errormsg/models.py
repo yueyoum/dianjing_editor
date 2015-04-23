@@ -7,6 +7,8 @@ class ErrorMsg(models.Model):
     error_index = models.CharField(max_length=64, unique=True)
     text_zh = models.CharField(max_length=255)
 
+    des = models.CharField(max_length=255, default=0)
+
     class Meta:
         db_table = 'error_msg'
         verbose_name = '错误代码'
