@@ -44,7 +44,7 @@ def download_zip(request):
         fixture = create_fixture(model)
         memzip.add(filename, fixture)
 
-    now = datetime.datetime.now().strftime("%Y-%m-%d-%H-%m-%S")
+    now = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
 
     response = HttpResponse(memzip.read(), content_type='application/zip')
     response['Content-Disposition'] = 'attachment; filename="config_{0}.zip"'.format(now)
