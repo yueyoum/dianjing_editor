@@ -36,7 +36,7 @@ def create_fixture(model):
 
 def download_zip(request):
     models = [
-        ('errormsg.ErrorMsg', 'errormsg.xml'),
+        ('errormsg.ErrorMsg', 'errormsg.json'),
     ]
 
     memzip = InMemoryZip()
@@ -44,7 +44,7 @@ def download_zip(request):
         fixture = create_fixture(model)
         memzip.add(filename, fixture)
 
-    now = datetime.datetime.now().strftime("%Y-%M-%d-%H-%m-%S")
+    now = datetime.datetime.now().strftime("%Y-%m-%d-%H-%m-%S")
 
     response = HttpResponse(memzip.read(), content_type='application/zip')
     response['Content-Disposition'] = 'attachment; filename="config_{0}.zip"'.format(now)
