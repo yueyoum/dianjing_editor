@@ -30,7 +30,7 @@ class InMemoryZip(object):
 
 def create_fixture(model):
     buffer = StringIO()
-    management.call_command('dumpdata', model, format='xml', indent=4, stdout=buffer)
+    management.call_command('dumpdata', model, format='json', indent=4, stdout=buffer)
     return buffer.getvalue()
 
 
@@ -48,4 +48,4 @@ def download_zip(request):
 
     response = HttpResponse(memzip.read(), content_type='application/zip')
     response['Content-Disposition'] = 'attachment; filename="config_{0}.zip"'.format(now)
-
+    return response
