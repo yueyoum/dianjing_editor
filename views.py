@@ -31,7 +31,7 @@ class InMemoryZip(object):
 def create_fixture(model):
     buffer = StringIO()
     management.call_command('dumpdata', model, format='json', indent=4, stdout=buffer)
-    return buffer.getvalue()
+    return buffer.getvalue().decode('unicode-escape').encode('utf-8')
 
 
 def download_zip(request):
