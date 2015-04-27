@@ -19,6 +19,9 @@ class StaffQuality(models.Model):
     id = models.CharField(primary_key=True, max_length=32)
     color = models.CharField(max_length=32)
 
+    def __unicode__(self):
+        return self.id
+
     class Meta:
         db_table = "staff_quality"
         verbose_name = "品质"
