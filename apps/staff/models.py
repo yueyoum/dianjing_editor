@@ -4,7 +4,7 @@ from django.db import models
 
 class StaffRace(models.Model):
     id = models.IntegerField(primary_key=True)
-    name = models.CharField(unique=True, verbose_name="名称")
+    name = models.CharField(unique=True, max_length=32, verbose_name="名称")
 
     def __unicode__(self):
         return self.name
