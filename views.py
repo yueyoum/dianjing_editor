@@ -15,6 +15,15 @@ from django.http import HttpResponse
 from django.core import management
 
 
+MODELS = (
+    ('errormsg.ErrorMsg', 'errormsg.json'),
+    ('staff.StaffQuality', 'staff_quality.json'),
+    ('staff.StaffRace', 'staff_race.json'),
+    ('staff.StaffStatus', 'staff_status.json'),
+    ('staff.Staff', 'staff.json'),
+)
+
+
 class InMemoryZip(object):
     def __init__(self):
         self.buffer = StringIO()
@@ -35,12 +44,8 @@ def create_fixture(model):
 
 
 def download_zip(request):
-    models = [
-        ('errormsg.ErrorMsg', 'errormsg.json'),
-    ]
-
     memzip = InMemoryZip()
-    for model, filename in models:
+    for model, filename in MODELS:
         fixture = create_fixture(model)
         memzip.add(filename, fixture)
 
