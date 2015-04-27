@@ -29,7 +29,7 @@ class InMemoryZip(object):
         self.buffer = StringIO()
 
     def add(self, filename, content):
-        f = zipfile.ZipFile(self.buffer, mode='a')
+        f = zipfile.ZipFile(self.buffer, mode='a', compression=zipfile.ZIP_DEFLATED)
         f.writestr(filename, content)
 
     def read(self):
