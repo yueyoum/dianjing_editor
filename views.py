@@ -21,6 +21,8 @@ MODELS = (
     ('staff.StaffRace', 'staff_race.json'),
     ('staff.StaffStatus', 'staff_status.json'),
     ('staff.Staff', 'staff.json'),
+    ('training.TrainingType', 'training_type.json'),
+    ('training.Training', 'training.json'),
 )
 
 

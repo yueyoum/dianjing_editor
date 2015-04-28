@@ -36,6 +36,8 @@ class Training(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(unique=True, max_length=32, verbose_name="名称")
     tp = models.ForeignKey(TrainingType, db_column='tp', verbose_name="类型")
+    icon = models.CharField(max_length=32, verbose_name="图标")
+    des = models.TextField(blank=True)
 
     minutes = models.IntegerField(verbose_name="训练所需分钟")
     reward_type = models.IntegerField(null=True, blank=True, choices=RewardType, verbose_name="奖励类型")
