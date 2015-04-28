@@ -18,7 +18,7 @@ class StuffQualityAdmin(admin.ModelAdmin):
 
 @admin.register(StaffStatus)
 class StuffStatusAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'value')
+    list_display = ('id', 'name', 'value', 'des')
 
 
 @admin.register(Staff)

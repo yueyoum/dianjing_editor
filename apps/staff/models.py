@@ -32,6 +32,7 @@ class StaffStatus(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=32, verbose_name="名称")
     value = models.IntegerField(verbose_name="加成值", help_text="5% 直接填5")
+    des = models.CharField(max_length=255, verbose_name="说明", blank=True)
 
     def __unicode__(self):
         return self.name
