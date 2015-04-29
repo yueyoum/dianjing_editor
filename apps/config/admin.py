@@ -4,4 +4,4 @@ from apps.config.models import ClientConfig
 
 @admin.register(ClientConfig)
 class ClientConfigAdmin(admin.ModelAdmin):
-    list_display = ('id', 'value')
+    list_display = ('id', 'value', 'mean')
