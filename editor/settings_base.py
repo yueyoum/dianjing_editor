@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'apps.errormsg',
     'apps.staff',
     'apps.training',
+    'apps.config',
 )
 
 MIDDLEWARE_CLASSES = (

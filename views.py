@@ -16,6 +16,7 @@ from django.core import management
 
 
 MODELS = (
+    ('config.ClientConfig', 'client_config.json'),
     ('errormsg.ErrorMsg', 'errormsg.json'),
     ('staff.StaffQuality', 'staff_quality.json'),
     ('staff.StaffRace', 'staff_race.json'),
