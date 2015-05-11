@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'apps.staff',
     'apps.training',
     'apps.config',
+    'apps.npc',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -24,6 +24,7 @@ MODELS = (
     ('staff.Staff', 'staff.json'),
     ('training.TrainingType', 'training_type.json'),
     ('training.Training', 'training.json'),
+    ('npc.NPCClub', 'npc_club.json'),
 )
 
 
