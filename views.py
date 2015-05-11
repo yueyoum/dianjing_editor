@@ -25,6 +25,8 @@ MODELS = (
     ('training.TrainingType', 'training_type.json'),
     ('training.Training', 'training.json'),
     ('npc.NPCClub', 'npc_club.json'),
+    ('npc.NPCClubName', 'npc_club_name.json'),
+    ('npc.NPCManagerName', 'npc_manager_name.json'),
 )
 
 

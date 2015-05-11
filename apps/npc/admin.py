@@ -1,11 +1,22 @@
 from django.contrib import admin
 
-from apps.npc.models import NPCClub
+from apps.npc.models import NPCClub, NPCClubName, NPCManagerName
+
+
+@admin.register(NPCClubName)
+class NPCClubNameAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+
+@admin.register(NPCManagerName)
+class NPCManagerNameAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
 
 @admin.register(NPCClub)
 class NPCClubAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'name', 'manager_name',
+        'id',
         'jingong_low', 'jingong_high',
         'qianzhi_low', 'qianzhi_high',
         'xintai_low', 'xintai_high',
@@ -18,8 +29,6 @@ class NPCClubAdmin(admin.ModelAdmin):
 
     fields = (
         'id',
-        'name',
-        'manager_name',
         ('jingong_low', 'jingong_high'),
         ('qianzhi_low', 'qianzhi_high'),
         ('xintai_low', 'xintai_high'),

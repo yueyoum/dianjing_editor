@@ -2,22 +2,27 @@
 
 from django.db import models
 
-class NPCClub(models.Model):
-    # RANK = (
-    #     (1, "青铜三"),
-    #     (2, "青铜二"),
-    #     (3, "青铜一"),
-    #     (4, "白银三"),
-    #     (5, "白银二"),
-    #     (6, "白银一"),
-    #     (7, "黄金三"),
-    #     (8, "黄金二"),
-    #     (9, "黄金一"),
-    # )
+class NPCClubName(models.Model):
+    name = models.CharField(max_length=64)
 
+    class Meta:
+        db_table = 'npc_club_name'
+        verbose_name = "NPC俱乐部名字"
+        verbose_name_plural = "NPC俱乐部名字"
+
+
+class NPCManagerName(models.Model):
+    name = models.CharField(max_length=64)
+
+    class Meta:
+        db_table = 'npc_manager_name'
+        verbose_name = "NPC经理人名字"
+        verbose_name_plural = "NPC经理人名字"
+
+
+
+class NPCClub(models.Model):
     id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=32, verbose_name="俱乐部名字")
-    manager_name = models.CharField(max_length=32, verbose_name="经理人名字")
 
     jingong_low = models.IntegerField(verbose_name="进攻下限")
     jingong_high = models.IntegerField(verbose_name="进攻上限")
