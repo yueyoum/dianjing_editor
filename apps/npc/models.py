@@ -20,28 +20,28 @@ class NPCClub(models.Model):
     manager_name = models.CharField(max_length=32, verbose_name="经理人名字")
 
     jingong_low = models.IntegerField(verbose_name="进攻下限")
-    jingong_high = models.FloatField(verbose_name="进攻上限")
+    jingong_high = models.IntegerField(verbose_name="进攻上限")
 
     qianzhi_low = models.IntegerField(verbose_name="牵制下限")
-    qianzhi_high = models.FloatField(verbose_name="牵制上限")
+    qianzhi_high = models.IntegerField(verbose_name="牵制上限")
 
     xintai_low = models.IntegerField(verbose_name="心态下限")
-    xintai_high = models.FloatField(verbose_name="心态上限")
+    xintai_high = models.IntegerField(verbose_name="心态上限")
 
     baobing_low = models.IntegerField(verbose_name="暴兵下限")
-    baobing_high = models.FloatField(verbose_name="暴兵上限")
+    baobing_high = models.IntegerField(verbose_name="暴兵上限")
 
     fangshou_low = models.IntegerField(verbose_name="防守下限")
-    fangshou_high = models.FloatField(verbose_name="防守上限")
+    fangshou_high = models.IntegerField(verbose_name="防守上限")
 
     yunying_low = models.IntegerField(verbose_name="运营下限")
-    yunying_high = models.FloatField(verbose_name="运营上限")
+    yunying_high = models.IntegerField(verbose_name="运营上限")
 
     yishi_low = models.IntegerField(verbose_name="意识下限")
-    yishi_high = models.FloatField(verbose_name="意识上限")
+    yishi_high = models.IntegerField(verbose_name="意识上限")
 
     caozuo_low = models.IntegerField(verbose_name="操作下限")
-    caozuo_high = models.FloatField(verbose_name="操作上限")
+    caozuo_high = models.IntegerField(verbose_name="操作上限")
 
     class Meta:
         db_table = 'npc_club'
