@@ -37,10 +37,12 @@ class Skill(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=32, verbose_name='名字')
     type_id = models.ForeignKey(SkillType, db_column='type_id', verbose_name="类型")
-    addition_ids = models.CommaSeparatedIntegerField(max_length=255, verbose_name="加成ID列表")
+    addition_ids = models.CommaSeparatedIntegerField(max_length=255, verbose_name="加成ID列表",
+                                                     help_text='id:value,id:value'
+                                                     )
 
     value_base = models.IntegerField("基础值")
-    level_grow = models.IntegerField("等级增长")
+    level_grow = models.IntegerField("等级增长", help_text="百分比数值")
     max_level = models.IntegerField("最大等级")
 
     des = models.TextField(blank=True, verbose_name="描述")
