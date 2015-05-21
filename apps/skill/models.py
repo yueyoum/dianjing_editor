@@ -37,7 +37,7 @@ class Skill(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=32, verbose_name='名字')
     type_id = models.ForeignKey(SkillType, db_column='type_id', verbose_name="类型")
-    addition_ids = models.CommaSeparatedIntegerField(max_length=255, verbose_name="加成ID列表",
+    addition_ids = models.CharField(max_length=255, verbose_name="加成ID列表",
                                                      help_text='id:value,id:value'
                                                      )
 
