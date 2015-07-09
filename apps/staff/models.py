@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+from django.core.exceptions import ValidationError
 
 class StaffRace(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -82,7 +83,69 @@ class Staff(models.Model):
     caozuo_grow = models.FloatField(verbose_name="操作成长")
 
 
+    def __unicode__(self):
+        return self.name
+
     class Meta:
         db_table = 'staff'
         verbose_name = "员工"
         verbose_name_plural = "员工"
+
+
+class StaffHot(models.Model):
+    id = models.OneToOneField(Staff, primary_key=True, verbose_name="员工")
+    cost = models.IntegerField(verbose_name="花费")
+
+    class Meta:
+        db_table = "staff_hot"
+        verbose_name = "员工招募-人气王"
+        verbose_name_plural = "员工招募-人气王"
+
+
+class StaffRecruitSettings(models.Model):
+    recruit = models.ForeignKey('StaffRecruit')
+    quality = models.ForeignKey(StaffQuality, verbose_name="品质")
+    first_amount = models.IntegerField(verbose_name="首次刷新出现次数")
+    lucky_amount = models.IntegerField(verbose_name="幸运刷新出现次数")
+    normal_amount = models.IntegerField(verbose_name="平时出现次数")
+    ids = models.CommaSeparatedIntegerField(max_length=255, verbose_name="员工ID列表")
+
+    def clean(self):
+        if not self.ids:
+            raise ValidationError("no ids")
+
+        for i in self.ids.split(','):
+            if not Staff.objects.filter(id=int(i)).exists():
+                raise ValidationError("Staff {0} not exists".format(i))
+
+    class Meta:
+        db_table = 'staff_recruit_settings'
+        unique_together = (('recruit', 'quality'),)
+
+
+class StaffRecruit(models.Model):
+    COST_TYPE = (
+        (1, "RMB"),
+        (2, "钻石")
+    )
+
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=32)
+    cost_type = models.IntegerField(choices=COST_TYPE, verbose_name="花费类型")
+    cost_value = models.IntegerField(verbose_name="花费金额")
+    lucky_times = models.IntegerField(verbose_name="幸运次数")
+
+    des = models.TextField(blank=True, verbose_name="描述")
+
+    recruit_settings = models.ManyToManyField(StaffRecruitSettings)
+
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'staff_recruit'
+        verbose_name = "员工招募-合约"
+        verbose_name_plural = "员工招募-合约"
+
+

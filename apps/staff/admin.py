@@ -5,6 +5,9 @@ from apps.staff.models import (
     StaffRace,
     StaffStatus,
     Staff,
+    StaffHot,
+    StaffRecruitSettings,
+    StaffRecruit,
 )
 
 
@@ -29,3 +32,25 @@ class StuffAdmin(admin.ModelAdmin):
     )
 
     list_filter = ('race', 'quality')
+
+
+@admin.register(StaffHot)
+class StaffHotAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'cost'
+    )
+
+class StaffRecruitSettingsInline(admin.TabularInline):
+    model = StaffRecruitSettings
+
+@admin.register(StaffRecruit)
+class StaffRecruitAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'name', 'cost_type', 'cost_value', 'lucky_times',
+        'des'
+    )
+
+    exclude = ('recruit_settings',)
+
+    inlines = [StaffRecruitSettingsInline,]
+
