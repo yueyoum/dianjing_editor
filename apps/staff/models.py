@@ -108,16 +108,6 @@ class StaffHot(models.Model):
         verbose_name = "员工招募-人气王"
         verbose_name_plural = "员工招募-人气王"
 
-    @classmethod
-    def create_fixture(cls):
-        fixture = []
-        for s in cls.objects.all():
-            fixture.append({
-                'id': s.id.id,
-                'cost': s.cost
-            })
-
-        return fixture
 
 
 class StaffRecruitSettings(models.Model):
@@ -157,18 +147,8 @@ class StaffRecruit(models.Model):
 
 
     @classmethod
-    def create_fixture(cls):
-        fixture = []
+    def patch_fixture(cls, fixture):
         for s in cls.objects.all():
-            data = {
-                'id': s.id,
-                'name': s.name,
-                'cost_type': s.cost_type,
-                'cost_value': s.cost_value,
-                'lucky_times': s.lucky_times,
-                'des': s.des,
-            }
-
             staff_settings = []
             for ss in s.statff_settings.all():
                 staff_settings.append({
@@ -178,9 +158,9 @@ class StaffRecruit(models.Model):
                     'normal_amount': ss.normal_amount
                 })
 
-            data['staff_settings'] = staff_settings
-
-            fixture.append(data)
+            for f in fixture:
+                if f['pk'] == s.id:
+                    f['fields']['staff_settings'] = staff_settings
 
         return fixture
 

@@ -56,13 +56,15 @@ def create_fixture(model):
     m = __import__('apps.{0}.models'.format(a), fromlist=[b])
     m = getattr(m, b)
 
-    cf = getattr(m ,'create_fixture', None)
+    management.call_command('dumpdata', model, format='json', indent=4, stdout=buffer)
+    data = buffer.getvalue()
+
+    cf = getattr(m ,'patch_fixture', None)
     if cf:
-        fixture = cf()
-        json.dump(fixture, buffer, indent=4)
-    else:
-        management.call_command('dumpdata', model, format='json', indent=4, stdout=buffer)
-    return buffer.getvalue().decode('unicode-escape').encode('utf-8')
+        fixture = cf(json.loads(data))
+        data = json.dumps(fixture, indent=4)
+
+    return data.decode('unicode-escape').encode('utf-8')
 
 
 def download_zip(request):
