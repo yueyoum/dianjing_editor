@@ -113,7 +113,7 @@ class StaffHot(models.Model):
         fixture = []
         for s in cls.objects.all():
             fixture.append({
-                'id': s.id,
+                'id': s.id.id,
                 'cost': s.cost
             })
 
