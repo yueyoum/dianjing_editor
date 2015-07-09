@@ -7,6 +7,7 @@ Description:
 
 """
 import datetime
+import json
 
 from cStringIO import StringIO
 import zipfile
@@ -22,6 +23,8 @@ MODELS = (
     ('staff.StaffRace', 'staff_race.json'),
     ('staff.StaffStatus', 'staff_status.json'),
     ('staff.Staff', 'staff.json'),
+    ('staff.StaffHot', 'staff_hot.json'),
+    ('staff.StaffRecruit', 'staff_recruit.json'),
     ('training.TrainingType', 'training_type.json'),
     ('training.Training', 'training.json'),
     ('npc.NPCClub', 'npc_club.json'),
@@ -46,10 +49,19 @@ class InMemoryZip(object):
         return self.buffer.getvalue()
 
 
-
 def create_fixture(model):
     buffer = StringIO()
-    management.call_command('dumpdata', model, format='json', indent=4, stdout=buffer)
+    a, b = model.split(',')
+
+    m = __import__('apps.{0}.models'.format(a), fromlist=[b])
+    m = getattr(m, b)
+
+    cf = getattr(m ,'create_fixture', None)
+    if cf:
+        fixture = cf()
+        json.dump(fixture, buffer, indent=4)
+    else:
+        management.call_command('dumpdata', model, format='json', indent=4, stdout=buffer)
     return buffer.getvalue().decode('unicode-escape').encode('utf-8')
 
 

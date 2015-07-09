@@ -110,7 +110,7 @@ class StaffHot(models.Model):
 
 
 class StaffRecruitSettings(models.Model):
-    recruit = models.ForeignKey('StaffRecruit')
+    recruit = models.ForeignKey('StaffRecruit', related_name='statff_settings')
     quality = models.ForeignKey(StaffQuality, verbose_name="品质")
     first_amount = models.IntegerField(verbose_name="首次刷新出现次数")
     lucky_amount = models.IntegerField(verbose_name="幸运刷新出现次数")
@@ -136,9 +136,6 @@ class StaffRecruit(models.Model):
 
     des = models.TextField(blank=True, verbose_name="描述")
 
-    recruit_settings = models.ManyToManyField(StaffRecruitSettings)
-
-
     def __unicode__(self):
         return self.name
 
@@ -146,5 +143,34 @@ class StaffRecruit(models.Model):
         db_table = 'staff_recruit'
         verbose_name = "员工招募-合约"
         verbose_name_plural = "员工招募-合约"
+
+
+    @classmethod
+    def create_fixture(cls):
+        fixture = {}
+        for s in cls.objects.all():
+            data = {
+                'id': s.id,
+                'name': s.name,
+                'cost_type': s.cost_type,
+                'cost_value': s.cost_value,
+                'lucky_times': s.lucky_times,
+                'des': s.des,
+            }
+
+            staff_settings = []
+            for ss in s.statff_settings.all():
+                staff_settings.append({
+                    'quality': ss.quality.id,
+                    'first_amount': ss.first_amount,
+                    'lucky_amount': ss.lucky_amount,
+                    'normal_amount': ss.normal_amount
+                })
+
+            data['staff_settings'] = staff_settings
+
+            fixture[s.id] = data
+
+        return fixture
 
 

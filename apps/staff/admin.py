@@ -50,7 +50,5 @@ class StaffRecruitAdmin(admin.ModelAdmin):
         'des'
     )
 
-    exclude = ('recruit_settings',)
-
     inlines = [StaffRecruitSettingsInline,]
 
