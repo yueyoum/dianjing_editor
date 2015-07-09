@@ -46,6 +46,11 @@ class StaffStatus(models.Model):
 
 
 class Staff(models.Model):
+    BUY_TYPE = (
+        (1, "RMB"),
+        (2, "钻石")
+    )
+
     id = models.IntegerField(primary_key=True)
     name = models.CharField(unique=True, max_length=32, verbose_name="名字")
     avatar = models.CharField(max_length=32, verbose_name="头像")
@@ -54,7 +59,9 @@ class Staff(models.Model):
     race = models.ForeignKey(StaffRace, db_column='race', verbose_name="种族")
     quality = models.ForeignKey(StaffQuality, db_column='quality', verbose_name="品质")
 
+    buy_type = models.IntegerField(choices=BUY_TYPE, verbose_name="签约费类型")
     buy_cost = models.IntegerField(verbose_name="签约费")
+    can_recruit = models.BooleanField(verbose_name="是否可以招募", default=True)
 
     des = models.TextField(blank=True, verbose_name="简介")
 
@@ -108,15 +115,7 @@ class StaffRecruitSettings(models.Model):
     first_amount = models.IntegerField(verbose_name="首次刷新出现次数")
     lucky_amount = models.IntegerField(verbose_name="幸运刷新出现次数")
     normal_amount = models.IntegerField(verbose_name="平时出现次数")
-    ids = models.CommaSeparatedIntegerField(max_length=255, verbose_name="员工ID列表")
 
-    def clean(self):
-        if not self.ids:
-            raise ValidationError("no ids")
-
-        for i in self.ids.split(','):
-            if not Staff.objects.filter(id=int(i)).exists():
-                raise ValidationError("Staff {0} not exists".format(i))
 
     class Meta:
         db_table = 'staff_recruit_settings'
