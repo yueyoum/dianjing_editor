@@ -51,7 +51,7 @@ class InMemoryZip(object):
 
 def create_fixture(model):
     buffer = StringIO()
-    a, b = model.split(',')
+    a, b = model.split('.')
 
     m = __import__('apps.{0}.models'.format(a), fromlist=[b])
     m = getattr(m, b)
