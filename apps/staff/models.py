@@ -108,6 +108,17 @@ class StaffHot(models.Model):
         verbose_name = "员工招募-人气王"
         verbose_name_plural = "员工招募-人气王"
 
+    @classmethod
+    def create_fixture(cls):
+        fixture = []
+        for s in cls.objects.all():
+            fixture.append({
+                'id': s.id,
+                'cost': s.cost
+            })
+
+        return fixture
+
 
 class StaffRecruitSettings(models.Model):
     recruit = models.ForeignKey('StaffRecruit', related_name='statff_settings')
@@ -147,7 +158,7 @@ class StaffRecruit(models.Model):
 
     @classmethod
     def create_fixture(cls):
-        fixture = {}
+        fixture = []
         for s in cls.objects.all():
             data = {
                 'id': s.id,
@@ -169,7 +180,7 @@ class StaffRecruit(models.Model):
 
             data['staff_settings'] = staff_settings
 
-            fixture[s.id] = data
+            fixture.append(data)
 
         return fixture
 
