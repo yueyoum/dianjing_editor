@@ -122,13 +122,18 @@ class Staff(models.Model):
     def patch_fixture(cls, fixture):
         for f in fixture:
             skill_ids = f['fields']['skill_ids']
-            f['fields']['skill_ids'] = [int(i) for i in skill_ids.split(',')]
+            if skill_ids:
+                f['fields']['skill_ids'] = [int(i) for i in skill_ids.split(',')]
+            else:
+                f['fields']['skill_ids'] = []
 
             qianban_ids = f['fields']['qianban_ids']
-            f['fields']['qianban_ids'] = [int(i) for i in qianban_ids.split(',')]
+            if qianban_ids:
+                f['fields']['qianban_ids'] = [int(i) for i in qianban_ids.split(',')]
+            else:
+                f['fields']['qianban_ids'] = []
 
         return fixture
-
 
 
 
