@@ -64,7 +64,7 @@ def create_fixture(model):
         fixture = cf(json.loads(data))
         data = json.dumps(fixture, indent=4)
 
-    return data.decode('unicode-escape').encode('utf-8')
+    return data
 
 
 def download_zip(request):
