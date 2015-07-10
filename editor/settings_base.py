@@ -45,6 +45,8 @@ INSTALLED_APPS = (
     'apps.npc',
     'apps.skill',
     'apps.unit',
+    'apps.club',
+    'apps.qianban',
 )
 
 MIDDLEWARE_CLASSES = (

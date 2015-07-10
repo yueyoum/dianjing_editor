@@ -63,6 +63,9 @@ class Staff(models.Model):
     buy_cost = models.IntegerField(verbose_name="签约费")
     can_recruit = models.BooleanField(verbose_name="是否可以招募", default=True)
 
+    skill_ids = models.CommaSeparatedIntegerField(max_length=255, blank=True, verbose_name="技能ID列表")
+    qianban_ids = models.CommaSeparatedIntegerField(max_length=255, blank=True, verbose_name="牵绊ID列表")
+
     des = models.TextField(blank=True, verbose_name="简介")
 
     jingong = models.IntegerField(verbose_name="进攻")
@@ -90,13 +93,44 @@ class Staff(models.Model):
     caozuo_grow = models.FloatField(verbose_name="操作成长")
 
 
+    def clean(self):
+        from apps.skill.models import Skill
+        from apps.qianban.models import QianBan
+
+        if self.skill_ids:
+            for i in self.skill_ids.split(','):
+                if not Skill.objects.filter(id=int(i)).exists():
+                    raise ValidationError("skill {0} not exists".format(i))
+
+        if self.qianban_ids:
+            for i in self.qianban_ids.split(','):
+                if not QianBan.objects.filter(id=int(i)).exists():
+                    raise ValidationError("qianban {0} not exists".format(i))
+
+
     def __unicode__(self):
         return self.name
+
 
     class Meta:
         db_table = 'staff'
         verbose_name = "员工"
         verbose_name_plural = "员工"
+
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            skill_ids = f['fields']['skill_ids']
+            f['fields']['skill_ids'] = [int(i) for i in skill_ids.split(',')]
+
+            qianban_ids = f['fields']['qianban_ids']
+            f['fields']['qianban_ids'] = [int(i) for i in qianban_ids.split(',')]
+
+        return fixture
+
+
+
 
 
 class StaffHot(models.Model):

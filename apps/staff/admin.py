@@ -29,6 +29,7 @@ class StuffAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'name', 'avatar', 'nation', 'race', 'quality',
         'buy_type', 'buy_cost', 'can_recruit', 'des',
+        'skill_ids', 'qianban_ids'
     )
 
     list_filter = ('race', 'quality')

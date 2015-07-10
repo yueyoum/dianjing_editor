@@ -34,6 +34,8 @@ MODELS = (
     ('skill.SkillType', 'skill_type.json'),
     ('skill.SkillAddition', 'skill_addition.json'),
     ('skill.Skill', 'skill.json'),
+    ('club.ClubFlag', 'club_flag.json'),
+    ('qianban.QianBan', 'qianban.json'),
 )
 
 
@@ -64,7 +66,7 @@ def create_fixture(model):
         fixture = cf(json.loads(data))
         data = json.dumps(fixture, indent=4)
 
-    return data
+    return data.decode('unicode-escape').encode('utf-8')
 
 
 def download_zip(request):
