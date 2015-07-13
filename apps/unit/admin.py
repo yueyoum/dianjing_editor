@@ -20,7 +20,6 @@ class UnitAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'name', 'race', 'first_trig', 'second_trig', 'third_trig',
         'skill',
-        'des'
     )
 
     list_filter = ('race',)

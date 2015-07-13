@@ -45,10 +45,22 @@ class Unit(models.Model):
         verbose_name = "单位"
         verbose_name_plural = "单位"
 
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+
+            des = {
+                int(d.policy.id): d.des.split('|') for d in cls.objects.get(id=f['pk']).des.all()
+            }
+
+            f['fields']['des'] = des
+
+        return fixture
+
 
 class UnitDes(models.Model):
     unit = models.ForeignKey(Unit, related_name='des')
-    policy = models.ForeignKey(Policy)
+    policy = models.ForeignKey(Policy, verbose_name="战术")
     des = models.TextField(verbose_name="描述")
 
     class Meta:
