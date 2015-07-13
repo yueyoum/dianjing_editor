@@ -50,7 +50,7 @@ class Unit(models.Model):
         for f in fixture:
 
             des = {
-                int(d.policy.id): d.des.split('|') for d in cls.objects.get(id=f['pk']).des.all()
+                int(d.policy.id): [line.split('|') for line in d.des.split('\n')] for d in cls.objects.get(id=f['pk']).des.all()
             }
 
             f['fields']['des'] = des
