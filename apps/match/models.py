@@ -41,10 +41,11 @@ class ChallengeMatch(models.Model):
 
 
     def clean(self):
-        if not self.staffs:
-            raise ValidationError("No staffs")
+        staffs = [int(s) for s in self.staffs.split(',')]
+        if len(staffs) != 5:
+            raise ValidationError("wrong staffs")
 
-        for s in self.staffs.split(','):
+        for s in staffs:
             if not Staff.objects.filter(id=int(s)).exists():
                 raise ValidationError("Staff {0} not exists".format(s))
 
