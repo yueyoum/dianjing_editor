@@ -23,6 +23,7 @@ class ChallengeType(models.Model):
 
 class ChallengeMatch(models.Model):
     id = models.IntegerField(primary_key=True)
+    next_id = models.IntegerField(verbose_name="下一关ID")
     name = models.CharField(max_length=255, verbose_name="名字")
     tp = models.ForeignKey(ChallengeType, verbose_name="类型")
 

@@ -12,7 +12,7 @@ class ChallengeTypeAdmin(admin.ModelAdmin):
 @admin.register(ChallengeMatch)
 class ChallengeMatchAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'name', 'tp', 'level', 'strength', 'staffs'
+        'id', 'next_id', 'name', 'tp', 'level', 'strength', 'staffs'
     )
 
     list_filter = ('tp',)
