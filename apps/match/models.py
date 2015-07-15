@@ -26,6 +26,7 @@ class ChallengeMatch(models.Model):
     next_id = models.IntegerField(verbose_name="下一关ID")
     name = models.CharField(max_length=255, verbose_name="名字")
     tp = models.ForeignKey(ChallengeType, verbose_name="类型")
+    policy = models.ForeignKey('unit.Policy', verbose_name="战术")
 
     level = models.IntegerField(verbose_name="选手等级")
     strength = models.FloatField(verbose_name="选手强度系数")
