@@ -38,6 +38,9 @@ MODELS = (
     ('qianban.QianBan', 'qianban.json'),
     ('match.ChallengeType', 'challenge_type.json'),
     ('match.ChallengeMatch', 'challenge_match.json'),
+    ('match.MatchConversationStart', 'match_conversation_start.json'),
+    ('match.MatchConversationEnd', 'match_conversation_end.json'),
+    ('match.MatchConversationRoundEnd', 'match_conversation_round_end.json'),
 )
 
 

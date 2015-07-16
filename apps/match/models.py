@@ -6,6 +6,65 @@ from django.core.exceptions import ValidationError
 from apps.staff.models import Staff
 
 
+class MatchConversationStart(models.Model):
+    id = models.IntegerField(primary_key=True)
+    policy = models.ForeignKey('unit.Policy', verbose_name="战术")
+    race = models.ForeignKey('staff.StaffRace', verbose_name="种族")
+    des = models.TextField(verbose_name="描述")
+
+    class Meta:
+        db_table = 'match_conversation_start'
+        verbose_name = '每局比赛开始对话'
+        verbose_name_plural = '每局比赛开始对话'
+
+
+class MatchConversationEnd(models.Model):
+    END_AT = (
+        (1, "第一回合"),
+        (2, "第二回合"),
+        (3, "第三回合"),
+    )
+
+    VALUE = (
+        (50, "=50"),
+        (49, "40<=, <50"),
+        (39, "30<=, <40"),
+        (29, "20<=, <30"),
+        (19, "10<=, <20"),
+        (9,  "0<=, <10"),
+    )
+
+    id = models.IntegerField(primary_key=True)
+    end_at = models.IntegerField(choices=END_AT, verbose_name="结束于")
+    disadvantage_win = models.BooleanField(default=False, verbose_name="劣势方是否胜利")
+    disadvantage_value = models.IntegerField(choices=VALUE, verbose_name="劣势方优势值")
+
+    des = models.TextField(verbose_name="描述")
+
+    class Meta:
+        db_table = 'match_conversation_end'
+        verbose_name = '每局比赛结束对话'
+        verbose_name_plural = '每局比赛结束对话'
+
+
+
+class MatchConversationRoundEnd(models.Model):
+    ROUND = (
+        (1, "第一回合"),
+        (2, "第二回合"),
+        (3, "第三回合"),
+    )
+
+    id = models.IntegerField(primary_key=True, choices=ROUND, verbose_name="第几回合")
+    des = models.TextField(verbose_name="描述")
+
+    class Meta:
+        db_table = 'match_conversation_round_end'
+        verbose_name = '每回合比赛结束对话'
+        verbose_name_plural = '每回合比赛结束对话'
+
+
+
 class ChallengeType(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, verbose_name='类型')
@@ -34,6 +93,9 @@ class ChallengeMatch(models.Model):
     strength = models.FloatField(verbose_name="选手强度系数")
 
     staffs = models.CommaSeparatedIntegerField(max_length=255, verbose_name="选手ID列表")
+
+    des = models.TextField(blank=True, verbose_name="描述")
+
 
     def __unicode__(self):
         return self.name
