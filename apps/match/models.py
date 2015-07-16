@@ -37,7 +37,7 @@ class MatchConversationEnd(models.Model):
     id = models.IntegerField(primary_key=True)
     end_at = models.IntegerField(choices=END_AT, verbose_name="结束于")
     disadvantage_win = models.BooleanField(default=False, verbose_name="劣势方是否胜利")
-    disadvantage_value = models.IntegerField(choices=VALUE, verbose_name="劣势方优势值")
+    disadvantage_value = models.IntegerField(choices=VALUE, null=True, blank=True, verbose_name="劣势方优势值")
 
     des = models.TextField(verbose_name="描述")
 
