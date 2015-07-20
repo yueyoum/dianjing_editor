@@ -12,5 +12,7 @@ class BuildingAdmin(admin.ModelAdmin):
         'id', 'name', 'des', 'LevelAmount'
     )
 
+    inlines = [BuildingLevelsInline,]
+
     def LevelAmount(self, obj):
         return obj.levels_info.all().count()
