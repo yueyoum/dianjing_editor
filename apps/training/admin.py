@@ -10,6 +10,7 @@ class TrainingTypeAdmin(admin.ModelAdmin):
 @admin.register(Training)
 class TrainingAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'name', 'tp', 'icon', 'des',
-        'minutes', 'reward_type', 'reward_value'
+        'id', 'name', 'building', 'tp', 'icon', 'des',
+        'cost_type', 'cost_value', 'need_building_level',
+        'minutes', 'package',
     )

@@ -164,7 +164,7 @@ class StaffRecruitSettings(models.Model):
 
 class StaffRecruit(models.Model):
     COST_TYPE = (
-        (1, "RMB"),
+        (1, "软妹币"),
         (2, "钻石")
     )
 
