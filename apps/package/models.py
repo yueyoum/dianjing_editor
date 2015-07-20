@@ -36,7 +36,7 @@ class Package(models.Model):
     attr_random_amount = models.IntegerField(default=0, verbose_name="随机属性数量",
                                              help_text="只有 属性模式 为 随机 时，才有用"
                                              )
-    attr_random_value = models.CharField(blank=True, max_length=32, verbose_name="随机熟悉值范围",
+    attr_random_value = models.CharField(blank=True, max_length=32, verbose_name="随机属性值范围",
                                          help_text="只有 属性模式 为 完全随机 时，才有用"
                                          )
 
