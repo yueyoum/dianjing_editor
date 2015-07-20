@@ -72,14 +72,14 @@ class Package(models.Model):
             if ',' not in value:
                 if not value.isdigit():
                     raise ValidationError("{0}填错了".format(name))
-
-            value_splited = value.split(',')
-            if len(value_splited) != 2:
-                raise ValidationError("{0}填错了".format(name))
-
-            for v in value_splited:
-                if not v.isdigit():
+            else:
+                value_splited = value.split(',')
+                if len(value_splited) != 2:
                     raise ValidationError("{0}填错了".format(name))
+
+                for v in value_splited:
+                    if not v.isdigit():
+                        raise ValidationError("{0}填错了".format(name))
 
 
     class Meta:
