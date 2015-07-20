@@ -15,6 +15,31 @@ class Building(models.Model):
         verbose_name = '设施'
         verbose_name_plural = '设施'
 
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            bid = f['pk']
+            levels = {}
+            for l in BuildingLevels.objects.filter(building__id=bid):
+                levels[l.level] = {
+                    'resource': l.resource,
+                    'up_need_club_level': l.up_need_club_level,
+                    'up_need_gold': l.up_need_gold,
+                    'value1': l.value1,
+                    'des': l.des,
+                }
+
+            f['fields']['levels'] = levels
+
+            if levels:
+                max_levels = max(levels.keys())
+            else:
+                max_levels = 0
+
+            f['fields']['max_levels'] = max_levels
+
+        return fixture
+
 
 class BuildingLevels(models.Model):
     building = models.ForeignKey(Building, related_name='levels_info')
