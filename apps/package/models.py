@@ -33,7 +33,7 @@ class Package(models.Model):
     name = models.CharField(max_length=32, verbose_name="名字")
 
     attr_mode = models.IntegerField(choices=ATTR_MODE, default=1, verbose_name="属性模式")
-    attr_random_amount = models.IntegerField(default=0, verbose_name="随机属性数量",
+    attr_random_amount = models.IntegerField(default=1, verbose_name="随机属性数量",
                                              help_text="只有 属性模式 为 随机 时，才有用"
                                              )
     attr_random_value = models.CharField(blank=True, max_length=32, verbose_name="随机属性值范围",
@@ -73,13 +73,13 @@ class Package(models.Model):
                 if not value.isdigit():
                     raise ValidationError("{0}填错了".format(name))
 
-                value_splited = value.split(',')
-                if len(value_splited) != 2:
-                    raise ValidationError("{0}填错了".format(name))
+            value_splited = value.split(',')
+            if len(value_splited) != 2:
+                raise ValidationError("{0}填错了".format(name))
 
-                for v in value_splited:
-                    if not v.isdigit():
-                        raise ValidationError("{0}填错了".format(name))
+            for v in value_splited:
+                if not v.isdigit():
+                    raise ValidationError("{0}填错了".format(name))
 
 
     class Meta:
