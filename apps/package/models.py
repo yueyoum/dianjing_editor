@@ -91,6 +91,9 @@ class Package(models.Model):
     @classmethod
     def patch_fixture(cls, fixture):
         def patch(value):
+            if not value:
+                return []
+
             if ',' in value:
                 a, b = value.split(',')
                 return [int(a), int(b)]
