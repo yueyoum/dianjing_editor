@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'apps.club',
     'apps.qianban',
     'apps.match',
+    'apps.package',
 )
 
 MIDDLEWARE_CLASSES = (
