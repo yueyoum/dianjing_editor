@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'apps.match',
     'apps.package',
     'apps.building',
+    'apps.task',
 )
 
 MIDDLEWARE_CLASSES = (
