@@ -23,6 +23,7 @@ class Building(models.Model):
             for l in BuildingLevels.objects.filter(building__id=bid):
                 levels[l.level] = {
                     'resource': l.resource,
+                    'location': l.location,
                     'up_need_club_level': l.up_need_club_level,
                     'up_need_gold': l.up_need_gold,
                     'value1': l.value1,
@@ -45,6 +46,7 @@ class BuildingLevels(models.Model):
     building = models.ForeignKey(Building, related_name='levels_info')
     level = models.IntegerField(verbose_name="等级", db_index=True)
     resource = models.CharField(max_length=255, blank=True, verbose_name="资源")
+    location = models.CharField(max_length=255, blank=True, verbose_name="位置")
     up_need_club_level = models.IntegerField(verbose_name="升级所需俱乐部等级")
     up_need_gold = models.IntegerField(verbose_name="升级所需软妹币")
     value1 = models.IntegerField(null=True, blank=True, verbose_name="值1")
