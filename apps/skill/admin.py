@@ -20,7 +20,7 @@ class SkillAdditionAdmin(admin.ModelAdmin):
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'name', 'icon', 'type_id', 'addition_ids',
+        'id', 'name', 'race', 'icon', 'type_id', 'addition_ids',
         'value_base', 'level_grow', 'max_level',
         'des',
     )
