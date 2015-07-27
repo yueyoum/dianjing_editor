@@ -28,7 +28,7 @@ class StuffStatusAdmin(admin.ModelAdmin):
 class StuffAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'name', 'avatar', 'nation', 'race', 'quality',
-        'buy_type', 'buy_cost', 'can_recruit', 'des',
+        'buy_type', 'buy_cost', 'can_recruit', 'salary', 'des',
         'skill_ids', 'qianban_ids'
     )
 

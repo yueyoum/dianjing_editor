@@ -63,6 +63,8 @@ class Staff(models.Model):
     buy_cost = models.IntegerField(verbose_name="签约费")
     can_recruit = models.BooleanField(verbose_name="是否可以招募", default=True)
 
+    salary = models.IntegerField(verbose_name="薪水", default=0)
+
     skill_ids = models.CommaSeparatedIntegerField(max_length=255, blank=True, verbose_name="技能ID列表")
     qianban_ids = models.CommaSeparatedIntegerField(max_length=255, blank=True, verbose_name="牵绊ID列表")
 
