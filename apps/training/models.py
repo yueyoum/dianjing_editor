@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+from django.core.exceptions import ValidationError
+
 
 class TrainingType(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -38,6 +40,9 @@ class Training(models.Model):
     minutes = models.IntegerField(verbose_name="训练所需分钟")
     package = models.ForeignKey('package.Package', verbose_name="物品包")
 
+    skill_id = models.ForeignKey('skill.Skill', null=True, blank=True, verbose_name="技能")
+    skill_level = models.IntegerField(null=True, blank=True, verbose_name="技能等级")
+
 
     def __unicode__(self):
         return self.name
@@ -47,3 +52,9 @@ class Training(models.Model):
         ordering = ('id',)
         verbose_name = "训练"
         verbose_name_plural = "训练"
+
+
+    def clean(self):
+        if self.skill_id:
+            if not self.skill_level:
+                raise ValidationError("技能配置错误")

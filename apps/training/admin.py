@@ -13,4 +13,5 @@ class TrainingAdmin(admin.ModelAdmin):
         'id', 'name', 'building', 'tp', 'icon', 'des',
         'cost_type', 'cost_value', 'need_building_level',
         'minutes', 'package',
+        'skill_id', 'skill_level',
     )
