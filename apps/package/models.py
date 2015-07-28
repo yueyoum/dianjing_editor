@@ -95,7 +95,7 @@ class Package(models.Model):
                 except:
                     raise ValidationError("道具填错了")
 
-                if not tid.isgidit() or not amount.isgidit():
+                if not tid.isdigit() or not amount.isdigit():
                     raise ValidationError("道具填错了")
 
                 if not Training.objects.filter(id=int(tid)).exists():
