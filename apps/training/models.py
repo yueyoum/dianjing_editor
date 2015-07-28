@@ -55,6 +55,6 @@ class Training(models.Model):
 
 
     def clean(self):
-        if self.skill_id:
-            if not self.skill_level:
+        if self.tp_id == 3:
+            if not self.skill_id or not self.skill_level:
                 raise ValidationError("技能配置错误")
