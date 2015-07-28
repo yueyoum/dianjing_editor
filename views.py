@@ -22,6 +22,7 @@ MODELS = (
     ('staff.StaffQuality', 'staff_quality.json'),
     ('staff.StaffRace', 'staff_race.json'),
     ('staff.StaffStatus', 'staff_status.json'),
+    ('staff.StaffLevel', 'staff_level.json'),
     ('staff.Staff', 'staff.json'),
     ('staff.StaffHot', 'staff_hot.json'),
     ('staff.StaffRecruit', 'staff_recruit.json'),

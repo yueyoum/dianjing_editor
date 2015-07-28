@@ -44,6 +44,35 @@ class StaffStatus(models.Model):
         verbose_name_plural = "状态"
 
 
+class StaffLevel(models.Model):
+    id = models.IntegerField(primary_key=True, verbose_name="等级")
+    quality_A = models.IntegerField(verbose_name="品质A升级所需经验")
+    quality_B = models.IntegerField(verbose_name="品质B升级所需经验")
+    quality_C = models.IntegerField(verbose_name="品质C升级所需经验")
+    quality_D = models.IntegerField(verbose_name="品质D升级所需经验")
+    quality_S = models.IntegerField(verbose_name="品质S升级所需经验")
+    quality_SS = models.IntegerField(verbose_name="品质SS升级所需经验")
+
+    def __unicode__(self):
+        return u'%d' % self.id
+
+    class Meta:
+        db_table = 'staff_level'
+        verbose_name = "等级"
+        verbose_name_plural = "等级"
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            exp = {}
+            for k, v in f['fields'].iteritems():
+                _, quality = k.split('_')
+                exp[quality] = v
+
+            f['fields'] = {'exp': exp}
+
+        return fixture
+
 
 class Staff(models.Model):
     BUY_TYPE = (

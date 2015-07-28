@@ -8,6 +8,7 @@ from apps.staff.models import (
     StaffHot,
     StaffRecruitSettings,
     StaffRecruit,
+    StaffLevel,
 )
 
 
@@ -53,3 +54,9 @@ class StaffRecruitAdmin(admin.ModelAdmin):
 
     inlines = [StaffRecruitSettingsInline,]
 
+@admin.register(StaffLevel)
+class StaffLevelAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'quality_A', 'quality_B', 'quality_C', 'quality_D',
+        'quality_S', 'quality_SS'
+    )
