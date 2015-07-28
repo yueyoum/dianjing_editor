@@ -10,5 +10,6 @@ class PackageAdmin(admin.ModelAdmin):
         'fangshou', 'yunying', 'yishi', 'caozuo',
         'gold', 'diamond',
         'staff_exp', 'club_renown',
+        'trainings',
         'des'
     )

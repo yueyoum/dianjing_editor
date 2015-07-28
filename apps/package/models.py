@@ -56,6 +56,10 @@ class Package(models.Model):
     staff_exp = models.CharField(max_length=32, blank=True, verbose_name="员工经验")
     club_renown = models.CharField(max_length=32, blank=True, verbose_name="俱乐部声望")
 
+    trainings = models.CharField(max_length=255, blank=True, verbose_name="道具（训练）",
+                                 help_text="id:数量,id:数量"
+                                 )
+
     des = models.TextField(blank=True, verbose_name="描述")
 
 
@@ -64,6 +68,8 @@ class Package(models.Model):
 
 
     def clean(self):
+        from apps.training.models import Training
+
         for attr, name in self.ATTRS.iteritems():
             value = getattr(self, attr)
             if not value:
@@ -80,6 +86,17 @@ class Package(models.Model):
                 for v in value_splited:
                     if not v.isdigit():
                         raise ValidationError("{0}填错了".format(name))
+
+        if self.trainings:
+            training = self.trainings.split(',')
+            for tr in training:
+                try:
+                    tid, amount = tr.split(':')
+                except:
+                    raise ValidationError("道具填错了")
+
+                if not Training.objects.filter(id=int(tid)).exists():
+                    raise ValidationError("道具{0}不存在".format(tid))
 
 
     class Meta:
@@ -103,6 +120,16 @@ class Package(models.Model):
         for f in fixture:
             for k in cls.ATTRS.keys():
                 f['fields'][k] = patch(f['fields'][k])
+
+            trainings = f['fields']['trainings']
+
+            new_trainings = []
+            if trainings:
+                for tr in trainings.split(','):
+                    tid, amount = tr.split(':')
+                    new_trainings.append((tid, amount))
+
+            f['fields']['trainings'] = new_trainings
 
         return fixture
 
