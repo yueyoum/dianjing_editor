@@ -95,6 +95,9 @@ class Package(models.Model):
                 except:
                     raise ValidationError("道具填错了")
 
+                if not tid.isgidit() or not amount.isgidit():
+                    raise ValidationError("道具填错了")
+
                 if not Training.objects.filter(id=int(tid)).exists():
                     raise ValidationError("道具{0}不存在".format(tid))
 
@@ -127,7 +130,7 @@ class Package(models.Model):
             if trainings:
                 for tr in trainings.split(','):
                     tid, amount = tr.split(':')
-                    new_trainings.append((tid, amount))
+                    new_trainings.append((int(tid), int(amount)))
 
             f['fields']['trainings'] = new_trainings
 
