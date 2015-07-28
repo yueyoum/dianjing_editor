@@ -94,6 +94,8 @@ class ChallengeMatch(models.Model):
 
     staffs = models.CommaSeparatedIntegerField(max_length=255, verbose_name="选手ID列表")
 
+    package = models.ForeignKey('package.Package', verbose_name="奖励物品包")
+
     des = models.TextField(blank=True, verbose_name="描述")
 
 

@@ -40,6 +40,7 @@ class ChallengeTypeAdmin(admin.ModelAdmin):
 class ChallengeMatchAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'next_id', 'name', 'club_name', 'club_flag', 'tp', 'policy', 'level', 'strength', 'staffs',
+        'package',
         'des'
     )
 
