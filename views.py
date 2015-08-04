@@ -32,6 +32,7 @@ MODELS = (
     ('npc.NPCClubName', 'npc_club_name.json'),
     ('npc.NPCManagerName', 'npc_manager_name.json'),
     ('unit.Unit', 'unit.json'),
+    ('unit.Policy', 'policy.json'),
     ('skill.SkillType', 'skill_type.json'),
     ('skill.SkillAddition', 'skill_addition.json'),
     ('skill.Skill', 'skill.json'),
