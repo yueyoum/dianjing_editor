@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'apps.package',
     'apps.building',
     'apps.task',
+    'apps.notification',
 )
 
 MIDDLEWARE_CLASSES = (
