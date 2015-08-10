@@ -27,7 +27,7 @@ class Training(models.Model):
 
     id = models.IntegerField(primary_key=True)
     name = models.CharField(unique=True, max_length=32, verbose_name="名称")
-    building = models.ForeignKey('building.Building', verbose_name="所属建筑")
+    building = models.ForeignKey('building.Building', null=True, blank=True, verbose_name="所属建筑")
 
     tp = models.ForeignKey(TrainingType, db_column='tp', verbose_name="类型")
     icon = models.CharField(max_length=32, verbose_name="图标")
