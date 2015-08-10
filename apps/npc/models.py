@@ -48,6 +48,9 @@ class NPCClub(models.Model):
     caozuo_low = models.IntegerField(verbose_name="操作下限")
     caozuo_high = models.IntegerField(verbose_name="操作上限")
 
+    skill_low = models.IntegerField(verbose_name="技能等级下限")
+    skill_high = models.IntegerField(verbose_name="技能等级上限")
+
     class Meta:
         db_table = 'npc_club'
         verbose_name = "NPC俱乐部"

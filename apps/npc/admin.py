@@ -25,6 +25,7 @@ class NPCClubAdmin(admin.ModelAdmin):
         'yunying_low', 'yunying_high',
         'yishi_low', 'yishi_high',
         'caozuo_low', 'caozuo_high',
+        'skill_low', 'skill_high',
     )
 
     fields = (
@@ -37,4 +38,5 @@ class NPCClubAdmin(admin.ModelAdmin):
         ('yunying_low', 'yunying_high'),
         ('yishi_low', 'yishi_high'),
         ('caozuo_low', 'caozuo_high'),
+        ('skill_low', 'skill_high'),
     )
