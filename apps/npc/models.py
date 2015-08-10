@@ -23,6 +23,7 @@ class NPCManagerName(models.Model):
 
 class NPCClub(models.Model):
     id = models.IntegerField(primary_key=True)
+    league = models.ForeignKey('league.League', verbose_name="所属联赛等级")
 
     jingong_low = models.IntegerField(verbose_name="进攻下限")
     jingong_high = models.IntegerField(verbose_name="进攻上限")

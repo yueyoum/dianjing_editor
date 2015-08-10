@@ -9,6 +9,9 @@ class League(models.Model):
     day_reward = models.ForeignKey('package.Package', related_name="league_day_reward", verbose_name="日奖励")
     week_reward = models.ForeignKey('package.Package', related_name="league_week_reward", verbose_name="周奖励")
 
+    def __unicode__(self):
+        return self.name
+
     class Meta:
         db_table = 'league'
         verbose_name = "联赛"

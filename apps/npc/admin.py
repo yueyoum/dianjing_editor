@@ -17,6 +17,7 @@ class NPCManagerNameAdmin(admin.ModelAdmin):
 class NPCClubAdmin(admin.ModelAdmin):
     list_display = (
         'id',
+        'league',
         'jingong_low', 'jingong_high',
         'qianzhi_low', 'qianzhi_high',
         'xintai_low', 'xintai_high',
@@ -30,6 +31,7 @@ class NPCClubAdmin(admin.ModelAdmin):
 
     fields = (
         'id',
+        'league',
         ('jingong_low', 'jingong_high'),
         ('qianzhi_low', 'qianzhi_high'),
         ('xintai_low', 'xintai_high'),
