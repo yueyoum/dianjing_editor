@@ -50,6 +50,7 @@ MODELS = (
     ('task.TaskType', 'task_type.json'),
     ('notification.Notification', 'notification.json'),
     ('league.League', 'league.json'),
+    ('function.Function', 'function.json'),
 )
 
 
