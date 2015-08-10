@@ -48,7 +48,8 @@ MODELS = (
     ('building.Building', 'building.json'),
     ('task.Task', 'task.json'),
     ('task.TaskType', 'task_type.json'),
-    ('notification.Notification', 'notification.json')
+    ('notification.Notification', 'notification.json'),
+    ('league.League', 'league.json'),
 )
 
 
