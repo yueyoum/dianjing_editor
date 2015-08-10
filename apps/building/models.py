@@ -6,6 +6,7 @@ class Building(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, verbose_name="名字")
     des = models.TextField(blank=True, verbose_name="描述")
+    status_des = models.TextField(blank=True, verbose_name="当前状态描述")
 
     def __unicode__(self):
         return self.name
