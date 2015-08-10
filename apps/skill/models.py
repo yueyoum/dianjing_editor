@@ -67,20 +67,18 @@ class Skill(models.Model):
 
         for addition in additions:
             a, b = addition.split(':')
-            id_values.append((int(a), int(b)))
+            name = SkillAddition.objects.get(id=int(a)).name
+            id_values.append((name, int(b)))
 
         return id_values
 
 
     def clean(self):
         try:
-            id_values = Skill.parse_addition_ids(self.addition_ids)
+            Skill.parse_addition_ids(self.addition_ids)
         except:
             raise ValidationError("加成ID列表填错了")
 
-        for a, b in id_values:
-            if not SkillAddition.objects.filter(id=a).exists():
-                raise ValidationError("加成ID {0} 不存在".format(a))
 
     @classmethod
     def patch_fixture(cls, fixture):
