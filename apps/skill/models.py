@@ -67,8 +67,8 @@ class Skill(models.Model):
 
         for addition in additions:
             a, b = addition.split(':')
-            name = SkillAddition.objects.get(id=int(a)).name
-            id_values.append((name, int(b)))
+            add_property = SkillAddition.objects.get(id=int(a)).add_property
+            id_values.append((add_property, int(b)))
 
         return id_values
 
