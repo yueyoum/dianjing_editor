@@ -11,5 +11,6 @@ class PackageAdmin(admin.ModelAdmin):
         'gold', 'diamond',
         'staff_exp', 'club_renown',
         'trainings',
+        'skill',
         'des'
     )

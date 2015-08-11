@@ -54,6 +54,7 @@ INSTALLED_APPS = (
     'apps.notification',
     'apps.league',
     'apps.function',
+    'apps.resources',
 )
 
 MIDDLEWARE_CLASSES = (

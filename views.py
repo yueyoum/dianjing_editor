@@ -51,6 +51,7 @@ MODELS = (
     ('notification.Notification', 'notification.json'),
     ('league.League', 'league.json'),
     ('function.Function', 'function.json'),
+    ('resources.Resource', 'resource.json'),
 )
 
 
