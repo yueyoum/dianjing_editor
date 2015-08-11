@@ -38,7 +38,10 @@ class Training(models.Model):
     need_building_level = models.IntegerField(verbose_name="所需建筑物等级")
 
     minutes = models.IntegerField(verbose_name="训练所需分钟")
-    package = models.ForeignKey('package.Package', verbose_name="物品包")
+    package = models.ForeignKey('package.Package', null=True, blank=True, verbose_name="物品包")
+
+    skill_id = models.ForeignKey('skill.Skill', null=True, blank=True, verbose_name="技能")
+    skill_level = models.IntegerField(null=True, blank=True, verbose_name="技能等级")
 
 
     def __unicode__(self):
@@ -49,3 +52,11 @@ class Training(models.Model):
         ordering = ('id',)
         verbose_name = "训练"
         verbose_name_plural = "训练"
+
+    def clean(self):
+        if self.tp_id == 3:
+            if not self.skill_id or not self.skill_level:
+                raise ValidationError("技能配置错误")
+        else:
+            if not self.package:
+                raise ValidationError("没有物品包")

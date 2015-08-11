@@ -13,7 +13,7 @@ class Package(models.Model):
     )
 
     ATTRS = {
-        'attr_random_value': "随机熟悉值范围",
+        'attr_random_value': "随机属性值范围",
         'jingong': "进攻",
         'qianzhi': "牵制",
         'xintai': "心态",
@@ -60,8 +60,6 @@ class Package(models.Model):
                                  help_text="id:数量,id:数量"
                                  )
 
-    skill = models.CharField(max_length=255, blank=True, verbose_name="技能等级加成",
-                             help_text="id:level")
 
     des = models.TextField(blank=True, verbose_name="描述")
 
@@ -72,7 +70,6 @@ class Package(models.Model):
 
     def clean(self):
         from apps.training.models import Training
-        from apps.skill.models import Skill
 
         for attr, name in self.ATTRS.iteritems():
             value = getattr(self, attr)
@@ -105,23 +102,6 @@ class Package(models.Model):
                 if not Training.objects.filter(id=int(tid)).exists():
                     raise ValidationError("道具{0}不存在".format(tid))
 
-        if self.skill:
-            try:
-                sid, level = self.skill.split(':')
-                sid = int(sid)
-                level = int(level)
-                assert level > 0
-            except:
-                raise ValidationError("技能填错了")
-
-            try:
-                s = Skill.objects.get(id=sid)
-            except Skill.DoesNotExist:
-                raise ValidationError("技能{0}不存在".format(sid))
-
-            if level > s.max_level:
-                raise ValidationError("技能{0}超过了最大等级{1}".format(sid, s.max_level))
-
 
     class Meta:
         db_table = 'package'
@@ -153,14 +133,6 @@ class Package(models.Model):
                     new_trainings.append((int(tid), int(amount)))
 
             f['fields']['trainings'] = new_trainings
-
-            skill = f['fields']['skill']
-            new_skill = []
-            if skill:
-                sid, level = skill.split(':')
-                new_skill = [int(sid), int(level)]
-
-            f['fields']['skill'] = new_skill
 
         return fixture
 
