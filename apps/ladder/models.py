@@ -16,8 +16,8 @@ class LadderLogTemplate(models.Model):
 class LadderRankReward(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="排名上限")
     name = models.CharField(max_length=255)
-    score = models.IntegerField(verbose_name="积分")
-    package = models.ForeignKey('package.Package', null=True, blank=True, verbose_name="物品包")
+    score = models.IntegerField(verbose_name="奖励积分")
+    package = models.ForeignKey('package.Package', null=True, blank=True, verbose_name="奖励物品包")
     reward_des = models.TextField(verbose_name="奖励描述")
 
     def __unicode__(self):
