@@ -32,6 +32,7 @@ class MatchConversationEnd(models.Model):
         (29, "20<=, <30"),
         (19, "10<=, <20"),
         (9,  "0<=, <10"),
+        (0, "无关紧要"),
     )
 
     id = models.IntegerField(primary_key=True)
