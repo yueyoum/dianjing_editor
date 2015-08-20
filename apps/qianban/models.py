@@ -31,8 +31,8 @@ class QianBan(models.Model):
                                                         )
 
     addition_tp = models.CharField(choices=ADDITIOIN, max_length=255, verbose_name="加成类型")
-    addition_value = models.CommaSeparatedIntegerField(max_length=255, verbose_name="加成值",
-                                                       help_text="如果加成类型是 技能强度，这里填写的是 技能id,强度"
+    addition_value = models.CharField(max_length=255, verbose_name="加成值",
+                                                       help_text="如果加成类型是 技能强度，这里填写的是 技能id:强度"
                                                        )
 
     class Meta:
@@ -62,10 +62,12 @@ class QianBan(models.Model):
 
         if self.addition_tp == 'skill':
             try:
-                a, b = self.addition_value.split(',')
-                a = int(a)
-                b = int(b)
-                Skill.objects.get(id=a)
+                skills = self.addition_value.split(',')
+                for s in skills:
+                    a, b = s.split(':')
+                    a = int(a)
+                    b = int(b)
+                    Skill.objects.get(id=a)
             except:
                 raise ValidationError("加成值填错了")
         else:
@@ -87,7 +89,14 @@ class QianBan(models.Model):
             f['fields']['addition_skill'] = []
 
             if f['fields']['addition_tp'] == 'skill':
-                f['fields']['addition_skill'] = [int(i) for i in addition_value.split(',')]
+                addition_skill = {}
+                for s in addition_value.split(','):
+                    a, b = s.split(":")
+                    a = int(a)
+                    b = int(b)
+                    addition_skill[a] = b
+
+                f['fields']['addition_skill'] = addition_skill
             else:
                 f['fields']['addition_property'] = int(addition_value)
 
