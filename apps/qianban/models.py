@@ -86,7 +86,7 @@ class QianBan(models.Model):
 
             addition_value = f['fields'].pop('addition_value')
             f['fields']['addition_property'] = 0
-            f['fields']['addition_skill'] = []
+            f['fields']['addition_skill'] = {}
 
             if f['fields']['addition_tp'] == 'skill':
                 addition_skill = {}
