@@ -11,6 +11,7 @@ class Policy(models.Model):
 
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=32, verbose_name="名字")
+    icon = models.CharField(max_length=255, verbose_name="图标")
     advantage_add_round = models.IntegerField(choices=ROUND, verbose_name="在第几轮加成")
     advantage_add_value = models.IntegerField(verbose_name="加成数值")
 

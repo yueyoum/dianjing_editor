@@ -5,7 +5,7 @@ from apps.unit.models import Unit, Policy, UnitDes
 @admin.register(Policy)
 class PolicyAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'name',
+        'id', 'name', 'icon',
         'advantage_add_round', 'advantage_add_value',
         'des'
     )
