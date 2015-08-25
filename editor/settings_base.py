@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'apps.function',
     'apps.resources',
     'apps.ladder',
+    'apps.emoticon',
 )
 
 MIDDLEWARE_CLASSES = (

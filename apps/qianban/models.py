@@ -9,7 +9,7 @@ class QianBan(models.Model):
         (2, "装配技能"),
     )
 
-    ADDITIOIN = (
+    ADDITION = (
         ('jingong', '进攻'),
         ('qianzhi', '牵制'),
         ('xintai', '心态'),
@@ -30,7 +30,7 @@ class QianBan(models.Model):
                                                         help_text='id,id,id'
                                                         )
 
-    addition_tp = models.CharField(choices=ADDITIOIN, max_length=255, verbose_name="加成类型")
+    addition_tp = models.CharField(choices=ADDITION, max_length=255, verbose_name="加成类型")
     addition_value = models.CharField(max_length=255, verbose_name="加成值",
                                                        help_text="如果加成类型是 技能强度，这里填写的是 技能id:强度"
                                                        )
