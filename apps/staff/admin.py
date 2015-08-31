@@ -1,4 +1,6 @@
 from django.contrib import admin
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 
 from apps.staff.models import (
     StaffQuality,
@@ -10,6 +12,10 @@ from apps.staff.models import (
     StaffRecruit,
     StaffLevel,
 )
+
+class StaffResource(resources.ModelResource):
+    class Meta:
+        model = Staff
 
 
 @admin.register(StaffRace)
@@ -26,7 +32,9 @@ class StuffStatusAdmin(admin.ModelAdmin):
 
 
 @admin.register(Staff)
-class StuffAdmin(admin.ModelAdmin):
+class StuffAdmin(ImportExportModelAdmin):
+    resource_class = StaffResource
+
     list_display = (
         'id', 'name', 'avatar', 'nation', 'race', 'quality',
         'buy_type', 'buy_cost', 'can_recruit', 'salary', 'des',
