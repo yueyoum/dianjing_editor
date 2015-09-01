@@ -1,4 +1,6 @@
 from django.contrib import admin
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 
 from apps.match.models import (
     ChallengeType,
@@ -7,6 +9,10 @@ from apps.match.models import (
     MatchConversationRoundEnd,
     MatchConversationStart
 )
+
+class ChallengeMatchResource(resources.ModelResource):
+    class Meta:
+        model = ChallengeMatch
 
 
 @admin.register(MatchConversationStart)
@@ -37,7 +43,9 @@ class ChallengeTypeAdmin(admin.ModelAdmin):
 
 
 @admin.register(ChallengeMatch)
-class ChallengeMatchAdmin(admin.ModelAdmin):
+class ChallengeMatchAdmin(ImportExportModelAdmin):
+    resource_class = ChallengeMatchResource
+
     list_display = (
         'id', 'next_id', 'name', 'club_name', 'club_flag', 'tp', 'policy', 'level', 'strength', 'staffs',
         'package',
