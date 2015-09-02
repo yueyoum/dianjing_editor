@@ -1,6 +1,14 @@
 from django.contrib import admin
 
-from apps.guide.models import Guide
+from apps.guide.models import Guide, GuideDialogAfter, GuideDialogBefore
+
+class GuideDialogBeforeInLine(admin.TabularInline):
+    model = GuideDialogBefore
+
+class GuideDialogAfterInLine(admin.TabularInline):
+    model = GuideDialogAfter
+
+
 
 @admin.register(Guide)
 class GuideAdmin(admin.ModelAdmin):
@@ -8,3 +16,5 @@ class GuideAdmin(admin.ModelAdmin):
         'id', 'next_id', 'operate_type', 'operate_target',
         'resume_url'
     )
+
+    inlines = [GuideDialogBeforeInLine, GuideDialogAfterInLine]

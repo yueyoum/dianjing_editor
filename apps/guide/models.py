@@ -21,3 +21,23 @@ class Guide(models.Model):
         db_table = 'guide'
         verbose_name = "新手引导"
         verbose_name_plural = "新手引导"
+
+
+class GuideDialogBefore(models.Model):
+    guide = models.ForeignKey(Guide, related_name='dialog_before')
+    dialog = models.TextField()
+
+    class Meta:
+        db_table = 'guide_dialog_before'
+        verbose_name = "操作前对话"
+        verbose_name_plural = "操作前对话"
+
+
+class GuideDialogAfter(models.Model):
+    guide = models.ForeignKey(Guide, related_name='dialog_after')
+    dialog = models.TextField()
+
+    class Meta:
+        db_table = 'guide_dialog_after'
+        verbose_name = "操作后对话"
+        verbose_name_plural = "操作后对话"
