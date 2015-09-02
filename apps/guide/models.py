@@ -22,6 +22,18 @@ class Guide(models.Model):
         verbose_name = "新手引导"
         verbose_name_plural = "新手引导"
 
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            pk = f['pk']
+            dialog_before = GuideDialogBefore.objects.filter(guide__id=pk).values_list('dialog', flat=True)
+            dialog_after = GuideDialogAfter.objects.filter(guide__id=pk).values_list('dialog', flat=True)
+
+            f['fields']['dialog_before'] = dialog_before
+            f['fields']['dialog_after'] = dialog_after
+
+        return fixture
+
 
 class GuideDialogBefore(models.Model):
     guide = models.ForeignKey(Guide, related_name='dialog_before')
