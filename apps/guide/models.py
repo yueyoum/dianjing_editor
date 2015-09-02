@@ -29,8 +29,8 @@ class Guide(models.Model):
             dialog_before = GuideDialogBefore.objects.filter(guide__id=pk).values_list('dialog', flat=True)
             dialog_after = GuideDialogAfter.objects.filter(guide__id=pk).values_list('dialog', flat=True)
 
-            f['fields']['dialog_before'] = dialog_before
-            f['fields']['dialog_after'] = dialog_after
+            f['fields']['dialog_before'] = [x for x in dialog_before]
+            f['fields']['dialog_after'] = [x for x in dialog_after]
 
         return fixture
 
