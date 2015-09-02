@@ -15,7 +15,7 @@ class Guide(models.Model):
     operate_type = models.IntegerField(choices=OPERATE_TYPE, verbose_name="操作类型")
     operate_target = models.CharField(max_length=255, verbose_name="操作目标")
 
-    resume_url = models.CharField(max_length=255, verbose_name="恢复操作步骤")
+    resume_url = models.CharField(max_length=255, blank=True, verbose_name="恢复操作步骤")
 
     class Meta:
         db_table = 'guide'
