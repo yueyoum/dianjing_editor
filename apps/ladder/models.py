@@ -33,6 +33,7 @@ class LadderRankReward(models.Model):
 class LadderScoreStore(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
+    des = models.TextField(verbose_name="描述")
     icon = models.CharField(max_length=255)
     times_limit = models.IntegerField(default=-1, verbose_name="次数限制",
                                       help_text="-1为没有限制，0为无法兑换，正整数N表示可以兑换N次")
@@ -44,5 +45,4 @@ class LadderScoreStore(models.Model):
         db_table = 'ladder_score_store'
         verbose_name = "天梯积分商店"
         verbose_name_plural = "天梯积分商店"
-
 
