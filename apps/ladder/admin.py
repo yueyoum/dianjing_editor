@@ -8,7 +8,9 @@ class LadderLogTemplateAdmin(admin.ModelAdmin):
 
 @admin.register(LadderRankReward)
 class LadderRankRewardAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'score', 'package', 'reward_des')
+    list_display = ('id', 'name', 'score', 'package', 'reward_des',
+                    'mail_title', 'mail_content'
+                    )
 
 @admin.register(LadderScoreStore)
 class LadderScoreStoreAdmin(admin.ModelAdmin):

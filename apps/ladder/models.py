@@ -12,13 +12,14 @@ class LadderLogTemplate(models.Model):
         verbose_name_plural = '天梯战况模板'
 
 
-
 class LadderRankReward(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="排名上限")
     name = models.CharField(max_length=255)
     score = models.IntegerField(verbose_name="奖励积分")
     package = models.ForeignKey('package.Package', null=True, blank=True, verbose_name="奖励物品包")
     reward_des = models.TextField(verbose_name="奖励描述")
+    mail_title = models.TextField(verbose_name="邮件标题")
+    mail_content = models.TextField(verbose_name="邮件内容")
 
     def __unicode__(self):
         return self.name
