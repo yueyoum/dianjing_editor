@@ -14,7 +14,7 @@ class GuideDialogAfterInLine(admin.TabularInline):
 class GuideAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'next_id', 'operate_type', 'operate_target',
-        'resume_url'
+        'resume_url', 'arrow'
     )
 
     inlines = [GuideDialogBeforeInLine, GuideDialogAfterInLine]
