@@ -25,7 +25,9 @@ class Package(models.Model):
         'gold': "软妹币",
         'diamond': "钻石",
         'staff_exp': "员工经验",
-        'club_renown': "俱乐部声望"
+        'club_renown': "俱乐部声望",
+        'ladder_score': "天梯赛积分",
+        "league_score": "联赛积分",
     }
 
 
@@ -55,6 +57,9 @@ class Package(models.Model):
 
     staff_exp = models.CharField(max_length=32, blank=True, verbose_name="员工经验")
     club_renown = models.CharField(max_length=32, blank=True, verbose_name="俱乐部声望")
+
+    ladder_score = models.CharField(max_length=32, blank=True, verbose_name="天梯赛积分")
+    league_score = models.CharField(max_length=32, blank=True, verbose_name="联赛积分")
 
     trainings = models.CharField(max_length=255, blank=True, verbose_name="道具（训练）",
                                  help_text="id:数量,id:数量"
