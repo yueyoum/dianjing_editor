@@ -10,6 +10,7 @@ class Guide(models.Model):
     )
 
     ARROW = (
+        (0, "没有箭头"),
         (1, "上"),
         (2, "下"),
         (3, "左"),
@@ -23,7 +24,7 @@ class Guide(models.Model):
     operate_target = models.CharField(max_length=255, verbose_name="操作目标")
 
     resume_url = models.CharField(max_length=255, blank=True, verbose_name="恢复操作步骤")
-    arrow = models.IntegerField(choices=ARROW, verbose_name="箭头方向")
+    arrow = models.IntegerField(choices=ARROW, default=0, verbose_name="箭头方向")
 
     class Meta:
         db_table = 'guide'
