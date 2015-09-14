@@ -85,6 +85,7 @@ class Staff(models.Model):
     name = models.CharField(unique=True, max_length=32, verbose_name="名字")
     avatar = models.CharField(max_length=32, verbose_name="头像")
     nation = models.CharField(max_length=32, verbose_name="国籍")
+    gender = models.CharField(max_length=32, verbose_name="性别")
 
     race = models.ForeignKey(StaffRace, db_column='race', verbose_name="种族")
     quality = models.ForeignKey(StaffQuality, db_column='quality', verbose_name="品质")
