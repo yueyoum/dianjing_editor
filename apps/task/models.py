@@ -9,7 +9,7 @@ class TaskType(models.Model):
 
     # unicode显示名称
     def __unicode__(self):
-        return self.name
+        return u"{0} : {1}".format(self.name, self.id)
 
     class Meta:
         db_table = "task_type"
