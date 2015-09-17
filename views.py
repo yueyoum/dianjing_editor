@@ -57,6 +57,7 @@ MODELS = (
     ('ladder.LadderScoreStore', 'ladder_score_store.json'),
     ('emoticon.Emoticon', 'emoticon.json'),
     ('guide.Guide', 'guide.json'),
+    ('template.SponsorLogTemplate', 'sponsor_template.json'),
 )
 
 
