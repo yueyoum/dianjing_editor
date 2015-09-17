@@ -49,7 +49,8 @@ class BuildingLevels(models.Model):
     resource = models.CharField(max_length=255, blank=True, verbose_name="资源")
     location = models.CharField(max_length=255, blank=True, verbose_name="位置")
     up_need_club_level = models.IntegerField(verbose_name="升级所需俱乐部等级")
-    up_need_gold = models.IntegerField(verbose_name="升级所需软妹币")
+    up_need_gold = models.IntegerField(default=0, verbose_name="升级所需软妹币")
+    up_need_diamond = models.IntegerField(default=0, verbose_name="升级所需钻石")
     value1 = models.IntegerField(null=True, blank=True, verbose_name="值1")
     des = models.CharField(max_length=255, blank=True, verbose_name="描述")
 
