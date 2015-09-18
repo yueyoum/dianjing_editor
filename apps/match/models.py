@@ -17,6 +17,13 @@ class MatchConversationStart(models.Model):
         verbose_name = '每局比赛开始对话'
         verbose_name_plural = '每局比赛开始对话'
 
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            f['fields']['des'] = f['fields']['des'].split('|')
+
+        return fixture
+
 
 class MatchConversationEnd(models.Model):
     END_AT = (
@@ -47,7 +54,12 @@ class MatchConversationEnd(models.Model):
         verbose_name = '每局比赛结束对话'
         verbose_name_plural = '每局比赛结束对话'
 
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            f['fields']['des'] = f['fields']['des'].split('|')
 
+        return fixture
 
 class MatchConversationRoundEnd(models.Model):
     ROUND = (
@@ -64,7 +76,12 @@ class MatchConversationRoundEnd(models.Model):
         verbose_name = '每回合比赛结束对话'
         verbose_name_plural = '每回合比赛结束对话'
 
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            f['fields']['des'] = f['fields']['des'].split('|')
 
+        return fixture
 
 class ChallengeType(models.Model):
     id = models.IntegerField(primary_key=True)
