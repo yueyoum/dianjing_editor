@@ -60,6 +60,7 @@ INSTALLED_APPS = (
     'apps.emoticon',
     'apps.guide',
     'apps.template',
+    'apps.activity',
 )
 
 MIDDLEWARE_CLASSES = (
