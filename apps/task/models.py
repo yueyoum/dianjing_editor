@@ -31,6 +31,10 @@ class Task(models.Model):
     num = models.IntegerField(verbose_name="目标次数")
     # 任务奖励
     reward = models.ForeignKey('package.Package', verbose_name="任务奖励")
+    # 是否是客户端任务，比如点击NPC之类的
+    client_task = models.BooleanField(default=False, verbose_name="是否是客户端任务")
+    # 成功率， 这个是客户端操作的任务
+    success_rate = models.IntegerField(default=100, verbose_name="成功率")
 
     class Meta:
         db_table = "task"
