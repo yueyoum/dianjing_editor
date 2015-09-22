@@ -48,6 +48,7 @@ MODELS = (
     ('building.Building', 'building.json'),
     ('task.Task', 'task.json'),
     ('task.TaskType', 'task_type.json'),
+    ('task.TaskStatus', 'task_status.json'),
     ('notification.Notification', 'notification.json'),
     ('league.League', 'league.json'),
     ('function.Function', 'function.json'),

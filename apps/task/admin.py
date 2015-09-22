@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.task.models import TaskType, Task
+from apps.task.models import TaskType, Task, TaskStatus
 # Register your models here.
 
 @admin.register(Task)
@@ -11,3 +11,8 @@ class TaskAdmin(admin.ModelAdmin):
 @admin.register(TaskType)
 class TaskTypeAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'des')
+
+
+@admin.register(TaskStatus)
+class TaskStatusAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'icon')

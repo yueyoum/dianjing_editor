@@ -1,7 +1,17 @@
 # -*- coding:utf-8 -*-
 from django.db import models
 
-# Create your models here.
+class TaskStatus(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255)
+    icon = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'task_status'
+        verbose_name = '任务状态'
+        verbose_name_plural = '任务状态'
+
+
 class TaskType(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="类型id")
     name = models.CharField(unique=True, max_length=32, verbose_name="类型名")
