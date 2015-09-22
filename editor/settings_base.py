@@ -61,6 +61,7 @@ INSTALLED_APPS = (
     'apps.guide',
     'apps.template',
     'apps.activity',
+    'apps.client_npc',
 )
 
 MIDDLEWARE_CLASSES = (
