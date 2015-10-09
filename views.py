@@ -63,6 +63,8 @@ MODELS = (
     ('activity.ActivitySignIn', 'activity_signin.json'),
     ('activity.ActivityLoginReward', 'activity_login_reward.json'),
     ('client_npc.ClientNPC', 'client_npc.json'),
+    ('active_value.ActiveFunction', 'active_function.json'),
+    ('active_value.ActiveReward', 'active_reward.json'),
 )
 
 
