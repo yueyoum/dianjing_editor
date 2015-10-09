@@ -5,7 +5,7 @@ from apps.active_value.models import ActiveFunction, ActiveReward
 @admin.register(ActiveFunction)
 class ActiveFunctionAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'name', 'value', 'max_times'
+        'id', 'function_sign', 'value', 'max_times'
     )
 
 @admin.register(ActiveReward)
