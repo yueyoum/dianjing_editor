@@ -5,6 +5,7 @@ from django.db import models
 class ActiveReward(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name='活跃度')
     package = models.ForeignKey('package.Package', verbose_name='物品包')
+    des = models.TextField(blank=True, verbose_name='描述')
 
     class Meta:
         db_table = 'active_reward'

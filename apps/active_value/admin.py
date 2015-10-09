@@ -11,5 +11,5 @@ class ActiveFunctionAdmin(admin.ModelAdmin):
 @admin.register(ActiveReward)
 class ActiveRewardAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'package'
+        'id', 'package', 'des'
     )
