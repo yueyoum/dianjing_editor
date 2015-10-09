@@ -14,8 +14,8 @@ class ActiveReward(models.Model):
 
 
 class ActiveFunction(models.Model):
-    id = models.CharField(primary_key=True, max_length=255, verbose_name='功能名字')
-    function_sign = models.CharField(max_length=255, verbose_name='功能标识')
+    id = models.CharField(primary_key=True, max_length=255, verbose_name='功能')
+    function_name = models.CharField(max_length=255, verbose_name='功能标识')
     value = models.IntegerField(verbose_name='每次奖励多少活跃度')
     max_times = models.IntegerField(verbose_name='每天最多奖励多少次')
 
