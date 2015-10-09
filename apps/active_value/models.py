@@ -18,6 +18,7 @@ class ActiveFunction(models.Model):
     function_name = models.CharField(max_length=255, verbose_name='功能标识')
     value = models.IntegerField(verbose_name='每次奖励多少活跃度')
     max_times = models.IntegerField(verbose_name='每天最多奖励多少次')
+    des = models.TextField(blank=True, verbose_name='描述')
 
     class Meta:
         db_table = 'active_function'
