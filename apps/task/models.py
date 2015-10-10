@@ -51,3 +51,15 @@ class Task(models.Model):
         ordering = ('id',)
         verbose_name = "任务"
         verbose_name_plural = "任务"
+
+
+class RandomEvent(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255, verbose_name='名字')
+    icon = models.CharField(max_length=255, verbose_name='图标')
+    package = models.ForeignKey('package.Package', verbose_name='奖励')
+
+    class Meta:
+        db_table = 'random_event'
+        verbose_name = '随机事件'
+        verbose_name_plural = '随机事件'

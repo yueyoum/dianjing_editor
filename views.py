@@ -49,6 +49,7 @@ MODELS = (
     ('task.Task', 'task.json'),
     ('task.TaskType', 'task_type.json'),
     ('task.TaskStatus', 'task_status.json'),
+    ('task.RandomEvent', 'random_event.json'),
     ('notification.Notification', 'notification.json'),
     ('league.League', 'league.json'),
     ('function.Function', 'function.json'),

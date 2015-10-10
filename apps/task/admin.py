@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.task.models import TaskType, Task, TaskStatus
+from apps.task.models import TaskType, Task, TaskStatus, RandomEvent
 # Register your models here.
 
 @admin.register(Task)
@@ -16,3 +16,7 @@ class TaskTypeAdmin(admin.ModelAdmin):
 @admin.register(TaskStatus)
 class TaskStatusAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'icon')
+
+@admin.register(RandomEvent)
+class RandomEventAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'icon', 'package')
