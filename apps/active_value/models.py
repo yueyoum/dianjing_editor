@@ -25,3 +25,12 @@ class ActiveFunction(models.Model):
         db_table = 'active_function'
         verbose_name = '活跃度功能'
         verbose_name_plural = '活跃度功能'
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            function_name = f['fields'].pop('function_name')
+            f['fields']['name'] = f['pk']
+            f['pk'] = function_name
+
+        return fixture
