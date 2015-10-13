@@ -78,6 +78,8 @@ class ActivitySignIn(models.Model):
     mail_title = models.CharField(max_length=255, verbose_name="邮件标题")
     mail_content = models.TextField(verbose_name="邮件内容")
 
+    remark = models.TextField(blank=True, verbose_name="备注")
+
     class Meta:
         db_table = 'activity_signin'
         verbose_name = "活动 - 签到"

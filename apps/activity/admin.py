@@ -34,7 +34,8 @@ class SignInDayInLine(admin.TabularInline):
 class ActivitySignInAdmin(admin.ModelAdmin):
     list_display = (
         'activity', 'circle_package',
-        'mail_title', 'mail_content'
+        'mail_title', 'mail_content',
+        'remark',
     )
 
     inlines = [SignInDayInLine,]
