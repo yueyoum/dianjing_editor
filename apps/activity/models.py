@@ -94,6 +94,8 @@ class ActivitySignIn(models.Model):
                 day_reward[_r.day] = _r.package_id
 
             f['fields']['day_reward'] = day_reward
+            if not f['fields']['circle_package']:
+                f['fields']['circle_package'] = 0
 
         return fixture
 
