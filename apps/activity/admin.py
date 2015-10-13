@@ -33,8 +33,7 @@ class SignInDayInLine(admin.TabularInline):
 @admin.register(ActivitySignIn)
 class ActivitySignInAdmin(admin.ModelAdmin):
     list_display = (
-        'activity', 'valid_test_divisor', 'valid_test_value',
-        'circle_times', 'circle_package',
+        'activity', 'circle_package',
         'mail_title', 'mail_content'
     )
 
