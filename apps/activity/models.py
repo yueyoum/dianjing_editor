@@ -73,7 +73,7 @@ def _patch_activity_fixture(fixture):
 class ActivitySignIn(models.Model):
     activity = models.OneToOneField(Activity, verbose_name="活动")
 
-    circle_package = models.ForeignKey('package.Package', null=True, verbose_name="大奖")
+    circle_package = models.ForeignKey('package.Package', null=True, blank=True, verbose_name="大奖")
 
     mail_title = models.CharField(max_length=255, verbose_name="邮件标题")
     mail_content = models.TextField(verbose_name="邮件内容")
