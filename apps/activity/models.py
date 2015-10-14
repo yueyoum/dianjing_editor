@@ -3,7 +3,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 
-
 # 活动大类
 class ActivityCategory(models.Model):
     MODE = (
@@ -75,8 +74,8 @@ class ActivitySignIn(models.Model):
 
     circle_package = models.ForeignKey('package.Package', null=True, blank=True, verbose_name="大奖")
 
-    mail_title = models.CharField(max_length=255, verbose_name="邮件标题")
-    mail_content = models.TextField(verbose_name="邮件内容")
+    mail_title = models.CharField(max_length=255, blank=True, verbose_name="邮件标题")
+    mail_content = models.TextField(blank=True, verbose_name="邮件内容")
 
     remark = models.TextField(blank=True, verbose_name="备注")
 
@@ -85,10 +84,17 @@ class ActivitySignIn(models.Model):
         verbose_name = "活动 - 签到"
         verbose_name_plural = "活动 - 签到"
 
+    def clean(self):
+        if self.circle_package:
+            if not self.mail_title or not self.mail_content:
+                raise ValidationError("设置了大奖，就要填写邮件标题和内容")
+
     @classmethod
     def patch_fixture(cls, fixture):
         fixture = _patch_activity_fixture(fixture)
         for f in fixture:
+            f['fields'].pop('remark')
+
             day_reward = {}
             for _r in ActivitySignInDayReward.objects.filter(activity_signin__activity__id=f['pk']):
                 day_reward[_r.day] = _r.package_id
