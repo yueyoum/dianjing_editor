@@ -63,6 +63,7 @@ INSTALLED_APPS = (
     'apps.activity',
     'apps.client_npc',
     'apps.active_value',
+    'apps.conversation',
 )
 
 MIDDLEWARE_CLASSES = (

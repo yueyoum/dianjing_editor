@@ -66,6 +66,7 @@ MODELS = (
     ('client_npc.ClientNPC', 'client_npc.json'),
     ('active_value.ActiveFunction', 'active_function.json'),
     ('active_value.ActiveReward', 'active_reward.json'),
+    ('conversation.Conversation', 'conversation.json'),
 )
 
 
