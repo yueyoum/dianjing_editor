@@ -25,7 +25,7 @@ class Conversation(models.Model):
     conversation = models.TextField(verbose_name='剧情')
 
     class Meta:
-        db_table = 'trigger'
+        db_table = 'conversation'
         verbose_name = "剧情"
         verbose_name_plural = "剧情"
 
