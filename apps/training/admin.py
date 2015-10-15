@@ -34,7 +34,7 @@ class TrainingPropertyAdmin(admin.ModelAdmin):
                 item_id, item_amount = item.split(':')
                 item_name = Item.objects.get(id=int(item_id)).name
 
-                items_text = "{0}: {1}".format(item_name, item_amount)
+                items_text = u"{0}: {1}".format(item_name, item_amount)
                 html.append(items_text)
 
         return u"<br />".join(html)
