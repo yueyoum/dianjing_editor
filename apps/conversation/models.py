@@ -5,6 +5,8 @@ from django.core.exceptions import ValidationError
 
 from apps.building.models import Building
 from apps.match.models import ChallengeMatch
+
+
 # Create your models here.
 
 
@@ -45,15 +47,15 @@ class Conversation(models.Model):
     @classmethod
     def patch_fixture(cls, fixture):
         for f in fixture:
-            conversation = []
+            conversations = []
             for _r in ConversationInfo.objects.filter(conversation__id=f['pk']):
                 conversation_info = {}
                 conversation_info['position'] = _r.position
                 conversation_info['icon'] = _r.icon
                 conversation_info['message'] = _r.message
-                conversation.append(conversation_info)
+                conversations.append(conversation_info)
 
-            f['fields']['conversation_info'] = conversation
+            f['fields']['conversations'] = conversations
 
         return fixture
 
@@ -71,4 +73,3 @@ class ConversationInfo(models.Model):
 
     class Meta:
         db_table = 'conversation_info'
-
