@@ -29,6 +29,7 @@ class Building(models.Model):
                     'up_need_club_level': l.up_need_club_level,
                     'up_need_gold': l.up_need_gold,
                     'up_need_diamond': l.up_need_diamond,
+                    'up_need_minutes': l.up_need_minutes,
                     'value1': l.value1,
                     'value2': l.value2,
                     'des': l.des,
