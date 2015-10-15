@@ -5,8 +5,8 @@ from django.db import models
 class Item(models.Model):
     BUY_TYPE = (
         (0, '不可购买'),
-        (1, '用 钻石 购买'),
-        (2, '用 软妹币 购买'),
+        (1, '用 软妹币 购买'),
+        (2, '用 钻石 购买'),
     )
 
     id = models.IntegerField(primary_key=True)
