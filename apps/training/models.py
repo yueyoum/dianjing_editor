@@ -85,6 +85,7 @@ class TrainingProperty(AbstractTraining):
 
     cost_type = models.IntegerField(choices=COST_TYPE, default=1, verbose_name="花费类型")
     cost_value = models.IntegerField(verbose_name="花费金额")
+    need_items = models.CharField(max_length=255, verbose_name='所需物品', help_text='id:数量,id:数量')
     package = models.ForeignKey('package.Package', verbose_name="物品包")
     order_value = models.IntegerField(default=1, verbose_name='排序值')
 
@@ -93,6 +94,31 @@ class TrainingProperty(AbstractTraining):
         verbose_name = "属性训练"
         verbose_name_plural = "属性训练"
 
+    def clean(self):
+        from apps.item.models import Item
+        for item in self.need_items.split(','):
+            try:
+                item_id, item_amount = item.split(':')
+                item_id = int(item_id)
+                item_amount = int(item_amount)
+            except:
+                raise ValidationError("所需物品填错了")
+
+            if not Item.objects.filter(id=item_id).exists():
+                raise ValidationError("物品{0}不存在".format(item_id))
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            items = f['fields']['need_items']
+            need_items = []
+            for item in items.split(','):
+                item_id, item_amount = item.split(':')
+                need_items.append((int(item_id), int(item_amount)))
+
+            f['fields']['need_items'] = need_items
+
+        return fixture
 
 # 技能训练
 class TrainingSkill(AbstractTraining):
