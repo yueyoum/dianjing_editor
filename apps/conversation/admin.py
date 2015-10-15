@@ -12,7 +12,7 @@ class ConversationInLine(admin.TabularInline):
 @admin.register(Conversation)
 class ConversationAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'tp', 'condition_value', 'is_loop', 'time_tp', 'conversation'
+        'id', 'tp', 'condition_value', 'is_loop', 'time_tp'
     )
 
     inlines = [ConversationInLine]
