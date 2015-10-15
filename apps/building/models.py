@@ -54,9 +54,9 @@ class BuildingLevels(models.Model):
     up_need_club_level = models.IntegerField(verbose_name="升级所需俱乐部等级")
     up_need_gold = models.IntegerField(default=0, verbose_name="升级所需软妹币")
     up_need_diamond = models.IntegerField(default=0, verbose_name="升级所需钻石")
-    up_need_time_min = models.IntegerField(default=0, verbose_name='升级所需时间')
+    up_need_minutes = models.IntegerField(default=0, verbose_name='升级所需分钟数')
     value1 = models.IntegerField(null=True, blank=True, verbose_name="值1")
-    value2 = models.IntegerField(null=True, blank=True, verbose_name="值1")
+    value2 = models.IntegerField(null=True, blank=True, verbose_name="值2")
     des = models.CharField(max_length=255, blank=True, verbose_name="描述")
 
     def __unicode__(self):
