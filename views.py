@@ -67,6 +67,7 @@ MODELS = (
     ('active_value.ActiveFunction', 'active_function.json'),
     ('active_value.ActiveReward', 'active_reward.json'),
     ('conversation.Conversation', 'conversation.json'),
+    ('item.Item', 'item.json'),
 )
 
 
