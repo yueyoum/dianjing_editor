@@ -2,6 +2,7 @@
 
 from django.db import models
 
+
 class Building(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, verbose_name="名字")
@@ -53,6 +54,7 @@ class BuildingLevels(models.Model):
     up_need_club_level = models.IntegerField(verbose_name="升级所需俱乐部等级")
     up_need_gold = models.IntegerField(default=0, verbose_name="升级所需软妹币")
     up_need_diamond = models.IntegerField(default=0, verbose_name="升级所需钻石")
+    up_need_time_min = models.IntegerField(default=0, verbose_name='升级所需时间')
     value1 = models.IntegerField(null=True, blank=True, verbose_name="值1")
     value2 = models.IntegerField(null=True, blank=True, verbose_name="值1")
     des = models.CharField(max_length=255, blank=True, verbose_name="描述")
