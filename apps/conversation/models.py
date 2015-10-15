@@ -44,14 +44,14 @@ class Conversation(models.Model):
 
     @classmethod
     def patch_fixture(cls, fixture):
-        conversation = []
         for f in fixture:
-            conversation_info = {}
+            conversation = []
             for _r in ConversationInfo.objects.filter(conversation__id=f['pk']):
+                conversation_info = {}
                 conversation_info['position'] = _r.position
                 conversation_info['icon'] = _r.icon
                 conversation_info['message'] = _r.message
-            conversation.append(conversation_info)
+                conversation.append(conversation_info)
 
             f['fields']['conversation_info'] = conversation
 
