@@ -19,6 +19,8 @@ class Item(models.Model):
 
     sell_gold = models.IntegerField(default=0, verbose_name='售卖所得软妹币')
 
+    def __unicode__(self):
+        return self.name
 
     class Meta:
         db_table = 'item'
