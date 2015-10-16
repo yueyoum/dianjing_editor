@@ -8,6 +8,7 @@ class Building(models.Model):
     name = models.CharField(max_length=255, verbose_name="名字")
     des = models.TextField(blank=True, verbose_name="描述")
     status_des = models.TextField(blank=True, verbose_name="当前状态描述")
+    remark = models.TextField(blank=True, verbose_name='备注')
 
     def __unicode__(self):
         return self.name
@@ -21,6 +22,7 @@ class Building(models.Model):
     def patch_fixture(cls, fixture):
         for f in fixture:
             bid = f['pk']
+            f['fields'].pop('remark')
             levels = {}
             for l in BuildingLevels.objects.filter(building__id=bid):
                 levels[l.level] = {
