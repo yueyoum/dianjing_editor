@@ -94,7 +94,7 @@ class Skill(models.Model):
                 levels[l.level] = data
 
             f['fields']['levels'] = levels
-            f['fields']['max_level'] = max(levels.keys())
+            f['fields']['max_level'] = max(levels.keys()) if levels else 0
 
         return fixture
 
