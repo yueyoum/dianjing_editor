@@ -21,7 +21,7 @@ class SkillAdditionAdmin(admin.ModelAdmin):
 class SkillAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'name', 'race', 'icon', 'type_id', 'addition_ids',
-        'value_base', 'level_grow', 'max_level',
+        'value_base', 'level_grow', 
         'des',
     )
 

@@ -46,7 +46,6 @@ class Skill(models.Model):
 
     value_base = models.IntegerField("基础值")
     level_grow = models.IntegerField("等级增长", help_text="百分比数值")
-    max_level = models.IntegerField("最大等级")
 
     des = models.TextField(blank=True, verbose_name="描述")
 
@@ -84,5 +83,30 @@ class Skill(models.Model):
     def patch_fixture(cls, fixture):
         for f in fixture:
             f['fields']['addition_ids'] = Skill.parse_addition_ids(f['fields']['addition_ids'])
+            skill_levels = SkillLevel.objects.filter(id=f['pk']).order_by('level')
+            levels = {}
+            for l in skill_levels:
+                data = {
+                    'upgrade_training_id': l.upgrade_training_id,
+                    'upgrade_training_amount': l.upgrade_training_amount
+                }
+
+                levels[l.level] = data
+
+            f['fields']['levels'] = levels
+            f['fields']['max_level'] = max(levels.keys())
 
         return fixture
+
+
+class SkillLevel(models.Model):
+    skill = models.ForeignKey(Skill)
+    level = models.IntegerField(verbose_name='等级')
+    upgrade_training_id = models.ForeignKey('training.TrainingSkill', verbose_name='升级所需技能训练ID')
+    upgrade_training_amount = models.IntegerField(verbose_name='升级所需技能训练数量')
+
+    def __unicode__(self):
+        return "level {0}".format(self.level)
+
+    class Meta:
+        db_table = 'skill_level'

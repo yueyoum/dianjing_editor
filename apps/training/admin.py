@@ -33,5 +33,4 @@ class TrainingPropertyAdmin(admin.ModelAdmin):
 class TrainingSkillAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'name', 'icon', 'des', 'minutes',
-        'skill_id', 'skill_level'
     )

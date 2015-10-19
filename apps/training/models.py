@@ -62,10 +62,8 @@ class TrainingProperty(AbstractTraining):
 
 # 技能训练
 class TrainingSkill(AbstractTraining):
-    skill_id = models.ForeignKey('skill.Skill', verbose_name="技能")
-    skill_level = models.IntegerField(verbose_name="技能增加等级")
 
     class Meta:
         db_table = 'training_skill'
-        verbose_name = "技能训练"
-        verbose_name_plural = "技能训练"
+        verbose_name = "技能训练书（道具）"
+        verbose_name_plural = "技能训练书（道具）"
