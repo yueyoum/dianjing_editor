@@ -83,7 +83,7 @@ class Skill(models.Model):
     def patch_fixture(cls, fixture):
         for f in fixture:
             f['fields']['addition_ids'] = Skill.parse_addition_ids(f['fields']['addition_ids'])
-            skill_levels = SkillLevel.objects.filter(skill=f['pk']).order_by('level')
+            skill_levels = SkillLevel.objects.filter(skill__id=f['pk']).order_by('level')
             levels = {}
             for l in skill_levels:
                 data = {
