@@ -31,8 +31,8 @@ class Building(models.Model):
                     'up_need_club_level': l.up_need_club_level,
                     'up_need_gold': l.up_need_gold,
                     'up_need_minutes': l.up_need_minutes,
-                    'value1': l.value1,
-                    'value2': l.value2,
+                    'value1': l.value1 if l.value1 else 0,
+                    'value2': l.value2 if l.value2 else 0,
                     'des': l.des,
                 }
 
