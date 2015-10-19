@@ -62,8 +62,7 @@ class TrainingProperty(AbstractTraining):
 
 # 技能训练
 class TrainingSkill(AbstractTraining):
-
     class Meta:
-        db_table = 'training_skill'
+        db_table = 'training_skill_item'
         verbose_name = "技能训练书（道具）"
         verbose_name_plural = "技能训练书（道具）"
