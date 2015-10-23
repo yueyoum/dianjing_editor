@@ -92,3 +92,17 @@ class Shop(models.Model):
         verbose_name_plural = '网店'
 
 
+class Sponsor(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255, verbose_name='名字')
+    icon = models.CharField(max_length=255, verbose_name='图标')
+    condition = models.ForeignKey('match.ChallengeMatch', verbose_name='需要通过的挑战赛')
+    total_days = models.IntegerField(default=0, verbose_name='合约天数')
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'sponsor'
+        verbose_name = '赞助商'
+        verbose_name_plural = '赞助商'

@@ -47,6 +47,7 @@ MODELS = (
     ('package.Package', 'package.json'),
     ('building.Building', 'building.json'),
     ('building.Shop', 'shop.json'),
+    ('building.Sponsor', 'sponsor.json'),
     ('task.Task', 'task.json'),
     ('task.TaskType', 'task_type.json'),
     ('task.TaskStatus', 'task_status.json'),
