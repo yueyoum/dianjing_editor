@@ -99,6 +99,10 @@ class Sponsor(models.Model):
     condition = models.ForeignKey('match.ChallengeMatch', verbose_name='需要通过的挑战赛')
     total_days = models.IntegerField(default=0, verbose_name='合约天数')
 
+    income = models.IntegerField(verbose_name='每天收入软妹币')
+    income_des = models.TextField(blank=True, verbose_name='收入说明')
+    condition_des = models.TextField(blank=True, verbose_name='条件说明')
+
     def __unicode__(self):
         return self.name
 

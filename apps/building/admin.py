@@ -26,5 +26,6 @@ class ShopAdmin(admin.ModelAdmin):
 @admin.register(Sponsor)
 class SponsorAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'name', 'icon', 'condition', 'total_days'
+        'id', 'name', 'icon', 'condition', 'total_days',
+        'income', 'income_des', 'condition_des',
     )
