@@ -46,6 +46,7 @@ MODELS = (
     ('match.MatchConversationRoundEnd', 'match_conversation_round_end.json'),
     ('package.Package', 'package.json'),
     ('building.Building', 'building.json'),
+    ('building.Shop', 'shop.json'),
     ('task.Task', 'task.json'),
     ('task.TaskType', 'task_type.json'),
     ('task.TaskStatus', 'task_status.json'),

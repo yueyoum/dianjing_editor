@@ -65,3 +65,30 @@ class BuildingLevels(models.Model):
 
     class Meta:
         db_table = 'building_levels'
+
+
+
+class Shop(models.Model):
+    UNLOCK_TYPE = (
+        (1, '无需解锁'),
+        (2, '俱乐部等级'),
+        (3, 'VIP等级'),
+    )
+
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255, verbose_name='名字')
+
+    unlock_type = models.IntegerField(choices=UNLOCK_TYPE, verbose_name='解锁条件')
+    unlock_value = models.IntegerField(default=0, verbose_name='解锁值')
+
+    income = models.IntegerField(verbose_name='每天获得软妹币')
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'shop'
+        verbose_name = '网店'
+        verbose_name_plural = '网店'
+
+
