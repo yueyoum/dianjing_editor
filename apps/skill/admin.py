@@ -5,6 +5,7 @@ from apps.skill.models import (
     SkillAddition,
     Skill,
     SkillLevel,
+    SkillCategory,
 )
 
 
@@ -12,6 +13,9 @@ from apps.skill.models import (
 class SkillTypeAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'des')
 
+@admin.register(SkillCategory)
+class SkillCategoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'des')
 
 @admin.register(SkillAddition)
 class SkillAdditionAdmin(admin.ModelAdmin):
@@ -29,6 +33,7 @@ class SkillAdmin(admin.ModelAdmin):
         'addition_ids',
         'value_base', 'level_grow',
         'des',
+        'unit_des',
     )
 
     list_filter = ('type_id',)

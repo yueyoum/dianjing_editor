@@ -63,6 +63,7 @@ class Skill(models.Model):
     level_grow = models.IntegerField("等级增长", help_text="百分比数值")
 
     des = models.TextField(blank=True, verbose_name="描述")
+    unit_des = models.TextField(blank=True, verbose_name="兵种描述")
 
     def __unicode__(self):
         return self.name

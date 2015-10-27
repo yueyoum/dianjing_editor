@@ -34,6 +34,7 @@ MODELS = (
     ('unit.Unit', 'unit.json'),
     ('unit.Policy', 'policy.json'),
     ('skill.SkillType', 'skill_type.json'),
+    ('skill.SkillCategory', 'skill_category.json'),
     ('skill.SkillAddition', 'skill_addition.json'),
     ('skill.Skill', 'skill.json'),
     ('club.ClubFlag', 'club_flag.json'),
