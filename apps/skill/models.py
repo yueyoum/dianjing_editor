@@ -17,6 +17,20 @@ class SkillType(models.Model):
         verbose_name = '技能类型'
         verbose_name_plural = '技能类型'
 
+class SkillCategory(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=32)
+    des = models.TextField(blank=True, verbose_name='描述')
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'skill_category'
+        verbose_name = '兵种类别'
+        verbose_name_plural = '兵种类别'
+
+
 
 class SkillAddition(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -40,6 +54,7 @@ class Skill(models.Model):
     race = models.ForeignKey('staff.StaffRace', verbose_name="种族")
     icon = models.CharField(max_length=255, verbose_name="图标")
     type_id = models.ForeignKey(SkillType, db_column='type_id', verbose_name="类型")
+    category = models.ForeignKey(SkillCategory, null=True, blank=True, verbose_name='兵种类别')
     addition_ids = models.CharField(max_length=255, verbose_name="加成ID列表",
                                                      help_text='id:value,id:value'
                                                      )
