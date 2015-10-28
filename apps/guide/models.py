@@ -17,6 +17,11 @@ class Guide(models.Model):
         (4, "右"),
     )
 
+    POSITION = (
+        (1, '左'),
+        (2, '右'),
+    )
+
     id = models.IntegerField(primary_key=True)
     next_id = models.IntegerField(default=0, verbose_name='下一步ID')
 
@@ -25,6 +30,8 @@ class Guide(models.Model):
 
     resume_url = models.CharField(max_length=255, blank=True, verbose_name="恢复操作步骤")
     arrow = models.IntegerField(choices=ARROW, default=0, verbose_name="箭头方向")
+    position = models.IntegerField(choices=POSITION, default=1, verbose_name='小秘书位置')
+    package = models.ForeignKey('package.Package', null=True, blank=True, verbose_name='物品包')
 
     class Meta:
         db_table = 'guide'
@@ -40,6 +47,9 @@ class Guide(models.Model):
 
             f['fields']['dialog_before'] = [x for x in dialog_before]
             f['fields']['dialog_after'] = [x for x in dialog_after]
+
+            if not f['fields']['package']:
+                f['fields']['package'] = 0
 
         return fixture
 
