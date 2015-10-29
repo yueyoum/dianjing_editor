@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.task.models import TaskType, Task, TaskStatus, RandomEvent
+from apps.task.models import TaskType, Task, TaskStatus, RandomEvent, RandomEventDialogAfter, RandomEventDialogBefore
 # Register your models here.
 
 @admin.register(Task)
@@ -17,6 +17,15 @@ class TaskTypeAdmin(admin.ModelAdmin):
 class TaskStatusAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'icon')
 
+
+class EventDialogBeforeInLine(admin.TabularInline):
+    model = RandomEventDialogBefore
+
+class EventDialogAfterInLine(admin.TabularInline):
+    model = RandomEventDialogAfter
+
+
 @admin.register(RandomEvent)
 class RandomEventAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'icon', 'package')
+    list_display = ('id', 'name', 'icon', 'level_min', 'level_max', 'trig_name', 'package')
+    inlines = [EventDialogBeforeInLine, EventDialogAfterInLine]
