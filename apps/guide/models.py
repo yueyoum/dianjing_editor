@@ -30,6 +30,7 @@ class Guide(models.Model):
 
     resume_url = models.CharField(max_length=255, blank=True, verbose_name="恢复操作步骤")
     arrow = models.IntegerField(choices=ARROW, default=0, verbose_name="箭头方向")
+    picture = models.CharField(max_length=255, verbose_name='小秘书图片')
     position = models.IntegerField(choices=POSITION, default=1, verbose_name='小秘书位置')
     package = models.ForeignKey('package.Package', null=True, blank=True, verbose_name='物品包')
 
