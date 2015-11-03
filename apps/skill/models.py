@@ -51,7 +51,7 @@ class SkillAddition(models.Model):
 class Skill(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=32, verbose_name='名字')
-    race = models.ForeignKey('staff.StaffRace', verbose_name="种族")
+    race = models.ForeignKey('staff.StaffRace', null=True, blank=True, verbose_name="种族")
     icon = models.CharField(max_length=255, verbose_name="图标")
     type_id = models.ForeignKey(SkillType, db_column='type_id', verbose_name="类型")
     category = models.ForeignKey(SkillCategory, null=True, blank=True, verbose_name='兵种类别')
@@ -111,6 +111,8 @@ class Skill(models.Model):
 
             f['fields']['levels'] = levels
             f['fields']['max_level'] = max(levels.keys()) if levels else 0
+            if not f['fields']['race']:
+                f['fields']['race'] = 0
 
         return fixture
 
