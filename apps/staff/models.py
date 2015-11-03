@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 
 class StaffRace(models.Model):
     id = models.IntegerField(primary_key=True)
+    icon = models.CharField(max_length=255, blank=True)
     name = models.CharField(unique=True, max_length=32, verbose_name="名称")
 
     def __unicode__(self):

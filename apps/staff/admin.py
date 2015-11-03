@@ -20,7 +20,7 @@ class StaffResource(resources.ModelResource):
 
 @admin.register(StaffRace)
 class StuffRaceAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
+    list_display = ('id', 'icon', 'name')
 
 @admin.register(StaffQuality)
 class StuffQualityAdmin(admin.ModelAdmin):
