@@ -7,7 +7,8 @@ from apps.match.models import (
     ChallengeMatch,
     MatchConversationEnd,
     MatchConversationRoundEnd,
-    MatchConversationStart
+    MatchConversationStart,
+    Maps
 )
 
 class ChallengeMatchResource(resources.ModelResource):
@@ -53,3 +54,9 @@ class ChallengeMatchAdmin(ImportExportModelAdmin):
     )
 
     list_filter = ('tp',)
+
+@admin.register(Maps)
+class MapsAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'name', 'picture',
+    )

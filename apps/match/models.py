@@ -142,3 +142,15 @@ class ChallengeMatch(models.Model):
             f['fields']['staffs'] = [int(s) for s in staffs.split(',')]
 
         return fixture
+
+
+
+class Maps(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255, verbose_name='名字')
+    picture = models.CharField(max_length=255, verbose_name='图片')
+
+    class Meta:
+        db_table = 'maps'
+        verbose_name = '地图'
+        verbose_name_plural = '地图'
