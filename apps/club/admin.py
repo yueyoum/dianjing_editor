@@ -9,4 +9,4 @@ class ClubFlagAdmin(admin.ModelAdmin):
 
 @admin.register(ClubLevel)
 class ClubLevelAdmin(admin.ModelAdmin):
-    list_display = ('id', 'renown')
+    list_display = ('id', 'renown', 'tibu_slot_amount')
