@@ -20,6 +20,7 @@ class StaffQuality(models.Model):
     id = models.CharField(primary_key=True, max_length=32)
     color = models.CharField(max_length=32)
     icon = models.CharField(max_length=255, blank=True)
+    background = models.CharField(max_length=255, blank=True)
 
     def __unicode__(self):
         return self.id

@@ -24,7 +24,7 @@ class StuffRaceAdmin(admin.ModelAdmin):
 
 @admin.register(StaffQuality)
 class StuffQualityAdmin(admin.ModelAdmin):
-    list_display = ('id', 'color', 'icon')
+    list_display = ('id', 'color', 'icon', 'background')
 
 @admin.register(StaffStatus)
 class StuffStatusAdmin(admin.ModelAdmin):
