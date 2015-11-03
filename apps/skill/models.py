@@ -83,7 +83,10 @@ class Skill(models.Model):
         for addition in additions:
             a, b = addition.split(':')
             add_property = SkillAddition.objects.get(id=int(a)).add_property
-            id_values.append((add_property, int(b)))
+            id_values.append({
+                'key': add_property,
+                'value': int(b)
+            })
 
         return id_values
 
