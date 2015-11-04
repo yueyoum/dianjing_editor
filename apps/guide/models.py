@@ -4,6 +4,7 @@ from django.db import models
 
 class Guide(models.Model):
     OPERATE_TYPE = (
+        (0, '空操作'),
         (1, '点击UI'),
         (2, '拖动UI'),
         (3, '点击建筑')
@@ -26,7 +27,7 @@ class Guide(models.Model):
     next_id = models.IntegerField(default=0, verbose_name='下一步ID')
 
     operate_type = models.IntegerField(choices=OPERATE_TYPE, verbose_name="操作类型")
-    operate_target = models.CharField(max_length=255, verbose_name="操作目标")
+    operate_target = models.CharField(max_length=255, blank=True, verbose_name="操作目标")
 
     resume_url = models.CharField(max_length=255, blank=True, verbose_name="恢复操作步骤")
     arrow = models.IntegerField(choices=ARROW, default=0, verbose_name="箭头方向")
