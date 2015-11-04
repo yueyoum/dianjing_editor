@@ -18,6 +18,7 @@ class Item(models.Model):
     buy_cost = models.IntegerField(default=0, verbose_name='购买花费')
 
     sell_gold = models.IntegerField(default=0, verbose_name='售卖所得软妹币')
+    order_value = models.IntegerField(default=1, verbose_name='排序值')
 
     def __unicode__(self):
         return self.name
