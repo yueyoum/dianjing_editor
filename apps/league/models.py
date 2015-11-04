@@ -10,6 +10,8 @@ class League(models.Model):
     day_reward_lose = models.ForeignKey('package.Package', null=True, blank=True, related_name="league_day_reward_lose", verbose_name="日奖励（输）")
     week_reward = models.ForeignKey('package.Package', related_name="league_week_reward", verbose_name="周奖励")
 
+    des = models.TextField(blank=True, verbose_name='说明')
+
     def __unicode__(self):
         return self.name
 
