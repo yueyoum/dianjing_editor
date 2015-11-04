@@ -111,6 +111,7 @@ class ChallengeMatch(models.Model):
     strength = models.FloatField(verbose_name="选手强度系数")
 
     staffs = models.CommaSeparatedIntegerField(max_length=255, verbose_name="选手ID列表")
+    winning_rates = models.CommaSeparatedIntegerField(max_length=255, default='1,1,1,1,1', verbose_name="胜率列表")
 
     package = models.ForeignKey('package.Package', verbose_name="奖励物品包")
 
@@ -139,10 +140,11 @@ class ChallengeMatch(models.Model):
     def patch_fixture(cls, fixture):
         for f in fixture:
             staffs = f['fields']['staffs']
+            winning_rates = f['fields']['winning_rates']
             f['fields']['staffs'] = [int(s) for s in staffs.split(',')]
+            f['fields']['winning_rates'] = [int(s) for s in winning_rates.split(',')]
 
         return fixture
-
 
 
 class Maps(models.Model):
