@@ -82,6 +82,8 @@ class Shop(models.Model):
     unlock_value = models.IntegerField(default=0, verbose_name='解锁值')
 
     income = models.IntegerField(verbose_name='每天获得软妹币')
+    mail_title = models.CharField(max_length=255, verbose_name='邮件标题')
+    mail_content = models.TextField(verbose_name='邮件内容')
 
     def __unicode__(self):
         return self.name
@@ -102,6 +104,9 @@ class Sponsor(models.Model):
     income = models.IntegerField(verbose_name='每天收入软妹币')
     income_des = models.TextField(blank=True, verbose_name='收入说明')
     condition_des = models.TextField(blank=True, verbose_name='条件说明')
+
+    mail_title = models.CharField(max_length=255, verbose_name='邮件标题')
+    mail_content = models.TextField(verbose_name='邮件内容')
 
     def __unicode__(self):
         return self.name
