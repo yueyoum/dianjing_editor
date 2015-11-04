@@ -39,6 +39,7 @@ MODELS = (
     ('skill.Skill', 'skill.json'),
     ('club.ClubFlag', 'club_flag.json'),
     ('club.ClubLevel', 'club_level.json'),
+    ('club.TibuSlot', 'tibu_slot.json'),
     ('qianban.QianBan', 'qianban.json'),
     ('match.ChallengeType', 'challenge_type.json'),
     ('match.ChallengeMatch', 'challenge_match.json'),

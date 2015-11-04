@@ -18,7 +18,6 @@ class ClubFlag(models.Model):
 class ClubLevel(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="等级")
     renown = models.IntegerField(verbose_name="升到下一级所需声望")
-    tibu_slot_amount = models.IntegerField(default=5, verbose_name='替补格子数')
 
     def __unicode__(self):
         return u'%d' % self.id
@@ -28,3 +27,12 @@ class ClubLevel(models.Model):
         verbose_name = "俱乐部等级"
         verbose_name_plural = "俱乐部等级"
 
+class TibuSlot(models.Model):
+    id = models.IntegerField(primary_key=True, verbose_name="数量")
+    need_club_level = models.IntegerField(verbose_name='所需俱乐部等级')
+    des = models.TextField(verbose_name='描述')
+
+    class Meta:
+        db_table = 'tibu_slot'
+        verbose_name = '替补格子'
+        verbose_name_plural = '替补格子'
