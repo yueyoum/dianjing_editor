@@ -39,7 +39,7 @@ class MatchConversationRoundEndAdmin(admin.ModelAdmin):
 @admin.register(ChallengeType)
 class ChallengeTypeAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'name', 'level', 'des'
+        'id', 'name', 'level', 'color', 'des'
     )
 
 
