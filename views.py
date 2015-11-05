@@ -37,6 +37,7 @@ MODELS = (
     ('skill.SkillCategory', 'skill_category.json'),
     ('skill.SkillAddition', 'skill_addition.json'),
     ('skill.Skill', 'skill.json'),
+    ('skill.SkillWashCost', 'skill_wash_cost.json'),
     ('club.ClubFlag', 'club_flag.json'),
     ('club.ClubLevel', 'club_level.json'),
     ('club.TibuSlot', 'tibu_slot.json'),

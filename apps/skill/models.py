@@ -131,3 +131,19 @@ class SkillLevel(models.Model):
 
     class Meta:
         db_table = 'skill_level'
+
+
+class SkillWashCost(models.Model):
+    COST_TYPE = (
+        (1, '软妹币'),
+        (2, '钻石'),
+    )
+
+    id = models.IntegerField(primary_key=True, verbose_name='锁定技能数量')
+    cost_type = models.IntegerField(choices=COST_TYPE, verbose_name="花费类型")
+    cost_value = models.IntegerField(verbose_name="花费金额")
+
+    class Meta:
+        db_table = 'skill_wash_cost'
+        verbose_name = '技能洗练花费'
+        verbose_name_plural = '技能洗练花费'

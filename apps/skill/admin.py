@@ -6,6 +6,7 @@ from apps.skill.models import (
     Skill,
     SkillLevel,
     SkillCategory,
+    SkillWashCost,
 )
 
 
@@ -38,3 +39,10 @@ class SkillAdmin(admin.ModelAdmin):
 
     list_filter = ('type_id',)
     inlines = [SkillLevelInLine,]
+
+
+@admin.register(SkillWashCost)
+class SkillWashCostAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'cost_type', 'cost_value'
+    )
