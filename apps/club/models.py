@@ -18,6 +18,7 @@ class ClubFlag(models.Model):
 class ClubLevel(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="等级")
     renown = models.IntegerField(verbose_name="升到下一级所需声望")
+    max_staff_amount = models.IntegerField(verbose_name="最大员工数")
 
     def __unicode__(self):
         return u'%d' % self.id

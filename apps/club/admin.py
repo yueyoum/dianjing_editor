@@ -8,7 +8,7 @@ class ClubFlagAdmin(admin.ModelAdmin):
 
 @admin.register(ClubLevel)
 class ClubLevelAdmin(admin.ModelAdmin):
-    list_display = ('id', 'renown')
+    list_display = ('id', 'renown', 'max_staff_amount')
 
 @admin.register(TibuSlot)
 class TibuAdmin(admin.ModelAdmin):
