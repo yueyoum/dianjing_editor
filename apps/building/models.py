@@ -85,6 +85,8 @@ class Shop(models.Model):
     mail_title = models.CharField(max_length=255, verbose_name='邮件标题')
     mail_content = models.TextField(verbose_name='邮件内容')
 
+    des = models.TextField(blank=True, verbose_name='描述')
+
     def __unicode__(self):
         return self.name
 

@@ -21,7 +21,7 @@ class BuildingAdmin(admin.ModelAdmin):
 class ShopAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'name', 'unlock_type', 'unlock_value', 'income',
-        'mail_title', 'mail_content',
+        'mail_title', 'mail_content', 'des',
     )
 
 @admin.register(Sponsor)
