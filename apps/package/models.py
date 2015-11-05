@@ -61,7 +61,7 @@ class Package(models.Model):
     ladder_score = models.CharField(max_length=32, blank=True, verbose_name="天梯赛积分")
     league_score = models.CharField(max_length=32, blank=True, verbose_name="联赛积分")
 
-    trainings = models.CharField(max_length=255, blank=True, verbose_name="道具（训练）",
+    trainings = models.CharField(max_length=255, blank=True, verbose_name="技能训练书",
                                  help_text="id:数量,id:数量"
                                  )
 
@@ -74,7 +74,7 @@ class Package(models.Model):
 
 
     def clean(self):
-        from apps.training.models import Training
+        from apps.training.models import TrainingSkill
 
         for attr, name in self.ATTRS.iteritems():
             value = getattr(self, attr)
@@ -99,14 +99,13 @@ class Package(models.Model):
                 try:
                     tid, amount = tr.split(':')
                 except:
-                    raise ValidationError("道具填错了")
+                    raise ValidationError("技能训练书填错了")
 
                 if not tid.isdigit() or not amount.isdigit():
-                    raise ValidationError("道具填错了")
+                    raise ValidationError("技能训练书填错了")
 
-                if not Training.objects.filter(id=int(tid)).exists():
-                    raise ValidationError("道具{0}不存在".format(tid))
-
+                if not TrainingSkill.objects.filter(id=int(tid)).exists():
+                    raise ValidationError("技能训练书{0}不存在".format(tid))
 
     class Meta:
         db_table = 'package'
