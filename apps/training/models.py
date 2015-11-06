@@ -29,6 +29,8 @@ class TrainingProperty(AbstractTraining):
     package = models.ForeignKey('package.Package', verbose_name="物品包")
     order_value = models.IntegerField(default=1, verbose_name='排序值')
 
+    need_building_level = models.IntegerField(default=1, verbose_name='所需培训中心等级')
+
     class Meta:
         db_table = 'training_property'
         verbose_name = "属性训练"

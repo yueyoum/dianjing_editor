@@ -10,7 +10,8 @@ from apps.training.models import TrainingProperty, TrainingSkill
 class TrainingPropertyAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'name', 'icon', 'des', 'minutes',
-        'cost_type', 'cost_value', 'NeedItems', 'package', 'order_value'
+        'cost_type', 'cost_value', 'NeedItems', 'package', 'order_value',
+        'need_building_level',
     )
 
     def NeedItems(self, obj):
