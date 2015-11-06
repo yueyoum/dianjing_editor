@@ -1,6 +1,13 @@
 # -*- coding:utf-8 -*-
 from django.db import models
 
+
+POSITION_TYPE = (
+        (1, '在左边'),
+        (2, '在右边')
+    )
+
+
 class TaskStatus(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
@@ -25,6 +32,7 @@ class TaskType(models.Model):
         db_table = "task_type"
         verbose_name = "任务类型"
         verbose_name_plural = "任务类型"
+
 
 class Task(models.Model):
     # 任务id
@@ -84,6 +92,8 @@ class RandomEvent(models.Model):
 
 
 class RandomEventDialogBefore(models.Model):
+    position = models.IntegerField(choices=POSITION_TYPE, verbose_name='对话者位置')
+    icon = models.CharField(max_length=255, verbose_name='对话者图标')
     random_event = models.ForeignKey(RandomEvent, related_name='dialog_before')
     dialog = models.TextField()
 
@@ -92,7 +102,10 @@ class RandomEventDialogBefore(models.Model):
         verbose_name = '随机事件前对话'
         verbose_name_plural = '随机事件前对话'
 
+
 class RandomEventDialogAfter(models.Model):
+    position = models.IntegerField(choices=POSITION_TYPE, verbose_name='对话者位置')
+    icon = models.CharField(max_length=255, verbose_name='对话者图标')
     random_event = models.ForeignKey(RandomEvent, related_name='dialog_after')
     dialog = models.TextField()
 
