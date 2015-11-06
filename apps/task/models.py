@@ -77,13 +77,20 @@ class RandomEvent(models.Model):
 
     @classmethod
     def patch_fixture(cls, fixture):
+        def make_dialog(dialog):
+            return {
+                'position': dialog.position,
+                'icon': dialog.icon,
+                'dialog': dialog.dialog
+            }
+
         for f in fixture:
             pk = f['pk']
-            dialog_before = RandomEventDialogBefore.objects.filter(random_event__id=pk).values_list('dialog', flat=True)
-            dialog_after = RandomEventDialogAfter.objects.filter(random_event__id=pk).values_list('dialog', flat=True)
+            dialog_before = RandomEventDialogBefore.objects.filter(random_event__id=pk)
+            dialog_after = RandomEventDialogAfter.objects.filter(random_event__id=pk)
 
-            f['fields']['dialog_before'] = [x for x in dialog_before]
-            f['fields']['dialog_after'] = [x for x in dialog_after]
+            f['fields']['dialog_before'] = [make_dialog(x) for x in dialog_before]
+            f['fields']['dialog_after'] = [make_dialog(x) for x in dialog_after]
 
             if not f['fields']['package']:
                 f['fields']['package'] = 0
@@ -92,9 +99,9 @@ class RandomEvent(models.Model):
 
 
 class RandomEventDialogBefore(models.Model):
+    random_event = models.ForeignKey(RandomEvent, related_name='dialog_before')
     position = models.IntegerField(choices=POSITION_TYPE, verbose_name='对话者位置')
     icon = models.CharField(max_length=255, verbose_name='对话者图标')
-    random_event = models.ForeignKey(RandomEvent, related_name='dialog_before')
     dialog = models.TextField()
 
     class Meta:
@@ -104,9 +111,9 @@ class RandomEventDialogBefore(models.Model):
 
 
 class RandomEventDialogAfter(models.Model):
+    random_event = models.ForeignKey(RandomEvent, related_name='dialog_after')
     position = models.IntegerField(choices=POSITION_TYPE, verbose_name='对话者位置')
     icon = models.CharField(max_length=255, verbose_name='对话者图标')
-    random_event = models.ForeignKey(RandomEvent, related_name='dialog_after')
     dialog = models.TextField()
 
     class Meta:
