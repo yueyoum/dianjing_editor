@@ -52,7 +52,7 @@ class Conversation(models.Model):
                 conversation_info = {}
                 conversation_info['position'] = _r.position
                 conversation_info['icon'] = _r.icon
-                conversation_info['message'] = _r.message
+                conversation_info['message'] = _r.dialog
                 conversations.append(conversation_info)
 
             f['fields']['conversations'] = conversations
@@ -69,7 +69,7 @@ class ConversationInfo(models.Model):
     conversation = models.ForeignKey(Conversation)
     position = models.IntegerField(choices=POSITION_TYPE, verbose_name='会话者位置')
     icon = models.CharField(max_length=255, verbose_name='会话者图标')
-    message = models.TextField(verbose_name='会话内容')
+    dialog = models.TextField(verbose_name='会话内容')
 
     class Meta:
         db_table = 'conversation_info'
