@@ -52,7 +52,7 @@ class Conversation(models.Model):
                 conversation_info = {}
                 conversation_info['position'] = _r.position
                 conversation_info['icon'] = _r.icon
-                conversation_info['message'] = _r.dialog
+                conversation_info['dialog'] = _r.dialog
                 conversations.append(conversation_info)
 
             f['fields']['conversations'] = conversations
