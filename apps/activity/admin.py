@@ -19,7 +19,7 @@ class ActivityCategoryAdmin(admin.ModelAdmin):
 @admin.register(Activity)
 class ActivityAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'category', 'name',
+        'id', 'category', 'name', 'display',
         'des'
     )
 

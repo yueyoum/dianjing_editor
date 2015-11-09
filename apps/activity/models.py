@@ -44,6 +44,7 @@ class Activity(models.Model):
     id = models.IntegerField(primary_key=True)
     category = models.ForeignKey(ActivityCategory, verbose_name="分类")
     name = models.CharField(max_length=255, verbose_name="名字")
+    display = models.BooleanField(default=True, verbose_name="是否显示")
 
     des = models.TextField(verbose_name="描述")
 
