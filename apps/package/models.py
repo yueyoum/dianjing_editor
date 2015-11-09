@@ -22,6 +22,7 @@ class Package(models.Model):
         'yunying': "运营",
         'yishi': "意识",
         'caozuo': "操作",
+        'zhimingdu': "知名度",
         'gold': "软妹币",
         'diamond': "钻石",
         'staff_exp': "员工经验",
@@ -42,7 +43,6 @@ class Package(models.Model):
                                          help_text="只有 属性模式 为 完全随机 时，才有用"
                                          )
 
-
     jingong = models.CharField(max_length=32, blank=True, verbose_name="进攻")
     qianzhi = models.CharField(max_length=32, blank=True, verbose_name="牵制")
     xintai = models.CharField(max_length=32, blank=True, verbose_name="心态")
@@ -51,6 +51,7 @@ class Package(models.Model):
     yunying = models.CharField(max_length=32, blank=True, verbose_name="运营")
     yishi = models.CharField(max_length=32, blank=True, verbose_name="意识")
     caozuo = models.CharField(max_length=32, blank=True, verbose_name="操作")
+    zhimingdu = models.CharField(max_length=32, blank=True, verbose_name="知名度")
 
     gold = models.CharField(max_length=32, blank=True, verbose_name="软妹币")
     diamond = models.CharField(max_length=32, blank=True, verbose_name="钻石")
@@ -92,6 +93,9 @@ class Package(models.Model):
                 for v in value_splited:
                     if not v.isdigit():
                         raise ValidationError("{0}填错了".format(name))
+
+                if int(value_splited[0]) > int(value_splited[1]):
+                    raise ValidationError("{0}填错了".format(name))
 
         if self.trainings:
             training = self.trainings.split(',')
@@ -139,4 +143,3 @@ class Package(models.Model):
             f['fields']['trainings'] = new_trainings
 
         return fixture
-
