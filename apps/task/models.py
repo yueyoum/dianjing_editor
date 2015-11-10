@@ -54,7 +54,7 @@ class Task(models.Model):
     # next id
     next_task = models.IntegerField(default=0, verbose_name="下一个任务id")
     # 任务触发类型
-    trigger_tp = models.ForeignKey(TaskTrigger, verbose_name="触发类型")
+    trigger_tp = models.ForeignKey(TaskTrigger, null=True, blank=True, verbose_name="触发类型")
     # 触发值
     trigger_rate = models.IntegerField(default=0, verbose_name="触发值")
     # 任务类型

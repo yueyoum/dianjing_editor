@@ -90,7 +90,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='task',
             name='trigger_tp',
-            field=models.ForeignKey(default=int, verbose_name=b'\xe8\xa7\xa6\xe5\x8f\x91\xe7\xb1\xbb\xe5\x9e\x8b', to='task.TaskTrigger'),
+            field=models.ForeignKey(null=True, blank=True, verbose_name=b'\xe8\xa7\xa6\xe5\x8f\x91\xe7\xb1\xbb\xe5\x9e\x8b', to='task.TaskTrigger'),
             preserve_default=False,
         ),
     ]
