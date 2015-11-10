@@ -21,7 +21,7 @@ class TaskStatus(models.Model):
 class TaskType(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="类型id")
     name = models.CharField(unique=True, max_length=32, verbose_name="类型名")
-    des = models.TextField(max_length=255, blank=True, verbose_name="类型描述")
+    des = models.TextField(blank=True, verbose_name="类型描述")
 
     # unicode显示名称
     def __unicode__(self):
@@ -53,7 +53,7 @@ class Task(models.Model):
     # 任务名称
     name = models.CharField(max_length=32, verbose_name="任务名")
     # 任务描述
-    des = models.TextField(blank=True, max_length=255, verbose_name="任务描述")
+    des = models.TextField(blank=True, verbose_name="任务描述")
     # next id
     next_task = models.IntegerField(default=0, verbose_name="下一个任务id")
     # 任务触发类型
@@ -95,6 +95,7 @@ class Task(models.Model):
 class TaskTargetType(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="目标类型id")
     name = models.CharField(max_length=255, verbose_name="目标类型名")
+    des = models.TextField(verbose_name="目标类型描述")
 
     # unicode显示名称
     def __unicode__(self):
