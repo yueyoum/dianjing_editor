@@ -10,6 +10,9 @@ class Building(models.Model):
     status_des = models.TextField(blank=True, verbose_name="当前状态描述")
     remark = models.TextField(blank=True, verbose_name='备注')
 
+    day_effect = models.CharField(max_length=255, blank=True, verbose_name='白天效果')
+    night_effect = models.CharField(max_length=255, blank=True, verbose_name='晚上效果')
+
     def __unicode__(self):
         return self.name
 
