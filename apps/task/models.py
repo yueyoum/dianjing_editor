@@ -11,7 +11,6 @@ POSITION_TYPE = (
 class TaskStatus(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
-    # icon = models.CharField(max_length=255)
 
     class Meta:
         db_table = 'task_status'
@@ -22,7 +21,6 @@ class TaskStatus(models.Model):
 class TaskType(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="类型id")
     name = models.CharField(unique=True, max_length=32, verbose_name="类型名")
-    # des = models.TextField(default=None, verbose_name="类型描述")
 
     # unicode显示名称
     def __unicode__(self):
@@ -78,18 +76,15 @@ class Task(models.Model):
     def patch_fixture(cls, fixture):
         def make_target(target):
             return {
-                'tp_id': target.tp,
-                'tp_num': target.value,
+                'target_id': target.tp.id,
+                'target_value': target.value,
             }
 
         for f in fixture:
             pk = f['pk']
             targets = TaskTarget.objects.filter(task__id=pk)
 
-            f['fields']['target'] = [make_target(x) for x in targets]
-
-            if not f['fields']['reward']:
-                f['fields']['reward'] = 0
+            f['fields']['targets'] = [make_target(x) for x in targets]
 
         return fixture
 
