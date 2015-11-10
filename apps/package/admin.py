@@ -11,6 +11,8 @@ class PackageAdmin(admin.ModelAdmin):
         'gold', 'diamond',
         'staff_exp', 'club_renown',
         'ladder_score', 'league_score',
-        'trainings',
+        'trainings', 'items',
         'des'
     )
+
+    search_fields = ('name',)

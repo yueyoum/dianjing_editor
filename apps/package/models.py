@@ -65,7 +65,9 @@ class Package(models.Model):
     trainings = models.CharField(max_length=255, blank=True, verbose_name="技能训练书",
                                  help_text="id:数量,id:数量"
                                  )
-
+    items = models.CharField(max_length=255, blank=True, verbose_name="道具",
+                             help_text="id:数量,id:数量"
+                             )
 
     des = models.TextField(blank=True, verbose_name="描述")
 
@@ -76,6 +78,7 @@ class Package(models.Model):
 
     def clean(self):
         from apps.training.models import TrainingSkill
+        from apps.item.models import Item
 
         for attr, name in self.ATTRS.iteritems():
             value = getattr(self, attr)
@@ -111,6 +114,22 @@ class Package(models.Model):
                 if not TrainingSkill.objects.filter(id=int(tid)).exists():
                     raise ValidationError("技能训练书{0}不存在".format(tid))
 
+
+        if self.items:
+            items = self.items.split(',')
+            for i in items:
+                try:
+                    _id, amount = i.split(':')
+                except:
+                    raise ValidationError("道具填错了")
+
+                if not _id.isdigit() or not amount.isdigit():
+                    raise ValidationError("道具填错了")
+
+                if not Item.objects.filter(id=int(_id)).exists():
+                    raise ValidationError("道具{0}不存在".format(_id))
+
+
     class Meta:
         db_table = 'package'
         verbose_name = "物品包"
@@ -141,5 +160,14 @@ class Package(models.Model):
                     new_trainings.append((int(tid), int(amount)))
 
             f['fields']['trainings'] = new_trainings
+
+            items = f['fields']['items']
+            new_items = []
+            if items:
+                for i in items.split(','):
+                    _id, amount = i.split(':')
+                    new_items.append((int(_id), int(amount)))
+
+            f['fields']['items'] = new_items
 
         return fixture
