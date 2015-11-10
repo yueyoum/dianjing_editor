@@ -11,7 +11,7 @@ POSITION_TYPE = (
 class TaskStatus(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
-    icon = models.CharField(max_length=255)
+    # icon = models.CharField(max_length=255)
 
     class Meta:
         db_table = 'task_status'
@@ -22,7 +22,7 @@ class TaskStatus(models.Model):
 class TaskType(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="类型id")
     name = models.CharField(unique=True, max_length=32, verbose_name="类型名")
-    des = models.TextField(default=None, verbose_name="类型描述")
+    # des = models.TextField(default=None, verbose_name="类型描述")
 
     # unicode显示名称
     def __unicode__(self):
@@ -34,19 +34,33 @@ class TaskType(models.Model):
         verbose_name_plural = "任务类型"
 
 
+class TaskTrigger(models.Model):
+    id = models.IntegerField(primary_key=True, verbose_name="触发类型id")
+    name = models.CharField(unique=True, max_length=255, verbose_name="触发类型名")
+
+    # unicode显示名称
+    def __unicode__(self):
+        return u"{0} : {1}".format(self.name, self.id)
+
+    class Meta:
+        db_table = "task_trigger"
+        verbose_name = "任务触发"
+        verbose_name_plural = "任务触发"
+
+
 class Task(models.Model):
     # 任务id
     id = models.IntegerField(primary_key=True, verbose_name="任务id")
     # 任务名称
     name = models.CharField(max_length=32, verbose_name="任务名")
-    # 任务中心等级
-    level = models.IntegerField(verbose_name="所需任务中心等级")
-    # 任务描述
-    des = models.TextField(verbose_name="任务描述")
+    # next id
+    next_task = models.IntegerField(default=0, verbose_name="下一个任务id")
+    # 任务触发类型
+    trigger_tp = models.ForeignKey(TaskTrigger, verbose_name="触发类型")
+    # 触发值
+    trigger_rate = models.IntegerField(default=0, verbose_name="触发值")
     # 任务类型
     tp = models.ForeignKey(TaskType, verbose_name="任务类型")
-    # 目标数量
-    num = models.IntegerField(verbose_name="目标次数")
     # 任务奖励
     reward = models.ForeignKey('package.Package', verbose_name="任务奖励")
     # 是否是客户端任务，比如点击NPC之类的
@@ -59,6 +73,50 @@ class Task(models.Model):
         ordering = ('id',)
         verbose_name = "任务"
         verbose_name_plural = "任务"
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        def make_target(target):
+            return {
+                'tp_id': target.tp_id,
+                'tp_num': target.tp_num,
+            }
+
+        for f in fixture:
+            pk = f['pk']
+            dialog_before = TaskTarget.objects.filter(task_id__id=pk)
+
+            f['fields']['target'] = [make_target(x) for x in dialog_before]
+
+            if not f['fields']['package']:
+                f['fields']['package'] = 0
+
+        return fixture
+
+
+class TaskTargetType(models.Model):
+    id = models.IntegerField(primary_key=True, verbose_name="目标类型id")
+    name = models.CharField(max_length=255, verbose_name="目标类型名")
+
+    # unicode显示名称
+    def __unicode__(self):
+        return u"{0} : {1}".format(self.name, self.id)
+
+    class Meta:
+        db_table = "target_type"
+        verbose_name = "目标类型"
+        verbose_name_plural = "目标类型"
+
+
+class TaskTarget(models.Model):
+    task_id = models.ForeignKey(Task, verbose_name="task_target")
+    tp_id = models.ForeignKey(TaskTargetType, verbose_name="目标类型")
+    tp_num = models.IntegerField(default=1, verbose_name="目标类型值")
+
+    class Meta:
+        db_table = "task_target"
+        verbose_name = "任务目标"
+        verbose_name_plural = "任务目标"
 
 
 class RandomEvent(models.Model):
