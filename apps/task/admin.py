@@ -19,8 +19,8 @@ class TaskTargetInLine(admin.TabularInline):
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'next_task', 'trigger_tp',
-                    'trigger_rate', 'tp', 'reward',
+    list_display = ('id', 'name', 'next_task', 'trigger',
+                    'trigger_value', 'tp', 'reward',
                     'client_task', 'success_rate',
                     )
     inlines = [TaskTargetInLine, ]
