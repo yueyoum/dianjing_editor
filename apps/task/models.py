@@ -78,18 +78,18 @@ class Task(models.Model):
     def patch_fixture(cls, fixture):
         def make_target(target):
             return {
-                'tp_id': target.tp_id,
-                'tp_num': target.tp_num,
+                'tp_id': target.tp,
+                'tp_num': target.value,
             }
 
         for f in fixture:
             pk = f['pk']
-            dialog_before = TaskTarget.objects.filter(task_id__id=pk)
+            targets = TaskTarget.objects.filter(task__id=pk)
 
-            f['fields']['target'] = [make_target(x) for x in dialog_before]
+            f['fields']['target'] = [make_target(x) for x in targets]
 
-            if not f['fields']['package']:
-                f['fields']['package'] = 0
+            if not f['fields']['reward']:
+                f['fields']['reward'] = 0
 
         return fixture
 
@@ -109,9 +109,9 @@ class TaskTargetType(models.Model):
 
 
 class TaskTarget(models.Model):
-    task_id = models.ForeignKey(Task, verbose_name="task_target")
-    tp_id = models.ForeignKey(TaskTargetType, verbose_name="目标类型")
-    tp_num = models.IntegerField(default=1, verbose_name="目标类型值")
+    task = models.ForeignKey(Task, verbose_name="task_target")
+    tp = models.ForeignKey(TaskTargetType, verbose_name="目标类型")
+    value = models.IntegerField(default=1, verbose_name="目标类型值")
 
     class Meta:
         db_table = "task_target"
