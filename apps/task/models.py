@@ -80,7 +80,7 @@ class Task(models.Model):
     @classmethod
     def patch_fixture(cls, fixture):
         def make_target(target):
-            return (target.tp.id, target.tp.value),
+            return target.tp.id, target.tp.value
 
         for f in fixture:
             pk = f['pk']
