@@ -68,6 +68,8 @@ class Task(models.Model):
     client_task = models.BooleanField(default=False, verbose_name="是否是客户端任务")
     # 成功率， 这个是客户端操作的任务
     success_rate = models.IntegerField(default=100, verbose_name="成功率")
+    # 是否是任务链首个
+    task_begin = models.BooleanField(default=False, verbose_name="是否是任务链头")
 
     class Meta:
         db_table = "task"

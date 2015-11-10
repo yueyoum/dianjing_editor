@@ -22,6 +22,7 @@ class TaskAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'des', 'next_task', 'trigger',
                     'trigger_value', 'tp', 'reward',
                     'client_task', 'success_rate',
+                    'task_begin',
                     )
     inlines = [TaskTargetInLine, ]
 
