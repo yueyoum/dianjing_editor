@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name='TaskTarget',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('tp_num', models.IntegerField(default=1, verbose_name=b'\xe7\x9b\xae\xe6\xa0\x87\xe7\xb1\xbb\xe5\x9e\x8b\xe5\x80\xbc')),
+                ('value', models.IntegerField(default=1, verbose_name=b'\xe7\x9b\xae\xe6\xa0\x87\xe7\xb1\xbb\xe5\x9e\x8b\xe5\x80\xbc')),
             ],
             options={
                 'db_table': 'task_target',
@@ -79,18 +79,17 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='tasktarget',
-            name='task_id',
+            name='task',
             field=models.ForeignKey(verbose_name=b'task_target', to='task.Task'),
         ),
         migrations.AddField(
             model_name='tasktarget',
-            name='tp_id',
+            name='tp',
             field=models.ForeignKey(verbose_name=b'\xe7\x9b\xae\xe6\xa0\x87\xe7\xb1\xbb\xe5\x9e\x8b', to='task.TaskTargetType'),
         ),
         migrations.AddField(
             model_name='task',
             name='trigger_tp',
-            field=models.ForeignKey(null=True, blank=True, verbose_name=b'\xe8\xa7\xa6\xe5\x8f\x91\xe7\xb1\xbb\xe5\x9e\x8b', to='task.TaskTrigger'),
-            preserve_default=False,
+            field=models.ForeignKey(verbose_name=b'\xe8\xa7\xa6\xe5\x8f\x91\xe7\xb1\xbb\xe5\x9e\x8b', blank=True, to='task.TaskTrigger', null=True),
         ),
     ]
