@@ -81,7 +81,7 @@ class Task(models.Model):
     def patch_fixture(cls, fixture):
         def make_target(target):
             return {
-                target.tp.id: target.tp.value,
+                (target.tp.id, target.tp.value)
             }
 
         for f in fixture:
