@@ -9,7 +9,9 @@ class BuildingLevelsInline(admin.TabularInline):
 @admin.register(Building)
 class BuildingAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'name', 'des', 'status_des', 'remark', 'LevelAmount'
+        'id', 'name', 'des', 'status_des', 'remark',
+        'day_effect', 'night_effect',
+        'LevelAmount'
     )
 
     inlines = [BuildingLevelsInline,]
