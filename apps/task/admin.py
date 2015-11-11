@@ -19,16 +19,17 @@ class TaskTargetInLine(admin.TabularInline):
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'next_task', 'trigger',
+    list_display = ('id', 'name', 'des', 'next_task', 'trigger',
                     'trigger_value', 'tp', 'reward',
                     'client_task', 'success_rate',
+                    'task_begin',
                     )
     inlines = [TaskTargetInLine, ]
 
 
 @admin.register(TaskType)
 class TaskTypeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
+    list_display = ('id', 'name', 'des')
 
 
 @admin.register(TaskStatus)
@@ -43,7 +44,7 @@ class TaskTriggerAdmin(admin.ModelAdmin):
 
 @admin.register(TaskTargetType)
 class TaskTargetTypeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
+    list_display = ('id', 'name', 'des')
 
 
 class EventDialogBeforeInLine(admin.TabularInline):

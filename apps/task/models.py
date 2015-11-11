@@ -21,6 +21,7 @@ class TaskStatus(models.Model):
 class TaskType(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="类型id")
     name = models.CharField(unique=True, max_length=32, verbose_name="类型名")
+    des = models.TextField(blank=True, verbose_name="类型描述")
 
     # unicode显示名称
     def __unicode__(self):
@@ -51,6 +52,8 @@ class Task(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="任务id")
     # 任务名称
     name = models.CharField(max_length=32, verbose_name="任务名")
+    # 任务描述
+    des = models.TextField(blank=True, verbose_name="任务描述")
     # next id
     next_task = models.IntegerField(default=0, verbose_name="下一个任务id")
     # 任务触发类型
@@ -65,6 +68,8 @@ class Task(models.Model):
     client_task = models.BooleanField(default=False, verbose_name="是否是客户端任务")
     # 成功率， 这个是客户端操作的任务
     success_rate = models.IntegerField(default=100, verbose_name="成功率")
+    # 是否是任务链首个
+    task_begin = models.BooleanField(default=False, verbose_name="是否是任务链头")
 
     class Meta:
         db_table = "task"
@@ -92,6 +97,7 @@ class Task(models.Model):
 class TaskTargetType(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="目标类型id")
     name = models.CharField(max_length=255, verbose_name="目标类型名")
+    des = models.TextField(verbose_name="目标类型描述")
 
     # unicode显示名称
     def __unicode__(self):
