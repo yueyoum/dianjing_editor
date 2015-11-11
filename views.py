@@ -55,6 +55,7 @@ MODELS = (
     ('task.Task', 'task.json'),
     ('task.TaskType', 'task_type.json'),
     ('task.TaskStatus', 'task_status.json'),
+    ('task.TaskTargetType', 'task_target.json'),
     ('task.RandomEvent', 'random_event.json'),
     ('notification.Notification', 'notification.json'),
     ('league.League', 'league.json'),
