@@ -92,8 +92,14 @@ class Task(models.Model):
 
 
 class TaskTargetType(models.Model):
+    MODE = (
+        (1, "数值累加"),
+        (2, "直接比较"),
+    )
+
     id = models.IntegerField(primary_key=True, verbose_name="目标类型id")
     name = models.CharField(max_length=255, verbose_name="目标类型名")
+    mode = models.IntegerField(choices=MODE, default=1, verbose_name="判断类型")
     des = models.TextField(verbose_name="目标类型描述")
 
     # unicode显示名称
