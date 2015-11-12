@@ -49,3 +49,12 @@ class LadderScoreStore(models.Model):
         verbose_name = "天梯积分商店"
         verbose_name_plural = "天梯积分商店"
 
+    @classmethod
+    def patch_fixture(cls, fixture):
+        replace_fields = ['item', 'item_amount', 'training_skill', 'training_skill_amount']
+        for f in fixture:
+            for rf in replace_fields:
+                if not f['fields'][rf]:
+                    f['fields'][rf] = 0
+
+        return fixture
