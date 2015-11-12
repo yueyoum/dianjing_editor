@@ -38,7 +38,11 @@ class LadderScoreStore(models.Model):
                                       help_text="-1为没有限制，0为无法兑换，正整数N表示可以兑换N次")
 
     score = models.IntegerField(verbose_name="所需积分")
-    package = models.ForeignKey('package.Package', verbose_name="物品包")
+
+    item = models.ForeignKey('item.Item', null=True, blank=True, verbose_name='物品')
+    item_amount = models.IntegerField(null=True, blank=True, verbose_name='物品数量')
+    training_skill = models.ForeignKey('training.TrainingSkill', null=True, blank=True, verbose_name='技能训练书')
+    training_skill_amount = models.IntegerField(null=True, blank=True, verbose_name='技能训练书数量')
 
     class Meta:
         db_table = 'ladder_score_store'

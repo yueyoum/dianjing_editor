@@ -14,4 +14,7 @@ class LadderRankRewardAdmin(admin.ModelAdmin):
 
 @admin.register(LadderScoreStore)
 class LadderScoreStoreAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'des', 'icon', 'times_limit', 'score', 'package')
+    list_display = ('id', 'name', 'des', 'icon', 'times_limit', 'score',
+                    'item', 'item_amount',
+                    'training_skill', 'training_skill_amount',
+                    )
