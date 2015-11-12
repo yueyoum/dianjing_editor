@@ -100,11 +100,12 @@ class TaskTargetType(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="目标类型id")
     name = models.CharField(max_length=255, verbose_name="目标类型名")
     mode = models.IntegerField(choices=MODE, default=1, verbose_name="判断类型")
+    type_category = models.IntegerField(default=0, verbose_name="大类ID")
     des = models.TextField(verbose_name="目标类型描述")
 
     # unicode显示名称
     def __unicode__(self):
-        return u"{0} : {1}".format(self.name, self.id)
+        return self.name
 
     class Meta:
         db_table = "target_type"
@@ -125,6 +126,7 @@ class TaskTarget(models.Model):
 
 class RandomEvent(models.Model):
     id = models.IntegerField(primary_key=True)
+    target = models.ForeignKey(TaskTargetType, null=True, blank=True, verbose_name='类型')
     name = models.CharField(max_length=255, verbose_name='名字')
     icon = models.CharField(max_length=255, verbose_name='图标')
     level_min = models.IntegerField(default=1, verbose_name='最低等级')
