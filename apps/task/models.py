@@ -97,9 +97,16 @@ class TaskTargetType(models.Model):
         (2, "直接比较"),
     )
 
+    COMPARE = (
+        (0, "不比较"),
+        (1, ">="),
+        (2, "<="),
+    )
+
     id = models.IntegerField(primary_key=True, verbose_name="目标类型id")
     name = models.CharField(max_length=255, verbose_name="目标类型名")
     mode = models.IntegerField(choices=MODE, default=1, verbose_name="判断类型")
+    compare_type = models.IntegerField(choices=COMPARE,default=0, verbose_name="比较方式")
     type_category = models.IntegerField(default=0, verbose_name="大类ID")
     des = models.TextField(verbose_name="目标类型描述")
 
