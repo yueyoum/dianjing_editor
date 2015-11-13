@@ -101,7 +101,6 @@ class ChallengeType(models.Model):
 
 class ChallengeMatch(models.Model):
     id = models.IntegerField(primary_key=True)
-    next_id = models.IntegerField(verbose_name="下一关ID")
     name = models.CharField(max_length=255, verbose_name="名字")
     club_name = models.CharField(max_length=255, verbose_name="俱乐部名字")
     club_flag = models.ForeignKey('club.ClubFlag', verbose_name="俱乐部旗帜")
