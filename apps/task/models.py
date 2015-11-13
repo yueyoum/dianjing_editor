@@ -80,12 +80,11 @@ class Task(models.Model):
     @classmethod
     def patch_fixture(cls, fixture):
         def make_target(target):
-            return target.tp.id, target.value
+            return target.tp.id, target.param, target.value
 
         for f in fixture:
             pk = f['pk']
             targets = TaskTarget.objects.filter(task__id=pk)
-
             f['fields']['targets'] = [make_target(x) for x in targets]
 
         return fixture
@@ -107,7 +106,7 @@ class TaskTargetType(models.Model):
     mode = models.IntegerField(choices=MODE, default=1, verbose_name="判断类型")
     compare_type = models.IntegerField(choices=COMPARE,default=1, verbose_name="比较方式")
     compare_source = models.CharField(max_length=255, blank=True, verbose_name="比较源", help_text="只有比较类型才需要设置")
-    type_category = models.IntegerField(default=0, verbose_name="大类ID")
+    has_param = models.BooleanField(default=False, verbose_name="是否有目标参数")
     des = models.TextField(verbose_name="目标类型描述")
 
     # unicode显示名称
@@ -123,7 +122,8 @@ class TaskTargetType(models.Model):
 class TaskTarget(models.Model):
     task = models.ForeignKey(Task, verbose_name="task_target")
     tp = models.ForeignKey(TaskTargetType, verbose_name="目标类型")
-    value = models.IntegerField(default=1, verbose_name="目标类型值")
+    param = models.IntegerField(default=0, verbose_name="目标参数")
+    value = models.IntegerField(default=1, verbose_name="目标值")
 
     class Meta:
         db_table = "task_target"
@@ -133,7 +133,6 @@ class TaskTarget(models.Model):
 
 class RandomEvent(models.Model):
     id = models.IntegerField(primary_key=True)
-    target = models.ForeignKey(TaskTargetType, null=True, blank=True, verbose_name='类型')
     name = models.CharField(max_length=255, verbose_name='名字')
     icon = models.CharField(max_length=255, verbose_name='图标')
     level_min = models.IntegerField(default=1, verbose_name='最低等级')

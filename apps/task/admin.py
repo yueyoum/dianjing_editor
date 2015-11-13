@@ -44,7 +44,7 @@ class TaskTriggerAdmin(admin.ModelAdmin):
 
 @admin.register(TaskTargetType)
 class TaskTargetTypeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'mode', 'compare_type', 'compare_source', 'type_category', 'des')
+    list_display = ('id', 'name', 'mode', 'compare_type', 'compare_source', 'has_param', 'des')
     list_filter = ('mode',)
 
 
@@ -58,5 +58,5 @@ class EventDialogAfterInLine(admin.TabularInline):
 
 @admin.register(RandomEvent)
 class RandomEventAdmin(admin.ModelAdmin):
-    list_display = ('id', 'target', 'name', 'icon', 'level_min', 'level_max', 'trig_name', 'package')
+    list_display = ('id', 'name', 'icon', 'level_min', 'level_max', 'trig_name', 'package')
     inlines = [EventDialogBeforeInLine, EventDialogAfterInLine]
