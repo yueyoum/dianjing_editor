@@ -48,7 +48,7 @@ class ChallengeMatchAdmin(ImportExportModelAdmin):
     resource_class = ChallengeMatchResource
 
     list_display = (
-        'id', 'name', 'club_name', 'club_flag', 'tp', 'policy', 'level', 'strength', 'staffs',
+        'id', 'name', 'need_club_level', 'club_name', 'club_flag', 'tp', 'policy', 'level', 'strength', 'staffs',
         'winning_rates',
         'package',
         'des'

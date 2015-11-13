@@ -102,8 +102,9 @@ class ChallengeType(models.Model):
 class ChallengeMatch(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, verbose_name="名字")
-    club_name = models.CharField(max_length=255, verbose_name="俱乐部名字")
-    club_flag = models.ForeignKey('club.ClubFlag', verbose_name="俱乐部旗帜")
+    need_club_level = models.IntegerField(default=1, verbose_name="需要俱乐部等级")
+    club_name = models.CharField(max_length=255, verbose_name="关卡俱乐部名字")
+    club_flag = models.ForeignKey('club.ClubFlag', verbose_name="关卡俱乐部旗帜")
     tp = models.ForeignKey(ChallengeType, verbose_name="类型")
     policy = models.ForeignKey('unit.Policy', verbose_name="战术")
 
