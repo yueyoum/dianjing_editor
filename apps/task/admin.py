@@ -44,7 +44,8 @@ class TaskTriggerAdmin(admin.ModelAdmin):
 
 @admin.register(TaskTargetType)
 class TaskTargetTypeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'mode', 'compare_type', 'type_category', 'des')
+    list_display = ('id', 'name', 'mode', 'compare_type', 'compare_source', 'type_category', 'des')
+    list_filter = ('mode',)
 
 
 class EventDialogBeforeInLine(admin.TabularInline):

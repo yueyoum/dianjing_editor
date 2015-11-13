@@ -94,11 +94,10 @@ class Task(models.Model):
 class TaskTargetType(models.Model):
     MODE = (
         (1, "数值累加"),
-        (2, "直接比较"),
+        (2, "比较"),
     )
 
     COMPARE = (
-        (0, "不比较"),
         (1, ">="),
         (2, "<="),
     )
@@ -106,7 +105,8 @@ class TaskTargetType(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="目标类型id")
     name = models.CharField(max_length=255, verbose_name="目标类型名")
     mode = models.IntegerField(choices=MODE, default=1, verbose_name="判断类型")
-    compare_type = models.IntegerField(choices=COMPARE,default=0, verbose_name="比较方式")
+    compare_type = models.IntegerField(choices=COMPARE,default=1, verbose_name="比较方式")
+    compare_source = models.CharField(max_length=255, blank=True, verbose_name="比较源", help_text="只有比较类型才需要设置")
     type_category = models.IntegerField(default=0, verbose_name="大类ID")
     des = models.TextField(verbose_name="目标类型描述")
 
