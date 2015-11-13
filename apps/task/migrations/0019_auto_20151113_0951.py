@@ -5,7 +5,7 @@ from django.db import models, migrations
 
 
 def change_compare_type_to_1(apps, schema_editor):
-    TaskTargetType = apps.get_module("task", "TaskTargetType")
+    TaskTargetType = apps.get_model("task", "TaskTargetType")
     TaskTargetType.objects.filter(compare_type=0).update(compare_type=1)
 
 class Migration(migrations.Migration):
