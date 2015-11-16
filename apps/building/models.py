@@ -37,7 +37,7 @@ class Building(models.Model):
                 levels[l.level] = {
                     'resource': l.resource,
                     'location': l.location,
-                    'up_condition_value': l.up_need_club_level,
+                    'up_condition_value': l.up_condition_value,
                     'up_need_gold': l.up_need_gold,
                     'up_need_minutes': l.up_need_minutes,
                     'value1': l.value1 if l.value1 else 0,
