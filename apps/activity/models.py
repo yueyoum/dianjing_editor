@@ -64,6 +64,7 @@ def _patch_activity_fixture(fixture):
         f['pk'] = activity.id
         f['fields']['category'] = activity.category_id
         f['fields']['name'] = activity.name
+        f['fields']['display'] = activity.display
         f['fields']['des'] = activity.des
 
     return fixture
