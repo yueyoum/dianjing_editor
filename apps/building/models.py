@@ -4,8 +4,14 @@ from django.db import models
 
 
 class Building(models.Model):
+    LEVEL_UP_CONDITION_TYPE = (
+        (1, "俱乐部等级"),
+        (2, "俱乐部总部大楼等级"),
+    )
+
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, verbose_name="名字")
+    level_up_condition_type = models.IntegerField(choices=LEVEL_UP_CONDITION_TYPE, default=1, verbose_name="升级所需条件")
     des = models.TextField(blank=True, verbose_name="描述")
     status_des = models.TextField(blank=True, verbose_name="当前状态描述")
     remark = models.TextField(blank=True, verbose_name='备注')
@@ -31,7 +37,7 @@ class Building(models.Model):
                 levels[l.level] = {
                     'resource': l.resource,
                     'location': l.location,
-                    'up_need_club_level': l.up_need_club_level,
+                    'up_condition_value': l.up_need_club_level,
                     'up_need_gold': l.up_need_gold,
                     'up_need_minutes': l.up_need_minutes,
                     'value1': l.value1 if l.value1 else 0,
@@ -56,7 +62,7 @@ class BuildingLevels(models.Model):
     level = models.IntegerField(verbose_name="等级", db_index=True)
     resource = models.CharField(max_length=255, blank=True, verbose_name="资源")
     location = models.CharField(max_length=255, blank=True, verbose_name="位置")
-    up_need_club_level = models.IntegerField(verbose_name="升级所需俱乐部等级")
+    up_condition_value = models.IntegerField(verbose_name="升级条件值")
     up_need_gold = models.IntegerField(default=0, verbose_name="升级所需软妹币")
     up_need_minutes = models.IntegerField(default=0, verbose_name='升级所需分钟数')
     value1 = models.IntegerField(null=True, blank=True, verbose_name="值1")
