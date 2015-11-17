@@ -33,5 +33,5 @@ class TrainingPropertyAdmin(admin.ModelAdmin):
 @admin.register(TrainingSkill)
 class TrainingSkillAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'name', 'icon', 'des', 'minutes',
+        'id', 'name', 'icon', 'des', 'minutes', 'sell_gold',
     )
