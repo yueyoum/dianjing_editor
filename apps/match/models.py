@@ -87,6 +87,7 @@ class ChallengeType(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, verbose_name='类型')
     level = models.IntegerField(verbose_name="等级")
+    condition_challenge_id = models.IntegerField(default=0, verbose_name="前置关卡ID")
     color = models.CharField(max_length=255, verbose_name='颜色')
     des = models.TextField(blank=True, verbose_name="描述")
 
