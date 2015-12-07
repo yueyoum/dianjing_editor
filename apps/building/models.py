@@ -88,7 +88,7 @@ class BuildingLevels(models.Model):
 
     def clean(self):
         from apps.item.models import Item
-        for item in self.need_items.split(','):
+        for item in self.up_need_items.split(','):
             try:
                 item_id, item_amount = item.split(':')
                 item_id = int(item_id)
