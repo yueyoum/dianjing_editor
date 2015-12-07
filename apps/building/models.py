@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+from django.core.exceptions import ValidationError
 
 
 class Building(models.Model):
@@ -29,6 +30,14 @@ class Building(models.Model):
 
     @classmethod
     def patch_fixture(cls, fixture):
+        def get_need_items(items):
+            need_items = []
+            for item in items.split(','):
+                item_id, item_amount = item.split(':')
+                need_items.append((int(item_id), int(item_amount)))
+
+            return need_items
+
         for f in fixture:
             bid = f['pk']
             f['fields'].pop('remark')
@@ -40,6 +49,7 @@ class Building(models.Model):
                     'up_condition_value': l.up_condition_value,
                     'up_need_gold': l.up_need_gold,
                     'up_need_minutes': l.up_need_minutes,
+                    'up_need_items': get_need_items(l.up_need_items),
                     'value1': l.value1 if l.value1 else 0,
                     'value2': l.value2 if l.value2 else 0,
                     'des': l.des,
@@ -65,6 +75,7 @@ class BuildingLevels(models.Model):
     up_condition_value = models.IntegerField(verbose_name="升级条件值")
     up_need_gold = models.IntegerField(default=0, verbose_name="升级所需软妹币")
     up_need_minutes = models.IntegerField(default=0, verbose_name='升级所需分钟数')
+    up_need_items = models.CharField(max_length=255, verbose_name='所需物品', help_text='id:数量,id:数量')
     value1 = models.IntegerField(null=True, blank=True, verbose_name="值1")
     value2 = models.IntegerField(null=True, blank=True, verbose_name="值2")
     des = models.CharField(max_length=255, blank=True, verbose_name="描述")
@@ -75,6 +86,18 @@ class BuildingLevels(models.Model):
     class Meta:
         db_table = 'building_levels'
 
+    def clean(self):
+        from apps.item.models import Item
+        for item in self.need_items.split(','):
+            try:
+                item_id, item_amount = item.split(':')
+                item_id = int(item_id)
+                item_amount = int(item_amount)
+            except:
+                raise ValidationError("所需物品填错了")
+
+            if not Item.objects.filter(id=item_id).exists():
+                raise ValidationError("物品{0}不存在".format(item_id))
 
 
 class Shop(models.Model):
