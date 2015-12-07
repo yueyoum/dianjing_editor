@@ -53,6 +53,7 @@ class Building(models.Model):
                     'value1': l.value1 if l.value1 else 0,
                     'value2': l.value2 if l.value2 else 0,
                     'des': l.des,
+                    'effect_des': l.effect_des,
                 }
 
             f['fields']['levels'] = levels
@@ -79,6 +80,7 @@ class BuildingLevels(models.Model):
     value1 = models.IntegerField(null=True, blank=True, verbose_name="值1")
     value2 = models.IntegerField(null=True, blank=True, verbose_name="值2")
     des = models.CharField(max_length=255, blank=True, verbose_name="描述")
+    effect_des = models.CharField(max_length=255, blank=True, verbose_name="升级效果描述")
 
     def __unicode__(self):
         return u'#{0}'.format(self.level)
