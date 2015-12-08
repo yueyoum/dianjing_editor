@@ -48,6 +48,7 @@ MODELS = (
     ('match.MatchConversationEnd', 'match_conversation_end.json'),
     ('match.MatchConversationRoundEnd', 'match_conversation_round_end.json'),
     ('match.Maps', 'maps.json'),
+    ('match.TrainingMatchReward', 'training_match_reward.json'),
     ('package.Package', 'package.json'),
     ('building.Building', 'building.json'),
     ('building.Shop', 'shop.json'),
@@ -75,7 +76,6 @@ MODELS = (
     ('active_value.ActiveReward', 'active_reward.json'),
     ('conversation.Conversation', 'conversation.json'),
     ('item.Item', 'item.json'),
-    ('training_match.TrainingMatchReward', 'training_match_reward.json'),
 )
 
 

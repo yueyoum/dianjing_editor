@@ -65,7 +65,6 @@ INSTALLED_APPS = (
     'apps.active_value',
     'apps.conversation',
     'apps.item',
-    'apps.training_match',
 )
 
 MIDDLEWARE_CLASSES = (

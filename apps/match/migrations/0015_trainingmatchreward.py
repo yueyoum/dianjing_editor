@@ -8,6 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('package', '0010_package_items'),
+        ('match', '0014_challengetype_condition_challenge_id'),
     ]
 
     operations = [

@@ -8,7 +8,8 @@ from apps.match.models import (
     MatchConversationEnd,
     MatchConversationRoundEnd,
     MatchConversationStart,
-    Maps
+    Maps,
+    TrainingMatchReward,
 )
 
 class ChallengeMatchResource(resources.ModelResource):
@@ -60,4 +61,12 @@ class ChallengeMatchAdmin(ImportExportModelAdmin):
 class MapsAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'name', 'picture',
+    )
+
+
+
+@admin.register(TrainingMatchReward)
+class TrainingMatchRewardAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'reward', 'additional_reward', 'des'
     )
