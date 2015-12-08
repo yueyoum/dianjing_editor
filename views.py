@@ -75,6 +75,7 @@ MODELS = (
     ('active_value.ActiveReward', 'active_reward.json'),
     ('conversation.Conversation', 'conversation.json'),
     ('item.Item', 'item.json'),
+    ('training_match.TrainingMatchReward', 'training_match_reward.json'),
 )
 
 
