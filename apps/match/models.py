@@ -186,7 +186,7 @@ class TrainingMatchReward(models.Model):
 
 class EliteArea(models.Model):
     id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=255, verbose_name='类型')
+    name = models.CharField(max_length=255, verbose_name='名字')
     need_club_level = models.IntegerField(verbose_name="所需俱乐部等级")
     match_ids = models.CommaSeparatedIntegerField(max_length=255, verbose_name='关卡ID列表')
     map_name = models.CharField(max_length=255, verbose_name="地图")
