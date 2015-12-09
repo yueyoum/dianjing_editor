@@ -10,6 +10,8 @@ from apps.match.models import (
     MatchConversationStart,
     Maps,
     TrainingMatchReward,
+    EliteArea,
+    EliteMatch,
 )
 
 class ChallengeMatchResource(resources.ModelResource):
@@ -69,4 +71,19 @@ class MapsAdmin(admin.ModelAdmin):
 class TrainingMatchRewardAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'reward', 'additional_reward', 'des'
+    )
+
+@admin.register(EliteArea)
+class EliteAreaAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'name', 'need_club_level', 'match_ids',
+        'map_name', 'des'
+    )
+
+@admin.register(EliteMatch)
+class EliteMatchAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'name', 'max_times', 'club_name',
+        'club_flag', 'policy', 'staff_level', 'staffs',
+        'reward', 'des'
     )

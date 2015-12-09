@@ -38,7 +38,7 @@ class MatchConversationEnd(models.Model):
         (39, "30<=, <40"),
         (29, "20<=, <30"),
         (19, "10<=, <20"),
-        (9,  "0<=, <10"),
+        (9, "0<=, <10"),
         (0, "无关紧要"),
     )
 
@@ -61,6 +61,7 @@ class MatchConversationEnd(models.Model):
 
         return fixture
 
+
 class MatchConversationRoundEnd(models.Model):
     ROUND = (
         (1, "第一回合"),
@@ -82,6 +83,7 @@ class MatchConversationRoundEnd(models.Model):
             f['fields']['des'] = f['fields']['des'].split('|')
 
         return fixture
+
 
 class ChallengeType(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -119,7 +121,6 @@ class ChallengeMatch(models.Model):
 
     des = models.TextField(blank=True, verbose_name="描述")
 
-
     def __unicode__(self):
         return self.name
 
@@ -127,7 +128,6 @@ class ChallengeMatch(models.Model):
         db_table = 'challenge_match'
         verbose_name = '挑战赛'
         verbose_name_plural = '挑战赛'
-
 
     def clean(self):
         staffs = [int(s) for s in self.staffs.split(',')]
@@ -154,17 +154,20 @@ class Maps(models.Model):
     name = models.CharField(max_length=255, verbose_name='名字')
     picture = models.CharField(max_length=255, verbose_name='图片')
 
+    def __unicode__(self):
+        return self.name
+
     class Meta:
         db_table = 'maps'
         verbose_name = '地图'
         verbose_name_plural = '地图'
 
 
-
 class TrainingMatchReward(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="第几场")
     reward = models.ForeignKey('package.Package', verbose_name="奖励", related_name='tmr')
-    additional_reward = models.ForeignKey('package.Package', null=True, blank=True, verbose_name="额外奖励", related_name='tmrar')
+    additional_reward = models.ForeignKey('package.Package', null=True, blank=True, verbose_name="额外奖励",
+                                          related_name='tmrar')
     des = models.TextField(blank=True)
 
     class Meta:
@@ -181,3 +184,78 @@ class TrainingMatchReward(models.Model):
         return fixtures
 
 
+class EliteArea(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255, verbose_name='类型')
+    need_club_level = models.IntegerField(verbose_name="所需俱乐部等级")
+    match_ids = models.CommaSeparatedIntegerField(max_length=255, verbose_name='关卡ID列表')
+    map_name = models.CharField(max_length=255, verbose_name="地图")
+    des = models.TextField(blank=True, verbose_name="描述")
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'elite_area'
+        verbose_name = '精英赛大区'
+        verbose_name_plural = '精英赛大区'
+
+    def clean(self):
+        if not self.match_ids:
+            return
+
+        for i in self.match_ids.split(','):
+            if not i.isdigit():
+                raise ValidationError("关卡ID {0} 填错了".format(i))
+
+            if not EliteMatch.objects.filter(id=int(i)).exists():
+                raise ValidationError("关卡ID {0} 不存在".format(i))
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            match_ids = f['fields']['match_ids']
+            f['fields']['match_ids'] = [int(i) for i in match_ids.split(',')]
+
+        return fixture
+
+
+class EliteMatch(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255, verbose_name="名字")
+    max_times = models.IntegerField(verbose_name="次数限制")
+
+    club_name = models.CharField(max_length=255, verbose_name="关卡俱乐部名字")
+    club_flag = models.ForeignKey('club.ClubFlag', verbose_name="关卡俱乐部旗帜")
+    policy = models.ForeignKey('unit.Policy', verbose_name="战术")
+    staff_level = models.IntegerField(verbose_name="选手等级")
+    staffs = models.CommaSeparatedIntegerField(max_length=255, verbose_name="选手ID列表")
+
+    reward = models.ForeignKey('package.Package', verbose_name="奖励物品包")
+
+    des = models.TextField(blank=True, verbose_name="描述")
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'elite_match'
+        verbose_name = '精英赛小关卡'
+        verbose_name_plural = '精英赛小关'
+
+    def clean(self):
+        staffs = [int(s) for s in self.staffs.split(',')]
+        if len(staffs) != 5:
+            raise ValidationError("wrong staffs")
+
+        for s in staffs:
+            if not Staff.objects.filter(id=int(s)).exists():
+                raise ValidationError("Staff {0} not exists".format(s))
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            staffs = f['fields']['staffs']
+            f['fields']['staffs'] = [int(s) for s in staffs.split(',')]
+
+        return fixture
