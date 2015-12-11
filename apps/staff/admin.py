@@ -36,7 +36,7 @@ class StuffAdmin(ImportExportModelAdmin):
     resource_class = StaffResource
 
     list_display = (
-        'id', 'name', 'avatar', 'nation', 'gender', 'race', 'quality',
+        'id', 'name', 'avatar', 'picture', 'nation', 'gender', 'race', 'quality',
         'buy_type', 'buy_cost', 'can_recruit', 'salary', 'des',
         'skill_ids', 'qianban_ids'
     )

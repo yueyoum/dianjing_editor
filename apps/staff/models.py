@@ -86,6 +86,7 @@ class Staff(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(unique=True, max_length=32, verbose_name="名字")
     avatar = models.CharField(max_length=32, verbose_name="头像")
+    picture = models.CharField(max_length=255, verbose_name="半身像")
     nation = models.CharField(max_length=32, verbose_name="国籍")
     gender = models.CharField(max_length=32, verbose_name="性别")
 
