@@ -26,3 +26,4 @@ class PackageAdmin(ImportExportModelAdmin):
     )
 
     search_fields = ('name',)
+    list_filter = ('attr_mode',)
