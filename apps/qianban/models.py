@@ -3,6 +3,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 
+
 class QianBan(models.Model):
     CONDITION_TYPE = (
         (1, "同时上阵"),
@@ -10,14 +11,12 @@ class QianBan(models.Model):
     )
 
     ADDITION = (
-        ('jingong', '进攻'),
-        ('qianzhi', '牵制'),
-        ('xintai', '心态'),
-        ('baobing', '暴兵'),
-        ('fangshou', '防守'),
-        ('yunying', '运营'),
-        ('yishi', '意识'),
-        ('caozuo', '操作'),
+        ('luoji', '逻辑'),
+        ('minjie', '敏捷'),
+        ('lilun', '理论'),
+        ('wuxing', '五行'),
+        ('meili', '魅力'),
+
         ('skill', '技能强度'),
     )
 
@@ -32,8 +31,8 @@ class QianBan(models.Model):
 
     addition_tp = models.CharField(choices=ADDITION, max_length=255, verbose_name="加成类型")
     addition_value = models.CharField(max_length=255, verbose_name="加成值",
-                                                       help_text="如果加成类型是 技能强度，这里填写的是 技能id:强度"
-                                                       )
+                                      help_text="如果加成类型是 技能强度，这里填写的是 技能id:强度"
+                                      )
 
     class Meta:
         db_table = 'qianban'
@@ -73,10 +72,9 @@ class QianBan(models.Model):
         else:
             try:
                 a = int(self.addition_value)
-                assert  a > 0
+                assert a > 0
             except:
                 raise ValidationError("加成值填错了")
-
 
     @classmethod
     def patch_fixture(cls, fixture):

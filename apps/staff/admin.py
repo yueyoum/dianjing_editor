@@ -13,6 +13,7 @@ from apps.staff.models import (
     StaffLevel,
 )
 
+
 class StaffResource(resources.ModelResource):
     class Meta:
         model = Staff
@@ -22,13 +23,15 @@ class StaffResource(resources.ModelResource):
 class StuffRaceAdmin(admin.ModelAdmin):
     list_display = ('id', 'icon', 'name')
 
+
 @admin.register(StaffQuality)
 class StuffQualityAdmin(admin.ModelAdmin):
     list_display = ('id', 'color', 'icon', 'background')
 
+
 @admin.register(StaffStatus)
 class StuffStatusAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'value', 'des')
+    list_display = ('id', 'icon', 'name', 'value', 'des')
 
 
 @admin.register(Staff)
@@ -50,8 +53,10 @@ class StaffHotAdmin(admin.ModelAdmin):
         'id', 'cost'
     )
 
+
 class StaffRecruitSettingsInline(admin.TabularInline):
     model = StaffRecruitSettings
+
 
 @admin.register(StaffRecruit)
 class StaffRecruitAdmin(admin.ModelAdmin):
@@ -60,11 +65,21 @@ class StaffRecruitAdmin(admin.ModelAdmin):
         'des'
     )
 
-    inlines = [StaffRecruitSettingsInline,]
+    inlines = [StaffRecruitSettingsInline, ]
+
 
 @admin.register(StaffLevel)
 class StaffLevelAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'quality_A', 'quality_B', 'quality_C', 'quality_D',
+        'id', 'quality_C', 'quality_B', 'quality_A',
         'quality_S', 'quality_SS'
+    )
+
+    fields = (
+        'id',
+        'quality_C',
+        'quality_B',
+        'quality_A',
+        'quality_S',
+        'quality_SS',
     )
