@@ -44,7 +44,6 @@ class Building(models.Model):
             levels = {}
 
             is_open = {}
-            is_acc = {}
             for l in BuildingLevels.objects.filter(building__id=bid):
                 levels[l.level] = {
                     'resource': l.resource,
@@ -58,18 +57,13 @@ class Building(models.Model):
                 }
 
                 effect = {}
-                for e in BuildingEffectInfo.objects.filter(building_effect__id=l.effect.id):
-                    if e.is_open:
-                        is_open[e.tp] = e.value
-                    elif e.is_acc:
-                        is_acc[e.tp] = e.value
+                for info in BuildingEffectInfo.objects.filter(building_effect__id=l.effect.id):
+                    if info.tp == 7:
+                        is_open[info.tp] = info.value
                     else:
-                        effect[e.tp] = e.value
-                if is_open:
-                    effect += is_open
-                if is_acc:
-                    effect += is_acc
+                        effect[info.tp] = info.value
 
+                effect = effect.items() + is_open.items()
                 levels[l.level]['effect'] = effect
 
             f['fields']['levels'] = levels
@@ -101,29 +95,50 @@ class BuildingEffectInfo(models.Model):
     BUILDING_EFFECT_TYPE = (
         (1, "招募花费减少"),
         (2, "商务收益增加"),
-        (3, "直播位置增加"),
-        (4, "网店数量增加"),
-        (5, "合约数量增加"),
+        (3, "直播位置累计增加"),
+        (4, "网店数量累计增加"),
+        (5, "合约数量累计增加"),
         (6, "联赛经验增加"),
-        (7, "天梯开放"),
-        (8, "训练赛开放"),
-        (9, "精英赛开放"),
-        (10, "杯赛开放"),
-        (11, "训练位置增加"),
-        (12, "训练效果加成"),
-        (13, "新的训练方式"),
+        (7, "功能开放"),
+        (8, "训练位置累计增加"),
+        (9, "训练效果加成"),
     )
 
     building_effect = models.ForeignKey(BuildingEffect, related_name="effect_id")
     tp = models.IntegerField(choices=BUILDING_EFFECT_TYPE, verbose_name="效果类型")
-    value = models.IntegerField(verbose_name="效果值")
-    is_open = models.BooleanField(verbose_name="是否为开放类型")
-    is_acc = models.BooleanField(verbose_name="是否为累加类型")
+    value = models.CharField(max_length=255, verbose_name="效果值")
 
     class Meta:
         db_table = "building_effect_info"
         verbose_name = "建筑效果"
         verbose_name_plural = "建筑效果"
+
+        unique_together = (
+            ('building_effect', 'tp'),
+        )
+
+    def clean(self):
+        from apps.function.models import Function
+        if self.tp == 7:
+            function_list = []
+            for function in self.value.split(','):
+                try:
+                    function = int(function)
+                except:
+                    raise ValidationError("开放功能id填错了")
+
+                if not Function.objects.filter(id=function).exists():
+                    raise ValidationError("功能{0}不存在".format(function))
+
+                if function in function_list:
+                    raise ValidationError("功能{0}不能反复添加".format(function))
+                else:
+                    function_list.append(function)
+        else:
+            try:
+                value = int(self.value)
+            except:
+                raise ValidationError("数值填错了")
 
 
 class BuildingLevels(models.Model):
@@ -135,7 +150,7 @@ class BuildingLevels(models.Model):
     up_need_gold = models.IntegerField(default=0, verbose_name="升级所需软妹币")
     up_need_minutes = models.IntegerField(default=0, verbose_name='升级所需分钟数')
     up_need_items = models.CharField(max_length=255, verbose_name='所需物品', help_text='id:数量,id:数量')
-    effect = models.ForeignKey(BuildingEffect, default=1, verbose_name="建筑效果")
+    effect = models.ForeignKey(BuildingEffect, null=True, blank=True, verbose_name="建筑效果")
     des = models.CharField(max_length=255, blank=True, verbose_name="描述")
     effect_des = models.CharField(max_length=255, blank=True, verbose_name="升级效果描述")
 
@@ -146,6 +161,9 @@ class BuildingLevels(models.Model):
         db_table = 'building_levels'
 
     def clean(self):
+        if not self.effect:
+            raise ValidationError("-->建筑效果<-- 不能为空!")
+
         from apps.item.models import Item
         for item in self.up_need_items.split(','):
             try:

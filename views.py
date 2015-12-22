@@ -78,6 +78,7 @@ MODELS = (
     ('active_value.ActiveReward', 'active_reward.json'),
     ('conversation.Conversation', 'conversation.json'),
     ('item.Item', 'item.json'),
+    ('auction.Auction', 'auction.json'),
 )
 
 
