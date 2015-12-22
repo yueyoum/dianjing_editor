@@ -14,23 +14,18 @@ class Package(models.Model):
 
     ATTRS = {
         'attr_random_value': "随机属性值范围",
-        'jingong': "进攻",
-        'qianzhi': "牵制",
-        'xintai': "心态",
-        'baobing': "暴兵",
-        'fangshou': "防守",
-        'yunying': "运营",
-        'yishi': "意识",
-        'caozuo': "操作",
+        'luoji': "逻辑",
+        'minjie': "敏捷",
+        'lilun': "理论",
+        'wuxing': "五行",
+        'meili': "魅力",
+
         'zhimingdu': "知名度",
         'gold': "软妹币",
         'diamond': "钻石",
         'staff_exp': "员工经验",
         'club_renown': "俱乐部声望",
-        'ladder_score': "天梯赛积分",
-        "league_score": "联赛积分",
     }
-
 
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=32, verbose_name="名字")
@@ -43,14 +38,12 @@ class Package(models.Model):
                                          help_text="只有 属性模式 为 完全随机 时，才有用"
                                          )
 
-    jingong = models.CharField(max_length=32, blank=True, verbose_name="进攻")
-    qianzhi = models.CharField(max_length=32, blank=True, verbose_name="牵制")
-    xintai = models.CharField(max_length=32, blank=True, verbose_name="心态")
-    baobing = models.CharField(max_length=32, blank=True, verbose_name="暴兵")
-    fangshou = models.CharField(max_length=32, blank=True, verbose_name="防守")
-    yunying = models.CharField(max_length=32, blank=True, verbose_name="运营")
-    yishi = models.CharField(max_length=32, blank=True, verbose_name="意识")
-    caozuo = models.CharField(max_length=32, blank=True, verbose_name="操作")
+    luoji = models.CharField(max_length=32, blank=True, verbose_name="逻辑")
+    minjie = models.CharField(max_length=32, blank=True, verbose_name="敏捷")
+    lilun = models.CharField(max_length=32, blank=True, verbose_name="理论")
+    wuxing = models.CharField(max_length=32, blank=True, verbose_name="五行")
+    meili = models.CharField(max_length=32, blank=True, verbose_name="魅力")
+
     zhimingdu = models.CharField(max_length=32, blank=True, verbose_name="知名度")
 
     gold = models.CharField(max_length=32, blank=True, verbose_name="软妹币")
@@ -58,9 +51,6 @@ class Package(models.Model):
 
     staff_exp = models.CharField(max_length=32, blank=True, verbose_name="员工经验")
     club_renown = models.CharField(max_length=32, blank=True, verbose_name="俱乐部声望")
-
-    ladder_score = models.CharField(max_length=32, blank=True, verbose_name="天梯赛积分")
-    league_score = models.CharField(max_length=32, blank=True, verbose_name="联赛积分")
 
     trainings = models.CharField(max_length=255, blank=True, verbose_name="技能训练书",
                                  help_text="id:数量,id:数量"
