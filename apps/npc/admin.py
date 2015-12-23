@@ -29,27 +29,6 @@ class NPCClubAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'league',
-        'jingong_low', 'jingong_high',
-        'qianzhi_low', 'qianzhi_high',
-        'xintai_low', 'xintai_high',
-        'baobing_low', 'baobing_high',
-        'fangshou_low', 'fangshou_high',
-        'yunying_low', 'yunying_high',
-        'yishi_low', 'yishi_high',
-        'caozuo_low', 'caozuo_high',
-        'skill_low', 'skill_high',
-    )
-
-    fields = (
-        'id',
-        'league',
-        ('jingong_low', 'jingong_high'),
-        ('qianzhi_low', 'qianzhi_high'),
-        ('xintai_low', 'xintai_high'),
-        ('baobing_low', 'baobing_high'),
-        ('fangshou_low', 'fangshou_high'),
-        ('yunying_low', 'yunying_high'),
-        ('yishi_low', 'yishi_high'),
-        ('caozuo_low', 'caozuo_high'),
-        ('skill_low', 'skill_high'),
+        'caozuo', 'baobing', 'yunying', 'zhanshu',
+        'skill_level'
     )

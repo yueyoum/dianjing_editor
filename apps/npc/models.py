@@ -2,6 +2,7 @@
 
 from django.db import models
 
+
 class NPCClubName(models.Model):
     name = models.CharField(max_length=64)
 
@@ -20,39 +21,27 @@ class NPCManagerName(models.Model):
         verbose_name_plural = "NPC经理人名字"
 
 
-
 class NPCClub(models.Model):
     id = models.IntegerField(primary_key=True)
     league = models.ForeignKey('league.League', verbose_name="所属联赛等级")
 
-    jingong_low = models.IntegerField(verbose_name="进攻下限")
-    jingong_high = models.IntegerField(verbose_name="进攻上限")
+    caozuo = models.CommaSeparatedIntegerField(blank=True, max_length=255, verbose_name="操作范围", help_text='low,high')
+    baobing = models.CommaSeparatedIntegerField(blank=True, max_length=255, verbose_name="暴兵范围")
+    yunying = models.CommaSeparatedIntegerField(blank=True, max_length=255, verbose_name="运营范围")
+    zhanshu = models.CommaSeparatedIntegerField(blank=True, max_length=255, verbose_name="战术范围")
 
-    qianzhi_low = models.IntegerField(verbose_name="牵制下限")
-    qianzhi_high = models.IntegerField(verbose_name="牵制上限")
-
-    xintai_low = models.IntegerField(verbose_name="心态下限")
-    xintai_high = models.IntegerField(verbose_name="心态上限")
-
-    baobing_low = models.IntegerField(verbose_name="暴兵下限")
-    baobing_high = models.IntegerField(verbose_name="暴兵上限")
-
-    fangshou_low = models.IntegerField(verbose_name="防守下限")
-    fangshou_high = models.IntegerField(verbose_name="防守上限")
-
-    yunying_low = models.IntegerField(verbose_name="运营下限")
-    yunying_high = models.IntegerField(verbose_name="运营上限")
-
-    yishi_low = models.IntegerField(verbose_name="意识下限")
-    yishi_high = models.IntegerField(verbose_name="意识上限")
-
-    caozuo_low = models.IntegerField(verbose_name="操作下限")
-    caozuo_high = models.IntegerField(verbose_name="操作上限")
-
-    skill_low = models.IntegerField(verbose_name="技能等级下限")
-    skill_high = models.IntegerField(verbose_name="技能等级上限")
+    skill_level = models.CommaSeparatedIntegerField(blank=True, max_length=255, verbose_name="技能等级范围")
 
     class Meta:
         db_table = 'npc_club'
         verbose_name = "NPC俱乐部"
         verbose_name_plural = "NPC俱乐部"
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        keys = ['caozuo', 'baobing', 'yunying', 'zhanshu', 'skill_level']
+        for f in fixture:
+            for key in keys:
+                f['fields'][key] = [int(i) for i in f['fields'][key].split(',')]
+
+        return fixture

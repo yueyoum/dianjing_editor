@@ -106,19 +106,10 @@ class Staff(models.Model):
     des = models.TextField(blank=True, verbose_name="简介")
 
     luoji = models.IntegerField(default=0, verbose_name="逻辑")
-    luoji_grow = models.IntegerField(default=0, verbose_name="逻辑成长")
-
     minjie = models.IntegerField(default=0, verbose_name="敏捷")
-    minjie_grow = models.IntegerField(default=0, verbose_name="敏捷成长")
-
     lilun = models.IntegerField(default=0, verbose_name="理论")
-    lilun_grow = models.IntegerField(default=0, verbose_name="理论成长")
-
     wuxing = models.IntegerField(default=0, verbose_name="悟性")
-    wuxing_grow = models.IntegerField(default=0, verbose_name="悟性成长")
-
     meili = models.IntegerField(default=0, verbose_name="魅力")
-    meili_grow = models.IntegerField(default=0, verbose_name="魅力成长")
 
     def clean(self):
         from apps.skill.models import Skill

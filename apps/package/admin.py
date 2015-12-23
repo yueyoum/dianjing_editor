@@ -15,9 +15,6 @@ class PackageAdmin(ImportExportModelAdmin):
     list_display = (
         'id', 'name', 'attr_mode', 'attr_random_amount', 'attr_random_value',
 
-        'luoji', 'minjie', 'lilun', 'wuxing', 'meili',
-        'zhimingdu',
-
         'gold', 'diamond',
         'staff_exp', 'club_renown',
 

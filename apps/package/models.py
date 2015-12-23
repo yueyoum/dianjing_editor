@@ -38,11 +38,13 @@ class Package(models.Model):
                                          help_text="只有 属性模式 为 完全随机 时，才有用"
                                          )
 
-    luoji = models.CharField(max_length=32, blank=True, verbose_name="逻辑")
-    minjie = models.CharField(max_length=32, blank=True, verbose_name="敏捷")
-    lilun = models.CharField(max_length=32, blank=True, verbose_name="理论")
-    wuxing = models.CharField(max_length=32, blank=True, verbose_name="五行")
-    meili = models.CharField(max_length=32, blank=True, verbose_name="魅力")
+    caozuo = models.CharField(max_length=32, blank=True, verbose_name="操作")
+    baobing = models.CharField(max_length=32, blank=True, verbose_name="暴兵")
+    yunying = models.CharField(max_length=32, blank=True, verbose_name="运营")
+    zhanshu = models.CharField(max_length=32, blank=True, verbose_name="战术")
+
+    biaoyan = models.CharField(max_length=32, blank=True, verbose_name="表演")
+    yingxiao = models.CharField(max_length=32, blank=True, verbose_name="营销")
 
     zhimingdu = models.CharField(max_length=32, blank=True, verbose_name="知名度")
 
@@ -61,10 +63,8 @@ class Package(models.Model):
 
     des = models.TextField(blank=True, verbose_name="描述")
 
-
     def __unicode__(self):
         return self.name
-
 
     def clean(self):
         from apps.training.models import TrainingSkill
@@ -104,7 +104,6 @@ class Package(models.Model):
                 if not TrainingSkill.objects.filter(id=int(tid)).exists():
                     raise ValidationError("技能训练书{0}不存在".format(tid))
 
-
         if self.items:
             items = self.items.split(',')
             for i in items:
@@ -119,12 +118,10 @@ class Package(models.Model):
                 if not Item.objects.filter(id=int(_id)).exists():
                     raise ValidationError("道具{0}不存在".format(_id))
 
-
     class Meta:
         db_table = 'package'
         verbose_name = "物品包"
         verbose_name_plural = "物品包"
-
 
     @classmethod
     def patch_fixture(cls, fixture):

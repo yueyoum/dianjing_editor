@@ -11,13 +11,13 @@ class QianBan(models.Model):
     )
 
     ADDITION = (
-        ('luoji', '逻辑'),
-        ('minjie', '敏捷'),
-        ('lilun', '理论'),
-        ('wuxing', '五行'),
-        ('meili', '魅力'),
+        ('caozuo', '逻辑'),
+        ('baobing', '敏捷'),
+        ('yunying', '理论'),
+        ('zhanshu', '五行'),
+        ('biaoyan', '魅力'),
 
-        ('skill', '技能强度'),
+        ('yingxiao', '技能强度'),
     )
 
     id = models.IntegerField(primary_key=True)
