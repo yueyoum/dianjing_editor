@@ -39,7 +39,7 @@ class NPCClub(models.Model):
 
     @classmethod
     def patch_fixture(cls, fixture):
-        keys = ['caozuo', 'baobing', 'yunying', 'zhanshu', 'skill_level']
+        keys = ['caozuo', 'baobing', 'jingying', 'zhanshu', 'skill_level']
         for f in fixture:
             for key in keys:
                 f['fields'][key] = [int(i) for i in f['fields'][key].split(',')]
