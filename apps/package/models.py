@@ -14,11 +14,13 @@ class Package(models.Model):
 
     ATTRS = {
         'attr_random_value': "随机属性值范围",
-        'luoji': "逻辑",
-        'minjie': "敏捷",
-        'lilun': "理论",
-        'wuxing': "五行",
-        'meili': "魅力",
+        'caozuo': "操作",
+        'baobing': "暴兵",
+        'yunying': "运营",
+        'zhanshu': "战术",
+
+        'biaoyan': "表演",
+        'yingxiao': "营销",
 
         'zhimingdu': "知名度",
         'gold': "软妹币",
