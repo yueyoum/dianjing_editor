@@ -27,7 +27,7 @@ class NPCClub(models.Model):
 
     caozuo = models.CommaSeparatedIntegerField(blank=True, max_length=255, verbose_name="操作范围", help_text='low,high')
     baobing = models.CommaSeparatedIntegerField(blank=True, max_length=255, verbose_name="暴兵范围")
-    yunying = models.CommaSeparatedIntegerField(blank=True, max_length=255, verbose_name="运营范围")
+    jingying = models.CommaSeparatedIntegerField(blank=True, max_length=255, verbose_name="经营范围")
     zhanshu = models.CommaSeparatedIntegerField(blank=True, max_length=255, verbose_name="战术范围")
 
     skill_level = models.CommaSeparatedIntegerField(blank=True, max_length=255, verbose_name="技能等级范围")

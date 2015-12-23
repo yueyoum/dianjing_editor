@@ -29,6 +29,6 @@ class NPCClubAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'league',
-        'caozuo', 'baobing', 'yunying', 'zhanshu',
+        'caozuo', 'baobing', 'jingying', 'zhanshu',
         'skill_level'
     )
