@@ -35,6 +35,10 @@ class Unit(models.Model):
     third_trig = models.IntegerField("结束局触发值")
     skill = models.ForeignKey('skill.Skill', verbose_name="技能")
 
+    power = models.IntegerField(default=0, verbose_name="战斗力")
+    consume_per_second = models.IntegerField(default=0, verbose_name="每秒消耗资源")
+    count_per_second = models.FloatField(default=0, verbose_name="每秒暴兵效率")
+    draft_total_time = models.IntegerField(default=0, verbose_name="暴兵时间")
 
     def __unicode__(self):
         return self.name
