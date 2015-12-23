@@ -28,6 +28,7 @@ class Policy(models.Model):
 
 class Unit(models.Model):
     id = models.IntegerField(primary_key=True)
+    icon = models.CharField(max_length=255, blank=True)
     name = models.CharField(max_length=32, verbose_name="兵种")
     race = models.ForeignKey('staff.StaffRace', verbose_name="种族")
     first_trig = models.IntegerField("开局触发值")
