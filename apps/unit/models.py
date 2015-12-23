@@ -36,6 +36,9 @@ class Unit(models.Model):
     third_trig = models.IntegerField("结束局触发值")
     skill = models.ForeignKey('skill.Skill', verbose_name="技能")
 
+    trig_at = models.IntegerField(default=0, verbose_name="出兵时间")
+    trig_prob = models.IntegerField(default=0, verbose_name="出兵几率")
+
     power = models.IntegerField(default=0, verbose_name="战斗力")
     consume_per_second = models.IntegerField(default=0, verbose_name="每秒消耗资源")
     count_per_second = models.FloatField(default=0, verbose_name="每秒暴兵效率")
