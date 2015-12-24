@@ -15,7 +15,6 @@ import zipfile
 from django.http import HttpResponse
 from django.core import management
 
-
 MODELS = (
     ('config.ClientConfig', 'client_config.json'),
     ('errormsg.ErrorMsg', 'errormsg.json'),
@@ -55,6 +54,7 @@ MODELS = (
     ('building.Building', 'building.json'),
     ('building.Shop', 'shop.json'),
     ('building.Sponsor', 'sponsor.json'),
+    ('building.BusinessBroadcastReward', 'business_broadcast_reward.json'),
     ('task.Task', 'task.json'),
     ('task.TaskType', 'task_type.json'),
     ('task.TaskStatus', 'task_status.json'),
@@ -94,16 +94,16 @@ class InMemoryZip(object):
 
 
 def create_fixture(model):
-    buffer = StringIO()
+    buf = StringIO()
     a, b = model.split('.')
 
     m = __import__('apps.{0}.models'.format(a), fromlist=[b])
     m = getattr(m, b)
 
-    management.call_command('dumpdata', model, format='json', indent=4, stdout=buffer)
-    data = buffer.getvalue()
+    management.call_command('dumpdata', model, format='json', indent=4, stdout=buf)
+    data = buf.getvalue()
 
-    cf = getattr(m ,'patch_fixture', None)
+    cf = getattr(m, 'patch_fixture', None)
     if cf:
         fixture = cf(json.loads(data))
         data = json.dumps(fixture, indent=2)

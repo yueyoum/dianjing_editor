@@ -151,3 +151,13 @@ class Sponsor(models.Model):
         db_table = 'sponsor'
         verbose_name = '赞助商'
         verbose_name_plural = '赞助商'
+
+
+class BusinessBroadcastReward(models.Model):
+    id = models.OneToOneField('item.Item', verbose_name="物品", primary_key=True)
+    amount = models.IntegerField(verbose_name="数量")
+
+    class Meta:
+        db_table = 'business_broadcast_reward'
+        verbose_name = '直播获得物品'
+        verbose_name_plural = '直播获得物品'

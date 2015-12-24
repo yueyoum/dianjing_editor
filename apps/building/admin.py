@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from apps.building.models import Building, BuildingLevels, Shop, Sponsor
+from apps.building.models import Building, BuildingLevels, Shop, Sponsor, BusinessBroadcastReward
 
 class BuildingLevelsInline(admin.TabularInline):
     model = BuildingLevels
@@ -33,3 +33,7 @@ class SponsorAdmin(admin.ModelAdmin):
         'income', 'income_des', 'condition_des',
         'mail_title', 'mail_content',
     )
+
+@admin.register(BusinessBroadcastReward)
+class BusinessBroadcastRewardAdmin(admin.ModelAdmin):
+    list_display = ('id', 'amount')
