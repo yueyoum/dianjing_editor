@@ -36,4 +36,4 @@ class SponsorAdmin(admin.ModelAdmin):
 
 @admin.register(BusinessBroadcastReward)
 class BusinessBroadcastRewardAdmin(admin.ModelAdmin):
-    list_display = ('id', 'amount')
+    list_display = ('id', 'amount', 'prob')

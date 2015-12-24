@@ -156,6 +156,7 @@ class Sponsor(models.Model):
 class BusinessBroadcastReward(models.Model):
     id = models.OneToOneField('item.Item', verbose_name="物品", primary_key=True)
     amount = models.IntegerField(verbose_name="数量")
+    prob = models.IntegerField(default=100, verbose_name="概率")
 
     class Meta:
         db_table = 'business_broadcast_reward'
