@@ -14,15 +14,17 @@ class Package(models.Model):
 
     ATTRS = {
         'attr_random_value': "随机属性值范围",
+
         'caozuo': "操作",
         'baobing': "暴兵",
-        'yunying': "运营",
+        'jingying': "经营",
         'zhanshu': "战术",
 
         'biaoyan': "表演",
         'yingxiao': "营销",
 
         'zhimingdu': "知名度",
+
         'gold': "软妹币",
         'diamond': "钻石",
         'staff_exp': "员工经验",
@@ -42,7 +44,7 @@ class Package(models.Model):
 
     caozuo = models.CharField(max_length=32, blank=True, verbose_name="操作")
     baobing = models.CharField(max_length=32, blank=True, verbose_name="暴兵")
-    yunying = models.CharField(max_length=32, blank=True, verbose_name="运营")
+    jingying = models.CharField(max_length=32, blank=True, verbose_name="经营")
     zhanshu = models.CharField(max_length=32, blank=True, verbose_name="战术")
 
     biaoyan = models.CharField(max_length=32, blank=True, verbose_name="表演")
