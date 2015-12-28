@@ -116,6 +116,7 @@ class Shop(models.Model):
     unlock_value = models.IntegerField(default=0, verbose_name='解锁值')
 
     goods = models.ForeignKey('item.Item', null=True, blank=True, verbose_name="售卖货物")
+    goods_max_amount = models.IntegerField(verbose_name="货物最大数量", default=1000)
 
     mail_title = models.CharField(max_length=255, verbose_name='邮件标题')
     mail_content = models.TextField(verbose_name='邮件内容')

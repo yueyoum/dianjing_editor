@@ -22,7 +22,7 @@ class BuildingAdmin(admin.ModelAdmin):
 @admin.register(Shop)
 class ShopAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'name', 'unlock_type', 'unlock_value', 'goods',
+        'id', 'name', 'unlock_type', 'unlock_value', 'goods', 'goods_max_amount',
         'mail_title', 'mail_content', 'des',
     )
 
