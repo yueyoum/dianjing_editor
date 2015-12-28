@@ -23,6 +23,7 @@ class BuildingAdmin(admin.ModelAdmin):
 class ShopAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'name', 'unlock_type', 'unlock_value', 'goods', 'goods_max_amount',
+        'sells_per_hour',
         'mail_title', 'mail_content', 'des',
     )
 

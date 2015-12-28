@@ -117,6 +117,7 @@ class Shop(models.Model):
 
     goods = models.ForeignKey('item.Item', null=True, blank=True, verbose_name="售卖货物")
     goods_max_amount = models.IntegerField(verbose_name="货物最大数量", default=1000)
+    sells_per_hour = models.IntegerField(verbose_name="每小时卖多少个", default=0)
 
     mail_title = models.CharField(max_length=255, verbose_name='邮件标题')
     mail_content = models.TextField(verbose_name='邮件内容')
