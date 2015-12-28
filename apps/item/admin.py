@@ -5,8 +5,11 @@ from apps.item.models import Item
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'name', 'icon', 'des',
+        'id', 'tp', 'name', 'icon', 'des',
         'buy_type', 'buy_cost',
         'sell_gold',
         'order_value',
+        'value',
     )
+
+    list_filter = ('tp',)
