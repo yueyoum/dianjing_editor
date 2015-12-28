@@ -115,7 +115,8 @@ class Shop(models.Model):
     unlock_type = models.IntegerField(choices=UNLOCK_TYPE, verbose_name='解锁条件')
     unlock_value = models.IntegerField(default=0, verbose_name='解锁值')
 
-    income = models.IntegerField(verbose_name='每天获得软妹币')
+    goods = models.ForeignKey('item.Item', null=True, blank=True, verbose_name="售卖货物")
+
     mail_title = models.CharField(max_length=255, verbose_name='邮件标题')
     mail_content = models.TextField(verbose_name='邮件内容')
 
@@ -123,6 +124,10 @@ class Shop(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def clean(self):
+        if not self.goods:
+            raise ValidationError("货物不能为空")
 
     class Meta:
         db_table = 'shop'
