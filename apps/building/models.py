@@ -130,7 +130,7 @@ class Shop(models.Model):
             raise ValidationError("货物不能为空")
 
     class Meta:
-        db_table = 'shop'
+        db_table = 'business_shop'
         verbose_name = '网店'
         verbose_name_plural = '网店'
 
@@ -153,7 +153,7 @@ class Sponsor(models.Model):
         return self.name
 
     class Meta:
-        db_table = 'sponsor'
+        db_table = 'business_sponsor'
         verbose_name = '赞助商'
         verbose_name_plural = '赞助商'
 
