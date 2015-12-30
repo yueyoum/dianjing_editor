@@ -65,8 +65,8 @@ class Package(models.Model):
                              help_text="id:数量,id:数量"
                              )
 
-    staffs = models.CharField(max_length=255, blank=True, verbose_name="员工",
-                              help_text="id:数量,id:数量"
+    staffs = models.CommaSeparatedIntegerField(max_length=255, blank=True, verbose_name="员工",
+                              help_text="id,id,id"
                               )
 
     des = models.TextField(blank=True, verbose_name="描述")
@@ -130,16 +130,11 @@ class Package(models.Model):
         if self.staffs:
             staffs = self.staffs.split(',')
             for i in staffs:
-                try:
-                    _id, amount = i.split(':')
-                except:
-                    raise ValidationError("员工填错了")
+                if not i.isdigit():
+                    raise ValidationError("员工ID填错了")
 
-                if not _id.isdigit() or not amount.isdigit():
-                    raise ValidationError("员工填错了")
-
-                if not Staff.objects.filter(id=int(_id)).exists():
-                    raise ValidationError("员工{0}不存在".format(_id))
+                if not Staff.objects.filter(id=int(i)).exists():
+                    raise ValidationError("员工{0}不存在".format(i))
 
     class Meta:
         db_table = 'package'
@@ -180,13 +175,7 @@ class Package(models.Model):
 
             f['fields']['items'] = new_items
 
-            staffs = f['fields']['staffs']
-            new_staffs = []
-            if staffs:
-                for i in staffs.split(','):
-                    _id, amount = i.split(':')
-                    new_staffs.append((int(_id), int(amount)))
-
-            f['fields']['staffs'] = new_staffs
+            staffs = [int(i) for i in f['fields']['staffs'].split(',')]
+            f['fields']['staffs'] = staffs
 
         return fixture
