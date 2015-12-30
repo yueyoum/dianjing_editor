@@ -8,6 +8,7 @@ class League(models.Model):
     name = models.CharField(max_length=255, verbose_name="名字")
     daily_reward = models.ForeignKey('package.Package', related_name="league_daily_reward", verbose_name="每日奖励")
     up_need_score = models.IntegerField(verbose_name="晋级积分")
+    icon_path = models.CharField(max_length=255, verbose_name="等级图标")
     des = models.TextField(blank=True, verbose_name='说明')
 
     def __unicode__(self):
