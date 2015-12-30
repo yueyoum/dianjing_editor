@@ -65,6 +65,10 @@ class Package(models.Model):
                              help_text="id:数量,id:数量"
                              )
 
+    staffs = models.CharField(max_length=255, blank=True, verbose_name="员工",
+                              help_text="id:数量,id:数量"
+                              )
+
     des = models.TextField(blank=True, verbose_name="描述")
 
     def __unicode__(self):
@@ -73,6 +77,7 @@ class Package(models.Model):
     def clean(self):
         from apps.training.models import TrainingSkill
         from apps.item.models import Item
+        from apps.staff.models import Staff
 
         for attr, name in self.ATTRS.iteritems():
             value = getattr(self, attr)
@@ -122,6 +127,20 @@ class Package(models.Model):
                 if not Item.objects.filter(id=int(_id)).exists():
                     raise ValidationError("道具{0}不存在".format(_id))
 
+        if self.staffs:
+            staffs = self.staffs.split(',')
+            for i in staffs:
+                try:
+                    _id, amount = i.split(':')
+                except:
+                    raise ValidationError("员工填错了")
+
+                if not _id.isdigit() or not amount.isdigit():
+                    raise ValidationError("员工填错了")
+
+                if not Staff.objects.filter(id=int(_id)).exists():
+                    raise ValidationError("员工{0}不存在".format(_id))
+
     class Meta:
         db_table = 'package'
         verbose_name = "物品包"
@@ -160,5 +179,14 @@ class Package(models.Model):
                     new_items.append((int(_id), int(amount)))
 
             f['fields']['items'] = new_items
+
+            staffs = f['fields']['staffs']
+            new_staffs = []
+            if staffs:
+                for i in staffs.split(','):
+                    _id, amount = i.split(':')
+                    new_staffs.append((int(_id), int(amount)))
+
+            f['fields']['staffs'] = new_staffs
 
         return fixture

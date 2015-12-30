@@ -13,12 +13,12 @@ class PackageAdmin(ImportExportModelAdmin):
     resource_class = PackageResource
 
     list_display = (
-        'id', 'name', 'attr_mode', 'attr_random_amount', 'attr_random_value',
+        'id', 'name', 'attr_mode',
 
         'gold', 'diamond',
         'staff_exp', 'club_renown',
 
-        'trainings', 'items',
+        'trainings', 'items', 'staffs',
         'des'
     )
 
