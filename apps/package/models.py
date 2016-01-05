@@ -175,7 +175,10 @@ class Package(models.Model):
 
             f['fields']['items'] = new_items
 
-            staffs = [int(i) for i in f['fields']['staffs'].split(',')]
+            if f['fields']['staffs']:
+                staffs = [int(i) for i in f['fields']['staffs'].split(',')]
+            else:
+                staffs = []
             f['fields']['staffs'] = staffs
 
         return fixture
