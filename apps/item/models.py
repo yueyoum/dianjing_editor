@@ -13,10 +13,21 @@ class Item(models.Model):
         (1, '培训耗材'),
         (2, '网店货物'),
         (3, '建筑许可证'),
+        (11, '装备'),
+    )
+
+    SUB_TYPE = (
+        (0, '无子类型'),
+        (1, '小型装备'),
+        (2, '大型装备'),
+        (3, '人物配饰'),
+        (4, '信物')
+
     )
 
     id = models.IntegerField(primary_key=True)
     tp = models.IntegerField(choices=ITEM_TYPE, default=1, verbose_name='类型')
+    sub_tp = models.IntegerField(choices=SUB_TYPE, default=0, verbose_name='子类型')
     name = models.CharField(max_length=255, verbose_name='名字')
     icon = models.CharField(max_length=255, verbose_name='图标')
     quality = models.IntegerField(default=1, verbose_name='品质')
@@ -29,6 +40,14 @@ class Item(models.Model):
     order_value = models.IntegerField(default=1, verbose_name='排序值')
 
     value = models.IntegerField(default=0, verbose_name='值')
+
+    # 装备用
+    luoji = models.IntegerField(default=0, verbose_name="逻辑")
+    minjie = models.IntegerField(default=0, verbose_name="敏捷")
+    lilun = models.IntegerField(default=0, verbose_name="理论")
+    wuxing = models.IntegerField(default=0, verbose_name="悟性")
+    meili = models.IntegerField(default=0, verbose_name="魅力")
+
 
     def __unicode__(self):
         return self.name
