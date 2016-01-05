@@ -1,0 +1,9 @@
+{% extends "admin/change_list.html" %}
+{% block result_list %}
+    <b>值 的含义:</b>
+    <ul>
+        <li>网店货物： 卖一个获得多少金币</li>
+        <li>技能训练书： 训练所需分钟</li>
+    </ul>
+    {{ block.super }}
+{% endblock %}
