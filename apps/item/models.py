@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+from django.core.exceptions import ValidationError
+
 
 class Item(models.Model):
     BUY_TYPE = (
@@ -42,11 +44,11 @@ class Item(models.Model):
     value = models.IntegerField(default=0, verbose_name='值')
 
     # 装备用
-    luoji = models.IntegerField(default=0, verbose_name="逻辑")
-    minjie = models.IntegerField(default=0, verbose_name="敏捷")
-    lilun = models.IntegerField(default=0, verbose_name="理论")
-    wuxing = models.IntegerField(default=0, verbose_name="悟性")
-    meili = models.IntegerField(default=0, verbose_name="魅力")
+    luoji = models.PositiveIntegerField(default=0, verbose_name="逻辑", help_text='装备需要填写')
+    minjie = models.PositiveIntegerField(default=0, verbose_name="敏捷", help_text='装备需要填写')
+    lilun = models.PositiveIntegerField(default=0, verbose_name="理论", help_text='装备需要填写')
+    wuxing = models.PositiveIntegerField(default=0, verbose_name="悟性", help_text='装备需要填写')
+    meili = models.PositiveIntegerField(default=0, verbose_name="魅力", help_text='装备需要填写')
 
 
     def __unicode__(self):
@@ -56,3 +58,15 @@ class Item(models.Model):
         db_table = 'item'
         verbose_name = '物品'
         verbose_name_plural = '物品'
+
+    def clean(self):
+        if self.tp == 11:
+            if self.sub_tp == 0:
+                raise ValidationError("装备不能没有子类型")
+
+            if self.luoji == 0 and \
+                self.minjie == 0 and \
+                self.lilun == 0 and \
+                self.wuxing == 0 and \
+                self.meili == 0:
+                raise ValidationError("装备属性不能全部为0")
