@@ -2,7 +2,14 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from apps.item.models import Item
+from apps.item.models import Item, ItemQuality
+
+
+@admin.register(ItemQuality)
+class ItemQualityAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'name', 'color', 'icon', 'background',
+    )
 
 
 class ItemResource(resources.ModelResource):
