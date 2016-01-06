@@ -54,7 +54,7 @@ class ChallengeMatchAdmin(ImportExportModelAdmin):
         'id', 'name', 'need_club_level', 'club_name', 'club_flag', 'tp', 'policy', 'level', 'strength', 'staffs',
         'winning_rates',
         'package',
-        'des'
+        'des', 'max_times',
     )
 
     list_filter = ('tp',)

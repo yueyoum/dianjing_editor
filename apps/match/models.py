@@ -140,6 +140,7 @@ class ChallengeMatch(models.Model):
     winning_rates = models.CommaSeparatedIntegerField(max_length=255, default='1,1,1,1,1', verbose_name="胜率列表")
 
     package = models.ForeignKey('package.Package', verbose_name="奖励物品包")
+    max_times = models.IntegerField(verbose_name='次数限制')
 
     des = models.TextField(blank=True, verbose_name="描述")
 
