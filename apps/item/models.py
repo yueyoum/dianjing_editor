@@ -3,6 +3,21 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 
+class ItemQuality(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=32)
+    color = models.CharField(max_length=32, blank=True)
+    icon = models.CharField(max_length=255, blank=True)
+    background = models.CharField(max_length=255, blank=True)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        db_table = "item_quality"
+        verbose_name = "物品品质"
+        verbose_name_plural = "物品品质"
+
 
 class Item(models.Model):
     BUY_TYPE = (
@@ -33,7 +48,7 @@ class Item(models.Model):
     sub_tp = models.IntegerField(choices=SUB_TYPE, default=0, verbose_name='子类型')
     name = models.CharField(max_length=255, verbose_name='名字')
     icon = models.CharField(max_length=255, verbose_name='图标')
-    quality = models.IntegerField(default=1, verbose_name='品质')
+    quality = models.ForeignKey(ItemQuality, null=True, blank=True, verbose_name="品质")
     des = models.TextField(verbose_name='描述')
 
     buy_type = models.IntegerField(choices=BUY_TYPE, default=0, verbose_name='购买类型')
@@ -61,6 +76,9 @@ class Item(models.Model):
         verbose_name_plural = '物品'
 
     def clean(self):
+        if not self.quality:
+            raise ValidationError("品质不能为空")
+
         if self.tp == 11:
             if self.sub_tp == 0:
                 raise ValidationError("装备不能没有子类型")
