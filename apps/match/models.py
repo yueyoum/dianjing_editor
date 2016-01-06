@@ -93,9 +93,25 @@ class ChallengeType(models.Model):
     condition_challenge_id = models.IntegerField(default=0, verbose_name="前置关卡ID")
     color = models.CharField(max_length=255, verbose_name='颜色')
     des = models.TextField(blank=True, verbose_name="描述")
+    star_reward = models.CharField(max_length=255, default="星级数:物品包ID,星级数:物品包ID,星级数:物品包ID", verbose_name="星级奖励")
 
     def __unicode__(self):
         return self.name
+
+    def clean(self):
+        if not ChallengeMatch.objects.filter(id=self.condition_challenge_id).exists():
+            raise ValidationError("challenge {0} not exists".format(self.condition_challenge_id))
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            star_reward = f['fields']['star_reward']
+            reward = []
+            for v in str(star_reward).split(','):
+                reward.append({'need_star': i, 'reward': j} for i, j in v.split(':'))
+
+            f['fields']['star_reward'] = reward
+        return fixture
 
     class Meta:
         db_table = 'challenge_type'
@@ -190,7 +206,7 @@ class EliteArea(models.Model):
     name = models.CharField(max_length=255, verbose_name='名字')
     need_club_level = models.IntegerField(verbose_name="所需俱乐部等级")
     match_ids = models.CommaSeparatedIntegerField(max_length=255, verbose_name='关卡ID列表')
-    star_reward = models.CharField(max_length=255, verbose_name="星级奖励")
+    star_reward = models.CharField(max_length=255, default="星级数:物品包ID,星级数:物品包ID,星级数:物品包ID", verbose_name="星级奖励")
     map_name = models.CharField(max_length=255, verbose_name="地图")
     des = models.TextField(blank=True, verbose_name="描述")
 
