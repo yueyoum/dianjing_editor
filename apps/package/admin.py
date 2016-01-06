@@ -18,8 +18,8 @@ class PackageAdmin(ImportExportModelAdmin):
         'gold', 'diamond',
         'staff_exp', 'club_renown',
 
-        'trainings', 'items', 'staffs',
-        'des'
+        'items', 'staffs', 'staff_cards',
+        'des',
     )
 
     search_fields = ('name',)
