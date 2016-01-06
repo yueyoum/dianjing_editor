@@ -102,6 +102,11 @@ class ChallengeType(models.Model):
         if not ChallengeMatch.objects.filter(id=self.condition_challenge_id).exists():
             raise ValidationError("challenge {0} not exists".format(self.condition_challenge_id))
 
+        for v in self.star_reward.split(','):
+            j, k = v.split(':')
+            if not Package.objects.filter(id=int(k)).exists():
+                raise ValidationError("物品ID {0} 不存在".format(k))
+
     @classmethod
     def patch_fixture(cls, fixture):
         for f in fixture:
