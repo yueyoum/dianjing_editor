@@ -77,7 +77,7 @@ class TrainingMatchRewardAdmin(admin.ModelAdmin):
 class EliteAreaAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'name', 'need_club_level', 'match_ids',
-        'map_name', 'des'
+        'map_name', 'des', 'star_reward',
     )
 
 @admin.register(EliteMatch)

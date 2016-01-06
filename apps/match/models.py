@@ -4,6 +4,7 @@ from django.db import models
 from django.core.exceptions import ValidationError
 
 from apps.staff.models import Staff
+from apps.package.models import Package
 
 
 class MatchConversationStart(models.Model):
@@ -189,6 +190,7 @@ class EliteArea(models.Model):
     name = models.CharField(max_length=255, verbose_name='名字')
     need_club_level = models.IntegerField(verbose_name="所需俱乐部等级")
     match_ids = models.CommaSeparatedIntegerField(max_length=255, verbose_name='关卡ID列表')
+    star_reward = models.CharField(max_length=255, verbose_name="星级奖励")
     map_name = models.CharField(max_length=255, verbose_name="地图")
     des = models.TextField(blank=True, verbose_name="描述")
 
@@ -211,11 +213,23 @@ class EliteArea(models.Model):
             if not EliteMatch.objects.filter(id=int(i)).exists():
                 raise ValidationError("关卡ID {0} 不存在".format(i))
 
+        for v in self.star_reward.split(','):
+            j, k = v.split(':')
+            if not Package.objects.filter(id=int(k)).exists():
+                raise ValidationError("物品ID {0} 不存在".format(k))
+
     @classmethod
     def patch_fixture(cls, fixture):
         for f in fixture:
             match_ids = f['fields']['match_ids']
             f['fields']['match_ids'] = [int(i) for i in match_ids.split(',')]
+
+            star_reward = f['fields']['star_reward']
+            reward = []
+            for v in str(star_reward).split(','):
+                reward.append({'need_star': i, 'reward': j} for i, j in v.split(':'))
+
+            f['fields']['star_reward'] = reward
 
         return fixture
 
