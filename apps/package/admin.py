@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
@@ -13,14 +15,30 @@ class PackageAdmin(ImportExportModelAdmin):
     resource_class = PackageResource
 
     list_display = (
-        'id', 'name', 'attr_mode',
-
-        'gold', 'diamond',
-        'staff_exp', 'club_renown',
-
-        'items', 'staffs', 'staff_cards',
-        'des',
+        'id', 'name', 'tp',  'des',
     )
 
     search_fields = ('name',)
-    list_filter = ('attr_mode',)
+    list_filter = ('tp',)
+
+    fieldsets = (
+        (None, {
+            'fields': ('id', 'name', 'tp', 'des')
+        }),
+
+        ('属性包', {
+            'classes': ('collapse',),
+            'fields': ('attr_mode', 'attr_random_amount', 'attr_random_value',
+                       'caozuo', 'baobing', 'jingying', 'zhanshu',
+                       'biaoyan', 'yingxiao', 'zhimingdu',
+                       ),
+        }),
+
+        ('物品包', {
+            'classes': ('collapse',),
+            'fields': ('item_mode', 'item_random_amount',
+                       'gold', 'diamond', 'staff_exp', 'club_renown',
+                       'items', 'staffs', 'staff_cards',
+                       ),
+        }),
+    )

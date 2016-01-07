@@ -5,11 +5,20 @@ from django.core.exceptions import ValidationError
 
 
 class Package(models.Model):
+    TYPE = (
+        (1, "属性包"),
+        (2, "物品包"),
+    )
+
     ATTR_MODE = (
-        (1, "不加成属性"),
-        (2, "完全随机"),
-        (3, "从设定的属性中随机"),
-        (4, "设定的属性")
+        (1, "设定的属性"),
+        (2, "从设定的属性中随机"),
+        (3, "完全随机"),
+    )
+
+    ITEM_MODE = (
+        (1, "全部生成"),
+        (2, "随机生成指定数量物品"),
     )
 
     ATTRS = {
@@ -33,7 +42,9 @@ class Package(models.Model):
 
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=32, verbose_name="名字")
+    tp = models.IntegerField(choices=TYPE, verbose_name="类型")
 
+    # attr start
     attr_mode = models.IntegerField(choices=ATTR_MODE, default=1, verbose_name="属性模式")
     attr_random_amount = models.IntegerField(default=1, verbose_name="随机属性数量",
                                              help_text="只有 属性模式 为 随机 时，才有用"
@@ -51,7 +62,13 @@ class Package(models.Model):
     yingxiao = models.CharField(max_length=32, blank=True, verbose_name="营销")
 
     zhimingdu = models.CharField(max_length=32, blank=True, verbose_name="知名度")
+    # attr end
 
+    # item start
+    item_mode = models.IntegerField(choices=ITEM_MODE, default=1, verbose_name="物品模式")
+    item_random_amount = models.IntegerField(default=1, verbose_name="随机物品数量",
+                                             help_text="只有 物品模式 为 随机 时，才有用. 只随机 物品，忽略金币这些"
+                                             )
     gold = models.CharField(max_length=32, blank=True, verbose_name="软妹币")
     diamond = models.CharField(max_length=32, blank=True, verbose_name="钻石")
 
@@ -69,11 +86,14 @@ class Package(models.Model):
     staff_cards = models.CharField(max_length=255, blank=True, verbose_name="员工卡",
                                    help_text='id:数量,id:数量'
                                    )
+    # item end
 
     des = models.TextField(blank=True, verbose_name="描述")
 
     def __unicode__(self):
-        return self.name
+        if self.tp == 1:
+            return u"属性包: {0}".format(self.name)
+        return u"物品包: {0}".format(self.name)
 
     def clean(self):
         from apps.item.models import Item
