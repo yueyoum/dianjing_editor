@@ -26,12 +26,15 @@ class Item(models.Model):
         (2, '用 钻石 购买'),
     )
 
+    # type 和消息是一一对应的
+    # 这里不能设置21, 因为已经在消息里被 员工卡 占用了
     ITEM_TYPE = (
         (1, '培训耗材'),
         (2, '网店货物'),
         (3, '建筑许可证'),
         (4, '技能训练书'),
         (11, '装备'),
+        (99, '箱子'),
     )
 
     SUB_TYPE = (
@@ -40,7 +43,6 @@ class Item(models.Model):
         (2, '大型装备'),
         (3, '人物配饰'),
         (4, '信物')
-
     )
 
     id = models.IntegerField(primary_key=True)
@@ -76,6 +78,8 @@ class Item(models.Model):
         verbose_name_plural = '物品'
 
     def clean(self):
+        from apps.package.models import Package
+
         if not self.quality:
             raise ValidationError("品质不能为空")
 
@@ -89,3 +93,10 @@ class Item(models.Model):
                 self.wuxing == 0 and \
                 self.meili == 0:
                 raise ValidationError("装备属性不能全部为0")
+
+        if self.tp == 99:
+            if not self.value:
+                raise ValidationError("箱子需要填写 物品包ID")
+
+            if not Package.objects.filter(id=self.value).exists():
+                raise ValidationError("物品包不存在")
