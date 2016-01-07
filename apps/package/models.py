@@ -58,10 +58,7 @@ class Package(models.Model):
     staff_exp = models.CharField(max_length=32, blank=True, verbose_name="员工经验")
     club_renown = models.CharField(max_length=32, blank=True, verbose_name="俱乐部声望")
 
-    trainings = models.CharField(max_length=255, blank=True, verbose_name="技能训练书",
-                                 help_text="id:数量,id:数量"
-                                 )
-    items = models.CharField(max_length=255, blank=True, verbose_name="道具",
+    items = models.CharField(max_length=255, blank=True, verbose_name="物品",
                              help_text="id:数量,id:数量"
                              )
 
@@ -69,13 +66,16 @@ class Package(models.Model):
                               help_text="id,id,id"
                               )
 
+    staff_cards = models.CharField(max_length=255, blank=True, verbose_name="员工卡",
+                                   help_text='id:数量,id:数量'
+                                   )
+
     des = models.TextField(blank=True, verbose_name="描述")
 
     def __unicode__(self):
         return self.name
 
     def clean(self):
-        from apps.training.models import TrainingSkill
         from apps.item.models import Item
         from apps.staff.models import Staff
 
@@ -99,33 +99,18 @@ class Package(models.Model):
                 if int(value_splited[0]) > int(value_splited[1]):
                     raise ValidationError("{0}填错了".format(name))
 
-        if self.trainings:
-            training = self.trainings.split(',')
-            for tr in training:
-                try:
-                    tid, amount = tr.split(':')
-                except:
-                    raise ValidationError("技能训练书填错了")
-
-                if not tid.isdigit() or not amount.isdigit():
-                    raise ValidationError("技能训练书填错了")
-
-                if not TrainingSkill.objects.filter(id=int(tid)).exists():
-                    raise ValidationError("技能训练书{0}不存在".format(tid))
-
         if self.items:
             items = self.items.split(',')
             for i in items:
                 try:
                     _id, amount = i.split(':')
+                    _id = int(_id)
+                    amount = int(amount)
                 except:
-                    raise ValidationError("道具填错了")
-
-                if not _id.isdigit() or not amount.isdigit():
-                    raise ValidationError("道具填错了")
+                    raise ValidationError("物品填错了")
 
                 if not Item.objects.filter(id=int(_id)).exists():
-                    raise ValidationError("道具{0}不存在".format(_id))
+                    raise ValidationError("物品{0}不存在".format(_id))
 
         if self.staffs:
             staffs = self.staffs.split(',')
@@ -135,6 +120,20 @@ class Package(models.Model):
 
                 if not Staff.objects.filter(id=int(i)).exists():
                     raise ValidationError("员工{0}不存在".format(i))
+
+        if self.staff_cards:
+            staff_cards = self.staff_cards.split(',')
+            for i in staff_cards:
+                try:
+                    _id, amount = i.split(':')
+                    _id = int(_id)
+                    amount = int(amount)
+                except:
+                    raise ValidationError("员工卡填错了")
+
+                if not Staff.objects.filter(id=_id).exists():
+                    raise ValidationError("员工{0}不存在".format(_id))
+
 
     class Meta:
         db_table = 'package'
@@ -157,15 +156,6 @@ class Package(models.Model):
             for k in cls.ATTRS.keys():
                 f['fields'][k] = patch(f['fields'][k])
 
-            trainings = f['fields']['trainings']
-            new_trainings = []
-            if trainings:
-                for tr in trainings.split(','):
-                    tid, amount = tr.split(':')
-                    new_trainings.append((int(tid), int(amount)))
-
-            f['fields']['trainings'] = new_trainings
-
             items = f['fields']['items']
             new_items = []
             if items:
@@ -180,5 +170,14 @@ class Package(models.Model):
             else:
                 staffs = []
             f['fields']['staffs'] = staffs
+
+            staff_cards = f['fields']['staff_cards']
+            new_staff_cards = []
+            if staff_cards:
+                for i in staff_cards.split(','):
+                    _id, amount = i.split(':')
+                    new_staff_cards.append((int(_id), int(amount)))
+
+            f['fields']['staff_cards'] = new_staff_cards
 
         return fixture
