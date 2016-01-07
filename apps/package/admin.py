@@ -31,13 +31,14 @@ class PackageAdmin(ImportExportModelAdmin):
             'fields': ('attr_mode', 'attr_random_amount', 'attr_random_value',
                        'caozuo', 'baobing', 'jingying', 'zhanshu',
                        'biaoyan', 'yingxiao', 'zhimingdu',
+                       'staff_exp',
                        ),
         }),
 
         ('物品包', {
             'classes': ('collapse',),
             'fields': ('item_mode', 'item_random_amount',
-                       'gold', 'diamond', 'staff_exp', 'club_renown',
+                       'gold', 'diamond', 'club_renown',
                        'items', 'staffs', 'staff_cards',
                        ),
         }),

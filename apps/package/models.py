@@ -33,10 +33,10 @@ class Package(models.Model):
         'yingxiao': "营销",
 
         'zhimingdu': "知名度",
+        'staff_exp': "员工经验",
 
         'gold': "软妹币",
         'diamond': "钻石",
-        'staff_exp': "员工经验",
         'club_renown': "俱乐部声望",
     }
 
@@ -62,6 +62,7 @@ class Package(models.Model):
     yingxiao = models.CharField(max_length=32, blank=True, verbose_name="营销")
 
     zhimingdu = models.CharField(max_length=32, blank=True, verbose_name="知名度")
+    staff_exp = models.CharField(max_length=32, blank=True, verbose_name="员工经验")
     # attr end
 
     # item start
@@ -72,7 +73,6 @@ class Package(models.Model):
     gold = models.CharField(max_length=32, blank=True, verbose_name="软妹币")
     diamond = models.CharField(max_length=32, blank=True, verbose_name="钻石")
 
-    staff_exp = models.CharField(max_length=32, blank=True, verbose_name="员工经验")
     club_renown = models.CharField(max_length=32, blank=True, verbose_name="俱乐部声望")
 
     items = models.CharField(max_length=255, blank=True, verbose_name="物品",
