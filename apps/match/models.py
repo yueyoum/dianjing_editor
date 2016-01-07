@@ -99,13 +99,16 @@ class ChallengeType(models.Model):
         return self.name
 
     def clean(self):
-        # if not ChallengeMatch.objects.filter(id=self.condition_challenge_id).exists():
-        #     raise ValidationError("challenge {0} not exists".format(self.condition_challenge_id))
-        if self.star_reward:
-            for v in self.star_reward.split(','):
-                j, k = v.split(':')
-                if not Package.objects.filter(id=int(k)).exists():
-                    raise ValidationError("物品ID {0} 不存在".format(k))
+        for v in self.star_reward.split(','):
+            j, k = v.split(':')
+            if not str(j).isdigit():
+                raise ValidationError("星数必须是数字")
+
+            if not str(k).isdigit():
+                raise ValidationError("物品ID必须是数字")
+
+            if not Package.objects.filter(id=int(k)).exists():
+                raise ValidationError("物品ID {0} 不存在".format(k))
 
     @classmethod
     def patch_fixture(cls, fixture):
@@ -114,7 +117,7 @@ class ChallengeType(models.Model):
             reward = []
             for v in str(star_reward).split(','):
                 i, j = v.split(':')
-                reward.append({'need_star': i, 'reward': j})
+                reward.append({'star': int(i), 'reward': int(j)})
 
             f['fields']['star_reward'] = reward
         return fixture
@@ -238,6 +241,12 @@ class EliteArea(models.Model):
 
         for v in self.star_reward.split(','):
             j, k = v.split(':')
+            if not str(j).isdigit():
+                raise ValidationError("星数必须是数字")
+
+            if not str(k).isdigit():
+                raise ValidationError("物品ID必须是数字")
+
             if not Package.objects.filter(id=int(k)).exists():
                 raise ValidationError("物品ID {0} 不存在".format(k))
 
@@ -251,7 +260,7 @@ class EliteArea(models.Model):
             reward = []
             for v in str(star_reward).split(','):
                 i, j = v.split(':')
-                reward.append({'need_star': i, 'reward': j})
+                reward.append({'star': int(i), 'reward': int(j)})
 
             f['fields']['star_reward'] = reward
 
