@@ -40,22 +40,10 @@ class LadderScoreStore(models.Model):
 
     score = models.IntegerField(verbose_name="所需积分")
 
-    item = models.ForeignKey('item.Item', null=True, blank=True, verbose_name='物品')
-    item_amount = models.IntegerField(null=True, blank=True, verbose_name='物品数量')
-    training_skill = models.ForeignKey('training.TrainingSkill', null=True, blank=True, verbose_name='技能训练书')
-    training_skill_amount = models.IntegerField(null=True, blank=True, verbose_name='技能训练书数量')
+    item = models.ForeignKey('item.Item', verbose_name='物品')
+    item_amount = models.IntegerField(default=1, verbose_name='物品数量')
 
     class Meta:
         db_table = 'ladder_score_store'
         verbose_name = "天梯积分商店"
         verbose_name_plural = "天梯积分商店"
-
-    @classmethod
-    def patch_fixture(cls, fixture):
-        replace_fields = ['item', 'item_amount', 'training_skill', 'training_skill_amount']
-        for f in fixture:
-            for rf in replace_fields:
-                if not f['fields'][rf]:
-                    f['fields'][rf] = 0
-
-        return fixture
