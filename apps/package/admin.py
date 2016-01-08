@@ -39,7 +39,7 @@ class PackageAdmin(ImportExportModelAdmin):
             'classes': ('collapse',),
             'fields': ('item_mode', 'item_random_amount',
                        'gold', 'diamond', 'club_renown',
-                       'items', 'staffs', 'staff_cards',
+                       'items', 'staff_cards',
                        ),
         }),
     )

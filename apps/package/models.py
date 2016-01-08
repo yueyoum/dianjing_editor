@@ -79,10 +79,6 @@ class Package(models.Model):
                              help_text="id:数量,id:数量"
                              )
 
-    staffs = models.CommaSeparatedIntegerField(max_length=255, blank=True, verbose_name="员工",
-                              help_text="id,id,id"
-                              )
-
     staff_cards = models.CharField(max_length=255, blank=True, verbose_name="员工卡",
                                    help_text='id:数量,id:数量'
                                    )
@@ -132,15 +128,6 @@ class Package(models.Model):
                 if not Item.objects.filter(id=int(_id)).exists():
                     raise ValidationError("物品{0}不存在".format(_id))
 
-        if self.staffs:
-            staffs = self.staffs.split(',')
-            for i in staffs:
-                if not i.isdigit():
-                    raise ValidationError("员工ID填错了")
-
-                if not Staff.objects.filter(id=int(i)).exists():
-                    raise ValidationError("员工{0}不存在".format(i))
-
         if self.staff_cards:
             staff_cards = self.staff_cards.split(',')
             for i in staff_cards:
@@ -184,12 +171,6 @@ class Package(models.Model):
                     new_items.append((int(_id), int(amount)))
 
             f['fields']['items'] = new_items
-
-            if f['fields']['staffs']:
-                staffs = [int(i) for i in f['fields']['staffs'].split(',')]
-            else:
-                staffs = []
-            f['fields']['staffs'] = staffs
 
             staff_cards = f['fields']['staff_cards']
             new_staff_cards = []
