@@ -42,7 +42,10 @@ class Item(models.Model):
         (1, '小型装备'),
         (2, '大型装备'),
         (3, '人物配饰'),
-        (4, '信物')
+        (4, '信物'),
+
+        (101, '饮品'),
+        (102, '训练徽章'),
     )
 
     id = models.IntegerField(primary_key=True)
@@ -83,9 +86,13 @@ class Item(models.Model):
         if not self.quality:
             raise ValidationError("品质不能为空")
 
+        if self.tp == 1:
+            if self.sub_tp not in [101, 102]:
+                raise ValidationError("培训耗材子类型错误")
+
         if self.tp == 11:
-            if self.sub_tp == 0:
-                raise ValidationError("装备不能没有子类型")
+            if self.sub_tp not in [1,2,3,4]:
+                raise ValidationError("装备子类型错误")
 
             if self.luoji == 0 and \
                 self.minjie == 0 and \
