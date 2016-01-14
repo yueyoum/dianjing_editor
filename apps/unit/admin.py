@@ -18,7 +18,8 @@ class UnitDesInline(admin.StackedInline):
 @admin.register(Unit)
 class UnitAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'icon', 'name', 'race', 'first_trig', 'second_trig', 'third_trig',
+        'id', 'icon', 'name', 'race', 'tp', 'target',
+        'first_trig', 'second_trig', 'third_trig',
         'skill',
         'trig_at', 'trig_prob',
         'power', 'consume_per_second',

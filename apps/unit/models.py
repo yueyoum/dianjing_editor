@@ -27,10 +27,25 @@ class Policy(models.Model):
 
 
 class Unit(models.Model):
+    TP = (
+        (1, '地面单位'),
+        (2, '空中单位'),
+    )
+
+    TARGET = (
+        (0, '全部'),
+        (1, '对地攻击'),
+        (2, '对空攻击'),
+    )
+
     id = models.IntegerField(primary_key=True)
     icon = models.CharField(max_length=255, blank=True)
     name = models.CharField(max_length=32, verbose_name="兵种")
     race = models.ForeignKey('staff.StaffRace', verbose_name="种族")
+
+    tp = models.IntegerField(choices=TP, default=1, verbose_name="类型")
+    target = models.IntegerField(choices=TARGET, default=0, verbose_name="攻击目标")
+
     first_trig = models.IntegerField("开局触发值")
     second_trig = models.IntegerField("中间局触发值")
     third_trig = models.IntegerField("结束局触发值")
