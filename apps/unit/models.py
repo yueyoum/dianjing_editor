@@ -45,6 +45,7 @@ class Unit(models.Model):
 
     tp = models.IntegerField(choices=TP, default=1, verbose_name="类型")
     target = models.IntegerField(choices=TARGET, default=0, verbose_name="攻击目标")
+    base_amount = models.IntegerField(default=0, verbose_name="基础数量")
 
     first_trig = models.IntegerField("开局触发值")
     second_trig = models.IntegerField("中间局触发值")
