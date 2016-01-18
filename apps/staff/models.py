@@ -104,7 +104,6 @@ class Staff(models.Model):
     qianban_ids = models.CommaSeparatedIntegerField(max_length=255, blank=True, verbose_name="牵绊ID列表")
 
     des = models.TextField(blank=True, verbose_name="简介")
-    story_des = models.TextField(blank=True, verbose_name="背景故事")
 
     luoji = models.IntegerField(default=0, verbose_name="逻辑")
     minjie = models.IntegerField(default=0, verbose_name="敏捷")

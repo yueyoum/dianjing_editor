@@ -24,6 +24,7 @@ class QianBan(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=32, unique=True, verbose_name="名字")
     des = models.TextField(verbose_name="描述")
+    story_des = models.TextField(blank=True, verbose_name="背景故事")
 
     condition_tp = models.IntegerField(choices=CONDITION_TYPE, verbose_name="条件")
     condition_value = models.CommaSeparatedIntegerField(max_length=255, verbose_name="条件值",
