@@ -40,7 +40,7 @@ class StuffAdmin(ImportExportModelAdmin):
 
     list_display = (
         'id', 'name', 'avatar', 'picture', 'nation', 'gender', 'race', 'quality',
-        'buy_type', 'buy_cost', 'can_recruit', 'salary', 'des',
+        'buy_type', 'buy_cost', 'can_recruit', 'salary',
         'skill_ids', 'qianban_ids'
     )
 
