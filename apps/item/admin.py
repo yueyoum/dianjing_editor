@@ -44,6 +44,7 @@ class EquipmentAdmin(ImportExportModelAdmin):
     resource_class = EquipmentResource
 
     list_display = (
+        'id',
         'need_club_level',
         'luoji', 'minjie', 'lilun', 'wuxing', 'meili',
         'template_1', 'template_2'

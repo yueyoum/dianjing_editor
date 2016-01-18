@@ -125,6 +125,10 @@ class Equipment(models.Model):
         verbose_name = '装备'
         verbose_name_plural = '装备'
 
+    def clean(self):
+        if self.id.tp != 11:
+            raise ValidationError("只能关联装备")
+
 EQUIPMENT_ATTR = (
     ('luoji', '逻辑'),
     ('minjie', '敏捷'),
