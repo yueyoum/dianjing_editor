@@ -102,7 +102,7 @@ class Item(models.Model):
                 raise ValidationError("物品包不存在")
 
 class Equipment(models.Model):
-    id = models.OneToOneField(Item, primary_key=True)
+    id = models.OneToOneField(Item, primary_key=True, db_column='id')
     need_club_level = models.IntegerField(default=0, verbose_name="使用所需俱乐部等级",
                                           help_text='0 表示没有限制'
                                           )
@@ -131,6 +131,6 @@ EQUIPMENT_ATTR = (
     ('lilun', '理论'),
     ('wuxing', '悟性'),
     ('meili', '魅力'),
-    ('yiji', '全部一级属性'),
-    ('erji', '全部二级属性'),
+    ('primary', '全部一级属性'),
+    ('secondary', '全部二级属性'),
 )
