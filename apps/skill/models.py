@@ -102,12 +102,12 @@ class Skill(models.Model):
     def patch_fixture(cls, fixture):
         for f in fixture:
             f['fields']['addition_ids'] = Skill.parse_addition_ids(f['fields']['addition_ids'])
+
             skill_levels = SkillLevel.objects.filter(skill__id=f['pk']).order_by('level')
             levels = {}
             for l in skill_levels:
                 data = {
-                    'upgrade_training_id': l.upgrade_training_id.id,
-                    'upgrade_training_amount': l.upgrade_training_amount
+                    'upgrade_items': l.export_upgrade_items_as_list()
                 }
 
                 levels[l.level] = data
@@ -123,8 +123,7 @@ class Skill(models.Model):
 class SkillLevel(models.Model):
     skill = models.ForeignKey(Skill)
     level = models.IntegerField(verbose_name='等级')
-    upgrade_training_id = models.ForeignKey('training.TrainingSkill', verbose_name='升级所需技能训练ID')
-    upgrade_training_amount = models.IntegerField(verbose_name='升级所需技能训练数量')
+    upgrade_items = models.CharField(blank=True, max_length=255, verbose_name="升级所需物品")
 
     def __unicode__(self):
         return "level {0}".format(self.level)
@@ -132,6 +131,28 @@ class SkillLevel(models.Model):
     class Meta:
         db_table = 'skill_level'
 
+    def export_upgrade_items_as_list(self):
+        if not self.upgrade_items:
+            return []
+
+        items = []
+        for item in self.upgrade_items.split(','):
+            _id, _amount = item.split(':')
+            items.append((int(_id), int(_amount)))
+
+        return items
+
+    def clean(self):
+        from apps.item.models import Item
+
+        try:
+            items = self.export_upgrade_items_as_list()
+        except:
+            raise ValidationError("物品填错了")
+
+        for _id, _ in items:
+            if not Item.objects.filter(id=_id).exists():
+                raise ValidationError("物品 {0} 不存在".format(_id))
 
 class SkillWashCost(models.Model):
     COST_TYPE = (
