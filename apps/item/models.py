@@ -64,13 +64,6 @@ class Item(models.Model):
 
     value = models.IntegerField(default=0, verbose_name='值')
 
-    # 装备用
-    luoji = models.PositiveIntegerField(default=0, verbose_name="逻辑", help_text='装备需要填写')
-    minjie = models.PositiveIntegerField(default=0, verbose_name="敏捷", help_text='装备需要填写')
-    lilun = models.PositiveIntegerField(default=0, verbose_name="理论", help_text='装备需要填写')
-    wuxing = models.PositiveIntegerField(default=0, verbose_name="悟性", help_text='装备需要填写')
-    meili = models.PositiveIntegerField(default=0, verbose_name="魅力", help_text='装备需要填写')
-
 
     def __unicode__(self):
         return self.name
@@ -107,3 +100,37 @@ class Item(models.Model):
 
             if not Package.objects.filter(id=self.value).exists():
                 raise ValidationError("物品包不存在")
+
+class Equipment(models.Model):
+    id = models.OneToOneField(Item, primary_key=True)
+    need_club_level = models.IntegerField(default=0, verbose_name="使用所需俱乐部等级",
+                                          help_text='0 表示没有限制'
+                                          )
+
+    luoji = models.PositiveIntegerField(default=0, verbose_name="逻辑")
+    minjie = models.PositiveIntegerField(default=0, verbose_name="敏捷")
+    lilun = models.PositiveIntegerField(default=0, verbose_name="理论")
+    wuxing = models.PositiveIntegerField(default=0, verbose_name="悟性")
+    meili = models.PositiveIntegerField(default=0, verbose_name="魅力")
+
+    template_1 = models.CharField(max_length=255, verbose_name='属性模板1',
+                                  help_text='属性:下限~上限,属性:下限~上限'
+                                  )
+    template_2 = models.CharField(max_length=255, verbose_name='属性模板1',
+                                  help_text='属性:下限~上限,属性:下限~上限'
+                                  )
+
+    class Meta:
+        db_table = 'equipment'
+        verbose_name = '装备'
+        verbose_name_plural = '装备'
+
+EQUIPMENT_ATTR = (
+    ('luoji', '逻辑'),
+    ('minjie', '敏捷'),
+    ('lilun', '理论'),
+    ('wuxing', '悟性'),
+    ('meili', '魅力'),
+    ('yiji', '全部一级属性'),
+    ('erji', '全部二级属性'),
+)

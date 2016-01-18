@@ -1,0 +1,15 @@
+{% extends "admin/import_export/change_list_import_export.html" %}
+{% block result_list %}
+    <b>属性模板格式:</b> 属性:下限～上限,属性:下限～上限...<br/>
+    <b>属性定义</b>
+    <ul>
+        <li>luoji： 逻辑</li>
+        <li>minjie： 敏捷</li>
+        <li>lilun： 理论</li>
+        <li>wuxing： 悟性</li>
+        <li>meili： 魅力</li>
+        <li>primary： 全部一级属性</li>
+        <li>secondary： 全部二级属性</li>
+    </ul>
+    {{ block.super }}
+{% endblock %}

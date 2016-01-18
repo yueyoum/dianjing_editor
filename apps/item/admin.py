@@ -4,7 +4,7 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from apps.item.models import Item, ItemQuality
+from apps.item.models import Item, ItemQuality, Equipment
 
 
 @admin.register(ItemQuality)
@@ -34,15 +34,19 @@ class ItemAdmin(ImportExportModelAdmin):
     list_filter = ('tp',)
     change_list_template = 'item_change_list.html'
 
-    fieldsets = (
-        (None, {
-            'fields': ('id', 'tp', 'sub_tp', 'name', 'icon', 'quality',
-                       'des', 'buy_type', 'buy_cost', 'sell_gold', 'order_value',
-                       'value',)
-        }),
 
-        ('装备属性', {
-            'classes': ('collapse',),
-            'fields': ('luoji', 'minjie', 'lilun', 'wuxing', 'meili')
-        })
+class EquipmentResource(resources.ModelResource):
+    class Meta:
+        model = Equipment
+
+@admin.register(Equipment)
+class EquipmentAdmin(ImportExportModelAdmin):
+    resource_class = EquipmentResource
+
+    list_display = (
+        'need_club_level',
+        'luoji', 'minjie', 'lilun', 'wuxing', 'meili',
+        'template_1', 'template_2'
     )
+
+    change_list_template = 'equipment_change_list.html'
