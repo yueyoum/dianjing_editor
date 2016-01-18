@@ -79,6 +79,7 @@ MODELS = (
     ('conversation.Conversation', 'conversation.json'),
     ('item.Item', 'item.json'),
     ('item.ItemQuality', 'item_quality.json'),
+    ('item.Equipment', 'equipment.json'),
 )
 
 

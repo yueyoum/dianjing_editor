@@ -129,12 +129,42 @@ class Equipment(models.Model):
         if self.id.tp != 11:
             raise ValidationError("只能关联装备")
 
-EQUIPMENT_ATTR = (
-    ('luoji', '逻辑'),
-    ('minjie', '敏捷'),
-    ('lilun', '理论'),
-    ('wuxing', '悟性'),
-    ('meili', '魅力'),
-    ('primary', '全部一级属性'),
-    ('secondary', '全部二级属性'),
-)
+    @classmethod
+    def patch_fixture(cls, fixture):
+        def make_template(t):
+            temp = {}
+            for attr in t.split(','):
+                name, value_range = attr.split(':')
+                assert name in EQUIPMENT_ATTR_TEMPLATE_NAME
+
+                low, high = value_range.split('~')
+                low = int(low)
+                high = int(high)
+
+                temp[name] = (low, high)
+
+            return temp
+
+        for f in fixture:
+            t1 = f['fields']['template_1']
+            f['fields']['template_1'] = make_template(t1)
+
+            t2 = f['fields']['template_2']
+            f['fields']['template_2'] = make_template(t2)
+
+        return fixture
+
+# EQUIPMENT_ATTR = (
+#     ('luoji', '逻辑'),
+#     ('minjie', '敏捷'),
+#     ('lilun', '理论'),
+#     ('wuxing', '悟性'),
+#     ('meili', '魅力'),
+#     ('primary', '全部一级属性'),
+#     ('secondary', '全部二级属性'),
+# )
+
+EQUIPMENT_ATTR_TEMPLATE_NAME = {
+    'luoji', 'minjie', 'lilun', 'wuxing', 'meili',
+    'primary', 'secondary',
+}
