@@ -107,7 +107,8 @@ class Skill(models.Model):
             levels = {}
             for l in skill_levels:
                 data = {
-                    'upgrade_items': l.export_upgrade_items_as_list()
+                    'upgrade_items': l.export_upgrade_items_as_list(),
+                    'minutes': l.minutes
                 }
 
                 levels[l.level] = data
@@ -124,6 +125,7 @@ class SkillLevel(models.Model):
     skill = models.ForeignKey(Skill)
     level = models.IntegerField(verbose_name='等级')
     upgrade_items = models.CharField(blank=True, max_length=255, verbose_name="升级所需物品")
+    minutes = models.IntegerField(default=0, verbose_name="升级所需分钟")
 
     def __unicode__(self):
         return "level {0}".format(self.level)
