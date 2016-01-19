@@ -108,10 +108,10 @@ class Equipment(models.Model):
             template = []
             if not t:
                 return template
-            
-            for group in t.split('|'):
-                temp = {}
-                for attr in group.split(','):
+
+            for segment in t.split('|'):
+                attrs = []
+                for attr in segment.split(','):
                     name, value_range = attr.split(':')
                     assert name in EQUIPMENT_ATTR_TEMPLATE_NAME
 
@@ -119,9 +119,8 @@ class Equipment(models.Model):
                     low = int(low)
                     high = int(high)
 
-                    temp[name] = (low, high)
-
-                template.append(temp)
+                    attrs.append((name, (low, high)))
+                template.append(attrs)
             return template
 
         for f in fixture:
