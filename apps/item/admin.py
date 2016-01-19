@@ -23,8 +23,7 @@ class ItemAdmin(ImportExportModelAdmin):
     resource_class = ItemResource
 
     list_display = (
-        'id', 'tp', 'sub_tp', 'name', 'icon', 'quality',
-        'des',
+        'id', 'tp', 'group_id', 'name', 'icon', 'quality',
         'buy_type', 'buy_cost',
         'sell_gold',
         'order_value',

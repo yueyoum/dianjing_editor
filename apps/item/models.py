@@ -27,30 +27,24 @@ class Item(models.Model):
     )
 
     # type 和消息是一一对应的
-    # 这里不能设置21, 因为已经在消息里被 员工卡 占用了
+    # 这里不能设置900, 因为已经在消息里被 员工卡 占用了
     ITEM_TYPE = (
-        (1, '培训耗材'),
-        (2, '网店货物'),
-        (3, '建筑许可证'),
-        (4, '技能训练书'),
-        (11, '装备'),
-        (99, '箱子'),
-    )
+        (100, '饮品'),
+        (200, '徽章'),
 
-    SUB_TYPE = (
-        (0, '无子类型'),
-        (1, '小型装备'),
-        (2, '大型装备'),
-        (3, '人物配饰'),
-        (4, '信物'),
+        (300, '建筑许可证'),
+        (400, '网店货物'),
 
-        (101, '饮品'),
-        (102, '训练徽章'),
+        (500, '天赋石'),
+
+        (1000, '装备'),
+
+        (9000, '箱子'),
     )
 
     id = models.IntegerField(primary_key=True)
     tp = models.IntegerField(choices=ITEM_TYPE, default=1, verbose_name='类型')
-    sub_tp = models.IntegerField(choices=SUB_TYPE, default=0, verbose_name='子类型')
+    group_id = models.IntegerField(default=0, verbose_name='组ID')
     name = models.CharField(max_length=255, verbose_name='名字')
     icon = models.CharField(max_length=255, verbose_name='图标')
     quality = models.ForeignKey(ItemQuality, null=True, blank=True, verbose_name="品质")
@@ -79,22 +73,7 @@ class Item(models.Model):
         if not self.quality:
             raise ValidationError("品质不能为空")
 
-        if self.tp == 1:
-            if self.sub_tp not in [101, 102]:
-                raise ValidationError("培训耗材子类型错误")
-
-        if self.tp == 11:
-            if self.sub_tp not in [1,2,3,4]:
-                raise ValidationError("装备子类型错误")
-
-            if self.luoji == 0 and \
-                self.minjie == 0 and \
-                self.lilun == 0 and \
-                self.wuxing == 0 and \
-                self.meili == 0:
-                raise ValidationError("装备属性不能全部为0")
-
-        if self.tp == 99:
+        if self.tp == 2000:
             if not self.value:
                 raise ValidationError("箱子需要填写 物品包ID")
 
@@ -126,7 +105,7 @@ class Equipment(models.Model):
         verbose_name_plural = '装备'
 
     def clean(self):
-        if self.id.tp != 11:
+        if self.id.tp != 1000:
             raise ValidationError("只能关联装备")
 
     @classmethod

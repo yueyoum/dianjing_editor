@@ -1,6 +1,12 @@
 {% extends "admin/import_export/change_list_import_export.html" %}
 {% block result_list %}
-    <b>值 的含义:</b>
+    <b>组ID:</b> 用来标识一类物品
+    <ul>
+        <li>徽章: 只要用ID分类就行</li>
+        <li>天赋石: 对应的技能ID</li>
+        <li>装备: 1 大型; 2 小型; 3 配饰; 4 信物</li>
+    </ul>
+    <b>值:</b>
     <ul>
         <li>网店货物： 卖一个获得多少金币</li>
         <li>技能训练书： 训练所需分钟</li>
