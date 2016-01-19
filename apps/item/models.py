@@ -106,6 +106,9 @@ class Equipment(models.Model):
     def patch_fixture(cls, fixture):
         def make_template(t):
             template = []
+            if not t:
+                return template
+            
             for group in t.split('|'):
                 temp = {}
                 for attr in group.split(','):
