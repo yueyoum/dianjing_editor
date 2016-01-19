@@ -86,18 +86,12 @@ class Equipment(models.Model):
                                           help_text='0 表示没有限制'
                                           )
 
-    luoji = models.PositiveIntegerField(default=0, verbose_name="逻辑")
-    minjie = models.PositiveIntegerField(default=0, verbose_name="敏捷")
-    lilun = models.PositiveIntegerField(default=0, verbose_name="理论")
-    wuxing = models.PositiveIntegerField(default=0, verbose_name="悟性")
-    meili = models.PositiveIntegerField(default=0, verbose_name="魅力")
+    template_0 = models.CharField(max_length=255, blank=True, verbose_name="固定模板",
+                                  help_text='属性:下线～上限,属性:下限～上限|...'
+                                  )
 
-    template_1 = models.CharField(max_length=255, verbose_name='属性模板1',
-                                  help_text='属性:下限~上限,属性:下限~上限'
-                                  )
-    template_2 = models.CharField(max_length=255, verbose_name='属性模板1',
-                                  help_text='属性:下限~上限,属性:下限~上限'
-                                  )
+    template_1 = models.CharField(max_length=255, verbose_name='随机模板1')
+    template_2 = models.CharField(max_length=255, verbose_name='随机模板2')
 
     class Meta:
         db_table = 'equipment'
@@ -111,20 +105,26 @@ class Equipment(models.Model):
     @classmethod
     def patch_fixture(cls, fixture):
         def make_template(t):
-            temp = {}
-            for attr in t.split(','):
-                name, value_range = attr.split(':')
-                assert name in EQUIPMENT_ATTR_TEMPLATE_NAME
+            template = []
+            for group in t.split('|'):
+                temp = {}
+                for attr in group.split(','):
+                    name, value_range = attr.split(':')
+                    assert name in EQUIPMENT_ATTR_TEMPLATE_NAME
 
-                low, high = value_range.split('~')
-                low = int(low)
-                high = int(high)
+                    low, high = value_range.split('~')
+                    low = int(low)
+                    high = int(high)
 
-                temp[name] = (low, high)
+                    temp[name] = (low, high)
 
-            return temp
+                template.append(temp)
+            return template
 
         for f in fixture:
+            t0 = f['fields']['template_0']
+            f['fields']['template_0'] = make_template(t0)
+
             t1 = f['fields']['template_1']
             f['fields']['template_1'] = make_template(t1)
 
@@ -133,17 +133,9 @@ class Equipment(models.Model):
 
         return fixture
 
-# EQUIPMENT_ATTR = (
-#     ('luoji', '逻辑'),
-#     ('minjie', '敏捷'),
-#     ('lilun', '理论'),
-#     ('wuxing', '悟性'),
-#     ('meili', '魅力'),
-#     ('primary', '全部一级属性'),
-#     ('secondary', '全部二级属性'),
-# )
 
 EQUIPMENT_ATTR_TEMPLATE_NAME = {
     'luoji', 'minjie', 'lilun', 'wuxing', 'meili',
+    'caozuo', 'baobing', 'jingying', 'zhanshu', 'biaoyan', 'yingxiao',
     'primary', 'secondary',
 }
