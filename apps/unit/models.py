@@ -90,3 +90,29 @@ class UnitDes(models.Model):
 
     class Meta:
         db_table = 'unit_des'
+
+
+class UnitEffect(models.Model):
+    RACE = (
+        (0, "全部"),
+        (1, "人族"),
+        (2, "神族"),
+        (3, "神族"),
+    )
+
+    TYPE = (
+        (1, "对撞"),
+        (2, "单方面挨打"),
+        (3, "死亡"),
+        (4, "出生"),
+    )
+
+    id = models.IntegerField(primary_key=True)
+    effect = models.CharField(max_length=255)
+    race = models.IntegerField(choices=RACE, verbose_name="种族")
+    tp = models.IntegerField(choices=TYPE, verbose_name="类型")
+
+    class Meta:
+        db_table = 'unit_effect'
+        verbose_name = "单位特效"
+        verbose_name_plural = "单位特效"

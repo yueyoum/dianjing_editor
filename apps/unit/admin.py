@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from apps.unit.models import Unit, Policy, UnitDes
+from apps.unit.models import Unit, Policy, UnitDes, UnitEffect
 
 @admin.register(Policy)
 class PolicyAdmin(admin.ModelAdmin):
@@ -29,3 +29,9 @@ class UnitAdmin(admin.ModelAdmin):
 
     list_filter = ('race',)
     inlines = [UnitDesInline,]
+
+@admin.register(UnitEffect)
+class UnitEffectAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'effect', 'race', 'tp'
+    )
