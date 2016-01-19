@@ -97,7 +97,7 @@ class UnitEffect(models.Model):
         (0, "全部"),
         (1, "人族"),
         (2, "神族"),
-        (3, "神族"),
+        (3, "虫族"),
     )
 
     TYPE = (
@@ -105,6 +105,7 @@ class UnitEffect(models.Model):
         (2, "单方面挨打"),
         (3, "死亡"),
         (4, "出生"),
+        (5, "天赋"),
     )
 
     id = models.IntegerField(primary_key=True)
