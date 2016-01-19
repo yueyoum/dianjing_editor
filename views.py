@@ -26,7 +26,6 @@ MODELS = (
     ('staff.StaffHot', 'staff_hot.json'),
     ('staff.StaffRecruit', 'staff_recruit.json'),
     ('training.TrainingProperty', 'training_property.json'),
-    ('training.TrainingSkill', 'training_skill_item.json'),
     ('npc.NPCClub', 'npc_club.json'),
     ('npc.NPCClubName', 'npc_club_name.json'),
     ('npc.NPCManagerName', 'npc_manager_name.json'),

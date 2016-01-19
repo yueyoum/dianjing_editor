@@ -3,7 +3,7 @@
 from django.contrib import admin
 
 from apps.item.models import Item
-from apps.training.models import TrainingProperty, TrainingSkill
+from apps.training.models import TrainingProperty
 
 
 @admin.register(TrainingProperty)
@@ -28,10 +28,3 @@ class TrainingPropertyAdmin(admin.ModelAdmin):
 
     NeedItems.allow_tags = True
     NeedItems.short_description = "所需物品"
-
-
-@admin.register(TrainingSkill)
-class TrainingSkillAdmin(admin.ModelAdmin):
-    list_display = (
-        'id', 'name', 'icon', 'des', 'minutes', 'sell_gold',
-    )

@@ -61,12 +61,3 @@ class TrainingProperty(AbstractTraining):
             f['fields']['need_items'] = need_items
 
         return fixture
-
-# 技能训练
-class TrainingSkill(AbstractTraining):
-    sell_gold = models.IntegerField(default=0, verbose_name='售卖所得软妹币')
-
-    class Meta:
-        db_table = 'training_skill_item'
-        verbose_name = "技能训练书（道具）"
-        verbose_name_plural = "技能训练书（道具）"
