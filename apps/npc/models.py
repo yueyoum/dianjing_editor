@@ -23,7 +23,7 @@ class NPCManagerName(models.Model):
 
 class NPCClub(models.Model):
     id = models.IntegerField(primary_key=True)
-    league = models.ForeignKey('league.League', verbose_name="所属联赛等级")
+    league = models.IntegerField(default=1, verbose_name="联赛等级")
 
     caozuo = models.CommaSeparatedIntegerField(blank=True, max_length=255, verbose_name="操作范围", help_text='low,high')
     baobing = models.CommaSeparatedIntegerField(blank=True, max_length=255, verbose_name="暴兵范围")
