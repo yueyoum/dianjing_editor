@@ -18,10 +18,17 @@ class AbstractTraining(models.Model):
 
 # 属性训练
 class TrainingProperty(AbstractTraining):
+    TYPE = (
+        (1, "属性训练"),
+        (2, "经验训练"),
+    )
+
     COST_TYPE = (
         (1, "软妹币"),
         (2, "钻石")
     )
+
+    tp = models.IntegerField(choices=TYPE, default=1, verbose_name="类型")
 
     cost_type = models.IntegerField(choices=COST_TYPE, default=1, verbose_name="花费类型")
     cost_value = models.IntegerField(verbose_name="花费金额")
