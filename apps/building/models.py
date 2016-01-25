@@ -24,8 +24,8 @@ class Building(models.Model):
 
     class Meta:
         db_table = 'building'
-        verbose_name = '设施'
-        verbose_name_plural = '设施'
+        verbose_name = '建筑'
+        verbose_name_plural = '建筑'
 
     @classmethod
     def patch_fixture(cls, fixture):
@@ -60,7 +60,7 @@ class Building(models.Model):
                         if info.tp == 7:
                             is_open[info.tp] = [int(i) for i in info.value.split(',')]
                         else:
-                            effect[info.tp] = info.value
+                            effect[info.tp] = int(info.value)
 
                     effect.update(is_open)
                 levels[l.level]['effect'] = effect
