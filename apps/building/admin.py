@@ -28,7 +28,7 @@ class BuildingLevelsInline(admin.TabularInline):
 @admin.register(Building)
 class BuildingAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'name', 'level_up_condition_type', 'des', 'status_des', 'remark',
+        'id', 'name', 'level_up_condition_type', 'des', 'status_des',
         'day_effect', 'night_effect',
         'LevelAmount'
     )

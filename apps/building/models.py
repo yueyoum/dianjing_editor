@@ -15,7 +15,6 @@ class Building(models.Model):
     level_up_condition_type = models.IntegerField(choices=LEVEL_UP_CONDITION_TYPE, default=1, verbose_name="升级所需条件")
     des = models.TextField(blank=True, verbose_name="描述")
     status_des = models.TextField(blank=True, verbose_name="当前状态描述")
-    remark = models.TextField(blank=True, verbose_name='备注')
 
     day_effect = models.CharField(max_length=255, blank=True, verbose_name='白天效果')
     night_effect = models.CharField(max_length=255, blank=True, verbose_name='晚上效果')
@@ -40,7 +39,6 @@ class Building(models.Model):
 
         for f in fixture:
             bid = f['pk']
-            f['fields'].pop('remark')
             levels = {}
 
             is_open = {}
@@ -57,13 +55,14 @@ class Building(models.Model):
                 }
 
                 effect = {}
-                for info in BuildingEffectInfo.objects.filter(building_effect__id=l.effect.id):
-                    if info.tp == 7:
-                        is_open[info.tp] = info.value
-                    else:
-                        effect[info.tp] = info.value
+                if l.effect:
+                    for info in BuildingEffectInfo.objects.filter(building_effect__id=l.effect.id):
+                        if info.tp == 7:
+                            is_open[info.tp] = [int(i) for i in info.value.split(',')]
+                        else:
+                            effect[info.tp] = info.value
 
-                effect = effect.items() + is_open.items()
+                    effect.update(is_open)
                 levels[l.level]['effect'] = effect
 
             f['fields']['levels'] = levels
@@ -87,31 +86,29 @@ class BuildingEffect(models.Model):
 
     class Meta:
         db_table = "building_effect"
-        verbose_name = "建筑效果"
-        verbose_name_plural = "建筑效果"
+        verbose_name = "建筑等级效果"
+        verbose_name_plural = "建筑等级效果"
 
 
 class BuildingEffectInfo(models.Model):
     BUILDING_EFFECT_TYPE = (
-        (1, "招募花费减少"),
-        (2, "商务收益增加"),
-        (3, "直播位置累计增加"),
-        (4, "网店数量累计增加"),
-        (5, "合约数量累计增加"),
+        (1, "招募花费"),
+        (2, "商务收益"),
+        (3, "直播位置"),
+        (4, "网店数量"),
+        (5, "合约数量"),
         (6, "联赛经验增加"),
         (7, "功能开放"),
-        (8, "训练位置累计增加"),
+        (8, "训练位置"),
         (9, "训练效果加成"),
     )
 
     building_effect = models.ForeignKey(BuildingEffect, related_name="effect_id")
-    tp = models.IntegerField(choices=BUILDING_EFFECT_TYPE, verbose_name="效果类型")
+    tp = models.IntegerField(choices=BUILDING_EFFECT_TYPE, verbose_name="类型")
     value = models.CharField(max_length=255, verbose_name="效果值")
 
     class Meta:
         db_table = "building_effect_info"
-        verbose_name = "建筑效果"
-        verbose_name_plural = "建筑效果"
 
         unique_together = (
             ('building_effect', 'tp'),
@@ -150,7 +147,7 @@ class BuildingLevels(models.Model):
     up_need_gold = models.IntegerField(default=0, verbose_name="升级所需软妹币")
     up_need_minutes = models.IntegerField(default=0, verbose_name='升级所需分钟数')
     up_need_items = models.CharField(max_length=255, verbose_name='所需物品', help_text='id:数量,id:数量')
-    effect = models.ForeignKey(BuildingEffect, null=True, blank=True, verbose_name="建筑效果")
+    effect = models.ForeignKey(BuildingEffect, null=True, blank=True, verbose_name="等级效果")
     des = models.CharField(max_length=255, blank=True, verbose_name="描述")
     effect_des = models.CharField(max_length=255, blank=True, verbose_name="升级效果描述")
 
