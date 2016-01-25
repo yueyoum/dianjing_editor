@@ -7,6 +7,7 @@ from apps.building.models import (
     BuildingLevels,
     Shop,
     Sponsor,
+    BusinessBroadcastReward,
 )
 
 
