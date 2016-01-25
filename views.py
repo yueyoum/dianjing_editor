@@ -77,8 +77,8 @@ MODELS = (
     ('active_value.ActiveFunction', 'active_function.json'),
     ('active_value.ActiveReward', 'active_reward.json'),
     ('conversation.Conversation', 'conversation.json'),
+    ('auction.Auction', 'auction.json'),
     ('item.Item', 'item.json'),
-    ('item.ItemQuality', 'item_quality.json'),
     ('item.Equipment', 'equipment.json'),
 )
 
