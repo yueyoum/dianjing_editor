@@ -70,7 +70,7 @@ class MapsAdmin(admin.ModelAdmin):
 @admin.register(TrainingMatchReward)
 class TrainingMatchRewardAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'reward', 'additional_reward', 'des'
+        'id', 'reward', 'score', 'des'
     )
 
 @admin.register(EliteArea)

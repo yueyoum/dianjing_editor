@@ -193,8 +193,7 @@ class Maps(models.Model):
 class TrainingMatchReward(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="第几场")
     reward = models.ForeignKey('package.Package', verbose_name="奖励", related_name='tmr')
-    additional_reward = models.ForeignKey('package.Package', null=True, blank=True, verbose_name="额外奖励",
-                                          related_name='tmrar')
+    score = models.IntegerField(verbose_name='获得积分')
     des = models.TextField(blank=True)
 
     class Meta:
