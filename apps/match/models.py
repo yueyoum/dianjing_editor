@@ -201,15 +201,6 @@ class TrainingMatchReward(models.Model):
         verbose_name = '训练赛奖励'
         verbose_name_plural = '训练赛奖励'
 
-    @classmethod
-    def patch_fixture(cls, fixtures):
-        for f in fixtures:
-            if not f['fields']['additional_reward']:
-                f['fields']['additional_reward'] = 0
-
-        return fixtures
-
-
 class EliteArea(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, verbose_name='名字')
