@@ -201,6 +201,23 @@ class TrainingMatchReward(models.Model):
         verbose_name = '训练赛奖励'
         verbose_name_plural = '训练赛奖励'
 
+
+class TrainingMatchScoreStore(models.Model):
+    id = models.IntegerField(primary_key=True)
+    times_limit = models.IntegerField(default=-1, verbose_name="次数限制",
+                                      help_text="-1为没有限制，0为无法兑换，正整数N表示可以兑换N次")
+
+    score = models.IntegerField(verbose_name="所需积分")
+
+    item = models.ForeignKey('item.Item', verbose_name='物品')
+    item_amount = models.IntegerField(default=1, verbose_name='物品数量')
+
+    class Meta:
+        db_table = 'training_match_score_store'
+        verbose_name = "训练赛积分商店"
+        verbose_name_plural = "训练赛积分商店"
+
+
 class EliteArea(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, verbose_name='名字')

@@ -10,6 +10,7 @@ from apps.match.models import (
     MatchConversationStart,
     Maps,
     TrainingMatchReward,
+    TrainingMatchScoreStore,
     EliteArea,
     EliteMatch,
 )
@@ -72,6 +73,14 @@ class TrainingMatchRewardAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'reward', 'score', 'des'
     )
+
+
+@admin.register(TrainingMatchScoreStore)
+class TrainingMatchScoreStoreAdmin(admin.ModelAdmin):
+    list_display = ('id', 'times_limit', 'score',
+                    'item', 'item_amount',
+                    )
+
 
 @admin.register(EliteArea)
 class EliteAreaAdmin(admin.ModelAdmin):
