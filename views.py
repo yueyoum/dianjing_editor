@@ -48,7 +48,7 @@ MODELS = (
     ('match.MatchConversationRoundEnd', 'match_conversation_round_end.json'),
     ('match.Maps', 'maps.json'),
     ('match.TrainingMatchReward', 'training_match_reward.json'),
-    ('match.TrainingMatchScoreStore', 'training_match_score_store.json'),
+    ('match.TrainingMatchScoreStore', 'training_match_store.json'),
     ('match.EliteArea', 'elite_area.json'),
     ('match.EliteMatch', 'elite_match.json'),
     ('package.Package', 'package.json'),
