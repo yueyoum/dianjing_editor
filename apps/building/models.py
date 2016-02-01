@@ -41,7 +41,8 @@ class Building(models.Model):
             bid = f['pk']
             levels = {}
 
-            is_open = {}
+            effect = {}
+            is_open = []
             for l in BuildingLevels.objects.filter(building__id=bid):
                 levels[l.level] = {
                     'resource': l.resource,
@@ -54,15 +55,14 @@ class Building(models.Model):
                     'effect_des': l.effect_des,
                 }
 
-                effect = {}
                 if l.effect:
                     for info in BuildingEffectInfo.objects.filter(building_effect__id=l.effect.id):
                         if info.tp == 7:
-                            is_open[info.tp] = [int(i) for i in info.value.split(',')]
+                            is_open += [int(i) for i in info.value.split(',')]
+                            effect[info.tp] = is_open
                         else:
                             effect[info.tp] = int(info.value)
 
-                    effect.update(is_open)
                 levels[l.level]['effect'] = effect
 
             f['fields']['levels'] = levels
