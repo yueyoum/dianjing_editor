@@ -106,6 +106,7 @@ class UnitEffect(models.Model):
         (3, "死亡"),
         (4, "出生"),
         (5, "天赋"),
+        (6, "失败"),
     )
 
     id = models.IntegerField(primary_key=True)
