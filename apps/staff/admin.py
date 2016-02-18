@@ -11,6 +11,7 @@ from apps.staff.models import (
     StaffRecruitSettings,
     StaffRecruit,
     StaffLevel,
+    StaffNew,
 )
 
 
@@ -82,4 +83,16 @@ class StaffLevelAdmin(admin.ModelAdmin):
         'quality_A',
         'quality_S',
         'quality_SS',
+    )
+
+class ResourceStaffNew(resources.ModelResource):
+    class Meta:
+        model = StaffNew
+
+@admin.register(StaffNew)
+class AdminStaffNew(ImportExportModelAdmin):
+    resource_class = ResourceStaffNew
+
+    list_display = (
+        'id', 'name', 'picture', 'attack', 'defense', 'manage', 'cost'
     )

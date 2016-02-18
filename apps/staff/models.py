@@ -213,3 +213,21 @@ class StaffRecruit(models.Model):
                     f['fields']['staff_settings'] = staff_settings
 
         return fixture
+
+
+class StaffNew(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255, verbose_name='名字')
+    picture = models.CharField(max_length=255, verbose_name='图片')
+    attack = models.IntegerField(verbose_name='进攻')
+    defense = models.IntegerField(verbose_name='防守')
+    manage = models.IntegerField(verbose_name='运营')
+    cost = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'staff_new'
+        verbose_name = "选手（新）"
+        verbose_name_plural = "选手（新）"

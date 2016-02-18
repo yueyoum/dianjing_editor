@@ -1,6 +1,8 @@
 from django.contrib import admin
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 
-from apps.unit.models import Unit, Policy, UnitDes, UnitEffect
+from apps.unit.models import Unit, Policy, UnitDes, UnitEffect, UnitNew
 
 @admin.register(Policy)
 class PolicyAdmin(admin.ModelAdmin):
@@ -34,4 +36,17 @@ class UnitAdmin(admin.ModelAdmin):
 class UnitEffectAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'effect', 'race', 'tp'
+    )
+
+
+class ResourceUnitNew(resources.ModelResource):
+    class Meta:
+        model = UnitNew
+
+@admin.register(UnitNew)
+class AdminUnitNew(ImportExportModelAdmin):
+    resource_class = ResourceUnitNew
+
+    list_display = (
+        'id', 'name', 'model', 'icon', 'tp', 'race',
     )

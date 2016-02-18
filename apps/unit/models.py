@@ -119,3 +119,64 @@ class UnitEffect(models.Model):
         db_table = 'unit_effect'
         verbose_name = "单位特效"
         verbose_name_plural = "单位特效"
+
+
+class UnitNew(models.Model):
+    TP = (
+        (1, '地面单位'),
+        (2, '空中单位'),
+    )
+
+    ATTACK_TP = (
+        (1, '物理攻击'),
+        (2, '能量攻击'),
+    )
+
+    DEFENSE_TP = (
+        (1, '生物护甲'),
+        (2, '能量护甲'),
+    )
+
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255, verbose_name="名字")
+    model = models.CharField(max_length=255, verbose_name="模型")
+    icon = models.CharField(max_length=255, verbose_name="图标")
+    tp = models.IntegerField(choices=TP, default=1, verbose_name="类型")
+    race = models.ForeignKey('staff.StaffRace', verbose_name="种族")
+
+    attack_tp = models.IntegerField(choices=ATTACK_TP, verbose_name='攻击类型')
+    defense_tp = models.IntegerField(choices=DEFENSE_TP, verbose_name='防御类型')
+
+    cost = models.IntegerField()
+    skill_1 = models.IntegerField()
+    skill_2 = models.IntegerField()
+
+    hp_max_base = models.IntegerField(verbose_name='基础最大生命值')
+    attack_base = models.IntegerField(verbose_name='基础攻击')
+    defense_base = models.IntegerField(verbose_name='基础防御')
+
+    attack_speed_base = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='基础攻击速度')
+    attack_range_base = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='基础攻击射程')
+    move_speed_base = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='基础移动速度')
+
+    hit_rate = models.DecimalField(max_digits=4, decimal_places=4, verbose_name='命中率')
+    dodge_rate = models.DecimalField(max_digits=4, decimal_places=4, verbose_name='闪避率')
+    crit_rate = models.DecimalField(max_digits=4, decimal_places=4, verbose_name='暴击率')
+    toughness_rate = models.DecimalField(max_digits=4, decimal_places=4, verbose_name='韧性')
+
+    hurt_addition_to_terran = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='对人族伤害加成')
+    hurt_addition_to_protoss = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='对神族伤害加成')
+    hurt_addition_to_zerg = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='对虫族伤害加成')
+
+    hurt_addition_by_terran = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='受到人族伤害加成')
+    hurt_addition_by_protoss = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='受到神族伤害加成')
+    hurt_addition_by_zerg = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='受到虫族伤害加成')
+
+    final_hurt_addition = models.IntegerField(verbose_name='最终伤害加成')
+    final_hurt_reduce = models.IntegerField(verbose_name='最终伤害减免')
+
+
+    class Meta:
+        db_table = 'unit_new'
+        verbose_name = "兵种（新）"
+        verbose_name_plural = "兵种（新）"
