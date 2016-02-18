@@ -1,4 +1,6 @@
 from django.contrib import admin
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 
 from apps.skill.models import (
     SkillType,
@@ -7,6 +9,7 @@ from apps.skill.models import (
     SkillLevel,
     SkillCategory,
     SkillWashCost,
+    Buff,
 )
 
 
@@ -45,4 +48,16 @@ class SkillAdmin(admin.ModelAdmin):
 class SkillWashCostAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'cost_type', 'cost_value'
+    )
+
+class ResourceBuff(resources.ModelResource):
+    class Meta:
+        model = Buff
+
+@admin.register(Buff)
+class AdminBuff(ImportExportModelAdmin):
+    resource_class = ResourceBuff
+
+    list_display = (
+        'id', 'tp', 'level', 'effect', 'value'
     )

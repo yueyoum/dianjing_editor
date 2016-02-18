@@ -170,3 +170,23 @@ class SkillWashCost(models.Model):
         db_table = 'skill_wash_cost'
         verbose_name = '技能洗练花费'
         verbose_name_plural = '技能洗练花费'
+
+
+class Buff(models.Model):
+    id = models.IntegerField(primary_key=True)
+    tp = models.IntegerField()
+    level = models.IntegerField()
+    effect = models.IntegerField()
+    value = models.DecimalField(max_digits=10, decimal_places=4)
+
+    class Meta:
+        db_table = 'buff'
+        verbose_name = 'Buff'
+        verbose_name_plural = 'Buff'
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            f['fields']['value'] = float(f['fields']['value'])
+
+        return fixture
