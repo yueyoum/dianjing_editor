@@ -180,3 +180,17 @@ class UnitNew(models.Model):
         db_table = 'unit_new'
         verbose_name = "兵种（新）"
         verbose_name_plural = "兵种（新）"
+
+    @classmethod
+    def patch_fixture(cls, fixtures):
+        decimal_fields = []
+        for _fields in cls._meta.get_fields():
+            if _fields.get_internal_type() == 'DecimalField':
+                decimal_fields.append(_fields.column)
+
+        for f in fixtures:
+            for field in decimal_fields:
+                value = f['fields'][field]
+                f['fields'][field] = float(value)
+
+        return fixtures
