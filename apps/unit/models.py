@@ -130,11 +130,13 @@ class UnitNew(models.Model):
     ATTACK_TP = (
         (1, '物理攻击'),
         (2, '能量攻击'),
+        (3, '爆炸攻击'),
     )
 
     DEFENSE_TP = (
         (1, '生物护甲'),
         (2, '能量护甲'),
+        (3, '机械护甲'),
     )
 
     id = models.IntegerField(primary_key=True)
