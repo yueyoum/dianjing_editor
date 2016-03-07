@@ -234,6 +234,7 @@ class ItemMerge(models.Model):
     amount = models.IntegerField()
     to_id = models.IntegerField()
     renown = models.IntegerField(verbose_name='分解获得声望')
+    crystal = models.IntegerField(verbose_name='分解获得水晶')
 
     class Meta:
         db_table = 'item_merge'

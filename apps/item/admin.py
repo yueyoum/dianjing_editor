@@ -97,7 +97,7 @@ class ItemMergeAdmin(ImportExportModelAdmin):
     resource_class = ResourceItemMerge
 
     list_display = (
-        'id', 'amount', 'to_id', 'renown'
+        'id', 'amount', 'to_id', 'renown', 'crystal'
     )
 
 @admin.register(EquipmentBase)
