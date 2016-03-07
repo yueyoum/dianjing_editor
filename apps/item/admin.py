@@ -4,7 +4,7 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from apps.item.models import Item, ItemQuality, Equipment
+from apps.item.models import Item, ItemQuality, Equipment, ItemNew, ItemUse, ItemMerge, EquipmentBase, EquipmentLevel
 
 
 @admin.register(ItemQuality)
@@ -50,3 +50,76 @@ class EquipmentAdmin(ImportExportModelAdmin):
     )
 
     change_list_template = 'equipment_change_list.html'
+
+
+
+class ResourceItemNew(resources.ModelResource):
+    class Meta:
+        model = ItemNew
+
+class ResourceItemUse(resources.ModelResource):
+    class Meta:
+        model = ItemUse
+
+class ResourceItemMerge(resources.ModelResource):
+    class Meta:
+        model = ItemMerge
+
+class ResourceEquipmentBase(resources.ModelResource):
+    class Meta:
+        model = EquipmentBase
+
+class ResourceEquipmentLevel(resources.ModelResource):
+    class Meta:
+        model = EquipmentLevel
+
+@admin.register(ItemNew)
+class ItemNewAdmin(ImportExportModelAdmin):
+    resource_class = ResourceItemNew
+
+    list_display = (
+        'id', 'name', 'des', 'icon', 'tp', 'quality', 'stack_max'
+    )
+
+    list_filter = ('tp',)
+
+
+@admin.register(ItemUse)
+class ItemUseAdmin(ImportExportModelAdmin):
+    resource_class = ResourceItemUse
+
+    list_display = (
+        'id', 'use_item_id', 'use_item_amount', 'result'
+    )
+
+@admin.register(ItemMerge)
+class ItemMergeAdmin(ImportExportModelAdmin):
+    resource_class = ResourceItemMerge
+
+    list_display = (
+        'id', 'amount', 'to_id', 'renown'
+    )
+
+@admin.register(EquipmentBase)
+class EquipmentBaseAdmin(ImportExportModelAdmin):
+    resource_class = ResourceEquipmentBase
+
+    list_display = (
+        'id', 'tp', 'renown'
+    )
+
+    list_filter = ('tp',)
+
+@admin.register(EquipmentLevel)
+class EquipmentLevelAdmin(ImportExportModelAdmin):
+    resource_class = ResourceEquipmentLevel
+
+    list_display = (
+        'equip_id', 'equip_level',
+        'attack', 'attack_percent',
+        'defense', 'defense_percent',
+        'manage', 'manage_percent',
+        'cost', 'cost_percent',
+    )
+
+    exclude = ('id',)

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import uuid
 from django.db import models
 from django.core.exceptions import ValidationError
 
@@ -141,3 +142,100 @@ EQUIPMENT_ATTR_TEMPLATE_NAME = {
     'caozuo', 'baobing', 'jingying', 'zhanshu', 'biaoyan', 'yingxiao',
     'primary', 'secondary',
 }
+
+
+
+class ItemNew(models.Model):
+    TYPE = (
+        (1, '普通道具'),
+        (2, '可使用道具'),
+        (3, '代币资源'),
+        (4, '装备'),
+        (5, '碎片'),
+        (6, '选手')
+    )
+
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255)
+    des = models.TextField()
+    icon = models.CharField(max_length=255)
+    tp = models.IntegerField(choices=TYPE)
+    quality = models.IntegerField()
+    stack_max = models.IntegerField(verbose_name='堆叠上限')
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'item_new'
+        verbose_name = '道具（新）'
+        verbose_name_plural = '道具（新）'
+
+
+class EquipmentBase(models.Model):
+    TYPE = (
+        (1, '鼠标'),
+        (2, '键盘'),
+        (3, '显示器'),
+        (4, '饰品'),
+    )
+
+    id = models.IntegerField(primary_key=True)
+    tp = models.IntegerField(choices=TYPE)
+    renown = models.IntegerField(verbose_name='分解获得声望')
+
+    class Meta:
+        db_table = 'equipment_base'
+        verbose_name = '装备基础属性'
+        verbose_name_plural = '装备基础属性'
+
+
+class EquipmentLevel(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+
+    equip_id = models.IntegerField()
+    equip_level = models.IntegerField()
+
+    attack = models.IntegerField()
+    attack_percent = models.DecimalField(max_digits=8, decimal_places=4)
+
+    defense = models.IntegerField()
+    defense_percent = models.DecimalField(max_digits=8, decimal_places=4)
+
+    manage = models.IntegerField()
+    manage_percent = models.DecimalField(max_digits=8, decimal_places=4)
+
+    cost = models.IntegerField()
+    cost_percent = models.DecimalField(max_digits=8, decimal_places=4)
+
+    update_item_need = models.CharField(max_length=255, verbose_name='升级所需道具')
+
+    class Meta:
+        db_table = 'equipment_level'
+        verbose_name = '装备等级'
+        verbose_name_plural = '装备等级'
+
+
+class ItemUse(models.Model):
+    id = models.IntegerField(primary_key=True)
+    use_item_id = models.IntegerField(default=0)
+    use_item_amount = models.IntegerField(default=0)
+
+    result = models.TextField(help_text='ID1,数量,几率;ID2,数量,几率|ID11,数量,几率;ID12,数量,几率|...')
+
+    class Meta:
+        db_table = 'item_use'
+        verbose_name = '道具使用'
+        verbose_name_plural = '道具使用'
+
+
+class ItemMerge(models.Model):
+    id = models.IntegerField(primary_key=True)
+    amount = models.IntegerField()
+    to_id = models.IntegerField()
+    renown = models.IntegerField(verbose_name='分解获得声望')
+
+    class Meta:
+        db_table = 'item_merge'
+        verbose_name = '碎片合成'
+        verbose_name_plural = '碎片合成'
