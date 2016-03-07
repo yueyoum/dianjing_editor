@@ -115,6 +115,7 @@ class EquipmentLevelAdmin(ImportExportModelAdmin):
     resource_class = ResourceEquipmentLevel
 
     list_display = (
+        'id',
         'equip_id', 'equip_level',
         'attack', 'attack_percent',
         'defense', 'defense_percent',
@@ -122,4 +123,3 @@ class EquipmentLevelAdmin(ImportExportModelAdmin):
         'cost', 'cost_percent',
     )
 
-    exclude = ('id',)

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import uuid
 from django.db import models
 from django.core.exceptions import ValidationError
 
@@ -191,7 +190,7 @@ class EquipmentBase(models.Model):
 
 
 class EquipmentLevel(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    id = models.IntegerField(primary_key=True)
 
     equip_id = models.IntegerField()
     equip_level = models.IntegerField()
