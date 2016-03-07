@@ -208,7 +208,7 @@ class EquipmentLevel(models.Model):
     cost = models.IntegerField()
     cost_percent = models.DecimalField(max_digits=8, decimal_places=4)
 
-    update_item_need = models.CharField(max_length=255, verbose_name='升级所需道具',
+    update_item_need = models.CharField(max_length=255, blank=True, verbose_name='升级所需道具',
                                         help_text='id,数量;id,数量...')
 
     class Meta:
