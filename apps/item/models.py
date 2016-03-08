@@ -210,13 +210,13 @@ class EquipmentBase(models.Model):
             for lv in levels:
                 levels_data[lv.equip_level] = {
                     'attack': lv.attack,
-                    'attack_percent': lv.attack_percent,
+                    'attack_percent': float(lv.attack_percent),
                     'defense': lv.defense,
-                    'defense_percent': lv.defense_percent,
+                    'defense_percent': float(lv.defense_percent),
                     'manage': lv.manage,
-                    'manage_percent': lv.manage_percent,
+                    'manage_percent': float(lv.manage_percent),
                     'cost': lv.cost,
-                    'cost_percent': lv.cost_percent,
+                    'cost_percent': float(lv.cost_percent),
                     'update_item_need': parse_item_need(lv.update_item_need)
                 }
 
