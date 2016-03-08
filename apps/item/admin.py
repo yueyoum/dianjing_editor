@@ -123,3 +123,5 @@ class EquipmentLevelAdmin(ImportExportModelAdmin):
         'cost', 'cost_percent',
     )
 
+    list_filter = ('equip_id',)
+

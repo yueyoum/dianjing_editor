@@ -85,6 +85,10 @@ MODELS = (
     ('item.Item', 'item.json'),
     ('item.ItemQuality', 'item_quality.json'),
     ('item.Equipment', 'equipment.json'),
+    ('item.ItemNew', 'item_new.json'),
+    ('item.ItemUse', 'item_use.json'),
+    ('item.ItemMerge', 'item_merge.json'),
+    ('item.EquipmentBase', 'equipment_new.json'),
 )
 
 

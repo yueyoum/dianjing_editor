@@ -188,11 +188,48 @@ class EquipmentBase(models.Model):
         verbose_name = '装备基础属性'
         verbose_name_plural = '装备基础属性'
 
+    @classmethod
+    def patch_fixture(cls, fixture):
+        def parse_item_need(item_text):
+            if not item_text:
+                return []
+
+            data = []
+            for group in item_text.split(';'):
+                _id, _amount = group.split(',')
+                data.append((int(_id), int(_amount)))
+
+            return data
+
+        for f in fixture:
+            equip_id = f['pk']
+            levels = EquipmentLevel.objects.filter(equip_id=equip_id)
+            """:type: list[EquipmentLevel]"""
+
+            levels_data = {}
+            for lv in levels:
+                levels_data[lv.equip_level] = {
+                    'attack': lv.attack,
+                    'attack_percent': lv.attack_percent,
+                    'defense': lv.defense,
+                    'defense_percent': lv.defense_percent,
+                    'manage': lv.manage,
+                    'manage_percent': lv.manage_percent,
+                    'cost': lv.cost,
+                    'cost_percent': lv.cost_percent,
+                    'update_item_need': parse_item_need(lv.update_item_need)
+                }
+
+            f['fields']['max_level'] = max(levels_data.keys())
+            f['fields']['levels'] = levels_data
+
+        return fixture
+
 
 class EquipmentLevel(models.Model):
     id = models.IntegerField(primary_key=True)
 
-    equip_id = models.IntegerField()
+    equip_id = models.IntegerField(db_index=True)
     equip_level = models.IntegerField()
 
     attack = models.IntegerField()
@@ -227,6 +264,30 @@ class ItemUse(models.Model):
         db_table = 'item_use'
         verbose_name = '道具使用'
         verbose_name_plural = '道具使用'
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        def parse_result(result_text):
+            result = []
+
+            for group_text in result_text.split('|'):
+                group_data = []
+
+                for item_text in group_text.split(';'):
+                    _id, _amount, _prob = item_text.split(',')
+                    group_data.append(
+                        (int(_id), int(_amount), int(_prob))
+                    )
+
+                result.append(group_data)
+
+            return result
+
+        for f in fixture:
+            result = f['fields']['result']
+            f['fields']['result'] = parse_result(result)
+
+        return fixture
 
 
 class ItemMerge(models.Model):
