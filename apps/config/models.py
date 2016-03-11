@@ -8,3 +8,12 @@ class ClientConfig(models.Model):
     class Meta:
         db_table = 'client_config'
         ordering = ('id',)
+
+
+class GlobalConfig(models.Model):
+    id = models.CharField(max_length=255, primary_key=True)
+    value = models.IntegerField()
+    mean = models.CharField(max_length=255, blank=True)
+
+    class Meta:
+        db_table = 'global_config'
