@@ -178,6 +178,11 @@ class UnitNew(models.Model):
     final_hurt_addition = models.IntegerField(verbose_name='最终伤害加成')
     final_hurt_reduce = models.IntegerField(verbose_name='最终伤害减免')
 
+    effect_skill_1 = models.CharField(max_length=255, verbose_name='普攻动作特效')
+    effect_skill_2 = models.CharField(max_length=255, verbose_name='技能动作特效')
+    effect_move = models.CharField(max_length=255, verbose_name='移动特效')
+    effect_die = models.CharField(max_length=255, verbose_name='死亡特效')
+
 
     class Meta:
         db_table = 'unit_new'
