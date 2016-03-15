@@ -139,6 +139,11 @@ class UnitNew(models.Model):
         (3, '机械护甲'),
     )
 
+    RANGE_TP = (
+        (1, '近战'),
+        (2, '远程'),
+    )
+
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, verbose_name="名字")
     model = models.CharField(max_length=255, verbose_name="模型")
@@ -148,6 +153,7 @@ class UnitNew(models.Model):
 
     attack_tp = models.IntegerField(choices=ATTACK_TP, verbose_name='攻击类型')
     defense_tp = models.IntegerField(choices=DEFENSE_TP, verbose_name='防御类型')
+    range_tp = models.IntegerField(choices=RANGE_TP, verbose_name='范围类型')
 
     cost = models.IntegerField()
     skill_1 = models.IntegerField()
