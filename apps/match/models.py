@@ -105,7 +105,7 @@ class ChallengeChapter(models.Model):
 class ChallengeMatch(models.Model):
     TP = (
         (1, '普通'),
-        (1, '精英'),
+        (2, '精英'),
     )
 
     id = models.IntegerField(primary_key=True)
