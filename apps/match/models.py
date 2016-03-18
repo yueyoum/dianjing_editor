@@ -91,6 +91,7 @@ class ChallengeChapter(models.Model):
     name = models.CharField(max_length=255)
     icon = models.CharField(max_length=255)
     des = models.TextField()
+    star_reward = models.CharField(max_length=255, help_text='星数,奖励ID,奖励数量;...')
 
     def __unicode__(self):
         return self.name
@@ -99,6 +100,19 @@ class ChallengeChapter(models.Model):
         db_table = 'challenge_chapter'
         verbose_name = '挑战赛章节'
         verbose_name_plural = '挑战赛章节'
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            reward = f['fields']['star_reward']
+            parsed_reward = []
+            for x in reward.split(';'):
+                a, b, c = x.split(',')
+                parsed_reward.append((int(a), int(b), int(c)))
+
+            f['fields']['star_reward'] = parsed_reward
+
+        return fixture
 
 
 

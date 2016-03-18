@@ -49,7 +49,7 @@ class MatchConversationRoundEndAdmin(admin.ModelAdmin):
 class ChallengeTypeAdmin(ImportExportModelAdmin):
     resource_class = ResourceChallengeChapter
     list_display = (
-        'id', 'name', 'icon', 'des'
+        'id', 'name', 'icon', 'des', 'star_reward'
     )
 
 @admin.register(ChallengeMatch)
