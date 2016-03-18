@@ -114,7 +114,7 @@ class ChallengeMatch(models.Model):
     chapter = models.IntegerField(verbose_name='章节')
     name = models.CharField(max_length=255, verbose_name="关卡名")
     des = models.TextField(verbose_name='描述')
-    club_flag = models.IntegerField(verbose_name='旗帜')
+    club_flag = models.CharField(max_length=255, verbose_name='旗帜')
 
     energy = models.IntegerField(verbose_name='消耗体力')
     club_exp = models.IntegerField(verbose_name='获得俱乐部经验')
