@@ -86,67 +86,48 @@ class MatchConversationRoundEnd(models.Model):
         return fixture
 
 
-class ChallengeType(models.Model):
+class ChallengeChapter(models.Model):
     id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=255, verbose_name='类型')
-    level = models.IntegerField(verbose_name="等级")
-    condition_challenge_id = models.IntegerField(default=0, verbose_name="前置关卡ID")
-    color = models.CharField(max_length=255, verbose_name='颜色')
-    des = models.TextField(blank=True, verbose_name="描述")
-    star_reward = models.CharField(max_length=255, verbose_name="星级奖励")
+    name = models.CharField(max_length=255)
+    icon = models.CharField(max_length=255)
+    des = models.TextField()
 
     def __unicode__(self):
         return self.name
 
-    def clean(self):
-        for v in self.star_reward.split(','):
-            j, k = v.split(':')
-            if not str(j).isdigit():
-                raise ValidationError("星数必须是数字")
-
-            if not str(k).isdigit():
-                raise ValidationError("物品ID必须是数字")
-
-            if not Package.objects.filter(id=int(k)).exists():
-                raise ValidationError("物品ID {0} 不存在".format(k))
-
-    @classmethod
-    def patch_fixture(cls, fixture):
-        for f in fixture:
-            star_reward = f['fields']['star_reward']
-            reward = []
-            for v in str(star_reward).split(','):
-                i, j = v.split(':')
-                reward.append({'star': int(i), 'reward': int(j)})
-
-            f['fields']['star_reward'] = reward
-        return fixture
-
     class Meta:
-        db_table = 'challenge_type'
-        verbose_name = '挑战赛类型'
-        verbose_name_plural = '挑战赛类型'
+        db_table = 'challenge_chapter'
+        verbose_name = '挑战赛章节'
+        verbose_name_plural = '挑战赛章节'
+
 
 
 class ChallengeMatch(models.Model):
+    TP = (
+        (1, '普通'),
+        (1, '精英'),
+    )
+
     id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=255, verbose_name="名字")
-    need_club_level = models.IntegerField(default=1, verbose_name="需要俱乐部等级")
-    club_name = models.CharField(max_length=255, verbose_name="关卡俱乐部名字")
-    club_flag = models.ForeignKey('club.ClubFlag', verbose_name="关卡俱乐部旗帜")
-    tp = models.ForeignKey(ChallengeType, verbose_name="类型")
-    policy = models.ForeignKey('unit.Policy', verbose_name="战术")
+    tp = models.IntegerField(choices=TP, verbose_name='类型')
+    area = models.CharField(max_length=255, verbose_name='大区名')
+    chapter = models.IntegerField(verbose_name='章节')
+    name = models.CharField(max_length=255, verbose_name="关卡名")
+    des = models.TextField(verbose_name='描述')
+    club_flag = models.IntegerField(verbose_name='旗帜')
 
-    level = models.IntegerField(verbose_name="选手等级")
-    strength = models.FloatField(verbose_name="选手强度系数")
+    energy = models.IntegerField(verbose_name='消耗体力')
+    club_exp = models.IntegerField(verbose_name='获得俱乐部经验')
+    staffs = models.CharField(max_length=255, verbose_name='选手列表',
+                              help_text='位置，ID，兵种ID；...'
+                              )
 
-    staffs = models.CommaSeparatedIntegerField(max_length=255, verbose_name="选手ID列表")
-    winning_rates = models.CommaSeparatedIntegerField(max_length=255, default='1,1,1,1,1', verbose_name="胜率列表")
+    drop = models.CharField(max_length=255, verbose_name='掉落',
+                            help_text='物品ID，数量，初始几率，递增几率；...'
+                            )
 
-    package = models.ForeignKey('package.Package', verbose_name="奖励物品包")
-    max_times = models.IntegerField(verbose_name='次数限制')
-
-    des = models.TextField(blank=True, verbose_name="描述")
+    condition_challenge = models.IntegerField(verbose_name='前置关卡ID')
+    times_limit = models.IntegerField(verbose_name='每日限制次数')
 
     def __unicode__(self):
         return self.name
@@ -156,22 +137,25 @@ class ChallengeMatch(models.Model):
         verbose_name = '挑战赛'
         verbose_name_plural = '挑战赛'
 
-    def clean(self):
-        staffs = [int(s) for s in self.staffs.split(',')]
-        if len(staffs) != 5:
-            raise ValidationError("wrong staffs")
-
-        for s in staffs:
-            if not Staff.objects.filter(id=int(s)).exists():
-                raise ValidationError("Staff {0} not exists".format(s))
 
     @classmethod
     def patch_fixture(cls, fixture):
         for f in fixture:
             staffs = f['fields']['staffs']
-            winning_rates = f['fields']['winning_rates']
-            f['fields']['staffs'] = [int(s) for s in staffs.split(',')]
-            f['fields']['winning_rates'] = [int(s) for s in winning_rates.split(',')]
+            parsed_staffs = []
+            for x in staffs.split(';'):
+                a, b, c = x.split(',')
+                parsed_staffs.append((int(a), int(b), int(c)))
+
+            f['fields']['staffs'] = parsed_staffs
+
+            drop = f['fields']['drop']
+            parsed_drop = []
+            for x in drop.split(';'):
+                a, b, c, d = x.split(',')
+                parsed_drop.append((int(a), int(b), int(c), int(d)))
+
+            f['fields']['drop'] = parsed_drop
 
         return fixture
 

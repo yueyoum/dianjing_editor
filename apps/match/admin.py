@@ -3,8 +3,8 @@ from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
 from apps.match.models import (
-    ChallengeType,
     ChallengeMatch,
+    ChallengeChapter,
     MatchConversationEnd,
     MatchConversationRoundEnd,
     MatchConversationStart,
@@ -14,6 +14,11 @@ from apps.match.models import (
     EliteArea,
     EliteMatch,
 )
+
+class ResourceChallengeChapter(resources.ModelResource):
+    class Meta:
+        model = ChallengeChapter
+
 
 class ChallengeMatchResource(resources.ModelResource):
     class Meta:
@@ -40,25 +45,22 @@ class MatchConversationRoundEndAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(ChallengeType)
-class ChallengeTypeAdmin(admin.ModelAdmin):
+@admin.register(ChallengeChapter)
+class ChallengeTypeAdmin(ImportExportModelAdmin):
+    resource_class = ResourceChallengeChapter
     list_display = (
-        'id', 'name', 'condition_challenge_id', 'level', 'color', 'des'
+        'id', 'name', 'icon', 'des'
     )
-
 
 @admin.register(ChallengeMatch)
 class ChallengeMatchAdmin(ImportExportModelAdmin):
     resource_class = ChallengeMatchResource
 
     list_display = (
-        'id', 'name', 'need_club_level', 'club_name', 'club_flag', 'tp', 'policy', 'level', 'strength', 'staffs',
-        'winning_rates',
-        'package',
-        'des', 'max_times',
+        'id', 'tp', 'area', 'chapter', 'name',
     )
 
-    list_filter = ('tp',)
+    list_filter = ('chapter',)
 
 @admin.register(Maps)
 class MapsAdmin(admin.ModelAdmin):

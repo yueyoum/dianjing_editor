@@ -213,7 +213,7 @@ class Sponsor(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, verbose_name='名字')
     icon = models.CharField(max_length=255, verbose_name='图标')
-    condition = models.ForeignKey('match.ChallengeMatch', verbose_name='需要通过的挑战赛')
+    condition = models.IntegerField(verbose_name='需要通过的挑战赛')
     total_days = models.IntegerField(default=0, verbose_name='合约天数')
 
     income = models.IntegerField(verbose_name='每天收入软妹币')

@@ -4,7 +4,7 @@ from django.db import models
 from django.core.exceptions import ValidationError
 
 from apps.building.models import Building
-from apps.match.models import ChallengeMatch
+# from apps.match.models import ChallengeMatch
 
 
 # Create your models here.
@@ -28,16 +28,16 @@ class Conversation(models.Model):
     is_loop = models.BooleanField(verbose_name='是否循环')
     time_tp = models.IntegerField(choices=TRIGGER_TIME, verbose_name='触发时间')
 
-    def clean(self):
-        if self.tp == 1:
-            if not self.condition_value.isdigit() or \
-                    not Building.objects.filter(id=int(self.condition_value)).exists():
-                raise ValidationError("Building {0} not exists".format(self.condition_value))
-
-        if self.tp == 2:
-            if not self.condition_value.isdigit() or \
-                    not ChallengeMatch.objects.filter(id=int(self.condition_value)).exists():
-                raise ValidationError("ChallengeMatch {0} not exists".format(self.condition_value))
+    # def clean(self):
+    #     if self.tp == 1:
+    #         if not self.condition_value.isdigit() or \
+    #                 not Building.objects.filter(id=int(self.condition_value)).exists():
+    #             raise ValidationError("Building {0} not exists".format(self.condition_value))
+    #
+    #     if self.tp == 2:
+    #         if not self.condition_value.isdigit() or \
+    #                 not ChallengeMatch.objects.filter(id=int(self.condition_value)).exists():
+    #             raise ValidationError("ChallengeMatch {0} not exists".format(self.condition_value))
 
     class Meta:
         db_table = 'conversation'
