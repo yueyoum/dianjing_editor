@@ -87,7 +87,13 @@ class MatchConversationRoundEnd(models.Model):
 
 
 class ChallengeChapter(models.Model):
+    TP = (
+        (1, '普通'),
+        (2, '精英'),
+    )
+
     id = models.IntegerField(primary_key=True)
+    tp = models.IntegerField(choices=TP, verbose_name='类型')
     name = models.CharField(max_length=255)
     icon = models.CharField(max_length=255)
     des = models.TextField()
@@ -115,15 +121,8 @@ class ChallengeChapter(models.Model):
         return fixture
 
 
-
 class ChallengeMatch(models.Model):
-    TP = (
-        (1, '普通'),
-        (2, '精英'),
-    )
-
     id = models.IntegerField(primary_key=True)
-    tp = models.IntegerField(choices=TP, verbose_name='类型')
     area = models.CharField(max_length=255, verbose_name='大区名')
     chapter = models.IntegerField(verbose_name='章节')
     name = models.CharField(max_length=255, verbose_name="关卡名")
