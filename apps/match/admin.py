@@ -49,7 +49,7 @@ class MatchConversationRoundEndAdmin(admin.ModelAdmin):
 class ChallengeTypeAdmin(ImportExportModelAdmin):
     resource_class = ResourceChallengeChapter
     list_display = (
-        'id', 'tp', 'name', 'icon', 'des', 'star_reward'
+        'id', 'tp', 'name', 'icon', 'des', 'star_reward', 'area'
     )
 
 @admin.register(ChallengeMatch)
@@ -57,7 +57,7 @@ class ChallengeMatchAdmin(ImportExportModelAdmin):
     resource_class = ChallengeMatchResource
 
     list_display = (
-        'id', 'area', 'chapter', 'name',
+        'id', 'chapter', 'name',
     )
 
     list_filter = ('chapter',)

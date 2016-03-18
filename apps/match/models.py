@@ -98,6 +98,7 @@ class ChallengeChapter(models.Model):
     icon = models.CharField(max_length=255)
     des = models.TextField()
     star_reward = models.CharField(max_length=255, help_text='星数,奖励ID,奖励数量;...')
+    area = models.CharField(max_length=255, verbose_name='大区名')
 
     def __unicode__(self):
         return self.name
@@ -123,7 +124,6 @@ class ChallengeChapter(models.Model):
 
 class ChallengeMatch(models.Model):
     id = models.IntegerField(primary_key=True)
-    area = models.CharField(max_length=255, verbose_name='大区名')
     chapter = models.IntegerField(verbose_name='章节')
     name = models.CharField(max_length=255, verbose_name="关卡名")
     des = models.TextField(verbose_name='描述')
