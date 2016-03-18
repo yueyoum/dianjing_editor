@@ -45,7 +45,7 @@ MODELS = (
     ('club.ClubLevel', 'club_level.json'),
     ('club.TibuSlot', 'tibu_slot.json'),
     ('qianban.QianBan', 'qianban.json'),
-    ('match.ChallengeType', 'challenge_type.json'),
+    ('match.ChallengeChapter', 'challenge_chapter.json'),
     ('match.ChallengeMatch', 'challenge_match.json'),
     ('match.MatchConversationStart', 'match_conversation_start.json'),
     ('match.MatchConversationEnd', 'match_conversation_end.json'),
