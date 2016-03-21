@@ -139,7 +139,7 @@ class ChallengeMatch(models.Model):
                             help_text='物品ID，数量，初始几率，递增几率；...'
                             )
 
-    condition_challenge = models.IntegerField(verbose_name='前置关卡ID')
+    condition_challenge = models.IntegerField(db_index=True, verbose_name='前置关卡ID')
     times_limit = models.IntegerField(verbose_name='每日限制次数')
 
     def __unicode__(self):
@@ -169,6 +169,9 @@ class ChallengeMatch(models.Model):
                 parsed_drop.append((int(a), int(b), int(c), int(d)))
 
             f['fields']['drop'] = parsed_drop
+
+            next_challenges = ChallengeMatch.objects.filter(condition_challenge=f['pk']).values_list('id', flat=True)
+            f['fields']['next'] = list(next_challenges)
 
         return fixture
 
