@@ -167,10 +167,10 @@ class UnitNew(models.Model):
     attack_range_base = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='基础攻击射程')
     move_speed_base = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='基础移动速度')
 
-    hit_rate = models.DecimalField(max_digits=4, decimal_places=4, verbose_name='命中率')
-    dodge_rate = models.DecimalField(max_digits=4, decimal_places=4, verbose_name='闪避率')
-    crit_rate = models.DecimalField(max_digits=4, decimal_places=4, verbose_name='暴击率')
-    toughness_rate = models.DecimalField(max_digits=4, decimal_places=4, verbose_name='韧性')
+    hit_rate = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='命中率')
+    dodge_rate = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='闪避率')
+    crit_rate = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='暴击率')
+    toughness_rate = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='韧性')
     crit_multiple = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='暴击被率')
 
     hurt_addition_to_terran = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='对人族伤害加成')
