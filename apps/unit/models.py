@@ -155,7 +155,7 @@ class UnitNew(models.Model):
     defense_tp = models.IntegerField(choices=DEFENSE_TP, verbose_name='防御类型')
     range_tp = models.IntegerField(choices=RANGE_TP, verbose_name='范围类型')
 
-    cost = models.IntegerField()
+    operation = models.IntegerField(verbose_name='操作')
     skill_1 = models.IntegerField()
     skill_2 = models.IntegerField()
 

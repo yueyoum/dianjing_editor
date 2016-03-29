@@ -94,5 +94,5 @@ class AdminStaffNew(ImportExportModelAdmin):
     resource_class = ResourceStaffNew
 
     list_display = (
-        'id', 'name', 'picture', 'attack', 'defense', 'manage', 'cost'
+        'id', 'name', 'picture', 'attack', 'defense', 'manage', 'operation'
     )

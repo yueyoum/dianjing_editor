@@ -222,7 +222,7 @@ class StaffNew(models.Model):
     attack = models.IntegerField(verbose_name='进攻')
     defense = models.IntegerField(verbose_name='防守')
     manage = models.IntegerField(verbose_name='运营')
-    cost = models.IntegerField()
+    operation = models.IntegerField(verbose_name='操作')
 
     def __unicode__(self):
         return self.name
