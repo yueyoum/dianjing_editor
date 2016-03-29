@@ -27,6 +27,8 @@ MODELS = (
     ('staff.StaffHot', 'staff_hot.json'),
     ('staff.StaffRecruit', 'staff_recruit.json'),
     ('staff.StaffNew', 'staff_new.json'),
+    ('staff.StaffLevelNew', 'staff_level_new.json'),
+    ('staff.StaffStar', 'staff_star.json'),
     ('training.TrainingProperty', 'training_property.json'),
     ('npc.NPCClub', 'npc_club.json'),
     ('npc.NPCClubName', 'npc_club_name.json'),
@@ -41,6 +43,7 @@ MODELS = (
     ('skill.Skill', 'skill.json'),
     ('skill.SkillWashCost', 'skill_wash_cost.json'),
     ('skill.Buff', 'skill_buff.json'),
+    ('skill.TalentSkill', 'talent_skill.json'),
     ('club.ClubFlag', 'club_flag.json'),
     ('club.ClubLevel', 'club_level.json'),
     ('club.TibuSlot', 'tibu_slot.json'),
@@ -90,6 +93,7 @@ MODELS = (
     ('item.ItemUse', 'item_use.json'),
     ('item.ItemMerge', 'item_merge.json'),
     ('item.EquipmentBase', 'equipment_new.json'),
+    ('item.ItemExp', 'item_exp.json'),
 )
 
 

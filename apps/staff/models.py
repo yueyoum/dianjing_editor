@@ -233,9 +233,6 @@ class StaffNew(models.Model):
 
     crystal = models.IntegerField(verbose_name='分解获得水晶')
 
-    def __unicode__(self):
-        return self.name
-
     class Meta:
         db_table = 'staff_new'
         verbose_name = "选手（新）"

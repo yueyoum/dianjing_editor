@@ -301,3 +301,13 @@ class ItemMerge(models.Model):
         db_table = 'item_merge'
         verbose_name = '碎片合成'
         verbose_name_plural = '碎片合成'
+
+
+class ItemExp(models.Model):
+    id = models.IntegerField(primary_key=True)
+    exp = models.IntegerField()
+
+    class Meta:
+        db_table = 'item_exp'
+        verbose_name = '经验道具'
+        verbose_name_plural = '经验道具'
