@@ -253,7 +253,10 @@ class StaffNew(models.Model):
 
         for f in fixture:
             talent_skill = f['fields']['talent_skill']
-            f['fields']['talent_skill'] = [int(i) for i in talent_skill.split(',')]
+            if talent_skill:
+                f['fields']['talent_skill'] = [int(i) for i in talent_skill.split(',')]
+            else:
+                f['fields']['talent_skill'] = []
 
             steps = StaffStep.objects.filter(staff_id=f['pk'])
             """:type: list[StaffStep]"""
@@ -287,6 +290,14 @@ class StaffLevelNew(models.Model):
         db_table = 'staff_level_new'
         verbose_name = "选手等级（新）"
         verbose_name_plural = "选手等级（新）"
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            if not f['fields']['exp']:
+                f['fields']['exp'] = 0
+
+        return fixture
 
 
 class StaffStep(models.Model):
