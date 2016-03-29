@@ -238,6 +238,46 @@ class StaffNew(models.Model):
         verbose_name = "选手（新）"
         verbose_name_plural = "选手（新）"
 
+    @classmethod
+    def patch_fixture(cls, fixture):
+        def parse_item_need(item_text):
+            if not item_text:
+                return []
+
+            data = []
+            for group in item_text.split(';'):
+                _id, _amount = group.split(',')
+                data.append((int(_id), int(_amount)))
+
+            return data
+
+        for f in fixture:
+            talent_skill = f['fields']['talent_skill']
+            f['fields']['talent_skill'] = [int(i) for i in talent_skill.split(',')]
+
+            steps = StaffStep.objects.filter(staff_id=f['pk'])
+            """:type: list[StaffStep]"""
+
+            steps_data = {}
+            for step in steps:
+                steps_data[step.staff_step] = {
+                    'attack': step.attack,
+                    'attack_percent': float(step.attack_percent),
+                    'defense': step.defense,
+                    'defense_percent': float(step.defense_percent),
+                    'manage': step.manage,
+                    'manage_percent': float(step.manage_percent),
+                    'operation': step.operation,
+                    'operation_percent': float(step.operation_percent),
+                    'talent_skill': step.talent_skill,
+                    'update_item_need': parse_item_need(step.update_item_need),
+                    'level_limit': step.level_limit if step.level_limit else 0
+                }
+
+            f['fields']['steps'] = steps_data
+            f['fields']['max_step'] = max(steps_data.keys())
+
+        return fixture
 
 class StaffLevelNew(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name='等级')
@@ -302,3 +342,22 @@ class StaffStar(models.Model):
         db_table = 'staff_star'
         verbose_name = "选手升星（新）"
         verbose_name_plural = "选手升星（新）"
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            if not f['fields']['exp']:
+                f['fields']['exp'] = 0
+
+            if not f['fields']['need_item_id']:
+                f['fields']['need_item_id'] = 0
+
+            if not f['fields']['need_item_amount']:
+                f['fields']['need_item_amount'] = 0
+
+            f['fields']['attack_percent'] = float(f['fields']['attack_percent'])
+            f['fields']['defense_percent'] = float(f['fields']['defense_percent'])
+            f['fields']['manage_percent'] = float(f['fields']['manage_percent'])
+            f['fields']['operation_percent'] = float(f['fields']['operation_percent'])
+
+        return fixture

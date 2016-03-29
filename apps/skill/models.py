@@ -254,3 +254,17 @@ class TalentSkill(models.Model):
         db_table = 'talent_skill'
         verbose_name = '天赋'
         verbose_name_plural = '天赋'
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        decimal_fields = []
+        for _fields in cls._meta.get_fields():
+            if _fields.get_internal_type() == 'DecimalField':
+                decimal_fields.append(_fields.column)
+
+        for f in fixture:
+            for field in decimal_fields:
+                value = f['fields'][field]
+                f['fields'][field] = float(value)
+
+        return fixture
