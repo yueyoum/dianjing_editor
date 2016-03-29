@@ -217,8 +217,6 @@ class StaffRecruit(models.Model):
 
 class StaffNew(models.Model):
     id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=255, verbose_name='名字')
-    picture = models.CharField(max_length=255, verbose_name='图片')
     race = models.IntegerField(default=1, verbose_name='种族')
     attack = models.IntegerField(verbose_name='进攻')
     attack_grow = models.IntegerField(default=1, verbose_name='进攻增长')
