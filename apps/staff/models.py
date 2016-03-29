@@ -244,7 +244,7 @@ class StaffNew(models.Model):
 
 class StaffLevelNew(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name='等级')
-    exp = models.IntegerField(verbose_name='所需经验')
+    exp = models.IntegerField(verbose_name='所需经验', null=True, blank=True)
 
     class Meta:
         db_table = 'staff_level_new'
@@ -274,7 +274,7 @@ class StaffStep(models.Model):
     update_item_need = models.CharField(max_length=255, blank=True, verbose_name='升到本阶所需道具',
                                         help_text='id,数量;id,数量...')
 
-    level_limit = models.IntegerField(verbose_name='选手等级限制')
+    level_limit = models.IntegerField(verbose_name='选手等级限制', null=True, blank=True)
 
     class Meta:
         db_table = 'staff_step'
@@ -284,9 +284,9 @@ class StaffStep(models.Model):
 
 class StaffStar(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name='星级')
-    exp = models.IntegerField(verbose_name='星级经验')
-    need_item_id = models.IntegerField()
-    need_item_amount = models.IntegerField()
+    exp = models.IntegerField(verbose_name='星级经验', null=True, blank=True)
+    need_item_id = models.IntegerField(null=True, blank=True)
+    need_item_amount = models.IntegerField(null=True, blank=True)
 
     attack = models.IntegerField()
     attack_percent = models.DecimalField(max_digits=8, decimal_places=4)
