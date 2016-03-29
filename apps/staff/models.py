@@ -219,10 +219,21 @@ class StaffNew(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, verbose_name='名字')
     picture = models.CharField(max_length=255, verbose_name='图片')
+    race = models.IntegerField(default=1, verbose_name='种族')
     attack = models.IntegerField(verbose_name='进攻')
+    attack_grow = models.IntegerField(default=1, verbose_name='进攻增长')
     defense = models.IntegerField(verbose_name='防守')
+    defense_grow = models.IntegerField(default=1, verbose_name='防守增长')
     manage = models.IntegerField(verbose_name='运营')
+    manage_grow = models.IntegerField(default=1, verbose_name='运营增长')
     operation = models.IntegerField(verbose_name='操作')
+    operation_grow = models.IntegerField(default=1, verbose_name='操作增长')
+    skill = models.IntegerField(verbose_name='技能ID')
+    talent_skill = models.CommaSeparatedIntegerField(max_length=255, verbose_name='天赋ID',
+                                                     help_text='id,id,id'
+                                                     )
+
+    crystal = models.IntegerField(verbose_name='分解获得水晶')
 
     def __unicode__(self):
         return self.name
@@ -231,3 +242,68 @@ class StaffNew(models.Model):
         db_table = 'staff_new'
         verbose_name = "选手（新）"
         verbose_name_plural = "选手（新）"
+
+
+class StaffLevelNew(models.Model):
+    id = models.IntegerField(primary_key=True, verbose_name='等级')
+    exp = models.IntegerField(verbose_name='所需经验')
+
+    class Meta:
+        db_table = 'staff_level_new'
+        verbose_name = "选手等级（新）"
+        verbose_name_plural = "选手等级（新）"
+
+
+class StaffStep(models.Model):
+    id = models.IntegerField(primary_key=True)
+    staff_id = models.IntegerField(db_index=True, verbose_name='选手ID')
+    staff_step = models.IntegerField(verbose_name='阶')
+
+    attack = models.IntegerField()
+    attack_percent = models.DecimalField(max_digits=8, decimal_places=4)
+
+    defense = models.IntegerField()
+    defense_percent = models.DecimalField(max_digits=8, decimal_places=4)
+
+    manage = models.IntegerField()
+    manage_percent = models.DecimalField(max_digits=8, decimal_places=4)
+
+    operation = models.IntegerField()
+    operation_percent = models.DecimalField(max_digits=8, decimal_places=4)
+
+    talent_skill = models.IntegerField()
+
+    update_item_need = models.CharField(max_length=255, blank=True, verbose_name='升到本阶所需道具',
+                                        help_text='id,数量;id,数量...')
+
+    level_limit = models.IntegerField(verbose_name='选手等级限制')
+
+    class Meta:
+        db_table = 'staff_step'
+        verbose_name = "选手升阶（新）"
+        verbose_name_plural = "选手升阶（新）"
+
+
+class StaffStar(models.Model):
+    id = models.IntegerField(primary_key=True, verbose_name='星级')
+    exp = models.IntegerField(verbose_name='星级经验')
+    need_item_id = models.IntegerField()
+    need_item_amount = models.IntegerField()
+
+    attack = models.IntegerField()
+    attack_percent = models.DecimalField(max_digits=8, decimal_places=4)
+
+    defense = models.IntegerField()
+    defense_percent = models.DecimalField(max_digits=8, decimal_places=4)
+
+    manage = models.IntegerField()
+    manage_percent = models.DecimalField(max_digits=8, decimal_places=4)
+
+    operation = models.IntegerField()
+    operation_percent = models.DecimalField(max_digits=8, decimal_places=4)
+
+
+    class Meta:
+        db_table = 'staff_star'
+        verbose_name = "选手升星（新）"
+        verbose_name_plural = "选手升星（新）"
