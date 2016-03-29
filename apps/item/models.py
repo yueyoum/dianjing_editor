@@ -215,8 +215,8 @@ class EquipmentBase(models.Model):
                     'defense_percent': float(lv.defense_percent),
                     'manage': lv.manage,
                     'manage_percent': float(lv.manage_percent),
-                    'cost': lv.cost,
-                    'cost_percent': float(lv.cost_percent),
+                    'operation': lv.operation,
+                    'operation_percent': float(lv.operation_percent),
                     'update_item_need': parse_item_need(lv.update_item_need)
                 }
 
@@ -241,8 +241,8 @@ class EquipmentLevel(models.Model):
     manage = models.IntegerField()
     manage_percent = models.DecimalField(max_digits=8, decimal_places=4)
 
-    cost = models.IntegerField()
-    cost_percent = models.DecimalField(max_digits=8, decimal_places=4)
+    operation = models.IntegerField()
+    operation_percent = models.DecimalField(max_digits=8, decimal_places=4)
 
     update_item_need = models.CharField(max_length=255, blank=True, verbose_name='升级所需道具',
                                         help_text='id,数量;id,数量...')

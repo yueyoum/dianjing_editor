@@ -124,7 +124,7 @@ class EquipmentLevelAdmin(ImportExportModelAdmin):
         'attack', 'attack_percent',
         'defense', 'defense_percent',
         'manage', 'manage_percent',
-        'cost', 'cost_percent',
+        'operation', 'operation_percent',
     )
 
     list_filter = ('equip_id',)
