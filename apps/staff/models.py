@@ -288,6 +288,7 @@ class StaffLevelNew(models.Model):
 
     class Meta:
         db_table = 'staff_level_new'
+        ordering = ('id',)
         verbose_name = "选手等级（新）"
         verbose_name_plural = "选手等级（新）"
 
@@ -326,6 +327,7 @@ class StaffStep(models.Model):
 
     class Meta:
         db_table = 'staff_step'
+        ordering = ('id',)
         verbose_name = "选手升阶（新）"
         verbose_name_plural = "选手升阶（新）"
 
@@ -351,6 +353,7 @@ class StaffStar(models.Model):
 
     class Meta:
         db_table = 'staff_star'
+        ordering = ('id',)
         verbose_name = "选手升星（新）"
         verbose_name_plural = "选手升星（新）"
 
