@@ -151,6 +151,11 @@ class UnitNew(models.Model):
     tp = models.IntegerField(choices=TP, default=1, verbose_name="类型")
     race = models.ForeignKey('staff.StaffRace', verbose_name="种族")
 
+    unlock_club_level = models.IntegerField(default=0, verbose_name='解锁所需俱乐部等级')
+    unlock_unit_level = models.CharField(max_length=255, blank=True, verbose_name='解锁所需兵种等级',
+                                         help_text='id,level;ld,level'
+                                         )
+
     attack_tp = models.IntegerField(choices=ATTACK_TP, verbose_name='攻击类型')
     defense_tp = models.IntegerField(choices=DEFENSE_TP, verbose_name='防御类型')
     range_tp = models.IntegerField(choices=RANGE_TP, verbose_name='范围类型')
@@ -197,6 +202,18 @@ class UnitNew(models.Model):
 
     @classmethod
     def patch_fixture(cls, fixtures):
+        def parse_item_need(item_text):
+            if not item_text:
+                return []
+
+            data = []
+            for group in item_text.split(';'):
+                _id, _amount = group.split(',')
+                data.append((int(_id), int(_amount)))
+
+            return data
+
+
         decimal_fields = []
         for _fields in cls._meta.get_fields():
             if _fields.get_internal_type() == 'DecimalField':
@@ -207,4 +224,197 @@ class UnitNew(models.Model):
                 value = f['fields'][field]
                 f['fields'][field] = float(value)
 
+            if f['fields']['unlock_unit_level']:
+                unlock_unit_level = []
+                for x in f['fields']['unlock_unit_level'].split(';'):
+                    _id, _lv = x.split(',')
+                    unlock_unit_level.append((int(_id), int(_lv)))
+            else:
+                unlock_unit_level = []
+
+            f['fields']['unlock_unit_level'] = unlock_unit_level
+
+            levels = UnitLevel.objects.filter(unit_id=f['pk'])
+            """:type: list[UnitLevel]"""
+
+            levels_data = {}
+            for lv in levels:
+                levels_data[lv.unit_level] = {
+                    'hp': lv.hp,
+                    'attack': lv.attack,
+                    'defense': lv.defense,
+                    'update_item_need': parse_item_need(lv.update_item_need)
+                }
+
+            f['fields']['levels'] = levels_data
+            f['fields']['max_level'] = max(levels_data.keys())
+
+
+            steps = UnitStep.objects.filter(unit_id=f['pk'])
+            """:type: list[UnitStep]"""
+
+            steps_data = {}
+            for st in steps:
+                steps_data[st.unit_step] = {
+                    'level_limit': st.level_limit,
+                    'update_item_need': parse_item_need(st.update_item_need),
+                    'hp_percent': float(st.hp_percent),
+                    'attack_percent': float(st.attack_percent),
+                    'defense_percent': float(st.defense_percent),
+                    'hit_rate': float(st.hit_rate),
+                    'dodge_rate': float(st.dodge_rate),
+                    'crit_rate': float(st.crit_rate),
+                    'toughness_rate': float(st.toughness_rate),
+                    'crit_multiple': float(st.crit_multiple),
+                    'hurt_addition_to_terran': float(st.hurt_addition_to_terran),
+                    'hurt_addition_to_protoss': float(st.hurt_addition_to_protoss),
+                    'hurt_addition_to_zerg': float(st.hurt_addition_to_zerg),
+                    'hurt_addition_by_terran': float(st.hurt_addition_by_terran),
+                    'hurt_addition_by_protoss': float(st.hurt_addition_by_protoss),
+                    'hurt_addition_by_zerg': float(st.hurt_addition_by_zerg),
+                }
+
+            f['fields']['steps'] = steps_data
+            f['fields']['max_step'] = max(steps_data.keys())
+
         return fixtures
+
+
+class UnitLevel(models.Model):
+    id = models.IntegerField(primary_key=True)
+    unit_id = models.IntegerField(db_index=True, verbose_name='兵种ID')
+    unit_level = models.IntegerField(verbose_name='等级')
+    update_item_need = models.CharField(max_length=255, blank=True, verbose_name='升到下一级所需道具',
+                                        help_text='id,数量;id,数量...')
+
+    hp = models.IntegerField()
+    attack = models.IntegerField()
+    defense = models.IntegerField()
+
+    class Meta:
+        db_table = 'unit_level'
+        verbose_name = "兵种升级"
+        verbose_name_plural = "兵种升级"
+
+
+class UnitStep(models.Model):
+    id = models.IntegerField(primary_key=True)
+    unit_id = models.IntegerField(db_index=True, verbose_name='兵种ID')
+    unit_step = models.IntegerField(verbose_name='阶')
+
+    level_limit = models.IntegerField(verbose_name="等级限制")
+    update_item_need = models.CharField(max_length=255, blank=True, verbose_name='升到下一阶所需道具',
+                                        help_text='id,数量;id,数量...')
+
+    hp_percent = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='生命百分比')
+    attack_percent = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='攻击百分比')
+    defense_percent = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='防御百分比')
+
+    hit_rate = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='命中率')
+    dodge_rate = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='闪避率')
+    crit_rate = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='暴击率')
+    toughness_rate = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='韧性')
+    crit_multiple = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='暴击被率')
+
+    hurt_addition_to_terran = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='对人族伤害加成')
+    hurt_addition_to_protoss = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='对神族伤害加成')
+    hurt_addition_to_zerg = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='对虫族伤害加成')
+
+    hurt_addition_by_terran = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='受到人族伤害加成')
+    hurt_addition_by_protoss = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='受到神族伤害加成')
+    hurt_addition_by_zerg = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='受到虫族伤害加成')
+
+
+    class Meta:
+        db_table = 'unit_step'
+        verbose_name = "兵种升阶"
+        verbose_name_plural = "兵种升阶"
+
+
+
+class UnitLevelAddition(models.Model):
+    id = models.IntegerField(primary_key=True)
+    race = models.IntegerField()
+    level = models.IntegerField(verbose_name='等级总和')
+
+    hp_percent = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='生命百分比')
+    attack_percent = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='攻击百分比')
+    defense_percent = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='防御百分比')
+
+    hit_rate = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='命中率')
+    dodge_rate = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='闪避率')
+    crit_rate = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='暴击率')
+    toughness_rate = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='韧性')
+    crit_multiple = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='暴击被率')
+
+    hurt_addition_to_terran = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='对人族伤害加成')
+    hurt_addition_to_protoss = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='对神族伤害加成')
+    hurt_addition_to_zerg = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='对虫族伤害加成')
+
+    hurt_addition_by_terran = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='受到人族伤害加成')
+    hurt_addition_by_protoss = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='受到神族伤害加成')
+    hurt_addition_by_zerg = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='受到虫族伤害加成')
+
+
+    class Meta:
+        db_table = 'unit_level_addition'
+        verbose_name = "种族等级加成"
+        verbose_name_plural = "种族等级加成"
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        decimal_fields = []
+        for _fields in cls._meta.get_fields():
+            if _fields.get_internal_type() == 'DecimalField':
+                decimal_fields.append(_fields.column)
+
+        for f in fixture:
+            for field in decimal_fields:
+                value = f['fields'][field]
+                f['fields'][field] = float(value)
+
+        return fixture
+
+
+class UnitStepAddition(models.Model):
+    id = models.IntegerField(primary_key=True)
+    race = models.IntegerField()
+    step = models.IntegerField(verbose_name='等级总和')
+
+    hp_percent = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='生命百分比')
+    attack_percent = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='攻击百分比')
+    defense_percent = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='防御百分比')
+
+    hit_rate = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='命中率')
+    dodge_rate = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='闪避率')
+    crit_rate = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='暴击率')
+    toughness_rate = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='韧性')
+    crit_multiple = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='暴击被率')
+
+    hurt_addition_to_terran = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='对人族伤害加成')
+    hurt_addition_to_protoss = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='对神族伤害加成')
+    hurt_addition_to_zerg = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='对虫族伤害加成')
+
+    hurt_addition_by_terran = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='受到人族伤害加成')
+    hurt_addition_by_protoss = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='受到神族伤害加成')
+    hurt_addition_by_zerg = models.DecimalField(max_digits=8, decimal_places=4, verbose_name='受到虫族伤害加成')
+
+
+    class Meta:
+        db_table = 'unit_step_addition'
+        verbose_name = "种族品阶加成"
+        verbose_name_plural = "种族品阶加成"
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        decimal_fields = []
+        for _fields in cls._meta.get_fields():
+            if _fields.get_internal_type() == 'DecimalField':
+                decimal_fields.append(_fields.column)
+
+        for f in fixture:
+            for field in decimal_fields:
+                value = f['fields'][field]
+                f['fields'][field] = float(value)
+
+        return fixture

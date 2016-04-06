@@ -320,7 +320,7 @@ class StaffStep(models.Model):
 
     talent_skill = models.IntegerField()
 
-    update_item_need = models.CharField(max_length=255, blank=True, verbose_name='升到本阶所需道具',
+    update_item_need = models.CharField(max_length=255, blank=True, verbose_name='升到下一阶所需道具',
                                         help_text='id,数量;id,数量...')
 
     level_limit = models.IntegerField(verbose_name='选手等级限制', null=True, blank=True)
