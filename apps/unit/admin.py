@@ -2,7 +2,7 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from apps.unit.models import Unit, Policy, UnitDes, UnitEffect, UnitNew, UnitLevel, UnitStep, UnitLevelAddition, UnitStepAddition
+from apps.unit.models import Unit, Policy, UnitDes, UnitEffect, UnitNew, UnitLevel, UnitStep, UnitLevelAddition, UnitStepAddition, UnitUnLock
 
 @admin.register(Policy)
 class PolicyAdmin(admin.ModelAdmin):
@@ -43,6 +43,10 @@ class ResourceUnitNew(resources.ModelResource):
     class Meta:
         model = UnitNew
 
+class ResourceUnitUnLock(resources.ModelResource):
+    class Meta:
+        model = UnitUnLock
+
 class ResourceUnitLevel(resources.ModelResource):
     class Meta:
         model = UnitLevel
@@ -67,6 +71,14 @@ class AdminUnitNew(ImportExportModelAdmin):
 
     list_display = (
         'id', 'name', 'model', 'icon', 'tp', 'race',
+    )
+
+@admin.register(UnitUnLock)
+class AdminUnitUnLock(ImportExportModelAdmin):
+    resource_class = ResourceUnitUnLock
+
+    list_display = (
+        'id', 'need_club_level', 'need_unit_level'
     )
 
 

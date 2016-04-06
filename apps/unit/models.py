@@ -151,11 +151,6 @@ class UnitNew(models.Model):
     tp = models.IntegerField(choices=TP, default=1, verbose_name="类型")
     race = models.ForeignKey('staff.StaffRace', verbose_name="种族")
 
-    unlock_club_level = models.IntegerField(default=0, verbose_name='解锁所需俱乐部等级')
-    unlock_unit_level = models.CharField(max_length=255, blank=True, verbose_name='解锁所需兵种等级',
-                                         help_text='id,level;ld,level'
-                                         )
-
     attack_tp = models.IntegerField(choices=ATTACK_TP, verbose_name='攻击类型')
     defense_tp = models.IntegerField(choices=DEFENSE_TP, verbose_name='防御类型')
     range_tp = models.IntegerField(choices=RANGE_TP, verbose_name='范围类型')
@@ -224,15 +219,6 @@ class UnitNew(models.Model):
                 value = f['fields'][field]
                 f['fields'][field] = float(value)
 
-            if f['fields']['unlock_unit_level']:
-                unlock_unit_level = []
-                for x in f['fields']['unlock_unit_level'].split(';'):
-                    _id, _lv = x.split(',')
-                    unlock_unit_level.append((int(_id), int(_lv)))
-            else:
-                unlock_unit_level = []
-
-            f['fields']['unlock_unit_level'] = unlock_unit_level
 
             levels = UnitLevel.objects.filter(unit_id=f['pk'])
             """:type: list[UnitLevel]"""
@@ -278,6 +264,35 @@ class UnitNew(models.Model):
             f['fields']['max_step'] = max(steps_data.keys())
 
         return fixtures
+
+
+class UnitUnLock(models.Model):
+    id = models.IntegerField(primary_key=True)
+    need_club_level = models.IntegerField(default=0, verbose_name='解锁所需俱乐部等级')
+    need_unit_level = models.CharField(max_length=255, blank=True, verbose_name='解锁所需兵种等级',
+                                         help_text='id,level;ld,level'
+                                         )
+
+    class Meta:
+        db_table = 'unit_unlock'
+        verbose_name = "兵种解锁"
+        verbose_name_plural = "兵种解锁"
+
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            if f['fields']['need_unit_level']:
+                need_unit_level = []
+                for x in f['fields']['need_unit_level'].split(';'):
+                    _id, _lv = x.split(',')
+                    need_unit_level.append((int(_id), int(_lv)))
+            else:
+                need_unit_level = []
+
+            f['fields']['need_unit_level'] = need_unit_level
+
+        return fixture
 
 
 class UnitLevel(models.Model):
@@ -329,7 +344,6 @@ class UnitStep(models.Model):
         db_table = 'unit_step'
         verbose_name = "兵种升阶"
         verbose_name_plural = "兵种升阶"
-
 
 
 class UnitLevelAddition(models.Model):
