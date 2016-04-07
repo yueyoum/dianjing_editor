@@ -39,6 +39,7 @@ MODELS = (
     ('unit.UnitNew', 'unit_new.json'),
     ('unit.UnitLevelAddition', 'unit_level_addition.json'),
     ('unit.UnitStepAddition', 'unit_step_addition.json'),
+    ('unit.UnitUnLock', 'unit_unlock.json'),
     ('skill.SkillType', 'skill_type.json'),
     ('skill.SkillCategory', 'skill_category.json'),
     ('skill.SkillAddition', 'skill_addition.json'),
