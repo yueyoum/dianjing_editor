@@ -233,7 +233,10 @@ class UnitNew(models.Model):
                 }
 
             f['fields']['levels'] = levels_data
-            f['fields']['max_level'] = max(levels_data.keys())
+            if levels_data:
+                f['fields']['max_level'] = max(levels_data.keys())
+            else:
+                f['fields']['max_level'] = 0
 
 
             steps = UnitStep.objects.filter(unit_id=f['pk'])
@@ -261,7 +264,10 @@ class UnitNew(models.Model):
                 }
 
             f['fields']['steps'] = steps_data
-            f['fields']['max_step'] = max(steps_data.keys())
+            if steps_data:
+                f['fields']['max_step'] = max(steps_data.keys())
+            else:
+                f['fields']['max_step'] = 0
 
         return fixtures
 
