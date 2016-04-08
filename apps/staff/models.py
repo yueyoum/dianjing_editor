@@ -375,3 +375,66 @@ class StaffStar(models.Model):
             f['fields']['operation_percent'] = float(f['fields']['operation_percent'])
 
         return fixture
+
+
+class StaffEquipmentQualityAddition(models.Model):
+    id = models.IntegerField(primary_key=True)
+    des = models.TextField(blank=True, verbose_name="说明")
+    attack = models.IntegerField()
+    attack_percent = models.DecimalField(max_digits=8, decimal_places=4)
+
+    defense = models.IntegerField()
+    defense_percent = models.DecimalField(max_digits=8, decimal_places=4)
+
+    manage = models.IntegerField()
+    manage_percent = models.DecimalField(max_digits=8, decimal_places=4)
+
+    operation = models.IntegerField()
+    operation_percent = models.DecimalField(max_digits=8, decimal_places=4)
+
+    class Meta:
+        db_table = 'staff_equipment_quality_addition'
+        ordering = ('id',)
+        verbose_name = "装备品质奖励"
+        verbose_name_plural = "装备品质奖励"
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            f['fields']['attack_percent'] = float(f['fields']['attack_percent'])
+            f['fields']['defense_percent'] = float(f['fields']['defense_percent'])
+            f['fields']['manage_percent'] = float(f['fields']['manage_percent'])
+            f['fields']['operation_percent'] = float(f['fields']['operation_percent'])
+
+        return fixture
+
+class StaffEquipmentLevelAddition(models.Model):
+    id = models.IntegerField(primary_key=True)
+    des = models.TextField(blank=True, verbose_name="说明")
+    attack = models.IntegerField()
+    attack_percent = models.DecimalField(max_digits=8, decimal_places=4)
+
+    defense = models.IntegerField()
+    defense_percent = models.DecimalField(max_digits=8, decimal_places=4)
+
+    manage = models.IntegerField()
+    manage_percent = models.DecimalField(max_digits=8, decimal_places=4)
+
+    operation = models.IntegerField()
+    operation_percent = models.DecimalField(max_digits=8, decimal_places=4)
+
+    class Meta:
+        db_table = 'staff_equipment_level_addition'
+        ordering = ('id',)
+        verbose_name = "装备等级奖励"
+        verbose_name_plural = "装备等级奖励"
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            f['fields']['attack_percent'] = float(f['fields']['attack_percent'])
+            f['fields']['defense_percent'] = float(f['fields']['defense_percent'])
+            f['fields']['manage_percent'] = float(f['fields']['manage_percent'])
+            f['fields']['operation_percent'] = float(f['fields']['operation_percent'])
+
+        return fixture

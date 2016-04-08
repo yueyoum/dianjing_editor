@@ -29,6 +29,8 @@ MODELS = (
     ('staff.StaffNew', 'staff_new.json'),
     ('staff.StaffLevelNew', 'staff_level_new.json'),
     ('staff.StaffStar', 'staff_star.json'),
+    ('staff.StaffEquipmentQualityAddition', 'staff_equip_quality_addition.json'),
+    ('staff.StaffEquipmentLevelAddition', 'staff_equip_level_addition.json'),
     ('training.TrainingProperty', 'training_property.json'),
     ('npc.NPCClub', 'npc_club.json'),
     ('npc.NPCClubName', 'npc_club_name.json'),

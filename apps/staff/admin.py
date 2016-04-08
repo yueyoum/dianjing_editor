@@ -15,6 +15,8 @@ from apps.staff.models import (
     StaffLevelNew,
     StaffStep,
     StaffStar,
+    StaffEquipmentLevelAddition,
+    StaffEquipmentQualityAddition,
 )
 
 
@@ -104,6 +106,14 @@ class ResourceStaffStar(resources.ModelResource):
     class Meta:
         model = StaffStar
 
+class ResourceEquipQuality(resources.ModelResource):
+    class Meta:
+        model = StaffEquipmentQualityAddition
+
+class ResourceEquipLevel(resources.ModelResource):
+    class Meta:
+        model = StaffEquipmentLevelAddition
+
 
 @admin.register(StaffNew)
 class AdminStaffNew(ImportExportModelAdmin):
@@ -133,3 +143,15 @@ class AdminStaffStar(ImportExportModelAdmin):
     resource_class = ResourceStaffStar
 
     list_display = ('id', 'exp', 'need_item_id', 'need_item_amount')
+
+@admin.register(StaffEquipmentQualityAddition)
+class AdminEquipQuality(ImportExportModelAdmin):
+    resource_class = ResourceEquipQuality
+
+    list_display = ('id', 'des',)
+
+@admin.register(StaffEquipmentLevelAddition)
+class AdminLevelQuality(ImportExportModelAdmin):
+    resource_class = ResourceEquipLevel
+
+    list_display = ('id', 'des',)
