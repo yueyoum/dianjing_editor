@@ -65,7 +65,7 @@ class StaffRecruit(models.Model):
             staff_settings = []
             for ss in s.statff_settings.all():
                 staff_settings.append({
-                    'quality': ss.quality.id,
+                    'quality': ss.quality,
                     'first_amount': ss.first_amount,
                     'lucky_amount': ss.lucky_amount,
                     'normal_amount': ss.normal_amount

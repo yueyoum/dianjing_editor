@@ -33,9 +33,7 @@ MODELS = (
     ('npc.NPCClub', 'npc_club.json'),
     ('npc.NPCClubName', 'npc_club_name.json'),
     ('npc.NPCManagerName', 'npc_manager_name.json'),
-    ('unit.Unit', 'unit.json'),
-    ('unit.Policy', 'policy.json'),
-    ('unit.UnitEffect', 'unit_effect.json'),
+
     ('unit.UnitNew', 'unit_new.json'),
     ('unit.UnitLevelAddition', 'unit_level_addition.json'),
     ('unit.UnitStepAddition', 'unit_step_addition.json'),
