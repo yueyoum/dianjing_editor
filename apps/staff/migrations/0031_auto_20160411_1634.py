@@ -31,6 +31,10 @@ class Migration(migrations.Migration):
             name='id',
             field=models.IntegerField(primary_key=True, serialize=False),
         ),
+        migrations.AlterUniqueTogether(
+            name='staffrecruitsettings',
+            unique_together=set([]),
+        ),
         migrations.AlterField(
             model_name='staffrecruitsettings',
             name='quality',

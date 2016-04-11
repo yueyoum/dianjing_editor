@@ -35,7 +35,6 @@ class StaffRecruitSettings(models.Model):
 
     class Meta:
         db_table = 'staff_recruit_settings'
-        unique_together = (('recruit', 'quality'),)
 
 
 class StaffRecruit(models.Model):
