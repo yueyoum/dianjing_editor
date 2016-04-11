@@ -5,9 +5,6 @@ from apps.building.models import (
     BuildingEffect,
     BuildingEffectInfo,
     BuildingLevels,
-    Shop,
-    Sponsor,
-    BusinessBroadcastReward,
 )
 
 
@@ -37,25 +34,3 @@ class BuildingAdmin(admin.ModelAdmin):
 
     def LevelAmount(self, obj):
         return obj.levels_info.all().count()
-
-
-@admin.register(Shop)
-class ShopAdmin(admin.ModelAdmin):
-    list_display = (
-        'id', 'name', 'unlock_type', 'unlock_value', 'goods', 'goods_max_amount',
-        'sells_per_hour',
-        'mail_title', 'mail_content', 'des',
-    )
-
-
-@admin.register(Sponsor)
-class SponsorAdmin(admin.ModelAdmin):
-    list_display = (
-        'id', 'name', 'icon', 'condition', 'total_days',
-        'income', 'income_des', 'condition_des',
-        'mail_title', 'mail_content',
-    )
-
-@admin.register(BusinessBroadcastReward)
-class BusinessBroadcastRewardAdmin(admin.ModelAdmin):
-    list_display = ('id', 'amount', 'prob')

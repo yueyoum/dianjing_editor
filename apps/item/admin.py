@@ -4,7 +4,7 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from apps.item.models import Item, ItemQuality, Equipment, ItemNew, ItemUse, ItemMerge, EquipmentBase, EquipmentLevel, ItemExp
+from apps.item.models import ItemQuality, ItemNew, ItemUse, ItemMerge, EquipmentBase, EquipmentLevel, ItemExp
 
 
 @admin.register(ItemQuality)
@@ -14,68 +14,35 @@ class ItemQualityAdmin(admin.ModelAdmin):
     )
 
 
-class ItemResource(resources.ModelResource):
-    class Meta:
-        model = Item
-
-@admin.register(Item)
-class ItemAdmin(ImportExportModelAdmin):
-    resource_class = ItemResource
-
-    list_display = (
-        'id', 'tp', 'group_id', 'name', 'icon', 'quality',
-        'buy_type', 'buy_cost',
-        'sell_gold',
-        'order_value',
-        'value',
-    )
-
-    list_filter = ('tp',)
-    change_list_template = 'item_change_list.html'
-
-
-class EquipmentResource(resources.ModelResource):
-    class Meta:
-        model = Equipment
-
-@admin.register(Equipment)
-class EquipmentAdmin(ImportExportModelAdmin):
-    resource_class = EquipmentResource
-
-    list_display = (
-        'id',
-        'need_club_level',
-        'template_0',
-        'template_1', 'template_2'
-    )
-
-    change_list_template = 'equipment_change_list.html'
-
-
-
 class ResourceItemNew(resources.ModelResource):
     class Meta:
         model = ItemNew
+
 
 class ResourceItemUse(resources.ModelResource):
     class Meta:
         model = ItemUse
 
+
 class ResourceItemMerge(resources.ModelResource):
     class Meta:
         model = ItemMerge
+
 
 class ResourceEquipmentBase(resources.ModelResource):
     class Meta:
         model = EquipmentBase
 
+
 class ResourceEquipmentLevel(resources.ModelResource):
     class Meta:
         model = EquipmentLevel
 
+
 class ResourceItemExp(resources.ModelResource):
     class Meta:
         model = ItemExp
+
 
 @admin.register(ItemNew)
 class ItemNewAdmin(ImportExportModelAdmin):
@@ -96,6 +63,7 @@ class ItemUseAdmin(ImportExportModelAdmin):
         'id', 'use_item_id', 'use_item_amount', 'result'
     )
 
+
 @admin.register(ItemMerge)
 class ItemMergeAdmin(ImportExportModelAdmin):
     resource_class = ResourceItemMerge
@@ -103,6 +71,7 @@ class ItemMergeAdmin(ImportExportModelAdmin):
     list_display = (
         'id', 'amount', 'to_id', 'renown', 'crystal'
     )
+
 
 @admin.register(EquipmentBase)
 class EquipmentBaseAdmin(ImportExportModelAdmin):
@@ -113,6 +82,7 @@ class EquipmentBaseAdmin(ImportExportModelAdmin):
     )
 
     list_filter = ('tp',)
+
 
 @admin.register(EquipmentLevel)
 class EquipmentLevelAdmin(ImportExportModelAdmin):
@@ -128,6 +98,7 @@ class EquipmentLevelAdmin(ImportExportModelAdmin):
     )
 
     list_filter = ('equip_id',)
+
 
 @admin.register(ItemExp)
 class AdminItemExp(ImportExportModelAdmin):
