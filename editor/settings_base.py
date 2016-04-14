@@ -66,6 +66,7 @@ INSTALLED_APPS = (
     'apps.conversation',
     'apps.item',
     'apps.auction',
+    'apps.talent',
 )
 
 MIDDLEWARE_CLASSES = (
