@@ -13,17 +13,17 @@ class Buff(models.Model):
         verbose_name = 'Buff'
         verbose_name_plural = 'Buff'
 
-    @classmethod
-    def patch_fixture(cls, fixture):
-        for f in fixture:
-            effect = f['fields']['effect']
-            effect_parsed = []
-            for x in effect.split(';'):
-                _tp, _value  = x.split(',')
-                effect_parsed.append((int(_tp), float(_value)))
-
-            f['fields']['effect'] = effect_parsed
-        return fixture
+    # @classmethod
+    # def patch_fixture(cls, fixture):
+    #     for f in fixture:
+    #         effect = f['fields']['effect']
+    #         effect_parsed = []
+    #         for x in effect.split(';'):
+    #             _tp, _value  = x.split(',')
+    #             effect_parsed.append((int(_tp), float(_value)))
+    #
+    #         f['fields']['effect'] = effect_parsed
+    #     return fixture
 
 
 class TalentSkill(models.Model):
