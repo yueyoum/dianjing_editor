@@ -6,8 +6,7 @@ class Buff(models.Model):
     id = models.IntegerField(primary_key=True)
     tp = models.IntegerField()
     level = models.IntegerField()
-    effect = models.IntegerField()
-    value = models.DecimalField(max_digits=10, decimal_places=4)
+    effect = models.CharField(max_length=255)
 
     class Meta:
         db_table = 'buff'
@@ -17,8 +16,13 @@ class Buff(models.Model):
     @classmethod
     def patch_fixture(cls, fixture):
         for f in fixture:
-            f['fields']['value'] = float(f['fields']['value'])
+            effect = f['fields']['effect']
+            effect_parsed = []
+            for x in effect.split(';'):
+                _tp, _value  = x.split(',')
+                effect_parsed.append((int(_tp), float(_value)))
 
+            f['fields']['effect'] = effect_parsed
         return fixture
 
 
