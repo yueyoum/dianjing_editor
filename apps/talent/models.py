@@ -31,13 +31,12 @@ class Talent(models.Model):
 
     @classmethod
     def patch_fixture(cls, fixture):
-        import re
         for f in fixture:
-            pairs = re.split(";", f['up_need'])
-            need_item = {}
-            for pair in pairs:
-                letter = pair.split(',')
-                need_item[letter[0]] = int(letter[1])
+            need_item = []
+            if f['up_need']:
+                for pair in f['up_need'].split(";"):
+                    item_id, amounts = pair.split(',')
+                    need_item.append((int(item_id), int(amounts)))
 
             f['up_need'] = need_item
         return fixture
