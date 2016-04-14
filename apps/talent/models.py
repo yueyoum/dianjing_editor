@@ -2,18 +2,13 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from django.core.exceptions import ValidationError
-
-from apps.skill.models import  TalentSkill
-from apps.item.models import ItemNew
-
 # Create your models here.
 
 
 TALENT_TYPE = (
         (1, "人族天赋"),
-        (2, "虫族天赋"),
-        (3, "神族天赋"),
+        (2, "神族天赋"),
+        (3, "虫族天赋"),
     )
 
 
@@ -21,7 +16,7 @@ class Talent(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="天赋ID")
     tp = models.IntegerField(choices=TALENT_TYPE, verbose_name="天赋类型")
     name = models.CharField(max_length=32, verbose_name="天赋名")
-    effect_id = models.ForeignKey(TalentSkill, null=True, verbose_name="天赋效果")
+    effect_id = models.IntegerField(verbose_name="天赋效果")
     position = models.IntegerField(verbose_name="天赋位置")
     unlock = models.IntegerField(verbose_name="前置条件")
     up_need = models.CharField(max_length=32, verbose_name="消耗道具",
@@ -34,14 +29,17 @@ class Talent(models.Model):
         verbose_name = "天赋"
         verbose_name_plural = "天赋"
 
-    def clean(self):
+    @classmethod
+    def patch_fixture(cls, fixture):
         import re
-        pairs = re.split(';', self.up_need)
-        for pair in pairs:
-            if not re.match('\d+,\d+', pair):
-                raise ValidationError("消耗道具 填写错误!".format(self.up_need))
+        for f in fixture:
+            pairs = re.split(";", f['up_need'])
+            need_item = {}
+            for pair in pairs:
+                letter = pair.split(',')
+                need_item[letter[0]] = int(letter[1])
 
-            item_id = pair.split(',')[0]
-            if not ItemNew.objects.filter(id=int(item_id)).exists():
-                raise ValidationError("物品 {0} 不存在!".format(item_id))
+            f['up_need'] = need_item
+        return fixture
+
 
