@@ -5,6 +5,7 @@ from django.db import models
 from django.core.exceptions import ValidationError
 
 from apps.skill.models import  TalentSkill
+from apps.item.models import ItemNew
 
 # Create your models here.
 
@@ -34,5 +35,13 @@ class Talent(models.Model):
         verbose_name_plural = "天赋"
 
     def clean(self):
-        if not TalentSkill.objects.filter(id=int(self.unlock)).exists():
-            raise ValidationError("前置条件 {0} 不存在!".format(self.unlock))
+        import re
+        pairs = re.split(';', self.up_need)
+        for pair in pairs:
+            if not re.match('\d+,\d+', pair):
+                raise ValidationError("消耗道具 填写错误!".format(self.up_need))
+
+            item_id = pair.split(',')[0]
+            if not ItemNew.objects.filter(id=int(item_id)).exists():
+                raise ValidationError("物品 {0} 不存在!".format(item_id))
+
