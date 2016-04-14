@@ -37,7 +37,7 @@ class LadderScoreStore(models.Model):
 
     score = models.IntegerField(verbose_name="所需积分")
 
-    item = models.ForeignKey('item.Item', verbose_name='物品')
+    item = models.IntegerField(default=0)
     item_amount = models.IntegerField(default=1, verbose_name='物品数量')
 
     class Meta:

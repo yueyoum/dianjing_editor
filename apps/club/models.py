@@ -27,13 +27,3 @@ class ClubLevel(models.Model):
         db_table = 'club_level'
         verbose_name = "俱乐部等级"
         verbose_name_plural = "俱乐部等级"
-
-class TibuSlot(models.Model):
-    id = models.IntegerField(primary_key=True, verbose_name="数量")
-    need_club_level = models.IntegerField(verbose_name='所需俱乐部等级')
-    des = models.TextField(verbose_name='描述')
-
-    class Meta:
-        db_table = 'tibu_slot'
-        verbose_name = '替补格子'
-        verbose_name_plural = '替补格子'

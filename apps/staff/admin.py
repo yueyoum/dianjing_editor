@@ -3,52 +3,22 @@ from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
 from apps.staff.models import (
-    StaffQuality,
     StaffRace,
-    StaffStatus,
-    Staff,
     StaffHot,
     StaffRecruitSettings,
     StaffRecruit,
-    StaffLevel,
     StaffNew,
     StaffLevelNew,
     StaffStep,
     StaffStar,
+    StaffEquipmentLevelAddition,
+    StaffEquipmentQualityAddition,
 )
-
-
-class StaffResource(resources.ModelResource):
-    class Meta:
-        model = Staff
 
 
 @admin.register(StaffRace)
 class StuffRaceAdmin(admin.ModelAdmin):
     list_display = ('id', 'icon', 'name')
-
-
-@admin.register(StaffQuality)
-class StuffQualityAdmin(admin.ModelAdmin):
-    list_display = ('id', 'color', 'icon', 'background', 'background_half')
-
-
-@admin.register(StaffStatus)
-class StuffStatusAdmin(admin.ModelAdmin):
-    list_display = ('id', 'icon', 'name', 'value', 'des')
-
-
-@admin.register(Staff)
-class StuffAdmin(ImportExportModelAdmin):
-    resource_class = StaffResource
-
-    list_display = (
-        'id', 'name', 'avatar', 'picture', 'nation', 'gender', 'race', 'quality',
-        'buy_type', 'buy_cost', 'can_recruit', 'salary',
-        'skill_ids', 'qianban_ids'
-    )
-
-    list_filter = ('race', 'quality')
 
 
 @admin.register(StaffHot)
@@ -72,37 +42,34 @@ class StaffRecruitAdmin(admin.ModelAdmin):
     inlines = [StaffRecruitSettingsInline, ]
 
 
-@admin.register(StaffLevel)
-class StaffLevelAdmin(admin.ModelAdmin):
-    list_display = (
-        'id', 'quality_C', 'quality_B', 'quality_A',
-        'quality_S', 'quality_SS'
-    )
-
-    fields = (
-        'id',
-        'quality_C',
-        'quality_B',
-        'quality_A',
-        'quality_S',
-        'quality_SS',
-    )
-
 class ResourceStaffNew(resources.ModelResource):
     class Meta:
         model = StaffNew
+
 
 class ResourceStaffLevelNew(resources.ModelResource):
     class Meta:
         model = StaffLevelNew
 
+
 class ResourceStaffStep(resources.ModelResource):
     class Meta:
         model = StaffStep
 
+
 class ResourceStaffStar(resources.ModelResource):
     class Meta:
         model = StaffStar
+
+
+class ResourceEquipQuality(resources.ModelResource):
+    class Meta:
+        model = StaffEquipmentQualityAddition
+
+
+class ResourceEquipLevel(resources.ModelResource):
+    class Meta:
+        model = StaffEquipmentLevelAddition
 
 
 @admin.register(StaffNew)
@@ -133,3 +100,17 @@ class AdminStaffStar(ImportExportModelAdmin):
     resource_class = ResourceStaffStar
 
     list_display = ('id', 'exp', 'need_item_id', 'need_item_amount')
+
+
+@admin.register(StaffEquipmentQualityAddition)
+class AdminEquipQuality(ImportExportModelAdmin):
+    resource_class = ResourceEquipQuality
+
+    list_display = ('id', 'des',)
+
+
+@admin.register(StaffEquipmentLevelAddition)
+class AdminLevelQuality(ImportExportModelAdmin):
+    resource_class = ResourceEquipLevel
+
+    list_display = ('id', 'des',)

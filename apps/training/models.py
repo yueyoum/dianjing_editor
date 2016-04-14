@@ -43,19 +43,6 @@ class TrainingProperty(AbstractTraining):
         verbose_name = "属性训练"
         verbose_name_plural = "属性训练"
 
-    def clean(self):
-        from apps.item.models import Item
-        for item in self.need_items.split(','):
-            try:
-                item_id, item_amount = item.split(':')
-                item_id = int(item_id)
-                item_amount = int(item_amount)
-            except:
-                raise ValidationError("所需物品填错了")
-
-            if not Item.objects.filter(id=item_id).exists():
-                raise ValidationError("物品{0}不存在".format(item_id))
-
     @classmethod
     def patch_fixture(cls, fixture):
         for f in fixture:
