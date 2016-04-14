@@ -84,6 +84,8 @@ MODELS = (
     ('item.ItemMerge', 'item_merge.json'),
     ('item.EquipmentBase', 'equipment_new.json'),
     ('item.ItemExp', 'item_exp.json'),
+
+    ('talent.Talent', 'talent.json'),
 )
 
 
