@@ -264,16 +264,15 @@ class _Fixture(object):
 
         if race in self.race:
             if value in self.race[race]:
-                self.race[race][value] = self.make_data(f)
+                raise ValueError()
             else:
-                self.race[race] = {value: self.make_data(f)}
+                self.race[race][value] = self.make_data(f)
         else:
             self.race[race] = {value: self.make_data(f)}
 
-
     def to_fixture(self):
         fixtures = []
-        for k, v in self.race:
+        for k, v in self.race.iteritems():
             fixture = {}
             fixture['pk'] = k
             fixture['model'] = self.model
