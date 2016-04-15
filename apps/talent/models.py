@@ -13,6 +13,7 @@ TALENT_TYPE = (
 
 class Talent(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="天赋ID")
+    next_id = models.IntegerField(verbose_name="下一个级天赋ID")
     tp = models.IntegerField(choices=TALENT_TYPE, verbose_name="天赋类型")
     name = models.CharField(max_length=32, verbose_name="天赋名")
     effect_id = models.IntegerField(verbose_name="天赋效果")
