@@ -242,6 +242,7 @@ class _Fixture(object):
 
     def make_data(self, f):
         return {
+            self.key: f['fields'][self.key],
             'hp_percent': float(f['fields']['hp_percent']),
             'attack_percent': float(f['fields']['attack_percent']),
             'defense_percent': float(f['fields']['defense_percent']),
@@ -266,13 +267,15 @@ class _Fixture(object):
             if value in self.race[race]:
                 raise ValueError()
             else:
-                self.race[race][value] = self.make_data(f)
+                self.race[race].append(self.make_data(f))
         else:
-            self.race[race] = {value: self.make_data(f)}
+            self.race[race] = [self.make_data(f)]
 
     def to_fixture(self):
         fixtures = []
         for k, v in self.race.iteritems():
+            v.sort(key=lambda item: item[self.key])
+            
             fixture = {}
             fixture['pk'] = k
             fixture['model'] = self.model
