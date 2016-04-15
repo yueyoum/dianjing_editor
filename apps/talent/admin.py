@@ -19,5 +19,5 @@ class TalentAdmin(ImportExportModelAdmin):
 
     list_display = (
             "id", "tp", "next_id", "position", "name", "des",
-            "image", "unlock", "up_need", "effect_id", "effect_lv",
+            "image", "unlock", "up_need", "effect_id",
     )
