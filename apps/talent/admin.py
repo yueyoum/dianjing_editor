@@ -18,6 +18,6 @@ class TalentAdmin(ImportExportModelAdmin):
     resource_class = ResourceTalent
 
     list_display = (
-            "id", "tp", "position", "name", "des",
-            "image", "unlock", "up_need", "effect_id",
+            "id", "tp", "next_id", "position", "name", "des",
+            "image", "unlock", "up_need", "effect_id", "effect_lv",
     )

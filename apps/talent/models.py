@@ -17,6 +17,7 @@ class Talent(models.Model):
     tp = models.IntegerField(choices=TALENT_TYPE, verbose_name="天赋类型")
     name = models.CharField(max_length=32, verbose_name="天赋名")
     effect_id = models.IntegerField(verbose_name="天赋效果")
+    effect_lv = models.IntegerField(verbose_name="天赋等级")
     position = models.IntegerField(verbose_name="天赋位置")
     unlock = models.IntegerField(verbose_name="前置条件")
     up_need = models.CharField(max_length=32, verbose_name="消耗道具",
