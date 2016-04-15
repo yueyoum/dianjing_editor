@@ -19,8 +19,7 @@ class Talent(models.Model):
     effect_id = models.IntegerField(verbose_name="天赋效果")
     position = models.IntegerField(verbose_name="天赋位置")
     unlock = models.IntegerField(verbose_name="前置条件")
-    up_need = models.CharField(max_length=32, verbose_name="消耗道具",
-                               help_text='id,amounts;ld,amounts')
+    up_need = models.IntegerField(verbose_name="消耗天赋点数")
     image = models.CharField(max_length=255, verbose_name="天赋图片")
     des = models.TextField(verbose_name="天赋描述")
 
@@ -29,16 +28,16 @@ class Talent(models.Model):
         verbose_name = "天赋"
         verbose_name_plural = "天赋"
 
-    @classmethod
-    def patch_fixture(cls, fixture):
-        for f in fixture:
-            need_item = []
-            if f['fields']['up_need']:
-                for pair in f['fields']['up_need'].split(";"):
-                    item_id, amounts = pair.split(',')
-                    need_item.append((int(item_id), int(amounts)))
-
-            f['fields']['up_need'] = need_item
-        return fixture
+    # @classmethod
+    # def patch_fixture(cls, fixture):
+    #     for f in fixture:
+    #         need_item = []
+    #         if f['fields']['up_need']:
+    #             for pair in f['fields']['up_need'].split(";"):
+    #                 item_id, amounts = pair.split(',')
+    #                 need_item.append((int(item_id), int(amounts)))
+    #
+    #         f['fields']['up_need'] = need_item
+    #     return fixture
 
 
