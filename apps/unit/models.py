@@ -233,6 +233,59 @@ class UnitStep(models.Model):
         verbose_name_plural = "兵种升阶"
 
 
+
+class _Fixture(object):
+    def __init__(self, model_name, key):
+        self.race = {}
+        self.model = model_name
+        self.key = key
+
+    def make_data(self, f):
+        return {
+            'hp_percent': float(f['fields']['hp_percent']),
+            'attack_percent': float(f['fields']['attack_percent']),
+            'defense_percent': float(f['fields']['defense_percent']),
+            'hit_rate': float(f['fields']['hit_rate']),
+            'dodge_rate': float(f['fields']['dodge_rate']),
+            'crit_rate': float(f['fields']['crit_rate']),
+            'toughness_rate': float(f['fields']['toughness_rate']),
+            'crit_multiple': float(f['fields']['crit_multiple']),
+            'hurt_addition_to_terran': float(f['fields']['hurt_addition_to_terran']),
+            'hurt_addition_to_protoss': float(f['fields']['hurt_addition_to_protoss']),
+            'hurt_addition_to_zerg': float(f['fields']['hurt_addition_to_zerg']),
+            'hurt_addition_by_terran': float(f['fields']['hurt_addition_by_terran']),
+            'hurt_addition_by_protoss': float(f['fields']['hurt_addition_by_protoss']),
+            'hurt_addition_by_zerg': float(f['fields']['hurt_addition_by_zerg']),
+        }
+
+    def add(self, f):
+        race = f['fields']['race']
+        value = f['fields'][self.key]
+
+        if race in self.race:
+            if value in self.race[race]:
+                self.race[race][value] = self.make_data(f)
+            else:
+                self.race[race] = {value: self.make_data(f)}
+        else:
+            self.race[race] = {value: self.make_data(f)}
+
+
+    def to_fixture(self):
+        fixtures = []
+        for k, v in self.race:
+            fixture = {}
+            fixture['pk'] = k
+            fixture['model'] = self.model
+            fixture['fields'] = {
+                'addition': v
+            }
+
+            fixtures.append(fixture)
+
+        return fixtures
+
+
 class UnitLevelAddition(models.Model):
     id = models.IntegerField(primary_key=True)
     race = models.IntegerField()
@@ -264,17 +317,11 @@ class UnitLevelAddition(models.Model):
 
     @classmethod
     def patch_fixture(cls, fixture):
-        decimal_fields = []
-        for _fields in cls._meta.get_fields():
-            if _fields.get_internal_type() == 'DecimalField':
-                decimal_fields.append(_fields.column)
+        f = _Fixture('unit.unitleveladdition', 'level')
+        for _f in fixture:
+            f.add(_f)
 
-        for f in fixture:
-            for field in decimal_fields:
-                value = f['fields'][field]
-                f['fields'][field] = float(value)
-
-        return fixture
+        return f.to_fixture()
 
 
 class UnitStepAddition(models.Model):
@@ -308,14 +355,8 @@ class UnitStepAddition(models.Model):
 
     @classmethod
     def patch_fixture(cls, fixture):
-        decimal_fields = []
-        for _fields in cls._meta.get_fields():
-            if _fields.get_internal_type() == 'DecimalField':
-                decimal_fields.append(_fields.column)
+        f = _Fixture('unit.unitstepaddition', 'step')
+        for _f in fixture:
+            f.add(_f)
 
-        for f in fixture:
-            for field in decimal_fields:
-                value = f['fields'][field]
-                f['fields'][field] = float(value)
-
-        return fixture
+        return f.to_fixture()
