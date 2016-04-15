@@ -1,5 +1,4 @@
 # -*- coding:utf-8 -*-
-from __future__ import unicode_literals
 
 from django.db import models
 # Create your models here.
@@ -33,12 +32,12 @@ class Talent(models.Model):
     def patch_fixture(cls, fixture):
         for f in fixture:
             need_item = []
-            if f['up_need']:
-                for pair in f['up_need'].split(";"):
+            if f['fields']['up_need']:
+                for pair in f['fields']['up_need'].split(";"):
                     item_id, amounts = pair.split(',')
                     need_item.append((int(item_id), int(amounts)))
 
-            f['up_need'] = need_item
+            f['fields']['up_need'] = need_item
         return fixture
 
 
