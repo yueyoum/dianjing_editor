@@ -19,9 +19,9 @@ class Talent(models.Model):
     effect_id = models.IntegerField(verbose_name="天赋效果")
     position = models.IntegerField(verbose_name="天赋位置")
     unlock = models.IntegerField(verbose_name="前置条件")
-    up_need = models.CharField(max_length=255, verbose_name="消耗物品",
+    up_need = models.CharField(max_length=255, blank=True, verbose_name="消耗物品",
                                help_text="ID,Number;ID,Number...")
-    image = models.CharField(max_length=255, verbose_name="天赋图片")
+    image = models.CharField(max_length=255, blank=True, verbose_name="天赋图片")
     des = models.TextField(verbose_name="天赋描述")
 
     class Meta:
