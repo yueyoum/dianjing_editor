@@ -42,6 +42,9 @@ class Talent(models.Model):
             if not f['fields']['image']:
                 f['fields']['image'] = ""
 
+            if not f['fields'].get('trigger_unlock', []):
+                f['fields']['trigger_unlock'] = []
+
             if f['fields']['unlock']:
                 for d in fixture:
                     if d['pk'] == f['fields']['unlock']:
