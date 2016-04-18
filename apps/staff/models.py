@@ -16,66 +16,46 @@ class StaffRace(models.Model):
         verbose_name_plural = "种族"
 
 
-class StaffHot(models.Model):
-    id = models.IntegerField(primary_key=True)
-    cost = models.IntegerField(verbose_name="花费")
-
-    class Meta:
-        db_table = "staff_hot"
-        verbose_name = "员工招募-人气王"
-        verbose_name_plural = "员工招募-人气王"
-
-
-class StaffRecruitSettings(models.Model):
-    recruit = models.ForeignKey('StaffRecruit', related_name='statff_settings')
-    quality = models.IntegerField()
-    first_amount = models.IntegerField(verbose_name="首次刷新出现次数")
-    lucky_amount = models.IntegerField(verbose_name="幸运刷新出现次数")
-    normal_amount = models.IntegerField(verbose_name="平时出现次数")
-
-    class Meta:
-        db_table = 'staff_recruit_settings'
-
-
 class StaffRecruit(models.Model):
-    COST_TYPE = (
-        (1, "软妹币"),
-        (2, "钻石")
+    TYPE = (
+        (1, "普通抽卡"),
+        (2, "钻石抽卡"),
     )
 
     id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=32)
-    cost_type = models.IntegerField(choices=COST_TYPE, verbose_name="花费类型")
-    cost_value = models.IntegerField(verbose_name="花费金额")
-    lucky_times = models.IntegerField(verbose_name="幸运次数")
-
-    des = models.TextField(blank=True, verbose_name="描述")
-
-    def __unicode__(self):
-        return self.name
+    tp = models.IntegerField(choices=TYPE)
+    min_point = models.IntegerField(verbose_name='最小点数')
+    items = models.CharField(max_length=255, help_text='id,几率;id,几率... 几率基数是一万')
 
     class Meta:
         db_table = 'staff_recruit'
-        verbose_name = "员工招募-合约"
-        verbose_name_plural = "员工招募-合约"
+        verbose_name = '抽卡'
+        verbose_name_plural = '抽卡'
 
-    @classmethod
-    def patch_fixture(cls, fixture):
-        for s in cls.objects.all():
-            staff_settings = []
-            for ss in s.statff_settings.all():
-                staff_settings.append({
-                    'quality': ss.quality,
-                    'first_amount': ss.first_amount,
-                    'lucky_amount': ss.lucky_amount,
-                    'normal_amount': ss.normal_amount
-                })
 
-            for f in fixture:
-                if f['pk'] == s.id:
-                    f['fields']['staff_settings'] = staff_settings
+class StaffRecruitSettings(models.Model):
+    COST_TYPE = (
+        (1, "金币"),
+        (2, "钻石"),
+    )
 
-        return fixture
+    id = models.IntegerField(primary_key=True)
+    cost_type = models.IntegerField(choices=COST_TYPE)
+    cost_value_1 = models.IntegerField(verbose_name='单次花费')
+    cost_value_10 = models.IntegerField(verbose_name='10连抽花费')
+
+    items_10 = models.CharField(max_length=255, verbose_name='第10次产出')
+
+    reward_score_times = models.IntegerField(verbose_name='获取积分的抽卡次数')
+    reward_score = models.IntegerField(verbose_name='积分')
+    reward_score_day_limit = models.IntegerField(verbose_name='每天获得积分上限',
+                                                 help_text='0表示没有上限'
+                                                 )
+
+    class Meta:
+        db_table = 'staff_recruit_settings'
+        verbose_name = '抽卡基本设置'
+        verbose_name_plural = '抽卡基本设置'
 
 
 class StaffNew(models.Model):
