@@ -4,15 +4,14 @@ from import_export.admin import ImportExportModelAdmin
 
 from apps.staff.models import (
     StaffRace,
-    StaffHot,
-    StaffRecruitSettings,
-    StaffRecruit,
     StaffNew,
     StaffLevelNew,
     StaffStep,
     StaffStar,
     StaffEquipmentLevelAddition,
     StaffEquipmentQualityAddition,
+    StaffRecruit,
+    StaffRecruitSettings,
 )
 
 
@@ -21,26 +20,13 @@ class StuffRaceAdmin(admin.ModelAdmin):
     list_display = ('id', 'icon', 'name')
 
 
-@admin.register(StaffHot)
-class StaffHotAdmin(admin.ModelAdmin):
-    list_display = (
-        'id', 'cost'
-    )
+class ResourceStaffRecruit(resources.ModelResource):
+    class Meta:
+        model = StaffRecruit
 
-
-class StaffRecruitSettingsInline(admin.TabularInline):
-    model = StaffRecruitSettings
-
-
-@admin.register(StaffRecruit)
-class StaffRecruitAdmin(admin.ModelAdmin):
-    list_display = (
-        'id', 'name', 'cost_type', 'cost_value', 'lucky_times',
-        'des'
-    )
-
-    inlines = [StaffRecruitSettingsInline, ]
-
+class ResourceStaffRecruitSettings(resources.ModelResource):
+    class Meta:
+        model = StaffRecruitSettings
 
 class ResourceStaffNew(resources.ModelResource):
     class Meta:
@@ -70,6 +56,25 @@ class ResourceEquipQuality(resources.ModelResource):
 class ResourceEquipLevel(resources.ModelResource):
     class Meta:
         model = StaffEquipmentLevelAddition
+
+
+@admin.register(StaffRecruit)
+class AdminStaffRecruit(ImportExportModelAdmin):
+    resource_class = ResourceStaffRecruit
+    list_display = (
+        'id', 'tp', 'min_point', 'items'
+    )
+
+@admin.register(StaffRecruitSettings)
+class AdminStaffRecruitSettings(ImportExportModelAdmin):
+    resource_class = ResourceStaffRecruitSettings
+    list_display = (
+        'id', 'cost_type', 'cost_value_1', 'cost_value_10',
+        'items_10',
+        'reward_score_times',
+        'reward_score',
+        'reward_score_day_limit'
+    )
 
 
 @admin.register(StaffNew)
