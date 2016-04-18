@@ -39,6 +39,9 @@ class Talent(models.Model):
                     need_item.append((int(item_id), int(amounts)))
             f['fields']['up_need'] = need_item
 
+            if not f['fields']['image']:
+                f['fields']['image'] = ""
+
             if f['fields']['unlock']:
                 for d in fixture:
                     if d['pk'] == f['fields']['unlock']:
