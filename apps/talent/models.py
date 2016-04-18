@@ -25,8 +25,8 @@ class Talent(models.Model):
 
     class Meta:
         db_table = "talent"
-        verbose_name = "天赋"
-        verbose_name_plural = "天赋"
+        verbose_name = "天赋树"
+        verbose_name_plural = "天赋树"
 
     # @classmethod
     # def patch_fixture(cls, fixture):
