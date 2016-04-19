@@ -32,6 +32,49 @@ class StaffRecruit(models.Model):
         verbose_name = '抽卡'
         verbose_name_plural = '抽卡'
 
+    @classmethod
+    def patch_fixture(cls, fixture):
+        def parse_items(items):
+            result = []
+            for x in items.split(';'):
+                _id, _amount, _prob  = x.split(',')
+                result.append((_id, _amount, _prob))
+
+            return result
+
+
+        tps = {}
+        for f in fixture:
+            tp = f['fields']['tp']
+
+            if tp in tps:
+                tps[tp]['points'][f['fields']['min_point']] = parse_items(f['fields']['items'])
+            else:
+                settings = StaffRecruitSettings.objects.get(id=tp)
+
+                tps[tp] = {
+                    'points': {f['fields']['min_point']: parse_items(f['fields']['items'])},
+
+                    'cost_type': settings.cost_type,
+                    'cost_value_1': settings.cost_value_1,
+                    'cost_value_10': settings.cost_value_10,
+                    'items_10': parse_items(settings.items_10),
+                    'reward_score_times': settings.reward_score_times,
+                    'reward_score': settings.reward_score,
+                    'reward_score_day_limit': settings.reward_score_day_limit,
+                }
+
+        new_fixture = []
+        for k, v in tps:
+            this_fixture = {
+                'pk': k,
+                'fields': v
+            }
+
+            new_fixture.append(this_fixture)
+
+        return new_fixture
+
 
 class StaffRecruitSettings(models.Model):
     COST_TYPE = (
