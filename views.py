@@ -22,7 +22,7 @@ MODELS = (
     ('errormsg.ErrorMsg', 'errormsg.json'),
 
     ('staff.StaffRace', 'staff_race.json'),
-
+    ('staff.StaffRecruit', 'staff_recruit.json'),
     ('staff.StaffNew', 'staff_new.json'),
     ('staff.StaffLevelNew', 'staff_level_new.json'),
     ('staff.StaffStar', 'staff_star.json'),
