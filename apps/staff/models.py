@@ -38,7 +38,7 @@ class StaffRecruit(models.Model):
             result = []
             for x in items.split(';'):
                 _id, _amount, _prob  = x.split(',')
-                result.append((_id, _amount, _prob))
+                result.append((int(_id), int(_amount), int(_prob)))
 
             return result
 
@@ -65,7 +65,7 @@ class StaffRecruit(models.Model):
                 }
 
         new_fixture = []
-        for k, v in tps:
+        for k, v in tps.iteritems():
             this_fixture = {
                 'pk': k,
                 'fields': v
