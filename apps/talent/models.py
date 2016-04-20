@@ -31,16 +31,6 @@ class Talent(models.Model):
     @classmethod
     def patch_fixture(cls, fixture):
         for f in fixture:
-            need_item = []
-            if f['fields']['up_need']:
-                for pair in f['fields']['up_need'].split(";"):
-                    item_id, amounts = pair.split(',')
-                    need_item.append((int(item_id), int(amounts)))
-            f['fields']['up_need'] = need_item
-
-            if not f['fields']['image']:
-                f['fields']['image'] = ""
-
             if not f['fields'].get('trigger_unlock', []):
                 f['fields']['trigger_unlock'] = []
 
@@ -55,5 +45,3 @@ class Talent(models.Model):
                         d['fields']['trigger_unlock'] = trigger_unlock
 
         return fixture
-
-
