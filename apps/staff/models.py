@@ -62,6 +62,7 @@ class StaffRecruit(models.Model):
                     'reward_score_times': settings.reward_score_times,
                     'reward_score': settings.reward_score,
                     'reward_score_day_limit': settings.reward_score_day_limit,
+                    'des': settings.des,
                 }
 
         new_fixture = []
@@ -94,6 +95,8 @@ class StaffRecruitSettings(models.Model):
     reward_score_day_limit = models.IntegerField(verbose_name='每天获得积分上限',
                                                  help_text='0表示没有上限'
                                                  )
+
+    des = models.TextField(blank=True)
 
     class Meta:
         db_table = 'staff_recruit_settings'

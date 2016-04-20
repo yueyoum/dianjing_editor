@@ -73,7 +73,8 @@ class AdminStaffRecruitSettings(ImportExportModelAdmin):
         'items_10',
         'reward_score_times',
         'reward_score',
-        'reward_score_day_limit'
+        'reward_score_day_limit',
+        'des',
     )
 
 
