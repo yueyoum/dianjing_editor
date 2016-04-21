@@ -116,7 +116,7 @@ class StaffNew(models.Model):
     operation = models.IntegerField(verbose_name='操作')
     operation_grow = models.IntegerField(default=1, verbose_name='操作增长')
     skill = models.IntegerField(verbose_name='技能ID')
-    talent_skill = models.CommaSeparatedIntegerField(max_length=255, verbose_name='天赋ID',
+    talent_skill = models.CommaSeparatedIntegerField(max_length=255, blank=True, verbose_name='天赋ID',
                                                      help_text='id,id,id'
                                                      )
 
