@@ -25,7 +25,7 @@ class StaffRecruit(models.Model):
     id = models.IntegerField(primary_key=True)
     tp = models.IntegerField(choices=TYPE)
     min_point = models.IntegerField(verbose_name='最小点数')
-    items = models.CharField(max_length=255, help_text='id,几率;id,几率... 几率基数是一万')
+    items = models.TextField(help_text='id,几率;id,几率... 几率基数是一万')
 
     class Meta:
         db_table = 'staff_recruit'
@@ -88,7 +88,7 @@ class StaffRecruitSettings(models.Model):
     cost_value_1 = models.IntegerField(verbose_name='单次花费')
     cost_value_10 = models.IntegerField(verbose_name='10连抽花费')
 
-    items_10 = models.CharField(max_length=255, verbose_name='第10次产出')
+    items_10 = models.TextField(verbose_name='第10次产出')
 
     reward_score_times = models.IntegerField(verbose_name='获取积分的抽卡次数')
     reward_score = models.IntegerField(verbose_name='积分')
