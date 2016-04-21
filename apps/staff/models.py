@@ -167,7 +167,10 @@ class StaffNew(models.Model):
                 }
 
             f['fields']['steps'] = steps_data
-            f['fields']['max_step'] = max(steps_data.keys())
+            if steps_data:
+                f['fields']['max_step'] = max(steps_data.keys())
+            else:
+                f['fields']['max_step'] = 0
 
         return fixture
 

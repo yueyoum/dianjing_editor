@@ -94,8 +94,11 @@ class EquipmentBase(models.Model):
                     'update_item_need': parse_item_need(lv.update_item_need)
                 }
 
-            f['fields']['max_level'] = max(levels_data.keys())
             f['fields']['levels'] = levels_data
+            if levels_data:
+                f['fields']['max_level'] = max(levels_data.keys())
+            else:
+                f['fields']['max_level'] = 0
 
         return fixture
 

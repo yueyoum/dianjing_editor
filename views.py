@@ -85,6 +85,7 @@ MODELS = (
     ('item.ItemExp', 'item_exp.json'),
 
     ('talent.Talent', 'talent.json'),
+    ('vip.VIP', 'vip.json'),
 )
 
 
