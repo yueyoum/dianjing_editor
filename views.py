@@ -7,13 +7,13 @@ Description:
 
 """
 import datetime
-import json
 
 from cStringIO import StringIO
 import zipfile
 
 from django.http import HttpResponse
-from django.core import management
+
+from misc import get_fixture
 
 MODELS = (
     ('config.ClientConfig', 'client_config.json'),
@@ -88,7 +88,6 @@ MODELS = (
     ('vip.VIP', 'vip.json'),
 )
 
-
 class InMemoryZip(object):
     def __init__(self):
         self.buffer = StringIO()
@@ -101,29 +100,10 @@ class InMemoryZip(object):
         return self.buffer.getvalue()
 
 
-def create_fixture(model):
-    buf = StringIO()
-    a, b = model.split('.')
-
-    m = __import__('apps.{0}.models'.format(a), fromlist=[b])
-    m = getattr(m, b)
-
-    management.call_command('dumpdata', model, format='json', indent=4, stdout=buf)
-    data = buf.getvalue()
-
-    cf = getattr(m, 'patch_fixture', None)
-    if cf:
-        fixture = cf(json.loads(data))
-        data = json.dumps(fixture, indent=2)
-
-    # return data.decode('unicode-escape').encode('utf-8')
-    return data
-
-
 def download_zip(request):
     memzip = InMemoryZip()
     for model, filename in MODELS:
-        fixture = create_fixture(model)
+        fixture = get_fixture(model)
         memzip.add(filename, fixture)
 
     now = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
