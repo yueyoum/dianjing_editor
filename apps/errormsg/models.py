@@ -14,3 +14,7 @@ class ErrorMsg(models.Model):
         db_table = 'error_msg'
         verbose_name = '错误代码'
         verbose_name_plural = '错误代码'
+
+    @classmethod
+    def get_fixture_key(cls):
+        return 'errormsg.ErrorMsg'

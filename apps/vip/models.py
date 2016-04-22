@@ -20,6 +20,10 @@ class VIP(models.Model):
         verbose_name_plural = "VIP"
 
     @classmethod
+    def get_fixture_key(cls):
+        return 'vip.VIP'
+
+    @classmethod
     def patch_fixture(cls, fixture):
         def parse_item(item_text):
             if not item_text:

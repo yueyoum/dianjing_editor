@@ -13,6 +13,10 @@ class Buff(models.Model):
         verbose_name = 'Buff'
         verbose_name_plural = 'Buff'
 
+    @classmethod
+    def get_fixture_key(cls):
+        return 'skill.Buff'
+
     # @classmethod
     # def patch_fixture(cls, fixture):
     #     for f in fixture:
@@ -88,6 +92,10 @@ class TalentSkill(models.Model):
         db_table = 'talent_skill'
         verbose_name = '天赋'
         verbose_name_plural = '天赋'
+
+    @classmethod
+    def get_fixture_key(cls):
+        return 'skill.TalentSkill'
 
     @classmethod
     def patch_fixture(cls, fixture):

@@ -45,6 +45,10 @@ class ItemNew(models.Model):
         verbose_name_plural = '道具（新）'
 
 
+    @classmethod
+    def get_fixture_key(cls):
+        return 'item.ItemNew'
+
 class EquipmentBase(models.Model):
     TYPE = (
         (1, '鼠标'),
@@ -61,6 +65,10 @@ class EquipmentBase(models.Model):
         db_table = 'equipment_base'
         verbose_name = '装备基础属性'
         verbose_name_plural = '装备基础属性'
+
+    @classmethod
+    def get_fixture_key(cls):
+        return 'item.EquipmentBase'
 
     @classmethod
     def patch_fixture(cls, fixture):

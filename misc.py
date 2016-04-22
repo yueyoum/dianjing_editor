@@ -17,6 +17,11 @@ r = redis.Redis()
 def make_cache_key(model):
     return 'dianjing:editor:cache:{0}'.format(model)
 
+def get_model_instance(model):
+    a, b = model.split('.')
+    m = __import__('apps.{0}.models'.format(a), fromlist=[b])
+    return getattr(m, b)
+
 def cache_get(model):
     key = make_cache_key(model)
     return r.get(key)
@@ -26,29 +31,31 @@ def cache_set(model, data):
     r.set(key, data)
 
 def get_fixture(model):
+    ins = get_model_instance(model)
+    key_func = getattr(ins, 'get_fixture_key', None)
+    if not key_func:
+        # 对应的model没有这个方法
+        return create_fixture(model, ins)
+
+    # 加了的，就是期望走cache的
     data = cache_get(model)
     if not data:
-        data = create_fixture(model)
+        data = create_fixture(model, ins)
         cache_set(model, data)
-        print "{0}\tGET FROM DB".format(model)
     else:
-        print "{0}\tGET FROM CACHE".format(model)
+        print "GET FROM CACHE\t{0}".format(model)
 
     return data
 
-def create_fixture(model):
+def create_fixture(model, ins):
     buf = StringIO()
-    a, b = model.split('.')
-
-    m = __import__('apps.{0}.models'.format(a), fromlist=[b])
-    m = getattr(m, b)
-
     management.call_command('dumpdata', model, format='json', indent=4, stdout=buf)
     data = buf.getvalue()
 
-    cf = getattr(m, 'patch_fixture', None)
+    cf = getattr(ins, 'patch_fixture', None)
     if cf:
         fixture = cf(json.loads(data))
         data = json.dumps(fixture, indent=2)
 
+    print "GET FROM MYSQL\t{0}".format(model)
     return data

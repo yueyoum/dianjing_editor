@@ -128,6 +128,10 @@ class StaffNew(models.Model):
         verbose_name_plural = "选手（新）"
 
     @classmethod
+    def get_fixture_key(cls):
+        return 'staff.StaffNew'
+
+    @classmethod
     def patch_fixture(cls, fixture):
         def parse_item_need(item_text):
             if not item_text:
@@ -183,6 +187,10 @@ class StaffLevelNew(models.Model):
         ordering = ('id',)
         verbose_name = "选手等级（新）"
         verbose_name_plural = "选手等级（新）"
+
+    @classmethod
+    def get_fixture_key(cls):
+        return 'staff.StaffLevelNew'
 
     @classmethod
     def patch_fixture(cls, fixture):
@@ -248,6 +256,10 @@ class StaffStar(models.Model):
         ordering = ('id',)
         verbose_name = "选手升星（新）"
         verbose_name_plural = "选手升星（新）"
+
+    @classmethod
+    def get_fixture_key(cls):
+        return 'staff.StaffStar'
 
     @classmethod
     def patch_fixture(cls, fixture):
