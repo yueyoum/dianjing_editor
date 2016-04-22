@@ -8,4 +8,4 @@ class ClubFlagAdmin(admin.ModelAdmin):
 
 @admin.register(ClubLevel)
 class ClubLevelAdmin(admin.ModelAdmin):
-    list_display = ('id', 'renown', 'max_staff_amount')
+    list_display = ('id', 'exp')
