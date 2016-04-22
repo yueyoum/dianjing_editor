@@ -12,6 +12,11 @@ class NPCClubName(models.Model):
         verbose_name_plural = "NPC俱乐部名字"
 
 
+    @classmethod
+    def get_fixture_key(cls):
+        return 'npc.NPCClubName'
+
+
 class NPCManagerName(models.Model):
     name = models.CharField(max_length=64)
 
@@ -19,6 +24,10 @@ class NPCManagerName(models.Model):
         db_table = 'npc_manager_name'
         verbose_name = "NPC经理人名字"
         verbose_name_plural = "NPC经理人名字"
+
+    @classmethod
+    def get_fixture_key(cls):
+        return 'npc.NPCManagerName'
 
 
 class NPCClub(models.Model):
@@ -36,6 +45,10 @@ class NPCClub(models.Model):
         db_table = 'npc_club'
         verbose_name = "NPC俱乐部"
         verbose_name_plural = "NPC俱乐部"
+
+    @classmethod
+    def get_fixture_key(cls):
+        return 'npc.NPCClub'
 
     @classmethod
     def patch_fixture(cls, fixture):
