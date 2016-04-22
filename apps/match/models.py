@@ -25,6 +25,10 @@ class ChallengeChapter(models.Model):
         verbose_name_plural = '挑战赛章节'
 
     @classmethod
+    def get_fixture_key(cls):
+        return 'match.ChallengeChapter'
+
+    @classmethod
     def patch_fixture(cls, fixture):
         for f in fixture:
             reward = f['fields']['star_reward']
@@ -66,6 +70,9 @@ class ChallengeMatch(models.Model):
         verbose_name = '挑战赛'
         verbose_name_plural = '挑战赛'
 
+    @classmethod
+    def get_fixture_key(cls):
+        return 'match.ChallengeMatch'
 
     @classmethod
     def patch_fixture(cls, fixture):
@@ -104,31 +111,3 @@ class Maps(models.Model):
         db_table = 'maps'
         verbose_name = '地图'
         verbose_name_plural = '地图'
-
-
-class TrainingMatchReward(models.Model):
-    id = models.IntegerField(primary_key=True, verbose_name="第几场")
-    reward = models.ForeignKey('package.Package', verbose_name="奖励", related_name='tmr')
-    score = models.IntegerField(verbose_name='获得积分')
-    des = models.TextField(blank=True)
-
-    class Meta:
-        db_table = 'training_match_reward'
-        verbose_name = '训练赛奖励'
-        verbose_name_plural = '训练赛奖励'
-
-
-class TrainingMatchScoreStore(models.Model):
-    id = models.IntegerField(primary_key=True)
-    times_limit = models.IntegerField(default=-1, verbose_name="次数限制",
-                                      help_text="-1为没有限制，0为无法兑换，正整数N表示可以兑换N次")
-
-    score = models.IntegerField(verbose_name="所需积分")
-
-    # item = models.ForeignKey('item.Item', verbose_name='物品')
-    item_amount = models.IntegerField(default=1, verbose_name='物品数量')
-
-    class Meta:
-        db_table = 'training_match_score_store'
-        verbose_name = "训练赛积分商店"
-        verbose_name_plural = "训练赛积分商店"

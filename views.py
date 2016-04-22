@@ -28,10 +28,6 @@ MODELS = (
     ('staff.StaffStar', 'staff_star.json'),
     ('staff.StaffEquipmentQualityAddition', 'staff_equip_quality_addition.json'),
     ('staff.StaffEquipmentLevelAddition', 'staff_equip_level_addition.json'),
-    
-    ('npc.NPCClub', 'npc_club.json'),
-    ('npc.NPCClubName', 'npc_club_name.json'),
-    ('npc.NPCManagerName', 'npc_manager_name.json'),
 
     ('unit.UnitNew', 'unit_new.json'),
     ('unit.UnitLevelAddition', 'unit_level_addition.json'),
@@ -48,8 +44,6 @@ MODELS = (
     ('match.ChallengeChapter', 'challenge_chapter.json'),
     ('match.ChallengeMatch', 'challenge_match.json'),
     ('match.Maps', 'maps.json'),
-    ('match.TrainingMatchReward', 'training_match_reward.json'),
-    ('match.TrainingMatchScoreStore', 'training_match_store.json'),
 
     ('building.Building', 'building.json'),
 
@@ -59,12 +53,10 @@ MODELS = (
     ('task.TaskTargetType', 'task_target.json'),
     ('task.RandomEvent', 'random_event.json'),
     ('notification.Notification', 'notification.json'),
-    ('league.League', 'league.json'),
+
     ('function.Function', 'function.json'),
     ('resources.Resource', 'resource.json'),
-    ('ladder.LadderLogTemplate', 'ladder_log_template.json'),
-    ('ladder.LadderRankReward', 'ladder_rank_reward.json'),
-    ('ladder.LadderScoreStore', 'ladder_score_store.json'),
+
     ('emoticon.Emoticon', 'emoticon.json'),
     ('guide.Guide', 'guide.json'),
     ('template.SponsorLogTemplate', 'sponsor_template.json'),

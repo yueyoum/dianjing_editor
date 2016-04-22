@@ -7,8 +7,6 @@ from apps.match.models import (
     ChallengeChapter,
 
     Maps,
-    TrainingMatchReward,
-    TrainingMatchScoreStore,
 )
 
 
@@ -46,17 +44,3 @@ class MapsAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'name', 'picture',
     )
-
-
-@admin.register(TrainingMatchReward)
-class TrainingMatchRewardAdmin(admin.ModelAdmin):
-    list_display = (
-        'id', 'reward', 'score', 'des'
-    )
-
-
-@admin.register(TrainingMatchScoreStore)
-class TrainingMatchScoreStoreAdmin(admin.ModelAdmin):
-    list_display = ('id', 'times_limit', 'score',
-                    'item_amount',
-                    )
