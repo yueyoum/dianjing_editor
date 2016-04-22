@@ -29,6 +29,10 @@ class Talent(models.Model):
         verbose_name_plural = "天赋树"
 
     @classmethod
+    def get_fixture_key(cls):
+        return 'talent.Talent'
+
+    @classmethod
     def patch_fixture(cls, fixture):
         for f in fixture:
             if not f['fields'].get('trigger_unlock', []):

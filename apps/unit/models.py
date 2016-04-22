@@ -77,6 +77,10 @@ class UnitNew(models.Model):
         verbose_name_plural = "兵种（新）"
 
     @classmethod
+    def get_fixture_key(cls):
+        return 'unit.UnitNew'
+
+    @classmethod
     def patch_fixture(cls, fixtures):
         def parse_item_need(item_text):
             if not item_text:
@@ -164,6 +168,10 @@ class UnitUnLock(models.Model):
         db_table = 'unit_unlock'
         verbose_name = "兵种解锁"
         verbose_name_plural = "兵种解锁"
+
+    @classmethod
+    def get_fixture_key(cls):
+        return 'unit.UnitUnLock'
 
 
     @classmethod
@@ -318,6 +326,10 @@ class UnitLevelAddition(models.Model):
         verbose_name_plural = "种族等级加成"
 
     @classmethod
+    def get_fixture_key(cls):
+        return 'unit.UnitLevelAddition'
+
+    @classmethod
     def patch_fixture(cls, fixture):
         f = _Fixture('unit.unitleveladdition', 'level')
         for _f in fixture:
@@ -354,6 +366,10 @@ class UnitStepAddition(models.Model):
         db_table = 'unit_step_addition'
         verbose_name = "种族品阶加成"
         verbose_name_plural = "种族品阶加成"
+
+    @classmethod
+    def get_fixture_key(cls):
+        return 'unit.UnitStepAddition'
 
     @classmethod
     def patch_fixture(cls, fixture):

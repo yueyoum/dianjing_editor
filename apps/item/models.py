@@ -151,6 +151,10 @@ class ItemUse(models.Model):
         verbose_name_plural = '道具使用'
 
     @classmethod
+    def get_fixture_key(cls):
+        return 'item.ItemUse'
+
+    @classmethod
     def patch_fixture(cls, fixture):
         def parse_result(result_text):
             result = []
@@ -187,6 +191,9 @@ class ItemMerge(models.Model):
         verbose_name = '碎片合成'
         verbose_name_plural = '碎片合成'
 
+    @classmethod
+    def get_fixture_key(cls):
+        return 'item.ItemMerge'
 
 class ItemExp(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -196,3 +203,7 @@ class ItemExp(models.Model):
         db_table = 'item_exp'
         verbose_name = '经验道具'
         verbose_name_plural = '经验道具'
+
+    @classmethod
+    def get_fixture_key(cls):
+        return 'item.ItemExp'
