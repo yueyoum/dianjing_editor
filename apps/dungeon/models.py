@@ -14,10 +14,9 @@ class Dungeon(models.Model):
     des = models.TextField(verbose_name="副本简介")
 
     class Meta:
-        class Meta:
-            db_table = "dungeon"
-            verbose_name = "副本"
-            verbose_name_plural = "副本"
+        db_table = "dungeon"
+        verbose_name = "副本"
+        verbose_name_plural = "副本"
 
 
 class DungeonGrade(models.Model):
@@ -34,7 +33,6 @@ class DungeonGrade(models.Model):
     des = models.TextField(verbose_name="副本等级描述")
 
     class Meta:
-        class Meta:
-            db_table = "dungeon_grade"
-            verbose_name = "副本等级"
-            verbose_name_plural = "副本等级"
+        db_table = "dungeon_grade"
+        verbose_name = "副本等级"
+        verbose_name_plural = "副本等级"
