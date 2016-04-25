@@ -18,6 +18,7 @@ class ClubFlag(models.Model):
 class ClubLevel(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="等级")
     exp = models.IntegerField(verbose_name="升到所需经验")
+    des = models.TextField(blank=True)
 
     class Meta:
         db_table = 'club_level'
