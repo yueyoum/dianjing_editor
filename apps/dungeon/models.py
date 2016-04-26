@@ -12,6 +12,7 @@ class Dungeon(models.Model):
     cost = models.IntegerField(verbose_name="消耗体力")
     open_time = models.CharField(max_length=32, verbose_name="开启时间",
                                  help_text="1,3,5 -- 周一、三、五开启")
+    open_des = models.TextField(verbose_name="开启描述")
     des = models.TextField(verbose_name="副本简介")
 
     class Meta:
