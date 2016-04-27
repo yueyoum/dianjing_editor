@@ -78,6 +78,8 @@ MODELS = (
 
     ('talent.Talent', 'talent.json'),
     ('vip.VIP', 'vip.json'),
+    ('dungeon.Dungeon', 'dungeon.json'),
+    ('dungeon.DungeonGrade', 'dungeon_grade.json'),
 )
 
 class InMemoryZip(object):
