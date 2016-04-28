@@ -88,6 +88,8 @@ class MatchReward(models.Model):
     @classmethod
     def patch_fixture(cls, fixture):
         def _parse_items(text):
+            if not text:
+                return []
             result = []
             for x in text.split(';'):
                 _a, _b, _c = x.split(',')
