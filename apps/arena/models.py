@@ -78,7 +78,7 @@ class MatchReward(models.Model):
     honor = models.IntegerField()
     item_id = models.IntegerField()
     item_amount = models.IntegerField()
-    random_items = models.TextField(help_text='id,amount,prob;')
+    random_items = models.TextField(blank=True, help_text='id,amount,prob;')
 
     class Meta:
         db_table = 'arena_match_reward'
