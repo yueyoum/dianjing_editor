@@ -21,6 +21,8 @@ class NPCFormation(models.Model):
                 _a, _b, _c = x.split(',')
                 result.append((int(_a), int(_b), int(_c)))
 
+            return result
+
         for f in fixture:
             f['fields']['staffs'] = _parse_staffs(f['fields']['staffs'])
 

@@ -37,6 +37,8 @@ class HonorReward(models.Model):
                 _a, _b = x.split(',')
                 result.append((int(_a), int(_b)))
 
+            return result
+
         for f in fixture:
             f['fields']['reward'] = _parse_reward(f['fields']['reward'])
 
@@ -61,6 +63,8 @@ class RankReward(models.Model):
             for x in text.split(';'):
                 _a, _b = x.split(',')
                 result.append((int(_a), int(_b)))
+
+            return result
 
         for f in fixture:
             f['fields']['reward'] = _parse_reward(f['fields']['reward'])
@@ -94,6 +98,8 @@ class MatchReward(models.Model):
             for x in text.split(';'):
                 _a, _b, _c = x.split(',')
                 result.append((int(_a), int(_b), int(_c)))
+
+            return result
 
         for f in fixture:
             f['fields']['random_items'] = _parse_items(f['fields']['random_items'])
