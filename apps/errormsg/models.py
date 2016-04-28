@@ -2,6 +2,9 @@
 
 from django.db import models
 
+from misc import cache_set, create_fixture
+
+
 class ErrorMsg(models.Model):
     id = models.IntegerField(primary_key=True)
     error_index = models.CharField(max_length=64, unique=True)
@@ -18,3 +21,13 @@ class ErrorMsg(models.Model):
     @classmethod
     def get_fixture_key(cls):
         return 'errormsg.ErrorMsg'
+
+    def save(self):
+        super(ErrorMsg, self).save()
+        key_func = getattr(self, 'get_fixture_key', None)
+        if key_func:
+            # 期望cache住
+            key = key_func()
+
+            data = create_fixture(key, self)
+            cache_set(key, data)
