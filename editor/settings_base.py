@@ -66,6 +66,8 @@ INSTALLED_APPS = (
     'apps.talent',
     'apps.vip',
     'apps.dungeon',
+    'apps.npc',
+    'apps.arena',
 )
 
 MIDDLEWARE_CLASSES = (

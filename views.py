@@ -80,6 +80,14 @@ MODELS = (
     ('vip.VIP', 'vip.json'),
     ('dungeon.Dungeon', 'dungeon.json'),
     ('dungeon.DungeonGrade', 'dungeon_grade.json'),
+
+    ('npc.NPCFormation', 'npc_formation.json'),
+
+    ('arena.ArenaNPC', 'arena_npc.json'),
+    ('arena.HonorReward', 'arena_honor_reward.json'),
+    ('arena.RankReward', 'arena_rank_reward.json'),
+    ('arena.MatchReward', 'arena_match_reward.json'),
+    ('arena.BuyTimesCost', 'arena_buy_times_cost.json'),
 )
 
 class InMemoryZip(object):
