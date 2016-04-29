@@ -22,8 +22,8 @@ class ErrorMsg(models.Model):
     def get_fixture_key(cls):
         return 'errormsg.ErrorMsg'
 
-    def save(self):
-        super(ErrorMsg, self).save()
+    def save(self, **kwargs):
+        super(ErrorMsg, self).save(**kwargs)
         key_func = getattr(self, 'get_fixture_key', None)
         if key_func:
             # 期望cache住

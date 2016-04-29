@@ -78,8 +78,14 @@ MODELS = (
 
     ('talent.Talent', 'talent.json'),
     ('vip.VIP', 'vip.json'),
+
     ('dungeon.Dungeon', 'dungeon.json'),
     ('dungeon.DungeonGrade', 'dungeon_grade.json'),
+
+    ('training_tower.SaleGoods', 'sale_goods.json'),
+    ('training_tower.StarReward', 'tower_star_reward.json'),
+    ('training_tower.RankReward', 'tower_rank_reward.json'),
+    ('training_tower.GameLevel', 'tower_level.json'),
 )
 
 class InMemoryZip(object):
