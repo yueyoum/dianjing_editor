@@ -19,7 +19,8 @@ class TowerSaleGoods(models.Model):
     tp_icon = models.CharField(max_length=255, verbose_name="类别icon")
     price = models.IntegerField(verbose_name="商品价格")
     sale = models.IntegerField(blank=True, verbose_name="促销价", help_text="非促销商品不填")
-    vip_need = models.IntegerField(blank=True, verbose_name="促销价所需vip等级", help_text="非促销商品不填")
+    vip_need = models.IntegerField(blank=True, verbose_name="促销价所需vip等级",
+                                   help_text="非促销商品不填")
     num = models.IntegerField(verbose_name="促销数量")
     des = models.CharField(max_length=255, blank=True, verbose_name="促销描述")
 
@@ -124,29 +125,33 @@ class TowerGameLevel(models.Model):
                 star_three.append([int(_id), int(amount)])
             f['fields']['star_one'] = star_three
 
-            sale_goods = []
-            for goods in f['fields']['sale_goods'].split(';'):
-                id_one, id_two = goods.split(',')
-                sale_goods.append([int(id_one), int(id_two)])
-            f['fields']['sale_goods'] = sale_goods
+            if f['fields'].get('sale_goods', ""):
+                sale_goods = []
+                for goods in f['fields']['sale_goods'].split(';'):
+                    id_one, id_two = goods.split(',')
+                    sale_goods.append([int(id_one), int(id_two)])
+                f['fields']['sale_goods'] = sale_goods
 
-            roulette_three = []
-            for buff in f['fields']['roulette_three'].split(';'):
-                _id, _range = buff.split(',')
-                roulette_three.append([int(_id), int(_range)])
-            f['fields']['roulette_three'] = roulette_three
+            if f['fields'].get('roulette_three', ""):
+                roulette_three = []
+                for buff in f['fields']['roulette_three'].split(';'):
+                    _id, _range = buff.split(',')
+                    roulette_three.append([int(_id), int(_range)])
+                f['fields']['roulette_three'] = roulette_three
 
-            roulette_six = []
-            for buff in f['fields']['roulette_six'].split(';'):
-                _id, _range = buff.split(',')
-                roulette_six.append([int(_id), int(_range)])
-            f['fields']['roulette_three'] = roulette_six
+            if f['fields'].get('roulette_six', ""):
+                roulette_six = []
+                for buff in f['fields']['roulette_six'].split(';'):
+                    _id, _range = buff.split(',')
+                    roulette_six.append([int(_id), int(_range)])
+                f['fields']['roulette_three'] = roulette_six
 
-            roulette_nine = []
-            for buff in f['fields']['roulette_nine'].split(';'):
-                _id, _range = buff.split(',')
-                roulette_nine.append([int(_id), int(_range)])
-            f['fields']['roulette_three'] = roulette_nine
+            if f['fields'].get('roulette_nine', ""):
+                roulette_nine = []
+                for buff in f['fields']['roulette_nine'].split(';'):
+                    _id, _range = buff.split(',')
+                    roulette_nine.append([int(_id), int(_range)])
+                f['fields']['roulette_three'] = roulette_nine
 
 
 class TowerResetCost(models.Model):
