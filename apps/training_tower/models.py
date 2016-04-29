@@ -6,11 +6,16 @@ from django.db import models
 
 # Create your models here.
 
+GoodsType = (
+    (1, '普通商品'),
+    (2, '高级商品'),
+)
+
 
 class TowerSaleGoods(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="商品ID")
     item = models.IntegerField(verbose_name="物品ID")
-    tp = models.IntegerField(verbose_name="物品类别")
+    tp = models.IntegerField(choices=GoodsType, verbose_name="物品类别")
     tp_icon = models.CharField(max_length=255, verbose_name="类别icon")
     price = models.IntegerField(verbose_name="商品价格")
     sale = models.IntegerField(blank=True, verbose_name="促销价", help_text="非促销商品不填")
@@ -70,14 +75,22 @@ class TowerGameLevel(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="层级ID")
     name = models.CharField(max_length=32, verbose_name="层级名")
     buff = models.IntegerField(verbose_name="副本效果")
-    npc_path = models.CharField(max_length=255, verbose_name="npc配置", help_text="位置,选手ID,兵种ID;位置,选手ID,兵种ID(位置范围0~29)")
-    star_one = models.CharField(max_length=255, verbose_name="1星奖励", help_text="物品ID,数量;物品ID,数量...")
-    star_two = models.CharField(max_length=255, verbose_name="2星奖励", help_text="物品ID,数量;物品ID,数量...")
-    star_three = models.CharField(max_length=255, verbose_name="3星奖励", help_text="物品ID,数量;物品ID,数量...")
-    sale_goods = models.CharField(max_length=255, verbose_name="折扣商品", blank=True, help_text="折扣商品ID,折扣商品...(没有则不填)")
-    roulette_three = models.CharField(max_length=32, verbose_name="3星天赋", blank=True, help_text="天赋ID,天赋ID...(没有则不填)")
-    roulette_six = models.CharField(max_length=32, verbose_name="6星天赋", blank=True, help_text="天赋ID,天赋ID...(没有则不填)")
-    roulette_nine = models.CharField(max_length=32, verbose_name="9星天赋", blank=True, help_text="天赋ID,天赋ID...(没有则不填)")
+    npc_path = models.CharField(max_length=255, verbose_name="npc配置",
+                                help_text="位置,选手ID,兵种ID;位置,选手ID,兵种ID(位置范围0~29)")
+    star_one = models.CharField(max_length=255, verbose_name="1星奖励",
+                                help_text="物品ID,数量;物品ID,数量...")
+    star_two = models.CharField(max_length=255, verbose_name="2星奖励",
+                                help_text="物品ID,数量;物品ID,数量...")
+    star_three = models.CharField(max_length=255, verbose_name="3星奖励",
+                                  help_text="物品ID,数量;物品ID,数量...")
+    sale_goods = models.CharField(max_length=255, verbose_name="折扣商品", blank=True,
+                                  help_text="普通商品ID,高级商品ID;...(没有则不填)")
+    roulette_three = models.CharField(max_length=32, verbose_name="3星天赋", blank=True,
+                                      help_text="天赋ID,概率;...(没有则不填)")
+    roulette_six = models.CharField(max_length=32, verbose_name="6星天赋", blank=True,
+                                    help_text="天赋ID,概率;...(没有则不填)")
+    roulette_nine = models.CharField(max_length=32, verbose_name="9星天赋", blank=True,
+                                     help_text="天赋ID,概率;...(没有则不填)")
 
     class Meta:
         db_table = 'tower_level'
@@ -112,23 +125,27 @@ class TowerGameLevel(models.Model):
             f['fields']['star_one'] = star_three
 
             sale_goods = []
-            for _id in f['fields']['sale_goods'].split(','):
-                sale_goods.append(int(_id))
+            for goods in f['fields']['sale_goods'].split(';'):
+                id_one, id_two = goods.split(',')
+                sale_goods.append([int(id_one), int(id_two)])
             f['fields']['sale_goods'] = sale_goods
 
             roulette_three = []
-            for _id in f['fields']['roulette_three'].split(','):
-                roulette_three.append(int(_id))
+            for buff in f['fields']['roulette_three'].split(';'):
+                _id, _range = buff.split(',')
+                roulette_three.append([int(_id), int(_range)])
             f['fields']['roulette_three'] = roulette_three
 
             roulette_six = []
-            for _id in f['fields']['roulette_six'].split(','):
-                roulette_six.append(int(_id))
+            for buff in f['fields']['roulette_six'].split(';'):
+                _id, _range = buff.split(',')
+                roulette_six.append([int(_id), int(_range)])
             f['fields']['roulette_three'] = roulette_six
 
             roulette_nine = []
-            for _id in f['fields']['roulette_nine'].split(','):
-                roulette_nine.append(int(_id))
+            for buff in f['fields']['roulette_nine'].split(';'):
+                _id, _range = buff.split(',')
+                roulette_nine.append([int(_id), int(_range)])
             f['fields']['roulette_three'] = roulette_nine
 
 
