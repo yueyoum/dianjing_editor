@@ -82,6 +82,14 @@ MODELS = (
     ('dungeon.Dungeon', 'dungeon.json'),
     ('dungeon.DungeonGrade', 'dungeon_grade.json'),
 
+    ('npc.NPCFormation', 'npc_formation.json'),
+
+    ('arena.ArenaNPC', 'arena_npc.json'),
+    ('arena.HonorReward', 'arena_honor_reward.json'),
+    ('arena.RankReward', 'arena_rank_reward.json'),
+    ('arena.MatchReward', 'arena_match_reward.json'),
+    ('arena.BuyTimesCost', 'arena_buy_times_cost.json'),
+
     ('training_tower.SaleGoods', 'sale_goods.json'),
     ('training_tower.StarReward', 'tower_star_reward.json'),
     ('training_tower.RankReward', 'tower_rank_reward.json'),
