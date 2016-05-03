@@ -88,6 +88,7 @@ MODELS = (
     ('arena.RankReward', 'arena_rank_reward.json'),
     ('arena.MatchReward', 'arena_match_reward.json'),
     ('arena.BuyTimesCost', 'arena_buy_times_cost.json'),
+    ('arena.MatchLogTemplate', 'arena_match_log_template.json'),
 )
 
 class InMemoryZip(object):

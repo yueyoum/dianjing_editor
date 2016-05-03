@@ -114,3 +114,13 @@ class BuyTimesCost(models.Model):
         db_table = 'arena_buy_times_cost'
         verbose_name = '购买次数消费'
         verbose_name_plural = "购买次数消费"
+
+
+class MatchLogTemplate(models.Model):
+    id = models.IntegerField(primary_key=True)
+    template = models.TextField()
+
+    class Meta:
+        db_table = 'arena_match_log_template'
+        verbose_name = '战报模板'
+        verbose_name_plural = '战报模板'

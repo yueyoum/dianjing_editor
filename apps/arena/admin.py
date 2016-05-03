@@ -3,7 +3,7 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from apps.arena.models import ArenaNPC, HonorReward, MatchReward, RankReward, BuyTimesCost
+from apps.arena.models import ArenaNPC, HonorReward, MatchReward, RankReward, BuyTimesCost, MatchLogTemplate
 
 class ResourceArenaNPC(resources.ModelResource):
     class Meta:
@@ -25,6 +25,9 @@ class ResourceBuyTimesCost(resources.ModelResource):
     class Meta:
         model = BuyTimesCost
 
+class ResourceMatchLogTemplate(resources.ModelResource):
+    class Meta:
+        model = MatchLogTemplate
 
 @admin.register(ArenaNPC)
 class AdminArenaNPC(ImportExportModelAdmin):
@@ -63,3 +66,11 @@ class AdminBuyTimesCost(ImportExportModelAdmin):
     resource_class = ResourceBuyTimesCost
 
     list_display = ('id', 'diamond')
+
+@admin.register(MatchLogTemplate)
+class AdminMatchLogTemplate(ImportExportModelAdmin):
+    resource_class = ResourceMatchLogTemplate
+
+    list_display = (
+        'id', 'template'
+    )
