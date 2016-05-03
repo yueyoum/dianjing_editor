@@ -66,6 +66,7 @@ INSTALLED_APPS = (
     'apps.talent',
     'apps.vip',
     'apps.dungeon',
+    'apps.training_tower',
     'apps.npc',
     'apps.arena',
 )

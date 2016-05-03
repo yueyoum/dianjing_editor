@@ -78,6 +78,7 @@ MODELS = (
 
     ('talent.Talent', 'talent.json'),
     ('vip.VIP', 'vip.json'),
+
     ('dungeon.Dungeon', 'dungeon.json'),
     ('dungeon.DungeonGrade', 'dungeon_grade.json'),
 
@@ -89,6 +90,12 @@ MODELS = (
     ('arena.MatchReward', 'arena_match_reward.json'),
     ('arena.BuyTimesCost', 'arena_buy_times_cost.json'),
     ('arena.MatchLogTemplate', 'arena_match_log_template.json'),
+
+    ('training_tower.TowerSaleGoods', 'sale_goods.json'),
+    ('training_tower.TowerStarReward', 'tower_star_reward.json'),
+    ('training_tower.TowerRankReward', 'tower_rank_reward.json'),
+    ('training_tower.TowerGameLevel', 'tower_level.json'),
+    ('training_tower.TowerResetCost', 'tower_reset_cost.json'),
 )
 
 class InMemoryZip(object):
