@@ -105,6 +105,10 @@ class TowerGameLevel(models.Model):
         def parse_star_reward(text):
             result = []
             for x in text.split(';'):
+                if not x:
+                    # 后面跟着一个;
+                    continue
+
                 _id, _amount = x.split(',')
                 result.append((int(_id), int(_amount)))
 

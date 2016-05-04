@@ -11,6 +11,7 @@ class Function(models.Model):
     belong_to_building = models.ForeignKey('building.Building', null=True, blank=True, verbose_name="所属建筑")
     order_in_building = models.IntegerField(default=1, verbose_name="在界面中显示顺序")
     need_building_level = models.IntegerField(default=1, verbose_name="所需建筑等级")
+    need_challenge_id = models.IntegerField(default=0, verbose_name='所需关卡ID')
     unlock_des = models.TextField(blank=True, verbose_name="解锁描述")
 
     def __unicode__(self):

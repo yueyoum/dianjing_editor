@@ -9,5 +9,6 @@ class FunctionAdmin(admin.ModelAdmin):
         'belong_to_building',
         'order_in_building',
         'need_building_level',
+        'need_challenge_id',
         'unlock_des'
     )
