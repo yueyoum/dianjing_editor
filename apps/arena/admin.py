@@ -42,7 +42,7 @@ class AdminHonorReward(ImportExportModelAdmin):
     resource_class = ResourceHonorReward
 
     list_display = (
-        'id', 'reward'
+        'id', 'reward', 'des'
     )
 
 @admin.register(MatchReward)

@@ -23,6 +23,7 @@ class ArenaNPC(models.Model):
 class HonorReward(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name='荣耀点')
     reward = models.CharField(max_length=255, help_text='id,amount;id,amount')
+    des = models.CharField(max_length=255, blank=True)
 
     class Meta:
         db_table = 'arena_honor_reward'
