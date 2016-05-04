@@ -75,23 +75,25 @@ class TowerRankReward(models.Model):
 class TowerGameLevel(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="层级ID")
     name = models.CharField(max_length=32, verbose_name="层级名")
-    buff = models.IntegerField(verbose_name="副本效果")
-    npc_path = models.CharField(max_length=255, verbose_name="npc配置",
+    talent_id = models.IntegerField(verbose_name="副本效果")
+    staffs = models.CharField(max_length=255, verbose_name="npc配置",
                                 help_text="位置,选手ID,兵种ID;位置,选手ID,兵种ID(位置范围0~29)")
-    star_one = models.CharField(max_length=255, verbose_name="1星奖励",
+    star_reward_1 = models.CharField(max_length=255, blank=True, verbose_name="1星奖励",
                                 help_text="物品ID,数量;物品ID,数量...")
-    star_two = models.CharField(max_length=255, verbose_name="2星奖励",
+    star_reward_2 = models.CharField(max_length=255, blank=True, verbose_name="2星奖励",
                                 help_text="物品ID,数量;物品ID,数量...")
-    star_three = models.CharField(max_length=255, verbose_name="3星奖励",
+    star_reward_3 = models.CharField(max_length=255, blank=True, verbose_name="3星奖励",
                                   help_text="物品ID,数量;物品ID,数量...")
+
     sale_goods = models.CharField(max_length=255, verbose_name="折扣商品", blank=True,
                                   help_text="普通商品ID,高级商品ID;...(没有则不填)")
-    roulette_three = models.CharField(max_length=32, verbose_name="3星天赋", blank=True,
-                                      help_text="天赋ID,概率;...(没有则不填)")
-    roulette_six = models.CharField(max_length=32, verbose_name="6星天赋", blank=True,
-                                    help_text="天赋ID,概率;...(没有则不填)")
-    roulette_nine = models.CharField(max_length=32, verbose_name="9星天赋", blank=True,
-                                     help_text="天赋ID,概率;...(没有则不填)")
+
+    turntable_3 = models.CharField(max_length=255, verbose_name="3星天赋", blank=True,
+                                      help_text="天赋ID,...(没有则不填)")
+    turntable_6 = models.CharField(max_length=255, verbose_name="6星天赋", blank=True,
+                                    help_text="天赋ID,...(没有则不填)")
+    turntable_9 = models.CharField(max_length=255, verbose_name="9星天赋", blank=True,
+                                     help_text="天赋ID,...(没有则不填)")
 
     class Meta:
         db_table = 'tower_level'
@@ -100,58 +102,60 @@ class TowerGameLevel(models.Model):
 
     @classmethod
     def patch_fixture(cls, fixture):
+        def parse_star_reward(text):
+            result = []
+            for x in text.split(';'):
+                _id, _amount = x.split(',')
+                result.append((int(_id), int(_amount)))
+
+            return result
+
+        def parse_turntable(text):
+            if not text:
+                return []
+
+            return [int(i) for i in text.split(',')]
+
+
         for f in fixture:
-            npc_path = []
-            for path in f['fields']['npc_path'].split(';'):
-                slot, staff, unit = path.split(',')
-                npc_path.append([int(slot), int(staff), int(unit)])
-            f['fields']['npc_path'] = npc_path
+            staffs = []
+            for staff in f['fields']['staffs'].split(';'):
+                pos, staff_id, unit_id = staff.split(',')
+                staffs.append([int(pos), int(staff_id), int(unit_id)])
+            f['fields']['staffs'] = staffs
 
-            star_one = []
-            for one in f['fields']['star_one'].split(';'):
-                _id,  amount = one.split(',')
-                star_one.append([int(_id), int(amount)])
-            f['fields']['star_one'] = star_one
+            star_reward = {
+                '1': parse_star_reward(f['fields']['star_reward_1']),
+                '2': parse_star_reward(f['fields']['star_reward_2']),
+                '3': parse_star_reward(f['fields']['star_reward_3']),
+            }
 
-            star_two = []
-            for two in f['fields']['star_two'].split(';'):
-                _id, amount = two.split(',')
-                star_two.append([int(_id), int(amount)])
-            f['fields']['star_one'] = star_two
+            f['fields'].pop('star_reward_1')
+            f['fields'].pop('star_reward_2')
+            f['fields'].pop('star_reward_3')
 
-            star_three = []
-            for three in f['fields']['star_three'].split(';'):
-                _id, amount = three.split(',')
-                star_three.append([int(_id), int(amount)])
-            f['fields']['star_one'] = star_three
+            f['fields']['star_reward'] = star_reward
 
-            if f['fields'].get('sale_goods', ""):
-                sale_goods = []
-                for goods in f['fields']['sale_goods'].split(';'):
-                    id_one, id_two = goods.split(',')
-                    sale_goods.append([int(id_one), int(id_two)])
-                f['fields']['sale_goods'] = sale_goods
+            # if f['fields'].get('sale_goods', ""):
+            #     sale_goods = []
+            #     for goods in f['fields']['sale_goods'].split(';'):
+            #         id_one, id_two = goods.split(',')
+            #         sale_goods.append([int(id_one), int(id_two)])
+            #     f['fields']['sale_goods'] = sale_goods
 
-            if f['fields'].get('roulette_three', ""):
-                roulette_three = []
-                for buff in f['fields']['roulette_three'].split(';'):
-                    _id, _range = buff.split(',')
-                    roulette_three.append([int(_id), int(_range)])
-                f['fields']['roulette_three'] = roulette_three
+            turntable = {
+                '3': parse_turntable(f['fields']['turntable_3']),
+                '6': parse_turntable(f['fields']['turntable_6']),
+                '9': parse_turntable(f['fields']['turntable_9']),
+            }
 
-            if f['fields'].get('roulette_six', ""):
-                roulette_six = []
-                for buff in f['fields']['roulette_six'].split(';'):
-                    _id, _range = buff.split(',')
-                    roulette_six.append([int(_id), int(_range)])
-                f['fields']['roulette_three'] = roulette_six
+            f['fields'].pop('turntable_3')
+            f['fields'].pop('turntable_6')
+            f['fields'].pop('turntable_9')
 
-            if f['fields'].get('roulette_nine', ""):
-                roulette_nine = []
-                for buff in f['fields']['roulette_nine'].split(';'):
-                    _id, _range = buff.split(',')
-                    roulette_nine.append([int(_id), int(_range)])
-                f['fields']['roulette_three'] = roulette_nine
+            f['fields']['turntable'] = turntable
+
+        return fixture
 
 
 class TowerResetCost(models.Model):

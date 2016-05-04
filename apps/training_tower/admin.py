@@ -67,8 +67,7 @@ class TowerGameLevelAdmin(ImportExportModelAdmin):
     resource_class = ResourceTowerGameLevel
 
     list_display = (
-            "id", "name", "buff", "npc_path", "star_one", "star_two", "star_three",
-            "sale_goods", "roulette_three", "roulette_six", "roulette_nine",
+            "id", "name", "talent_id", "staffs",
     )
 
 
