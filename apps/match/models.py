@@ -111,3 +111,15 @@ class Maps(models.Model):
         db_table = 'maps'
         verbose_name = '地图'
         verbose_name_plural = '地图'
+
+
+class ChallengeGuide(models.Model):
+    id = models.IntegerField(primary_key=True)
+    guide = models.IntegerField()
+    des = models.TextField()
+    return_to_main_panel = models.BooleanField()
+
+    class Meta:
+        db_table = 'challenge_guide'
+        verbose_name = '挑战赛引导'
+        verbose_name_plural = '挑战赛引导'

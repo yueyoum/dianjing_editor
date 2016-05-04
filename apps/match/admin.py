@@ -5,6 +5,7 @@ from import_export.admin import ImportExportModelAdmin
 from apps.match.models import (
     ChallengeMatch,
     ChallengeChapter,
+    ChallengeGuide,
 
     Maps,
 )
@@ -18,6 +19,11 @@ class ResourceChallengeChapter(resources.ModelResource):
 class ChallengeMatchResource(resources.ModelResource):
     class Meta:
         model = ChallengeMatch
+
+
+class ResourceChallengeGuide(resources.ModelResource):
+    class Meta:
+        model = ChallengeGuide
 
 
 @admin.register(ChallengeChapter)
@@ -44,3 +50,12 @@ class MapsAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'name', 'picture',
     )
+
+@admin.register(ChallengeGuide)
+class AdminChallengeGuide(ImportExportModelAdmin):
+    resource_class = ResourceChallengeGuide
+
+    list_display = (
+        'id', 'guide', 'des', 'return_to_main_panel'
+    )
+    
