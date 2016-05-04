@@ -43,6 +43,7 @@ MODELS = (
 
     ('match.ChallengeChapter', 'challenge_chapter.json'),
     ('match.ChallengeMatch', 'challenge_match.json'),
+    ('match.ChallengeGuide', 'challenge_guide.json'),
     ('match.Maps', 'maps.json'),
 
     ('building.Building', 'building.json'),

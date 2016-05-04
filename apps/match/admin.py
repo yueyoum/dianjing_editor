@@ -58,4 +58,3 @@ class AdminChallengeGuide(ImportExportModelAdmin):
     list_display = (
         'id', 'guide', 'des', 'return_to_main_panel'
     )
-    
