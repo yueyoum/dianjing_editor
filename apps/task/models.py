@@ -191,3 +191,34 @@ class RandomEventDialogAfter(models.Model):
         verbose_name = '随机事件后对话'
         verbose_name_plural = '随机事件后对话'
 
+
+class TaskMain(models.Model):
+    id = models.IntegerField(primary_key=True)
+    next_id = models.IntegerField()
+    name = models.CharField(max_length=255)
+    des = models.TextField()
+    challenge_id = models.IntegerField()
+    items = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'task_main'
+        verbose_name = '主线任务'
+        verbose_name_plural = '主线任务'
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        def parse_items(items):
+            result = []
+            for x in items.split(';'):
+                if not x:
+                    continue
+
+                _id, _amount  = x.split(',')
+                result.append((int(_id), int(_amount)))
+
+            return result
+
+        for f in fixture:
+            f['fields']['items'] = parse_items(f['fields']['items'])
+
+        return fixture

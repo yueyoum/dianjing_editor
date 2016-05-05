@@ -53,6 +53,9 @@ MODELS = (
     ('task.TaskStatus', 'task_status.json'),
     ('task.TaskTargetType', 'task_target.json'),
     ('task.RandomEvent', 'random_event.json'),
+    ('task.TaskMain', 'task_main.json'),
+
+
     ('notification.Notification', 'notification.json'),
 
     ('function.Function', 'function.json'),

@@ -9,7 +9,12 @@ from apps.task.models import (
     RandomEvent,
     RandomEventDialogAfter,
     RandomEventDialogBefore,
+
+    TaskMain,
 )
+
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 
 
 # Register your models here.
@@ -60,3 +65,13 @@ class EventDialogAfterInLine(admin.TabularInline):
 class RandomEventAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'icon', 'level_min', 'level_max', 'trig_name', 'package')
     inlines = [EventDialogBeforeInLine, EventDialogAfterInLine]
+
+
+class ResourceTaskMain(resources.ModelResource):
+    class Meta:
+        model = TaskMain
+
+@admin.register(TaskMain)
+class AdminTaskMain(ImportExportModelAdmin):
+    resource_class = ResourceTaskMain
+    list_display = ('id', 'next_id', 'name', 'des', 'challenge_id', 'items')
