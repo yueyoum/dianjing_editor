@@ -74,4 +74,4 @@ class ResourceTaskMain(resources.ModelResource):
 @admin.register(TaskMain)
 class AdminTaskMain(ImportExportModelAdmin):
     resource_class = ResourceTaskMain
-    list_display = ('id', 'next_id', 'name', 'des', 'challenge_id', 'items')
+    list_display = ('id', 'name', 'des', 'challenge_id', 'items')

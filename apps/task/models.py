@@ -194,7 +194,6 @@ class RandomEventDialogAfter(models.Model):
 
 class TaskMain(models.Model):
     id = models.IntegerField(primary_key=True)
-    next_id = models.IntegerField()
     name = models.CharField(max_length=255)
     des = models.TextField()
     challenge_id = models.IntegerField()
