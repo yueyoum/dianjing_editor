@@ -163,8 +163,7 @@ class TowerGameLevel(models.Model):
 
 
 class TowerResetCost(models.Model):
-    id = models.IntegerField(primary_key=True, verbose_name="爬塔重置ID")
-    times = models.IntegerField(verbose_name="第几次购买")
+    id = models.IntegerField(primary_key=True)
     cost = models.IntegerField(verbose_name="消耗钻石")
 
     class Meta:
