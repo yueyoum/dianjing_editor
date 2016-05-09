@@ -58,6 +58,7 @@ class StaffRecruit(models.Model):
                     'cost_type': settings.cost_type,
                     'cost_value_1': settings.cost_value_1,
                     'cost_value_10': settings.cost_value_10,
+                    'items_1': parse_items(settings.items_1),
                     'items_10': parse_items(settings.items_10),
                     'reward_score_times': settings.reward_score_times,
                     'reward_score': settings.reward_score,
