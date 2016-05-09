@@ -37,11 +37,12 @@ class StaffRecruit(models.Model):
         def parse_items(items):
             result = []
             for x in items.split(';'):
+                if not x:
+                    continue
                 _id, _amount, _prob  = x.split(',')
                 result.append((int(_id), int(_amount), int(_prob)))
 
             return result
-
 
         tps = {}
         for f in fixture:
