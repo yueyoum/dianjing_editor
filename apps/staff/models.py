@@ -88,6 +88,7 @@ class StaffRecruitSettings(models.Model):
     cost_value_1 = models.IntegerField(verbose_name='单次花费')
     cost_value_10 = models.IntegerField(verbose_name='10连抽花费')
 
+    items_1 = models.TextField(verbose_name='第1次产出')
     items_10 = models.TextField(verbose_name='第10次产出')
 
     reward_score_times = models.IntegerField(verbose_name='获取积分的抽卡次数')
