@@ -18,7 +18,7 @@ class DungeonAdmin(ImportExportModelAdmin):
     resource_class = ResourceDungeon
 
     list_display = (
-        "id", "name", "cost", "open_time", "des"
+        "id", "name", "icon", "cost", "open_time", "des"
     )
 
 

@@ -9,6 +9,7 @@ from django.db import models
 class Dungeon(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="副本ID")
     name = models.CharField(max_length=32, verbose_name="副本名称")
+    icon = models.CharField(max_length=32, verbose_name='ICON')
     cost = models.IntegerField(verbose_name="消耗体力")
     open_time = models.CharField(max_length=32, verbose_name="开启时间",
                                  help_text="1,3,5 -- 周一、三、五开启")
