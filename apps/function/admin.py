@@ -18,7 +18,7 @@ class FunctionAdmin(ImportExportModelAdmin):
         'belong_to_building',
         'belong_to_ui',
         'order_in_building',
-        'need_building_level',
+        'need_club_level',
         'need_challenge_id',
         'unlock_des'
     )

@@ -11,7 +11,7 @@ class Function(models.Model):
     belong_to_building = models.IntegerField(verbose_name="所属建筑")
     belong_to_ui = models.CharField(max_length=255, blank=True)
     order_in_building = models.IntegerField(default=1, verbose_name="在界面中显示顺序")
-    need_building_level = models.IntegerField(default=1, verbose_name="所需建筑等级")
+    need_club_level = models.IntegerField(default=1, verbose_name="所需俱乐部等级")
     need_challenge_id = models.IntegerField(default=0, verbose_name='所需关卡ID')
     unlock_des = models.TextField(blank=True, verbose_name="解锁描述")
 
@@ -22,4 +22,3 @@ class Function(models.Model):
         db_table = 'function'
         verbose_name = "功能"
         verbose_name_plural = "功能"
-
