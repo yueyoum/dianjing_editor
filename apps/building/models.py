@@ -6,8 +6,8 @@ class BuildingNew(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=32)
     des = models.TextField()
-    effect_day = models.CharField(max_length=255)
-    effect_night = models.CharField(max_length=255)
+    day_effect = models.CharField(max_length=255)
+    night_effect = models.CharField(max_length=255)
     model_resource = models.CharField(max_length=255)
     position = models.CharField(max_length=255)
 

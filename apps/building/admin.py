@@ -16,5 +16,5 @@ class ResourceBuildingNew(resources.ModelResource):
 class AdminBuildingNew(ImportExportModelAdmin):
     resource_class = ResourceBuildingNew
     list_display = (
-        'id', 'name', 'des', 'effect_day', 'effect_night', 'model_resource', 'position'
+        'id', 'name', 'des', 'day_effect', 'night_effect', 'model_resource', 'position'
     )
