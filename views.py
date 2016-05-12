@@ -46,7 +46,7 @@ MODELS = (
     ('match.ChallengeGuide', 'challenge_guide.json'),
     ('match.Maps', 'maps.json'),
 
-    ('building.Building', 'building.json'),
+    ('building.BuildingNew', 'building.json'),
 
     ('task.Task', 'task.json'),
     ('task.TaskType', 'task_type.json'),

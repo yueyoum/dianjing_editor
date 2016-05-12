@@ -1,36 +1,20 @@
 from django.contrib import admin
 
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
+
 from apps.building.models import (
-    Building,
-    BuildingEffect,
-    BuildingEffectInfo,
-    BuildingLevels,
+    BuildingNew
 )
 
 
-class BuildingEffectInfoInline(admin.TabularInline):
-    model = BuildingEffectInfo
+class ResourceBuildingNew(resources.ModelResource):
+    class Meta:
+        model = BuildingNew
 
-
-@admin.register(BuildingEffect)
-class BuildingEffectAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
-    inlines = [BuildingEffectInfoInline]
-
-
-class BuildingLevelsInline(admin.TabularInline):
-    model = BuildingLevels
-
-
-@admin.register(Building)
-class BuildingAdmin(admin.ModelAdmin):
+@admin.register(BuildingNew)
+class AdminBuildingNew(ImportExportModelAdmin):
+    resource_class = ResourceBuildingNew
     list_display = (
-        'id', 'name', 'level_up_condition_type', 'des', 'status_des',
-        'day_effect', 'night_effect',
-        'LevelAmount'
+        'id', 'name', 'des', 'effect_day', 'effect_night', 'model_resource', 'position'
     )
-
-    inlines = [BuildingLevelsInline,]
-
-    def LevelAmount(self, obj):
-        return obj.levels_info.all().count()
