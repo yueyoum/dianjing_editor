@@ -6,7 +6,7 @@ from django.db import migrations
 
 
 def change_null_to_0(apps, scheme_editor):
-    Model = apps.get_module("function", "Function")
+    Model = apps.get_model("function", "Function")
     Model.objects.filter(belong_to_building=None).update(belong_to_building=0)
 
 
