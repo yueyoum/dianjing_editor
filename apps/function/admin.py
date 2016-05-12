@@ -16,6 +16,7 @@ class FunctionAdmin(ImportExportModelAdmin):
     list_display = (
         'id', 'name', 'icon',
         'belong_to_building',
+        'belong_to_ui',
         'order_in_building',
         'need_building_level',
         'need_challenge_id',

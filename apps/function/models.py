@@ -8,7 +8,8 @@ class Function(models.Model):
     name = models.CharField(max_length=255)
     icon = models.CharField(max_length=255)
 
-    belong_to_building = models.ForeignKey('building.Building', null=True, blank=True, verbose_name="所属建筑")
+    belong_to_building = models.IntegerField(verbose_name="所属建筑")
+    belong_to_ui = models.CharField(max_length=255, blank=True)
     order_in_building = models.IntegerField(default=1, verbose_name="在界面中显示顺序")
     need_building_level = models.IntegerField(default=1, verbose_name="所需建筑等级")
     need_challenge_id = models.IntegerField(default=0, verbose_name='所需关卡ID')
