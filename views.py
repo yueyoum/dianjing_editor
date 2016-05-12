@@ -100,6 +100,9 @@ MODELS = (
     ('training_tower.TowerRankReward', 'tower_rank_reward.json'),
     ('training_tower.TowerGameLevel', 'tower_level.json'),
     ('training_tower.TowerResetCost', 'tower_reset_cost.json'),
+
+    ('territory.TerritoryBuilding', 'territory_building.json'),
+    ('territory.StaffSpecialProduct', 'territory_staff_special_product.json'),
 )
 
 class InMemoryZip(object):

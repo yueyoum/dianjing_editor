@@ -69,6 +69,7 @@ INSTALLED_APPS = (
     'apps.training_tower',
     'apps.npc',
     'apps.arena',
+    'apps.territory',
 )
 
 MIDDLEWARE_CLASSES = (
