@@ -9,7 +9,7 @@ def drop_index(apps, scheme_editor):
     cursor.execute("select INDEX_NAME from information_schema.STATISTICS where TABLE_NAME = 'function' and COLUMN_NAME='belong_to_building_id';")
     res = cursor.fetchone()
     index_name = res[0]
-    cursor.execute("drop index {0} on function".format(index_name))
+    cursor.execute("alter table function drop foreign key {0}".format(index_name))
 
     cursor.close()
 
