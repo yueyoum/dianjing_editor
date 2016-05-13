@@ -1,8 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 
-from apps.conversation.models import Conversation, ConversationInfo
+from apps.conversation.models import Conversation, ConversationInfo, ChallengeConversation
 
 
 class ConversationInLine(admin.TabularInline):
@@ -16,3 +17,15 @@ class ConversationAdmin(admin.ModelAdmin):
     )
 
     inlines = [ConversationInLine]
+
+
+class ResourceCC(resources.ModelResource):
+    class Meta:
+        model = ChallengeConversation
+
+class AdminCC(ImportExportModelAdmin):
+    resource_class = ResourceCC
+    list_display = (
+        'id', 'challenge_id', 'mode', 'pos',
+        'picture', 'content'
+    )
