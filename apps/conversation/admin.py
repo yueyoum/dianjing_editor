@@ -27,6 +27,6 @@ class ResourceCC(resources.ModelResource):
 class AdminCC(ImportExportModelAdmin):
     resource_class = ResourceCC
     list_display = (
-        'id', 'challenge_id', 'mode', 'pos',
-        'picture', 'content'
+        'id', 'challenge_id', 'mode', 'position',
+        'icon', 'dialog'
     )

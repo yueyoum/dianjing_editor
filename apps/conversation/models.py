@@ -89,10 +89,10 @@ class ChallengeConversation(models.Model):
     id = models.IntegerField(primary_key=True)
     challenge_id = models.IntegerField()
     mode = models.IntegerField(choices=MODE)
-    pos = models.IntegerField(choices=POS)
+    position = models.IntegerField(choices=POS)
 
-    picture = models.CharField(max_length=255)
-    content = models.TextField()
+    icon = models.CharField(max_length=255)
+    dialog = models.TextField()
 
     class Meta:
         db_table = 'challenge_conversation'
