@@ -23,6 +23,7 @@ class ResourceCC(resources.ModelResource):
     class Meta:
         model = ChallengeConversation
 
+@admin.register(ChallengeConversation)
 class AdminCC(ImportExportModelAdmin):
     resource_class = ResourceCC
     list_display = (
