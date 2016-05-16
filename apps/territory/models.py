@@ -188,7 +188,7 @@ class Inspire(models.Model):
                 continue
 
             _id, _amount, _prob = x.split(',')
-            result.append([_id, _amount, _prob])
+            result.append([int(_id), int(_amount), int(_prob)])
 
         for i in range(1, len(result)):
             result[i][2] += result[i-1][2]
