@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.db.models import Q
 
 class TerritoryBuilding(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -60,6 +61,12 @@ class TerritoryBuilding(models.Model):
                 lv = i.pop('building_level')
 
                 levels[lv] = i
+                inspire = Inspire.objects.get(Q(building_id=k) & Q(building_level=lv))
+                levels[lv]['inspire'] = {
+                    'exp': inspire.exp,
+                    'max_times': inspire.max_times,
+                    'reward': inspire.parsed_reward(),
+                }
 
             slots = BuildingSlot.objects.filter(building_id=k)
             slots_data = {}
@@ -85,6 +92,7 @@ class TerritoryBuilding(models.Model):
                 'fields': {
                     'name': name,
                     'levels': levels,
+                    'max_level': max(levels.keys()),
                     'slots': slots_data,
                 }
             }
@@ -126,6 +134,10 @@ class StaffSpecialProduct(models.Model):
     product_1 = models.TextField(help_text='id,amount_low,amount_high;')
     product_2 = models.TextField(help_text='id,amount_low,amount_high;')
     product_3 = models.TextField(help_text='id,amount_low,amount_high;')
+    des_1 = models.TextField(blank=True)
+    des_2 = models.TextField(blank=True)
+    des_3 = models.TextField(blank=True)
+
 
     class Meta:
         db_table = 'territory_special_product'
@@ -143,8 +155,42 @@ class StaffSpecialProduct(models.Model):
             return result
 
         for f in fixture:
-            f['fields']['product_1'] = _parse(f['fields']['product_1'])
-            f['fields']['product_2'] = _parse(f['fields']['product_2'])
-            f['fields']['product_3'] = _parse(f['fields']['product_3'])
+            p1 = f['fields'].pop('product_1')
+            p2 = f['fields'].pop('product_2')
+            p3 = f['fields'].pop('product_3')
+            d1 = f['fields'].pop('des_1')
+            d2 = f['fields'].pop('des_2')
+            d3 = f['fields'].pop('des_3')
+
+            f['fields']['product'] = [_parse(p1), _parse(p2), _parse(p3)]
+            f['fields']['des'] = [d1, d2, d3]
 
         return fixture
+
+class Inspire(models.Model):
+    id = models.IntegerField(primary_key=True)
+    building_id = models.IntegerField()
+    building_level = models.IntegerField()
+    exp = models.IntegerField()
+    max_times = models.IntegerField()
+    reward = models.TextField(help_text='id,amount,prob;  概率和为100')
+
+    class Meta:
+        db_table = 'territory_inspire'
+        unique_together = (('building_id', 'building_level'),)
+        verbose_name = '鼓舞'
+        verbose_name_plural = '鼓舞'
+
+    def parsed_reward(self):
+        result = []
+        for x in self.reward.split(';'):
+            if not x:
+                continue
+
+            _id, _amount, _prob = x.split(',')
+            result.append([_id, _amount, _prob])
+
+        for i in range(1, len(result)):
+            result[i][2] += result[i-1][2]
+
+        return result
