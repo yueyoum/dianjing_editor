@@ -194,3 +194,24 @@ class Inspire(models.Model):
             result[i][2] += result[i-1][2]
 
         return result
+
+
+class InspireCost(models.Model):
+    id = models.IntegerField(primary_key=True)
+    diamond = models.IntegerField()
+
+    class Meta:
+        db_table = 'territory_inspire_cost'
+        verbose_name = '鼓舞花费'
+        verbose_name_plural = '鼓舞花费'
+
+
+class ReportTemplate(models.Model):
+    id = models.IntegerField(primary_key=True)
+    used_for = models.CharField(max_length=255, verbose_name='用于')
+    template = models.TextField()
+
+    class Meta:
+        db_table = 'territory_report_template'
+        verbose_name = '工作报告模板'
+        verbose_name_plural = '工作报告模板'

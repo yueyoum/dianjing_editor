@@ -106,6 +106,8 @@ MODELS = (
 
     ('territory.TerritoryBuilding', 'territory_building.json'),
     ('territory.StaffSpecialProduct', 'territory_staff_special_product.json'),
+    ('territory.InspireCost', 'territory_inspire_cost.json'),
+    ('territory.ReportTemplate', 'territory_report_template.json'),
 )
 
 class InMemoryZip(object):
