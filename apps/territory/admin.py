@@ -8,6 +8,7 @@ from apps.territory.models import (
     BuildingSlot,
     BuildingSlotExtraProduct,
     StaffSpecialProduct,
+    Inspire,
 )
 
 class ResourceTerritoryBuilding(resources.ModelResource):
@@ -25,6 +26,10 @@ class ResourceBuildingSlotExtraProduct(resources.ModelResource):
 class ResourceStaffSpecialProduct(resources.ModelResource):
     class Meta:
         model = StaffSpecialProduct
+
+class ResourceInspire(resources.ModelResource):
+    class Meta:
+        model = Inspire
 
 
 
@@ -62,4 +67,11 @@ class AdminStaffSpecialProduct(ImportExportModelAdmin):
     resource_class = ResourceStaffSpecialProduct
     list_display = (
         'id', 'product_1', 'product_2', 'product_3'
+    )
+
+@admin.register(Inspire)
+class AdminInspire(ImportExportModelAdmin):
+    resource_class = ResourceInspire
+    list_display = (
+        'id', 'building_id', 'building_level', 'exp', 'max_times', 'reward'
     )
