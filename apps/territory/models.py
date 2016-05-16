@@ -26,7 +26,7 @@ class TerritoryBuilding(models.Model):
             if not text:
                 return []
 
-            return [int(i) for i in text.split(';') if i]
+            return [int(i) for i in text.split(',') if i]
 
         def _parse_extra_product(text):
             if not text:
