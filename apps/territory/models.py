@@ -53,10 +53,8 @@ class TerritoryBuilding(models.Model):
 
         new_fixture = []
         for k, v in buildings.iteritems():
-            name = ""
             levels = {}
             for i in v:
-                name = i.pop('building_name')
                 lv = i.pop('building_level')
 
                 levels[lv] = i
@@ -89,7 +87,6 @@ class TerritoryBuilding(models.Model):
             data = {
                 'pk': k,
                 'fields': {
-                    'name': name,
                     'levels': levels,
                     'max_level': max(levels.keys()),
                     'slots': slots_data,
