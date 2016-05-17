@@ -151,15 +151,14 @@ class ItemUse(models.Model):
         verbose_name_plural = '道具使用'
 
     @classmethod
-    def get_fixture_key(cls):
-        return 'item.ItemUse'
-
-    @classmethod
     def patch_fixture(cls, fixture):
         def parse_result(result_text):
             result = []
 
             for group_text in result_text.split('|'):
+                if not group_text:
+                    continue
+                    
                 group_data = []
 
                 for item_text in group_text.split(';'):
