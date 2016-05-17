@@ -7,7 +7,6 @@ from django.db.models import Q
 class TerritoryBuilding(models.Model):
     id = models.IntegerField(primary_key=True)
     building_id = models.IntegerField()
-    building_name = models.CharField(max_length=32)
     building_level = models.IntegerField()
 
     exp = models.IntegerField()

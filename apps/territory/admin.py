@@ -47,7 +47,7 @@ class ResourceReportTemplate(resources.ModelResource):
 class AdminTerritoryBuilding(ImportExportModelAdmin):
     resource_class = ResourceTerritoryBuilding
     list_display = (
-        'id', 'building_id', 'building_name', 'building_level',
+        'id', 'building_id', 'building_level',
         'exp', 'product_rate', 'events', 'product_limit'
     )
 
