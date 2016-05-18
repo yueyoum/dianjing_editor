@@ -67,7 +67,8 @@ class AdminBuildingSlot(ImportExportModelAdmin):
 class AdminBuildingSlotExtraProduct(ImportExportModelAdmin):
     resource_class = ResourceBuildingSlotExtraProduct
     list_display = (
-        'id', 'slot_id', 'building_level', 'extra_product', 'cost_amount'
+        'id', 'slot_id', 'building_level', 'extra_product', 'cost_amount',
+        'des',
     )
 
     list_filter = ('slot_id',)

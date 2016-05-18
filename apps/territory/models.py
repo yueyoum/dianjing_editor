@@ -79,7 +79,8 @@ class TerritoryBuilding(models.Model):
                 for ep in extra_products:
                     slot_building_levels[ep.building_level] = {
                         'extra_product': _parse_extra_product(ep.extra_product),
-                        'cost_amount': [int(x) for x in ep.cost_amount.split(';') if x]
+                        'cost_amount': [int(x) for x in ep.cost_amount.split(';') if x],
+                        'des': ep.des
                     }
 
                 slots_data[s.id]['building_levels'] = slot_building_levels
@@ -118,6 +119,7 @@ class BuildingSlotExtraProduct(models.Model):
     building_level = models.IntegerField()
     extra_product = models.TextField(help_text='id,amount;')
     cost_amount = models.CharField(max_length=255)
+    des = models.TextField(blank=True)
 
     class Meta:
         db_table = 'territory_building_slot_extra_product'
