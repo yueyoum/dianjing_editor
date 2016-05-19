@@ -213,3 +213,54 @@ class ReportTemplate(models.Model):
         db_table = 'territory_report_template'
         verbose_name = '工作报告模板'
         verbose_name_plural = '工作报告模板'
+
+
+class TerritoryStore(models.Model):
+    TYPE = (
+        (1, '普通兑换'),
+        (2, '高级兑换'),
+    )
+
+    CON_ID = (
+        (-1, 'VIP等级'),
+        (101, '建筑等级101'),
+        (102, '建筑等级102'),
+        (103, '建筑等级103'),
+    )
+
+    id = models.IntegerField(primary_key=True)
+    tp = models.IntegerField(choices=TYPE)
+    item_id = models.IntegerField()
+    item_amount = models.IntegerField()
+    sequence = models.IntegerField(verbose_name='位置')
+
+    needs = models.TextField(verbose_name='所需资源')
+    condition_id = models.IntegerField(choices=CON_ID, verbose_name='条件ID')
+    condition_value = models.IntegerField(default=0, verbose_name='条件值')
+
+    max_times = models.IntegerField(verbose_name='次数限制')
+
+    class Meta:
+        db_table = 'territory_store'
+        verbose_name = '商店'
+        verbose_name_plural = '商店'
+
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        def _parse(text):
+            res = []
+            for x in text.split(';'):
+                if not x:
+                    continue
+
+                a, b = x.split(',')
+
+                res.append((int(a), int(b)))
+
+            return res
+
+        for f in fixture:
+            f['fields']['needs'] = _parse(f['fields']['needs'])
+
+        return fixture
