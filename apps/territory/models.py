@@ -264,3 +264,39 @@ class TerritoryStore(models.Model):
             f['fields']['needs'] = _parse(f['fields']['needs'])
 
         return fixture
+
+class Event(models.Model):
+    id = models.IntegerField(primary_key=True)
+    target_exp = models.IntegerField(verbose_name='被帮助人获得经验')
+    reward_win = models.TextField(verbose_name='帮助人胜利获得资源')
+    reward_lose = models.TextField(verbose_name='帮助人失败获得资源')
+
+    npc = models.IntegerField()
+    des = models.TextField(blank=True)
+
+
+    class Meta:
+        db_table = 'territory_event'
+        verbose_name = '随机事件'
+        verbose_name_plural = '随机事件'
+
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        def _parse(text):
+            res = []
+            for x in text.split(';'):
+                if not x:
+                    continue
+
+                a, b = x.split(',')
+
+                res.append((int(a), int(b)))
+
+            return res
+
+        for f in fixture:
+            f['fields']['reward_win'] = _parse(f['fields']['reward_win'])
+            f['fields']['reward_lose'] = _parse(f['fields']['reward_lose'])
+
+        return fixture

@@ -12,6 +12,7 @@ from apps.territory.models import (
     InspireCost,
     ReportTemplate,
     TerritoryStore,
+    Event,
 )
 
 class ResourceTerritoryBuilding(resources.ModelResource):
@@ -45,6 +46,10 @@ class ResourceReportTemplate(resources.ModelResource):
 class ResourceStore(resources.ModelResource):
     class Meta:
         model = TerritoryStore
+
+class ResourceEvent(resources.ModelResource):
+    class Meta:
+        model = Event
 
 
 @admin.register(TerritoryBuilding)
@@ -107,4 +112,11 @@ class AdminTerritoryStore(ImportExportModelAdmin):
     list_display = (
         'id', 'tp', 'item_id', 'item_amount', 'sequence', 'needs',
         'condition_id', 'condition_value', 'max_times'
+    )
+
+@admin.register(Event)
+class AdminEvent(ImportExportModelAdmin):
+    resource_class = ResourceEvent
+    list_display = (
+        'id', 'target_exp', 'reward_win', 'reward_lose', 'npc', 'des'
     )
