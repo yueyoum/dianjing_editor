@@ -48,7 +48,7 @@ class Store(models.Model):
     def patch_fixture(cls, fixture):
         def _parse(text):
             result = []
-            for x in fixture.split(';'):
+            for x in text.split(';'):
                 if not x:
                     continue
 
@@ -78,7 +78,7 @@ class StoreRefresh(models.Model):
     def patch_fixture(cls, fixture):
         result = {}
         for f in fixture:
-            pk = f['store_tp']
+            pk = f['fields']['store_tp']
             data = [f['fields']['times'], f['fields']['diamond']]
 
             if pk in result:
