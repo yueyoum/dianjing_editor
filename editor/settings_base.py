@@ -70,6 +70,7 @@ INSTALLED_APPS = (
     'apps.npc',
     'apps.arena',
     'apps.territory',
+    'apps.store',
 )
 
 MIDDLEWARE_CLASSES = (

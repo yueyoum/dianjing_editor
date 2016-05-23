@@ -110,6 +110,10 @@ MODELS = (
     ('territory.ReportTemplate', 'territory_report_template.json'),
     ('territory.TerritoryStore', 'territory_store.json'),
     ('territory.Event', 'territory_event.json'),
+
+    ('store.StoreCondition', 'store_condition.json'),
+    ('store.Store', 'store.json'),
+    ('store.StoreRefresh', 'store_refresh.json'),
 )
 
 class InMemoryZip(object):
