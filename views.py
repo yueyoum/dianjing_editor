@@ -112,7 +112,8 @@ MODELS = (
     ('territory.Event', 'territory_event.json'),
 
     ('store.StoreCondition', 'store_condition.json'),
-    ('store.Store', 'store.json'),
+    ('store.StoreType', 'store_condition.json'),
+    ('store.Store', 'store_type.json'),
     ('store.StoreRefresh', 'store_refresh_cost.json'),
 )
 
