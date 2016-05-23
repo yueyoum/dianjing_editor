@@ -3,7 +3,11 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from apps.store.models import Store, StoreCondition, StoreRefresh
+from apps.store.models import Store, StoreCondition, StoreRefresh, StoreType
+
+class ResourceStoreType(resources.ModelResource):
+    class Meta:
+        model = StoreType
 
 class ResourceStore(resources.ModelResource):
     class Meta:
@@ -18,13 +22,20 @@ class ResourceSR(resources.ModelResource):
         model = StoreRefresh
 
 
+@admin.register(StoreType)
+class AdminStoreType(ImportExportModelAdmin):
+    resource_class = ResourceStoreType
+    list_display = (
+        'id', 'name', 'money_id', 'refresh_hour_interval'
+    )
+
 
 @admin.register(Store)
 class AdminStore(ImportExportModelAdmin):
     resource_class = ResourceStore
     list_display = (
-        'id', 'tp', 'tp_name', 'club_level_min', 'club_level_max',
-        'money_id', 'refresh_hour_interval', 'position',
+        'id', 'tp', 'club_level_min', 'club_level_max',
+        'position',
         'condition_id', 'condition_value',
         'times_limit', 'content',
     )

@@ -14,15 +14,24 @@ class StoreCondition(models.Model):
         verbose_name_plural = '商店条件'
 
 
+class StoreType(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255)
+    money_id = models.IntegerField()
+    refresh_hour_interval = models.IntegerField(verbose_name='自动刷新间隔小时数')
+
+    class Meta:
+        db_table = 'store_type'
+        verbose_name = '商店类型'
+        verbose_name_plural = '商店类型'
+
+
 class Store(models.Model):
     id = models.IntegerField(primary_key=True)
     tp = models.IntegerField(verbose_name='类型')
-    tp_name = models.CharField(max_length=255)
     club_level_min = models.IntegerField(default=0, help_text='0 表示没有限制')
     club_level_max = models.IntegerField(default=0, help_text='0 表示没有限制')
 
-    money_id = models.IntegerField(verbose_name='显示的货币')
-    refresh_hour_interval = models.IntegerField(verbose_name='自动刷新间隔小时数')
     position = models.IntegerField(verbose_name='位置')
     condition_id = models.IntegerField()
     condition_value = models.IntegerField()
