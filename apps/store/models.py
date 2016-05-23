@@ -65,3 +65,27 @@ class StoreRefresh(models.Model):
         verbose_name = '刷新花费'
         verbose_name_plural = '刷新花费'
 
+    @classmethod
+    def patch_fixture(cls, fixture):
+        result = {}
+        for f in fixture:
+            pk = f['store_tp']
+            data = [f['fields']['times'], f['fields']['diamond']]
+
+            if pk in result:
+                result[pk].append(data)
+            else:
+                result[pk] = [data]
+
+        new_fixture = []
+        for k, v in result.iteritems():
+            v.sort(key=lambda item: -item[0])
+            new_fixture.append({
+                'pk': k,
+                'fields': {
+                    'cost': v
+                }
+            })
+
+        return new_fixture
+
