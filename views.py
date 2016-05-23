@@ -113,7 +113,7 @@ MODELS = (
 
     ('store.StoreCondition', 'store_condition.json'),
     ('store.StoreType', 'store_type.json'),
-    ('store.Store', 'store_type.json'),
+    ('store.Store', 'store.json'),
     ('store.StoreRefresh', 'store_refresh_cost.json'),
 )
 
