@@ -62,6 +62,8 @@ class Store(models.Model):
         for f in fixture:
             f['fields']['content'] = _parse(f['fields']['content'])
 
+        return fixture
+
 
 class StoreRefresh(models.Model):
     id = models.IntegerField(primary_key=True)
