@@ -6,7 +6,7 @@ from django.db import migrations
 
 
 def set_new_fields(apps, schema_editor):
-    Guide = apps.get_module('guide', 'Guide')
+    Guide = apps.get_model('guide', 'Guide')
     for g in Guide.objects.all():
         before_dialog = g.dialog_before.first()
         if before_dialog:
