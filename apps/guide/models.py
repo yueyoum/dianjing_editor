@@ -2,6 +2,11 @@
 
 from django.db import models
 
+POSITION = (
+    (1, '左'),
+    (2, '右'),
+)
+
 class Guide(models.Model):
     OPERATE_TYPE = (
         (0, '空操作'),
@@ -27,7 +32,13 @@ class Guide(models.Model):
     resume_url = models.CharField(max_length=255, blank=True, verbose_name="恢复操作步骤")
     arrow = models.IntegerField(choices=ARROW, default=0, verbose_name="箭头方向")
 
-    package = models.ForeignKey('package.Package', null=True, blank=True, verbose_name='物品包')
+    before_icon = models.CharField(max_length=255, blank=True)
+    before_position = models.IntegerField(default=1, choices=POSITION)
+    before_dialog = models.TextField(blank=True)
+
+    after_icon = models.CharField(max_length=255, blank=True)
+    after_position = models.IntegerField(default=1, choices=POSITION)
+    after_dialog = models.TextField(blank=True)
 
     class Meta:
         db_table = 'guide'
@@ -58,10 +69,6 @@ class Guide(models.Model):
         return fixture
 
 
-POSITION = (
-    (1, '左'),
-    (2, '右'),
-)
 
 class GuideDialogBefore(models.Model):
     guide = models.ForeignKey(Guide, related_name='dialog_before')

@@ -1,20 +1,20 @@
 from django.contrib import admin
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 
-from apps.guide.models import Guide, GuideDialogAfter, GuideDialogBefore
+from apps.guide.models import Guide
 
-class GuideDialogBeforeInLine(admin.TabularInline):
-    model = GuideDialogBefore
 
-class GuideDialogAfterInLine(admin.TabularInline):
-    model = GuideDialogAfter
-
+class ResourceGuide(resources.ModelResource):
+    class Meta:
+        model = Guide
 
 
 @admin.register(Guide)
-class GuideAdmin(admin.ModelAdmin):
+class GuideAdmin(ImportExportModelAdmin):
+    resource_class = ResourceGuide
+
     list_display = (
         'id', 'next_id', 'operate_type', 'operate_target',
-        'resume_url', 'arrow', 'package',
+        'resume_url', 'arrow',
     )
-
-    inlines = [GuideDialogBeforeInLine, GuideDialogAfterInLine]
