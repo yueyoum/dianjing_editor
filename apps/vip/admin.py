@@ -14,7 +14,11 @@ class AdminVIP(ImportExportModelAdmin):
     resource_class = ResourceVIP
 
     list_display = (
-        'id', 'update_vip_exp',
+        'id', 'exp',
         'item_id', 'diamond_original', 'diamond_now', 'item_preview',
         'des',
+        'challenge_reset_times',
+        'daily_dungeon_reset_times',
+        'tower_reset_times',
+        'arena_buy_times',
     )

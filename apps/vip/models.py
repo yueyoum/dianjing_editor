@@ -5,7 +5,7 @@ from django.db import models
 
 class VIP(models.Model):
     id = models.IntegerField(primary_key=True)
-    update_vip_exp = models.IntegerField()
+    exp = models.IntegerField()
 
     item_id = models.IntegerField(verbose_name='礼包ID')
     diamond_original = models.IntegerField(verbose_name='钻石原价')
@@ -14,14 +14,15 @@ class VIP(models.Model):
 
     des = models.TextField()
 
+    challenge_reset_times = models.IntegerField(default=0, verbose_name='主线副本每日重置次数')
+    daily_dungeon_reset_times = models.IntegerField(default=0, verbose_name='日常副本重置次数')
+    tower_reset_times = models.IntegerField(default=0, verbose_name='挑战塔重置次数')
+    arena_buy_times = models.IntegerField(default=0, verbose_name='竞技场购买次数')
+
     class Meta:
         db_table = "vip"
         verbose_name = "VIP"
         verbose_name_plural = "VIP"
-
-    @classmethod
-    def get_fixture_key(cls):
-        return 'vip.VIP'
 
     @classmethod
     def patch_fixture(cls, fixture):
