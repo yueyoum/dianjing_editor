@@ -56,18 +56,25 @@ class Guide(models.Model):
 
 
         for f in fixture:
-            pk = f['pk']
-            dialog_before = GuideDialogBefore.objects.filter(guide__id=pk)
-            dialog_after = GuideDialogAfter.objects.filter(guide__id=pk)
+            before_icon = f['fields'].pop('before_icon')
+            before_position = f['fields'].pop('before_position')
+            before_dialog = f['fields'].pop('before_dialog')
 
-            f['fields']['dialog_before'] = [_make_dialog(x) for x in dialog_before]
-            f['fields']['dialog_after'] = [_make_dialog(x) for x in dialog_after]
+            after_icon = f['fields'].pop('after_icon')
+            after_position = f['fields'].pop('after_position')
+            after_dialog = f['fields'].pop('after_dialog')
 
-            if not f['fields']['package']:
-                f['fields']['package'] = 0
+            if before_dialog:
+                f['fields']['dialog_before'] = [{'position': before_position, 'icon': before_icon, 'dialog': before_dialog}]
+            else:
+                f['fields']['dialog_before'] = []
+
+            if after_dialog:
+                f['fields']['after_dialog'] = [{'position': after_position, 'icon': after_icon, 'dialog': after_dialog}]
+            else:
+                f['fields']['after_dialog'] = []
 
         return fixture
-
 
 
 class GuideDialogBefore(models.Model):
