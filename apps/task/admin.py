@@ -1,56 +1,17 @@
 from django.contrib import admin
 from apps.task.models import (
-    TaskType,
-    Task,
-    TaskStatus,
-    TaskTrigger,
-    TaskTargetType,
-    TaskTarget,
     RandomEvent,
     RandomEventDialogAfter,
     RandomEventDialogBefore,
 
+    TaskCondition,
     TaskMain,
+    TaskDaily,
 )
 
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-
-# Register your models here.
-class TaskTargetInLine(admin.TabularInline):
-    model = TaskTarget
-
-
-@admin.register(Task)
-class TaskAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'des', 'next_task', 'trigger',
-                    'trigger_value', 'tp', 'reward',
-                    'client_task', 'success_rate',
-                    'task_begin',
-                    )
-    inlines = [TaskTargetInLine, ]
-
-
-@admin.register(TaskType)
-class TaskTypeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'des')
-
-
-@admin.register(TaskStatus)
-class TaskStatusAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
-
-
-@admin.register(TaskTrigger)
-class TaskTriggerAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
-
-
-@admin.register(TaskTargetType)
-class TaskTargetTypeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'mode', 'compare_type', 'compare_source', 'has_param', 'des')
-    list_filter = ('mode',)
 
 
 class EventDialogBeforeInLine(admin.TabularInline):
@@ -67,11 +28,34 @@ class RandomEventAdmin(admin.ModelAdmin):
     inlines = [EventDialogBeforeInLine, EventDialogAfterInLine]
 
 
+class ResourceTC(resources.ModelResource):
+    class Meta:
+        model = TaskCondition
+
 class ResourceTaskMain(resources.ModelResource):
     class Meta:
         model = TaskMain
+
+class ResourceTaskDaily(resources.ModelResource):
+    class Meta:
+        model = TaskDaily
+
+
+@admin.register(TaskCondition)
+class AdminTC(ImportExportModelAdmin):
+    resource_class = ResourceTC
+    list_display = ('id', 'name', 'ui')
+
 
 @admin.register(TaskMain)
 class AdminTaskMain(ImportExportModelAdmin):
     resource_class = ResourceTaskMain
     list_display = ('id', 'name', 'des', 'challenge_id', 'items')
+
+@admin.register(TaskDaily)
+class AdminTaskDaily(ImportExportModelAdmin):
+    resource_class = ResourceTaskDaily
+    list_display = ('id', 'name', 'des', 'club_level', 'vip_level',
+                    'condition_id', 'condition_value',
+                    'rewards',
+                    )

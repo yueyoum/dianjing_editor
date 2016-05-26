@@ -48,12 +48,10 @@ MODELS = (
 
     ('building.BuildingNew', 'building.json'),
 
-    ('task.Task', 'task.json'),
-    ('task.TaskType', 'task_type.json'),
-    ('task.TaskStatus', 'task_status.json'),
-    ('task.TaskTargetType', 'task_target.json'),
     ('task.RandomEvent', 'random_event.json'),
+    ('task.TaskCondition', 'task_condition.json'),
     ('task.TaskMain', 'task_main.json'),
+    ('task.TaskDaily', 'task_daily.json'),
 
 
     ('notification.Notification', 'notification.json'),
