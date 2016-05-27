@@ -44,7 +44,7 @@ class ResourceTaskDaily(resources.ModelResource):
 @admin.register(TaskCondition)
 class AdminTC(ImportExportModelAdmin):
     resource_class = ResourceTC
-    list_display = ('id', 'name', 'ui')
+    list_display = ('id', 'name', 'ui', 'server_module')
 
 
 @admin.register(TaskMain)
