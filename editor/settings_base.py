@@ -71,6 +71,7 @@ INSTALLED_APPS = (
     'apps.arena',
     'apps.territory',
     'apps.store',
+    'apps.collection',
 )
 
 MIDDLEWARE_CLASSES = (

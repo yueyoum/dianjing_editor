@@ -113,6 +113,8 @@ MODELS = (
     ('store.StoreType', 'store_type.json'),
     ('store.Store', 'store.json'),
     ('store.StoreRefresh', 'store_refresh_cost.json'),
+
+    ('collection.Collection', 'collection.json')
 )
 
 class InMemoryZip(object):
