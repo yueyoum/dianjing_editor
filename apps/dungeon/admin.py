@@ -33,5 +33,5 @@ class DungeonGradeAdmin(ImportExportModelAdmin):
 
     list_display = (
         "id", "name", "belong", "power", "need_level",
-        "npc_path", "des"
+        "npc", "des"
     )

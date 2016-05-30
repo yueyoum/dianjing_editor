@@ -38,10 +38,10 @@ class DungeonGrade(models.Model):
     belong = models.IntegerField(verbose_name="副本所属")
     power = models.IntegerField(verbose_name="参考战力")
     need_level = models.IntegerField(verbose_name="等级限制")
-    drop = models.CharField(max_length=255, verbose_name="掉落配置",
+    drop = models.TextField(max_length=255, verbose_name="掉落配置",
                             help_text="物品ID,数量,掉落几率;物品ID,数量,掉落几率")
-    npc_path = models.CharField(max_length=255, verbose_name="怪物配置",
-                                help_text="位置,选手ID,兵种ID;位置,选手ID,兵种ID")
+
+    npc = models.IntegerField(default=0)
     des = models.TextField(verbose_name="副本等级描述")
 
     class Meta:
@@ -54,14 +54,11 @@ class DungeonGrade(models.Model):
         for f in fixture:
             drops = []
             for drop in f['fields']['drop'].split(';'):
+                if not drop:
+                    continue
+
                 _id, amount, _range = drop.split(',')
                 drops.append([int(_id), int(amount), int(_range)])
             f['fields']['drop'] = drops
-
-            npc_path = []
-            for npc in f['fields']['npc_path'].split(';'):
-                slot, staff, unit = npc.split(',')
-                npc_path.append([int(slot), int(staff), int(unit)])
-            f['fields']['npc_path'] = npc_path
 
         return fixture
