@@ -123,3 +123,13 @@ class ChallengeGuide(models.Model):
         db_table = 'challenge_guide'
         verbose_name = '挑战赛引导'
         verbose_name_plural = '挑战赛引导'
+
+
+class ChallengeBuyCost(models.Model):
+    id = models.IntegerField(primary_key=True, verbose_name='购买次数')
+    diamond = models.IntegerField(verbose_name='钻石')
+
+    class Meta:
+        db_table = 'challenge_buy_cost'
+        verbose_name = "挑战赛购买花费"
+        verbose_name_plural = "挑战赛购买花费"

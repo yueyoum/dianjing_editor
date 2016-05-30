@@ -6,6 +6,7 @@ from apps.match.models import (
     ChallengeMatch,
     ChallengeChapter,
     ChallengeGuide,
+    ChallengeBuyCost,
 
     Maps,
 )
@@ -25,6 +26,9 @@ class ResourceChallengeGuide(resources.ModelResource):
     class Meta:
         model = ChallengeGuide
 
+class ResourceBC(resources.ModelResource):
+    class Meta:
+        model = ChallengeBuyCost
 
 @admin.register(ChallengeChapter)
 class ChallengeTypeAdmin(ImportExportModelAdmin):
@@ -58,3 +62,8 @@ class AdminChallengeGuide(ImportExportModelAdmin):
     list_display = (
         'id', 'guide', 'des', 'return_to_main_panel'
     )
+
+@admin.register(ChallengeBuyCost)
+class AdminBC(ImportExportModelAdmin):
+    resource_class = ResourceBC
+    list_display = ('id', 'diamond',)
