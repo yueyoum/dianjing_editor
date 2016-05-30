@@ -18,6 +18,7 @@ class VIP(models.Model):
     daily_dungeon_reset_times = models.IntegerField(default=0, verbose_name='日常副本重置次数')
     tower_reset_times = models.IntegerField(default=0, verbose_name='挑战塔重置次数')
     arena_buy_times = models.IntegerField(default=0, verbose_name='竞技场购买次数')
+    energy_buy_times = models.IntegerField(default=0, verbose_name='体力购买次数')
 
     class Meta:
         db_table = "vip"
