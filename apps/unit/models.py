@@ -29,6 +29,7 @@ class UnitNew(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, verbose_name="名字")
     model = models.CharField(max_length=255, verbose_name="模型")
+    scale = models.FloatField(default=1, verbose_name='缩放')
     icon = models.CharField(max_length=255, verbose_name="图标")
     tp = models.IntegerField(choices=TP, default=1, verbose_name="类型")
     race = models.ForeignKey('staff.StaffRace', verbose_name="种族")

@@ -35,7 +35,7 @@ class AdminUnitNew(ImportExportModelAdmin):
     resource_class = ResourceUnitNew
 
     list_display = (
-        'id', 'name', 'model', 'icon', 'tp', 'race',
+        'id', 'name', 'model', 'scale', 'icon', 'tp', 'race',
     )
 
 @admin.register(UnitUnLock)
