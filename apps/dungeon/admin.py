@@ -3,9 +3,8 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from apps.dungeon.models import Dungeon, DungeonGrade
+from apps.dungeon.models import Dungeon, DungeonGrade, DungeonBuyCost
 
-# Register your models here.
 
 
 class ResourceDungeon(resources.ModelResource):
@@ -35,3 +34,14 @@ class DungeonGradeAdmin(ImportExportModelAdmin):
         "id", "name", "belong", "power", "need_level",
         "npc", "des"
     )
+
+
+class ResourceBC(resources.ModelResource):
+    class Meta:
+        model = DungeonBuyCost
+
+
+@admin.register(DungeonBuyCost)
+class AdminBC(ImportExportModelAdmin):
+    resource_class = ResourceBC
+    list_display = ('id', 'diamond',)

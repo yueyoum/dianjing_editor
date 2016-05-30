@@ -86,6 +86,7 @@ MODELS = (
 
     ('dungeon.Dungeon', 'dungeon.json'),
     ('dungeon.DungeonGrade', 'dungeon_grade.json'),
+    ('dungeon.DungeonBuyCost', 'dungeon_buy_cost.json'),
 
     ('npc.NPCFormation', 'npc_formation.json'),
 

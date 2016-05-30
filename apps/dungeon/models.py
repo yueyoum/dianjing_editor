@@ -62,3 +62,13 @@ class DungeonGrade(models.Model):
             f['fields']['drop'] = drops
 
         return fixture
+
+
+class DungeonBuyCost(models.Model):
+    id = models.IntegerField(primary_key=True, verbose_name='购买次数')
+    diamond = models.IntegerField(verbose_name='钻石')
+
+    class Meta:
+        db_table = 'dungeon_buy_cost'
+        verbose_name = "副本购买花费"
+        verbose_name_plural = "副本购买花费"
