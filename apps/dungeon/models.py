@@ -86,7 +86,7 @@ class DungeonResetCost(models.Model):
                 data[dungeon_id] = [(f['fields']['reset_times'], f['fields']['diamond'])]
 
         new_fixture = []
-        for k, v in data:
+        for k, v in data.iteritems():
             v.sort(key=lambda item: -item[0])
             x = {
                 'pk': k,

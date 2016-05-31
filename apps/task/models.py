@@ -103,7 +103,7 @@ class TaskMain(models.Model):
 class TaskCondition(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
-    ui = models.CharField(max_length=255)
+    ui = models.CharField(max_length=255, blank=True)
     server_module = models.CharField(max_length=255, blank=True)
 
     class Meta:
