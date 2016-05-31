@@ -3,7 +3,7 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from apps.dungeon.models import Dungeon, DungeonGrade, DungeonBuyCost
+from apps.dungeon.models import Dungeon, DungeonGrade, DungeonResetCost
 
 
 
@@ -36,12 +36,12 @@ class DungeonGradeAdmin(ImportExportModelAdmin):
     )
 
 
-class ResourceBC(resources.ModelResource):
+class ResourceRC(resources.ModelResource):
     class Meta:
-        model = DungeonBuyCost
+        model = DungeonResetCost
 
 
-@admin.register(DungeonBuyCost)
+@admin.register(DungeonResetCost)
 class AdminBC(ImportExportModelAdmin):
-    resource_class = ResourceBC
-    list_display = ('id', 'diamond',)
+    resource_class = ResourceRC
+    list_display = ('id', 'dungeon_id', 'reset_times', 'diamond',)

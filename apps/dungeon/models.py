@@ -64,11 +64,37 @@ class DungeonGrade(models.Model):
         return fixture
 
 
-class DungeonBuyCost(models.Model):
-    id = models.IntegerField(primary_key=True, verbose_name='购买次数')
+class DungeonResetCost(models.Model):
+    id = models.IntegerField(primary_key=True)
+    dungeon_id = models.IntegerField()
+    reset_times = models.IntegerField()
     diamond = models.IntegerField(verbose_name='钻石')
 
     class Meta:
-        db_table = 'dungeon_buy_cost'
-        verbose_name = "副本购买花费"
-        verbose_name_plural = "副本购买花费"
+        db_table = 'dungeon_reset_cost'
+        verbose_name = "副本重置花费"
+        verbose_name_plural = "副本重置花费"
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        data = {}
+        for f in fixture:
+            dungeon_id = f['fields']['dungeon_id']
+            if dungeon_id in data:
+                data[dungeon_id].append((f['fields']['reset_times'], f['fields']['diamond']))
+            else:
+                data[dungeon_id] = [(f['fields']['reset_times'], f['fields']['diamond'])]
+
+        new_fixture = []
+        for k, v in data:
+            v.sort(key=lambda item: -item[0])
+            x = {
+                'pk': k,
+                'fields': {
+                    'times': v
+                }
+            }
+
+            new_fixture.append(x)
+
+        return new_fixture
