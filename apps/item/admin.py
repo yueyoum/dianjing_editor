@@ -53,6 +53,7 @@ class ItemNewAdmin(ImportExportModelAdmin):
     )
 
     list_filter = ('tp',)
+    search_fields = ('id',)
 
 
 @admin.register(ItemUse)
