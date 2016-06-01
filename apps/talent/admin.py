@@ -21,3 +21,5 @@ class TalentAdmin(ImportExportModelAdmin):
             "id", "tp", "next_id", "position", "name", "des",
             "image", "unlock", "up_need_point", "up_need_items", "effect_id",
     )
+
+    list_filter = ('tp', 'position',)
