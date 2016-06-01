@@ -80,7 +80,6 @@ MODELS = (
     ('item.ItemUse', 'item_use.json'),
     ('item.ItemMerge', 'item_merge.json'),
     ('item.EquipmentBase', 'equipment_new.json'),
-    ('item.ItemExp', 'item_exp.json'),
 
     ('talent.Talent', 'talent.json'),
     ('vip.VIP', 'vip.json'),

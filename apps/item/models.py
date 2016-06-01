@@ -193,16 +193,3 @@ class ItemMerge(models.Model):
     @classmethod
     def get_fixture_key(cls):
         return 'item.ItemMerge'
-
-class ItemExp(models.Model):
-    id = models.IntegerField(primary_key=True)
-    exp = models.IntegerField()
-
-    class Meta:
-        db_table = 'item_exp'
-        verbose_name = '经验道具'
-        verbose_name_plural = '经验道具'
-
-    @classmethod
-    def get_fixture_key(cls):
-        return 'item.ItemExp'

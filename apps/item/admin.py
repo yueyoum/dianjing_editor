@@ -4,7 +4,7 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from apps.item.models import ItemQuality, ItemNew, ItemUse, ItemMerge, EquipmentBase, EquipmentLevel, ItemExp
+from apps.item.models import ItemQuality, ItemNew, ItemUse, ItemMerge, EquipmentBase, EquipmentLevel
 
 
 @admin.register(ItemQuality)
@@ -37,12 +37,6 @@ class ResourceEquipmentBase(resources.ModelResource):
 class ResourceEquipmentLevel(resources.ModelResource):
     class Meta:
         model = EquipmentLevel
-
-
-class ResourceItemExp(resources.ModelResource):
-    class Meta:
-        model = ItemExp
-
 
 @admin.register(ItemNew)
 class ItemNewAdmin(ImportExportModelAdmin):
@@ -99,10 +93,3 @@ class EquipmentLevelAdmin(ImportExportModelAdmin):
     )
 
     list_filter = ('equip_id',)
-
-
-@admin.register(ItemExp)
-class AdminItemExp(ImportExportModelAdmin):
-    resource_class = ResourceItemExp
-
-    list_display = ('id', 'exp')
