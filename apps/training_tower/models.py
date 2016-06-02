@@ -55,7 +55,8 @@ class TowerRankReward(models.Model):
     rank_cap = models.IntegerField(verbose_name="排名区间上限")
     rank_floor = models.IntegerField(verbose_name="排名区间下限")
     reward = models.CharField(max_length=255, verbose_name="排名奖励", help_text="物品ID,数量;物品ID,数量")
-    mail_sender = models.CharField(max_length=32, verbose_name="邮件ID")
+    mail_title = models.CharField(max_length=255)
+    mail_content = models.CharField(max_length=255)
 
     class Meta:
         db_table = 'tower_rank_reward'

@@ -53,7 +53,7 @@ class TowerRankRewardAdmin(ImportExportModelAdmin):
     resource_class = ResourceTowerRankReward
 
     list_display = (
-            "id", "reward", "rank_cap", "rank_floor", "mail_sender",
+            "id", "reward", "rank_cap", "rank_floor", "mail_title", "mail_content"
     )
 
 
