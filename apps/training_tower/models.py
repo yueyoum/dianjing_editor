@@ -31,8 +31,7 @@ class TowerSaleGoods(models.Model):
 
 
 class TowerStarReward(models.Model):
-    id = models.IntegerField(primary_key=True, verbose_name="星级奖励")
-    star = models.IntegerField(verbose_name="所需星数")
+    id = models.IntegerField(primary_key=True)
     reward = models.CharField(max_length=255, verbose_name="星级奖励", help_text="物品ID,数量;物品ID,数量")
 
     class Meta:
@@ -45,32 +44,40 @@ class TowerStarReward(models.Model):
         for f in fixture:
             rewards = []
             for reward in f['fields']['reward'].split(';'):
+                if not reward:
+                    continue
+
                 _id, _amount = reward.split(',')
                 rewards.append([int(_id), int(_amount)])
             f['fields']['reward'] = rewards
 
+        return fixture
+
 
 class TowerRankReward(models.Model):
-    id = models.IntegerField(primary_key=True, verbose_name="爬塔奖励ID")
-    rank_cap = models.IntegerField(verbose_name="排名区间上限")
-    rank_floor = models.IntegerField(verbose_name="排名区间下限")
+    id = models.IntegerField(primary_key=True, verbose_name="排名上限")
     reward = models.CharField(max_length=255, verbose_name="排名奖励", help_text="物品ID,数量;物品ID,数量")
     mail_title = models.CharField(max_length=255)
     mail_content = models.CharField(max_length=255)
 
     class Meta:
         db_table = 'tower_rank_reward'
-        verbose_name = '爬塔奖励'
-        verbose_name_plural = '爬塔奖励'
+        verbose_name = '排名奖励'
+        verbose_name_plural = '排名奖励'
 
     @classmethod
     def patch_fixture(cls, fixture):
         for f in fixture:
             rewards = []
             for reward in f['fields']['reward'].split(';'):
+                if not reward:
+                    continue
+
                 _id, _amount = reward.split(',')
                 rewards.append([int(_id), int(_amount)])
             f['fields']['reward'] = rewards
+
+        return fixture
 
 
 class TowerGameLevel(models.Model):
