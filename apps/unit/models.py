@@ -32,7 +32,7 @@ class UnitNew(models.Model):
     scale = models.FloatField(default=1, verbose_name='缩放')
     icon = models.CharField(max_length=255, verbose_name="图标")
     tp = models.IntegerField(choices=TP, default=1, verbose_name="类型")
-    race = models.ForeignKey('staff.StaffRace', verbose_name="种族")
+    race = models.IntegerField(verbose_name="种族")
 
     attack_tp = models.IntegerField(choices=ATTACK_TP, verbose_name='攻击类型')
     defense_tp = models.IntegerField(choices=DEFENSE_TP, verbose_name='防御类型')
