@@ -13,8 +13,7 @@ def adjust_1(apps, schema_editor):
     int_list = [-1-x for x in range(amount)]
 
     for i in range(amount):
-        star_reward[i].id = int_list[i]
-        star_reward[i].save()
+        TowerStarReward.objects.filter(id=star_reward[i].id).update(id=int_list[i])
 
 
     TowerRankReward = apps.get_model("training_tower", "TowerRankReward")
@@ -24,8 +23,7 @@ def adjust_1(apps, schema_editor):
     int_list = [-1 - x for x in range(amount)]
 
     for i in range(amount):
-        rank_reward[i].id = int_list[i]
-        rank_reward[i].save()
+        TowerRankReward.objects.filter(id=rank_reward[i].id).update(id=int_list[i])
 
 
 class Migration(migrations.Migration):
