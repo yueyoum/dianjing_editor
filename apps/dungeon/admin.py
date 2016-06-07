@@ -10,6 +10,8 @@ from apps.dungeon.models import Dungeon, DungeonGrade, DungeonResetCost
 class ResourceDungeon(resources.ModelResource):
     class Meta:
         model = Dungeon
+        bulk_replace = True
+
 
 
 @admin.register(Dungeon)

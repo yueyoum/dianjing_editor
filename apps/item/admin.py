@@ -17,30 +17,42 @@ class ItemQualityAdmin(admin.ModelAdmin):
 class ResourceItemNew(resources.ModelResource):
     class Meta:
         model = ItemNew
+        bulk_replace = True
+
 
 
 class ResourceItemUse(resources.ModelResource):
     class Meta:
         model = ItemUse
+        bulk_replace = True
+
 
 
 class ResourceItemMerge(resources.ModelResource):
     class Meta:
         model = ItemMerge
+        bulk_replace = True
+
 
 
 class ResourceEquipmentBase(resources.ModelResource):
     class Meta:
         model = EquipmentBase
+        bulk_replace = True
+
 
 
 class ResourceEquipmentLevel(resources.ModelResource):
     class Meta:
         model = EquipmentLevel
+        bulk_replace = True
+
 
 class ResourceItemExp(resources.ModelResource):
     class Meta:
         model = ItemExp
+        bulk_replace = True
+
 
 
 @admin.register(ItemNew)

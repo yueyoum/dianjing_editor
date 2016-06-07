@@ -18,38 +18,56 @@ from apps.territory.models import (
 class ResourceTerritoryBuilding(resources.ModelResource):
     class Meta:
         model = TerritoryBuilding
+        bulk_replace = True
+
 
 class ResourceBuildingSlot(resources.ModelResource):
     class Meta:
         model = BuildingSlot
+        bulk_replace = True
+
 
 class ResourceBuildingSlotExtraProduct(resources.ModelResource):
     class Meta:
         model = BuildingSlotExtraProduct
+        bulk_replace = True
+
 
 class ResourceStaffSpecialProduct(resources.ModelResource):
     class Meta:
         model = StaffSpecialProduct
+        bulk_replace = True
+
 
 class ResourceInspire(resources.ModelResource):
     class Meta:
         model = Inspire
+        bulk_replace = True
+
 
 class ResourceInspireCost(resources.ModelResource):
     class Meta:
         model = InspireCost
+        bulk_replace = True
+
 
 class ResourceReportTemplate(resources.ModelResource):
     class Meta:
         model = ReportTemplate
+        bulk_replace = True
+
 
 class ResourceStore(resources.ModelResource):
     class Meta:
         model = TerritoryStore
+        bulk_replace = True
+
 
 class ResourceEvent(resources.ModelResource):
     class Meta:
         model = Event
+        bulk_replace = True
+
 
 
 @admin.register(TerritoryBuilding)

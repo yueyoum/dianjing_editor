@@ -7,27 +7,37 @@ from apps.unit.models import UnitNew, UnitLevel, UnitStep, UnitLevelAddition, Un
 class ResourceUnitNew(resources.ModelResource):
     class Meta:
         model = UnitNew
+        bulk_replace = True
+
 
 class ResourceUnitUnLock(resources.ModelResource):
     class Meta:
         model = UnitUnLock
+        bulk_replace = True
+
 
 class ResourceUnitLevel(resources.ModelResource):
     class Meta:
         model = UnitLevel
+        bulk_replace = True
+
 
 class ResourceUnitStep(resources.ModelResource):
     class Meta:
         model = UnitStep
+        bulk_replace = True
+
 
 class ResourceUnitLevelAddition(resources.ModelResource):
     class Meta:
         model = UnitLevelAddition
+        bulk_replace = True
+
 
 class ResourceUnitStepAddition(resources.ModelResource):
     class Meta:
         model = UnitStepAddition
-
+        bulk_replace = True
 
 
 @admin.register(UnitNew)

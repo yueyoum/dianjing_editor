@@ -15,20 +15,28 @@ from apps.match.models import (
 class ResourceChallengeChapter(resources.ModelResource):
     class Meta:
         model = ChallengeChapter
+        bulk_replace = True
+
 
 
 class ChallengeMatchResource(resources.ModelResource):
     class Meta:
         model = ChallengeMatch
+        bulk_replace = True
+
 
 
 class ResourceChallengeGuide(resources.ModelResource):
     class Meta:
         model = ChallengeGuide
+        bulk_replace = True
+
 
 class ResourceBC(resources.ModelResource):
     class Meta:
         model = ChallengeBuyCost
+        bulk_replace = True
+
 
 @admin.register(ChallengeChapter)
 class ChallengeTypeAdmin(ImportExportModelAdmin):

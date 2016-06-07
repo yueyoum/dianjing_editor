@@ -8,26 +8,37 @@ from apps.arena.models import ArenaNPC, HonorReward, MatchReward, RankReward, Bu
 class ResourceArenaNPC(resources.ModelResource):
     class Meta:
         model = ArenaNPC
+        bulk_replace = True
 
 class ResourceHonorReward(resources.ModelResource):
     class Meta:
         model = HonorReward
+        bulk_replace = True
+
 
 class ResourceMatchReward(resources.ModelResource):
     class Meta:
         model = MatchReward
+        bulk_replace = True
+
 
 class ResourceRankReward(resources.ModelResource):
     class Meta:
         model = RankReward
+        bulk_replace = True
+
 
 class ResourceBuyTimesCost(resources.ModelResource):
     class Meta:
         model = BuyTimesCost
+        bulk_replace = True
+
 
 class ResourceMatchLogTemplate(resources.ModelResource):
     class Meta:
         model = MatchLogTemplate
+        bulk_replace = True
+
 
 @admin.register(ArenaNPC)
 class AdminArenaNPC(ImportExportModelAdmin):

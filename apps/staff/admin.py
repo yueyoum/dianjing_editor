@@ -23,39 +23,54 @@ class StuffRaceAdmin(admin.ModelAdmin):
 class ResourceStaffRecruit(resources.ModelResource):
     class Meta:
         model = StaffRecruit
+        bulk_replace = True
+
 
 class ResourceStaffRecruitSettings(resources.ModelResource):
     class Meta:
         model = StaffRecruitSettings
+        bulk_replace = True
+
 
 class ResourceStaffNew(resources.ModelResource):
     class Meta:
         model = StaffNew
+        bulk_replace = True
+
 
 
 class ResourceStaffLevelNew(resources.ModelResource):
     class Meta:
         model = StaffLevelNew
+        bulk_replace = True
+
 
 
 class ResourceStaffStep(resources.ModelResource):
     class Meta:
         model = StaffStep
+        bulk_replace = True
+
 
 
 class ResourceStaffStar(resources.ModelResource):
     class Meta:
         model = StaffStar
+        bulk_replace = True
+
 
 
 class ResourceEquipQuality(resources.ModelResource):
     class Meta:
         model = StaffEquipmentQualityAddition
+        bulk_replace = True
+
 
 
 class ResourceEquipLevel(resources.ModelResource):
     class Meta:
         model = StaffEquipmentLevelAddition
+        bulk_replace = True
 
 
 @admin.register(StaffRecruit)

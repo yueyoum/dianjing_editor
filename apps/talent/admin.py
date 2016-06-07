@@ -11,6 +11,8 @@ from apps.talent.models import Talent
 class ResourceTalent(resources.ModelResource):
     class Meta:
         model = Talent
+        bulk_replace = True
+
 
 
 @admin.register(Talent)

@@ -18,6 +18,8 @@ from apps.training_tower.models import (
 class ResourceTowerSaleGoods(resources.ModelResource):
     class Meta:
         model = TowerSaleGoods
+        bulk_replace = True
+
 
 
 @admin.register(TowerSaleGoods)
@@ -32,6 +34,8 @@ class TowerSaleGoodsAdmin(ImportExportModelAdmin):
 class ResourceTowerStarReward(resources.ModelResource):
     class Meta:
         model = TowerStarReward
+        bulk_replace = True
+
 
 
 @admin.register(TowerStarReward)
@@ -46,6 +50,8 @@ class TowerStarRewardAdmin(ImportExportModelAdmin):
 class ResourceTowerRankReward(resources.ModelResource):
     class Meta:
         model = TowerRankReward
+        bulk_replace = True
+
 
 
 @admin.register(TowerRankReward)
