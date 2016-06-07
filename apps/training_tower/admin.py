@@ -25,7 +25,7 @@ class TowerSaleGoodsAdmin(ImportExportModelAdmin):
     resource_class = ResourceTowerSaleGoods
 
     list_display = (
-            "id", "item", "price", "sale", "vip_need", "num", "des",
+            "id", "price_original", "price_now", "vip_need", "item_id", "amount", "des",
     )
 
 

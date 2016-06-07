@@ -14,15 +14,15 @@ GoodsType = (
 
 class TowerSaleGoods(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="商品ID")
-    item = models.IntegerField(verbose_name="物品ID")
     tp = models.IntegerField(choices=GoodsType, verbose_name="物品类别")
     tp_icon = models.CharField(max_length=255, verbose_name="类别icon")
-    price = models.IntegerField(verbose_name="商品价格")
-    sale = models.IntegerField(blank=True, verbose_name="促销价", help_text="非促销商品不填")
-    vip_need = models.IntegerField(blank=True, verbose_name="促销价所需vip等级",
-                                   help_text="非促销商品不填")
-    num = models.IntegerField(verbose_name="促销数量")
-    des = models.CharField(max_length=255, blank=True, verbose_name="促销描述")
+    price_original = models.IntegerField(verbose_name="商品价格")
+    price_now = models.IntegerField(verbose_name="促销价")
+    vip_need = models.IntegerField(default=0, verbose_name="所需vip等级")
+
+    item_id = models.IntegerField(verbose_name="物品ID")
+    amount = models.IntegerField(verbose_name="数量")
+    des = models.CharField(max_length=255, blank=True, verbose_name="描述")
 
     class Meta:
         db_table = 'tower_sale_goods'
@@ -95,7 +95,7 @@ class TowerGameLevel(models.Model):
                                   help_text="物品ID,数量;物品ID,数量...")
 
     sale_goods = models.CharField(max_length=255, verbose_name="折扣商品", blank=True,
-                                  help_text="普通商品ID,高级商品ID;...(没有则不填)")
+                                  help_text="商品ID,商品ID,几率;...(没有则不填)")
 
     turntable_3 = models.CharField(max_length=255, verbose_name="3星天赋", blank=True,
                                       help_text="天赋ID,...(没有则不填)")
@@ -129,6 +129,20 @@ class TowerGameLevel(models.Model):
 
             return [int(i) for i in text.split(',')]
 
+        def parse_sale_goods(text):
+            result = []
+            for x in text.split(';'):
+                if not x:
+                    continue
+
+                _id, _amount, _prob  = x.split(',')
+                result.append([int(_id), int(_amount), int(_prob)])
+
+            for i in range(1, len(result)):
+                result[i][2] += result[i-1][2]
+
+            return result
+
 
         for f in fixture:
             staffs = []
@@ -149,12 +163,7 @@ class TowerGameLevel(models.Model):
 
             f['fields']['star_reward'] = star_reward
 
-            # if f['fields'].get('sale_goods', ""):
-            #     sale_goods = []
-            #     for goods in f['fields']['sale_goods'].split(';'):
-            #         id_one, id_two = goods.split(',')
-            #         sale_goods.append([int(id_one), int(id_two)])
-            #     f['fields']['sale_goods'] = sale_goods
+            f['fields']['sale_goods'] = parse_sale_goods(f['fields']['sale_goods'])
 
             turntable = {
                 '3': parse_turntable(f['fields']['turntable_3']),
