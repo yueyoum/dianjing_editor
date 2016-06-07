@@ -58,7 +58,7 @@ class AdminRankReward(ImportExportModelAdmin):
     resource_class = ResourceRankReward
 
     list_display = (
-        'id', 'reward', 'mail_title', 'mail_content'
+        'id', 'rank_des', 'reward', 'mail_title', 'mail_content'
     )
 
 @admin.register(BuyTimesCost)

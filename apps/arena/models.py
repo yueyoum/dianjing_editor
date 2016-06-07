@@ -48,6 +48,7 @@ class HonorReward(models.Model):
 
 class RankReward(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name='排名上限')
+    rank_des = models.CharField(blank=True, max_length=255)
     reward = models.CharField(max_length=255, help_text='id,amount;id,amount')
     mail_title = models.CharField(max_length=255)
     mail_content = models.CharField(max_length=255)
