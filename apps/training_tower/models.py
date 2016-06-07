@@ -6,16 +6,8 @@ from django.db import models
 
 # Create your models here.
 
-GoodsType = (
-    (1, '普通商品'),
-    (2, '高级商品'),
-)
-
-
 class TowerSaleGoods(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="商品ID")
-    tp = models.IntegerField(choices=GoodsType, verbose_name="物品类别")
-    tp_icon = models.CharField(max_length=255, verbose_name="类别icon")
     price_original = models.IntegerField(verbose_name="商品价格")
     price_now = models.IntegerField(verbose_name="促销价")
     vip_need = models.IntegerField(default=0, verbose_name="所需vip等级")
