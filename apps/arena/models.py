@@ -96,10 +96,14 @@ class MatchReward(models.Model):
         def _parse_items(text):
             if not text:
                 return []
+
             result = []
             for x in text.split(';'):
                 _a, _b, _c = x.split(',')
                 result.append((int(_a), int(_b), int(_c)))
+
+            for i in range(1, len(result)-1):
+                result[i][2] += result[i-1][2]
 
             return result
 
