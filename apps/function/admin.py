@@ -7,6 +7,8 @@ from apps.function.models import Function
 class ResourceFunction(resources.ModelResource):
     class Meta:
         model = Function
+        bulk_replace = True
+
 
 
 @admin.register(Function)

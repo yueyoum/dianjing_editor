@@ -11,10 +11,14 @@ from apps.skill.models import (
 class ResourceBuff(resources.ModelResource):
     class Meta:
         model = Buff
+        bulk_replace = True
+
 
 class ResourceTalentSkill(resources.ModelResource):
     class Meta:
         model = TalentSkill
+        bulk_replace = True
+
 
 
 @admin.register(Buff)

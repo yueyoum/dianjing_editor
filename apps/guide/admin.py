@@ -8,6 +8,8 @@ from apps.guide.models import Guide
 class ResourceGuide(resources.ModelResource):
     class Meta:
         model = Guide
+        bulk_replace = True
+
 
 
 @admin.register(Guide)

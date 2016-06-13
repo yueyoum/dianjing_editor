@@ -11,6 +11,8 @@ from apps.building.models import (
 class ResourceBuildingNew(resources.ModelResource):
     class Meta:
         model = BuildingNew
+        bulk_replace = True
+
 
 @admin.register(BuildingNew)
 class AdminBuildingNew(ImportExportModelAdmin):

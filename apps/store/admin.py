@@ -8,18 +8,26 @@ from apps.store.models import Store, StoreCondition, StoreRefresh, StoreType
 class ResourceStoreType(resources.ModelResource):
     class Meta:
         model = StoreType
+        bulk_replace = True
+
 
 class ResourceStore(resources.ModelResource):
     class Meta:
         model = Store
+        bulk_replace = True
+
 
 class ResourceSC(resources.ModelResource):
     class Meta:
         model = StoreCondition
+        bulk_replace = True
+
 
 class ResourceSR(resources.ModelResource):
     class Meta:
         model = StoreRefresh
+        bulk_replace = True
+
 
 
 @admin.register(StoreType)

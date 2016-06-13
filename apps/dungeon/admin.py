@@ -26,6 +26,8 @@ class DungeonAdmin(ImportExportModelAdmin):
 class ResourceDungeonGrade(resources.ModelResource):
     class Meta:
         model = DungeonGrade
+        bulk_replace = True
+
 
 
 @admin.register(DungeonGrade)
@@ -41,6 +43,8 @@ class DungeonGradeAdmin(ImportExportModelAdmin):
 class ResourceRC(resources.ModelResource):
     class Meta:
         model = DungeonResetCost
+        bulk_replace = True
+
 
 
 @admin.register(DungeonResetCost)

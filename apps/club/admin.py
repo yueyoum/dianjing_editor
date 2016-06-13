@@ -7,10 +7,14 @@ from apps.club.models import ClubFlag, ClubLevel
 class ResourceClubFlag(resources.ModelResource):
     class Meta:
         model = ClubFlag
+        bulk_replace = True
+
 
 class ResourceClubLevel(resources.ModelResource):
     class Meta:
         model = ClubLevel
+        bulk_replace = True
+
 
 
 @admin.register(ClubFlag)

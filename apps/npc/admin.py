@@ -7,6 +7,8 @@ from apps.npc.models import NPCFormation
 class ResourceNPCFormation(resources.ModelResource):
     class Meta:
         model = NPCFormation
+        bulk_replace = True
+
 
 @admin.register(NPCFormation)
 class AdminNPCFormation(ImportExportModelAdmin):

@@ -8,6 +8,8 @@ from apps.collection.models import Collection
 class ResourceCollection(resources.ModelResource):
     class Meta:
         model = Collection
+        bulk_replace = True
+
 
 @admin.register(Collection)
 class AdminCollection(ImportExportModelAdmin):

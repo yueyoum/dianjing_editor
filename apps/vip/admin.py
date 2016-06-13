@@ -8,6 +8,8 @@ from apps.vip.models import VIP
 class ResourceVIP(resources.ModelResource):
     class Meta:
         model = VIP
+        bulk_replace = True
+
 
 @admin.register(VIP)
 class AdminVIP(ImportExportModelAdmin):

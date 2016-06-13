@@ -66,6 +66,8 @@ class TowerRankRewardAdmin(ImportExportModelAdmin):
 class ResourceTowerGameLevel(resources.ModelResource):
     class Meta:
         model = TowerGameLevel
+        bulk_replace = True
+
 
 
 @admin.register(TowerGameLevel)
@@ -80,6 +82,8 @@ class TowerGameLevelAdmin(ImportExportModelAdmin):
 class ResourceTowerResetCost(resources.ModelResource):
     class Meta:
         model = TowerResetCost
+        bulk_replace = True
+
 
 
 @admin.register(TowerResetCost)

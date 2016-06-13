@@ -31,14 +31,20 @@ class RandomEventAdmin(admin.ModelAdmin):
 class ResourceTC(resources.ModelResource):
     class Meta:
         model = TaskCondition
+        bulk_replace = True
+
 
 class ResourceTaskMain(resources.ModelResource):
     class Meta:
         model = TaskMain
+        bulk_replace = True
+
 
 class ResourceTaskDaily(resources.ModelResource):
     class Meta:
         model = TaskDaily
+        bulk_replace = True
+
 
 
 @admin.register(TaskCondition)
