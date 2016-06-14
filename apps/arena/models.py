@@ -100,7 +100,7 @@ class MatchReward(models.Model):
             result = []
             for x in text.split(';'):
                 _a, _b, _c = x.split(',')
-                result.append((int(_a), int(_b), int(_c)))
+                result.append([int(_a), int(_b), int(_c)])
 
             for i in range(1, len(result)-1):
                 result[i][2] += result[i-1][2]
@@ -130,3 +130,16 @@ class MatchLogTemplate(models.Model):
         db_table = 'arena_match_log_template'
         verbose_name = '战报模板'
         verbose_name_plural = '战报模板'
+
+
+class SearchRange(models.Model):
+    id = models.IntegerField(primary_key=True, verbose_name='排名上限')
+    range_1 = models.IntegerField()
+    range_2 = models.IntegerField()
+    range_3 = models.IntegerField()
+    range_4 = models.IntegerField()
+
+    class Meta:
+        db_table = 'arena_search_range'
+        verbose_name = '对手搜索范围'
+        verbose_name_plural = '对手搜索范围'

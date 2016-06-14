@@ -3,7 +3,7 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from apps.arena.models import ArenaNPC, HonorReward, MatchReward, RankReward, BuyTimesCost, MatchLogTemplate
+from apps.arena.models import ArenaNPC, HonorReward, MatchReward, RankReward, BuyTimesCost, MatchLogTemplate, SearchRange
 
 class ResourceArenaNPC(resources.ModelResource):
     class Meta:
@@ -37,6 +37,12 @@ class ResourceBuyTimesCost(resources.ModelResource):
 class ResourceMatchLogTemplate(resources.ModelResource):
     class Meta:
         model = MatchLogTemplate
+        bulk_replace = True
+
+
+class ResourceSearchRange(resources.ModelResource):
+    class Meta:
+        model = SearchRange
         bulk_replace = True
 
 
@@ -85,3 +91,8 @@ class AdminMatchLogTemplate(ImportExportModelAdmin):
     list_display = (
         'id', 'template'
     )
+
+@admin.register(SearchRange)
+class AdminSearchRange(ImportExportModelAdmin):
+    resource_class = ResourceSearchRange
+    list_display = ('id', 'range_1', 'range_2', 'range_3', 'range_4')
