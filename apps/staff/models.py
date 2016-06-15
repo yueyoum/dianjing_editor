@@ -52,7 +52,10 @@ class StaffRecruit(models.Model):
             if tp in tps:
                 tps[tp]['points'][f['fields']['min_point']] = parse_items(f['fields']['items'])
             else:
-                settings = StaffRecruitSettings.objects.get(id=tp)
+                if tp == 3:
+                    settings = StaffRecruitSettings.objects.get(id=2)
+                else:
+                    settings = StaffRecruitSettings.objects.get(id=tp)
 
                 tps[tp] = {
                     'points': {f['fields']['min_point']: parse_items(f['fields']['items'])},
