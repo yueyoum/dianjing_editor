@@ -20,6 +20,7 @@ class VIP(models.Model):
     arena_buy_times = models.IntegerField(default=0, verbose_name='竞技场购买次数')
     energy_buy_times = models.IntegerField(default=0, verbose_name='体力购买次数')
     store_refresh_times = models.IntegerField(default=5, verbose_name='神秘商店刷新次数')
+    territory_help_times = models.IntegerField(default=0, verbose_name='领地帮助好友次数')
 
     class Meta:
         db_table = "vip"
