@@ -20,6 +20,7 @@ class StaffRecruit(models.Model):
     TYPE = (
         (1, "普通抽卡"),
         (2, "钻石抽卡"),
+        (3, "钻石免费抽卡")
     )
 
     id = models.IntegerField(primary_key=True)
