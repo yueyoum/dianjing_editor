@@ -15,6 +15,7 @@ class ChallengeChapter(models.Model):
     des = models.TextField()
     star_reward = models.CharField(max_length=255, help_text='星数,奖励ID,奖励数量;...')
     area = models.CharField(max_length=255, verbose_name='大区名')
+    map_name = models.CharField(max_length=255, blank=True)
 
     def __unicode__(self):
         return self.name
@@ -97,20 +98,6 @@ class ChallengeMatch(models.Model):
             f['fields']['next'] = list(next_challenges)
 
         return fixture
-
-
-class Maps(models.Model):
-    id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=255, verbose_name='名字')
-    picture = models.CharField(max_length=255, verbose_name='图片')
-
-    def __unicode__(self):
-        return self.name
-
-    class Meta:
-        db_table = 'maps'
-        verbose_name = '地图'
-        verbose_name_plural = '地图'
 
 
 class ChallengeGuide(models.Model):

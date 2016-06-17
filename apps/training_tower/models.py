@@ -96,6 +96,8 @@ class TowerGameLevel(models.Model):
     turntable_9 = models.CharField(max_length=255, verbose_name="9星天赋", blank=True,
                                      help_text="天赋ID,...(没有则不填)")
 
+    map_name = models.CharField(max_length=255, blank=True)
+
     class Meta:
         db_table = 'tower_level'
         verbose_name = '层级'

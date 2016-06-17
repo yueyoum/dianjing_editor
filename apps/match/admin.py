@@ -8,7 +8,6 @@ from apps.match.models import (
     ChallengeGuide,
     ChallengeBuyCost,
 
-    Maps,
 )
 
 
@@ -56,12 +55,6 @@ class ChallengeMatchAdmin(ImportExportModelAdmin):
 
     list_filter = ('chapter',)
 
-
-@admin.register(Maps)
-class MapsAdmin(admin.ModelAdmin):
-    list_display = (
-        'id', 'name', 'picture',
-    )
 
 @admin.register(ChallengeGuide)
 class AdminChallengeGuide(ImportExportModelAdmin):

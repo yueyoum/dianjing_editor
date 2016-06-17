@@ -15,6 +15,7 @@ class Dungeon(models.Model):
                                  help_text="1,3,5 -- 周一、三、五开启")
     open_des = models.TextField(verbose_name="开启描述")
     des = models.TextField(verbose_name="副本简介")
+    map_name = models.CharField(max_length=255, blank=True)
 
     class Meta:
         db_table = "dungeon"
