@@ -7,6 +7,9 @@ class Buff(models.Model):
     tp = models.IntegerField()
     level = models.IntegerField()
     effect = models.CharField(max_length=255)
+    # 1 增益 2 减益
+    mode = models.IntegerField()
+    icon = models.CharField(max_length=255)
 
     class Meta:
         db_table = 'buff'

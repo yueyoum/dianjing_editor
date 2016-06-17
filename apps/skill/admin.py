@@ -26,7 +26,7 @@ class AdminBuff(ImportExportModelAdmin):
     resource_class = ResourceBuff
 
     list_display = (
-        'id', 'tp', 'level', 'effect',
+        'id', 'tp', 'level', 'effect', 'mode', 'icon'
     )
 
 
