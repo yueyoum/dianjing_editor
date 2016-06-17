@@ -9,7 +9,7 @@ class QianBan(models.Model):
 
     id = models.IntegerField(primary_key=True)
     staff_oid = models.IntegerField()
-    name = models.CharField(max_length=32, unique=True, verbose_name="名字")
+    name = models.CharField(max_length=32, verbose_name="名字")
     des = models.TextField(verbose_name="描述")
     story_des = models.TextField(blank=True, verbose_name="背景故事")
 
