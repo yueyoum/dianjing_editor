@@ -8,12 +8,13 @@ from apps.qianban.models import QianBan
 class QianBanResource(resources.ModelResource):
     class Meta:
         model = QianBan
+        bulk_replace = True
 
 @admin.register(QianBan)
 class QianBanAdmin(ImportExportModelAdmin):
     resource_class = QianBanResource
 
-    list_display = ('id', 'name', 'des',
+    list_display = ('id', 'staff_oid', 'name', 'des', 'story_des',
                     'condition_tp', 'condition_value',
-                    'addition_tp', 'addition_value'
+                    'talent_effect_id'
                     )
