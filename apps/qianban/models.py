@@ -53,7 +53,7 @@ class QianBan(models.Model):
             f = {
                 'pk': k,
                 'fields': {
-                    'qianban': v
+                    'info': v
                 }
             }
 
