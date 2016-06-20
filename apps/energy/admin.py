@@ -10,7 +10,7 @@ class ResourceBuyCost(resources.ModelResource):
         model = BuyCost
         bulk_replace = True
 
-
+@admin.register(BuyCost)
 class AdminBuyCost(ImportExportModelAdmin):
     resource_class = ResourceBuyCost
     list_display = ('id', 'cost',)
