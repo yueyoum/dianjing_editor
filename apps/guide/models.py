@@ -12,7 +12,8 @@ class Guide(models.Model):
         (0, '空操作'),
         (1, '点击UI'),
         (2, '拖动UI'),
-        (3, '点击建筑')
+        (3, '点击建筑'),
+        (4, '拖动阵型'),
     )
 
     ARROW = (
@@ -39,6 +40,10 @@ class Guide(models.Model):
     after_icon = models.CharField(max_length=255, blank=True)
     after_position = models.IntegerField(default=1, choices=POSITION)
     after_dialog = models.TextField(blank=True)
+    
+    position = models.IntegerField(default=1, choices=POSITION)
+    icon = models.CharField(max_length=255, blank=True)
+    des = models.TextField(blank=True)
 
     class Meta:
         db_table = 'guide'

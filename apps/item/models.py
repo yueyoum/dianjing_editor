@@ -162,6 +162,9 @@ class ItemUse(models.Model):
                 group_data = []
 
                 for item_text in group_text.split(';'):
+                    if not item_text:
+                        continue
+
                     _id, _amount, _prob = item_text.split(',')
                     group_data.append(
                         (int(_id), int(_amount), int(_prob))
