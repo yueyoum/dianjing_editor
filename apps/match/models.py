@@ -62,6 +62,7 @@ class ChallengeMatch(models.Model):
 
     condition_challenge = models.IntegerField(db_index=True, verbose_name='前置关卡ID')
     times_limit = models.IntegerField(verbose_name='每日限制次数')
+    show_item_id = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.name
