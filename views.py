@@ -116,7 +116,9 @@ MODELS = (
     ('store.Store', 'store.json'),
     ('store.StoreRefresh', 'store_refresh_cost.json'),
 
-    ('collection.Collection', 'collection.json')
+    ('collection.Collection', 'collection.json'),
+
+    ('energy.BuyCost', 'energy_buy_cost.json'),
 )
 
 class InMemoryZip(object):
