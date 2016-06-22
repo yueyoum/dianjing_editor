@@ -14,6 +14,7 @@ class Guide(models.Model):
         (2, '拖动UI'),
         (3, '点击建筑'),
         (4, '拖动阵型'),
+        (5, '上阵'),
     )
 
     ARROW = (
