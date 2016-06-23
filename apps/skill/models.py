@@ -48,6 +48,8 @@ class TalentSkill(models.Model):
         (11, '上阵所有选手携带的人族兵种'),
         (12, '上阵所有选手携带的虫族兵种'),
         (13, '上阵所有选手携带的神族兵种'),
+        (14, '敌我上阵所有空中兵种'),
+        (15, '敌我上阵所有地面兵种'),
     )
 
     id = models.IntegerField(primary_key=True)
