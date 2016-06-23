@@ -15,6 +15,9 @@ class Function(models.Model):
     need_challenge_id = models.IntegerField(default=0, verbose_name='所需关卡ID')
     unlock_des = models.TextField(blank=True, verbose_name="解锁描述")
 
+    normal_color = models.CharField(max_length=255, blank=True)
+    lock_color = models.CharField(max_length=255, blank=True)
+
     def __unicode__(self):
         return self.name
 

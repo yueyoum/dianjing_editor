@@ -22,5 +22,7 @@ class FunctionAdmin(ImportExportModelAdmin):
         'order_in_building',
         'need_club_level',
         'need_challenge_id',
-        'unlock_des'
+        'unlock_des',
+        'normal_color',
+        'lock_color',
     )
