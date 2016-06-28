@@ -57,7 +57,6 @@ class WelfareSignIn(models.Model):
 class WelfareNewPlayer(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
-    day = models.IntegerField()
     reward = models.TextField(help_text='id,amount;id,amount;')
 
     class Meta:
@@ -80,7 +79,6 @@ class WelfareNewPlayer(models.Model):
 class WelfareLevelReward(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
-    level = models.IntegerField()
     reward = models.TextField(help_text='id,amount;id,amount;')
 
     class Meta:
@@ -95,6 +93,6 @@ class WelfareLevelReward(models.Model):
     @classmethod
     def patch_fixture(cls, fixture):
         for f in fixture:
-            f['fields']['reward'] = _parse(f['fields']['reward'])
+            f['fields']['reward'] = _parse(f['fields']['reward'], 2)
 
         return fixture

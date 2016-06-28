@@ -34,9 +34,9 @@ class AdminSignIn(ImportExportModelAdmin):
 @admin.register(WelfareNewPlayer)
 class AdminNewPlayer(ImportExportModelAdmin):
     resource_class = ResourceNewPlayer
-    list_display = ('id', 'name', 'day', 'reward')
+    list_display = ('id', 'name', 'reward')
 
 @admin.register(WelfareLevelReward)
 class AdminLevelReward(ImportExportModelAdmin):
     resource_class = ResourceLevelReward
-    list_display = ('id', 'name', 'level', 'reward')
+    list_display = ('id', 'name', 'reward')
