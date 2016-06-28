@@ -121,6 +121,10 @@ MODELS = (
     ('energy.BuyCost', 'energy_buy_cost.json'),
 
     ('formation.Slot', 'formation_slot.json'),
+
+    ('welfare.WelfareSignIn', 'welfare_signin.json'),
+    ('welfare.WelfareNewPlayer', 'welfare_new_player.json'),
+    ('welfare.WelfareLevelReward', 'welfare_level_reward.json'),
 )
 
 class InMemoryZip(object):

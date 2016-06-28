@@ -74,6 +74,7 @@ INSTALLED_APPS = (
     'apps.collection',
     'apps.energy',
     'apps.formation',
+    'apps.welfare',
 )
 
 MIDDLEWARE_CLASSES = (
