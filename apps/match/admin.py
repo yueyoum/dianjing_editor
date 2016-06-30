@@ -7,9 +7,13 @@ from apps.match.models import (
     ChallengeChapter,
     ChallengeGuide,
     ChallengeBuyCost,
-
+    ChallengeArea,
 )
 
+class ResourceChallengeArea(resources.ModelResource):
+    class Meta:
+        model = ChallengeArea
+        bulk_replace = True
 
 class ResourceChallengeChapter(resources.ModelResource):
     class Meta:
@@ -36,6 +40,10 @@ class ResourceBC(resources.ModelResource):
         model = ChallengeBuyCost
         bulk_replace = True
 
+@admin.register(ChallengeArea)
+class AdminChallengeArea(ImportExportModelAdmin):
+    resource_class = ResourceChallengeArea
+    list_display = ('id', 'name', 'icon')
 
 @admin.register(ChallengeChapter)
 class ChallengeTypeAdmin(ImportExportModelAdmin):

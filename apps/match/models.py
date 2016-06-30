@@ -2,6 +2,16 @@
 
 from django.db import models
 
+class ChallengeArea(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255)
+    icon = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'challenge_area'
+        verbose_name = '挑战赛大区'
+        verbose_name_plural = '挑战赛大区'
+
 class ChallengeChapter(models.Model):
     TP = (
         (1, '普通'),
@@ -14,7 +24,7 @@ class ChallengeChapter(models.Model):
     icon = models.CharField(max_length=255)
     des = models.TextField()
     star_reward = models.CharField(max_length=255, help_text='星数,奖励ID,奖励数量;...')
-    area = models.CharField(max_length=255, verbose_name='大区名')
+    area = models.IntegerField()
     map_name = models.CharField(max_length=255, blank=True)
 
     def __unicode__(self):

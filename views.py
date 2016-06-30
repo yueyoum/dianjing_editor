@@ -41,6 +41,7 @@ MODELS = (
 
     ('qianban.QianBan', 'qianban.json'),
 
+    ('match.ChallengeArea', 'challenge_area.json'),
     ('match.ChallengeChapter', 'challenge_chapter.json'),
     ('match.ChallengeMatch', 'challenge_match.json'),
     ('match.ChallengeGuide', 'challenge_guide.json'),
