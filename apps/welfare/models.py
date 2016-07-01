@@ -42,7 +42,7 @@ class WelfareSignIn(models.Model):
 
     @classmethod
     def get_fixture_key(cls):
-        return 'welfare.WelfareSignin'
+        return 'welfare.WelfareSignIn'
 
     @classmethod
     def patch_fixture(cls, fixture):
