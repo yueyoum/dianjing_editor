@@ -15,9 +15,16 @@ from apps.staff.models import (
 )
 
 
+class ResourceStaffRace(resources.ModelResource):
+    class Meta:
+        model = StaffRace
+        bulk_replace = True
+
+
 @admin.register(StaffRace)
-class StuffRaceAdmin(admin.ModelAdmin):
-    list_display = ('id', 'icon', 'name')
+class StuffRaceAdmin(ImportExportModelAdmin):
+    resource_class = ResourceStaffRace
+    list_display = ('id', 'icon', 'name', 'effect', 'show_mode', 'show_delay')
 
 
 class ResourceStaffRecruit(resources.ModelResource):
@@ -38,12 +45,10 @@ class ResourceStaffNew(resources.ModelResource):
         bulk_replace = True
 
 
-
 class ResourceStaffLevelNew(resources.ModelResource):
     class Meta:
         model = StaffLevelNew
         bulk_replace = True
-
 
 
 class ResourceStaffStep(resources.ModelResource):
@@ -52,19 +57,16 @@ class ResourceStaffStep(resources.ModelResource):
         bulk_replace = True
 
 
-
 class ResourceStaffStar(resources.ModelResource):
     class Meta:
         model = StaffStar
         bulk_replace = True
 
 
-
 class ResourceEquipQuality(resources.ModelResource):
     class Meta:
         model = StaffEquipmentQualityAddition
         bulk_replace = True
-
 
 
 class ResourceEquipLevel(resources.ModelResource):
@@ -79,6 +81,7 @@ class AdminStaffRecruit(ImportExportModelAdmin):
     list_display = (
         'id', 'tp', 'min_point', 'items'
     )
+
 
 @admin.register(StaffRecruitSettings)
 class AdminStaffRecruitSettings(ImportExportModelAdmin):

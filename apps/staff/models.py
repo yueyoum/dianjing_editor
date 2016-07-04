@@ -7,6 +7,10 @@ class StaffRace(models.Model):
     icon = models.CharField(max_length=255, blank=True)
     name = models.CharField(unique=True, max_length=32, verbose_name="名称")
 
+    effect = models.CharField(max_length=255, blank=True)
+    show_mode = models.IntegerField(default=1)
+    show_delay = models.FloatField(default=0)
+
     def __unicode__(self):
         return self.name
 
