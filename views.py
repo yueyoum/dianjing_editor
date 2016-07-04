@@ -62,7 +62,10 @@ MODELS = (
 
     ('emoticon.Emoticon', 'emoticon.json'),
     ('guide.Guide', 'guide.json'),
+
     ('template.SponsorLogTemplate', 'sponsor_template.json'),
+    ('template.BroadcastTemplate', 'broadcast_template.json'),
+
     ('activity.ActivityCategory', 'activity_category.json'),
     ('activity.ActivitySignIn', 'activity_signin.json'),
     ('activity.ActivityLoginReward', 'activity_login_reward.json'),
