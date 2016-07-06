@@ -65,17 +65,11 @@ MODELS = (
     ('template.SponsorLogTemplate', 'sponsor_template.json'),
     ('template.BroadcastTemplate', 'broadcast_template.json'),
 
-    ('activity.ActivityCategory', 'activity_category.json'),
-    ('activity.ActivitySignIn', 'activity_signin.json'),
-    ('activity.ActivityLoginReward', 'activity_login_reward.json'),
+
     ('client_npc.ClientNPC', 'client_npc.json'),
-    ('active_value.ActiveFunction', 'active_function.json'),
-    ('active_value.ActiveReward', 'active_reward.json'),
 
     ('conversation.Conversation', 'conversation.json'),
     ('conversation.ChallengeConversation', 'challenge_conversation.json'),
-
-    ('auction.Auction', 'auction.json'),
 
     ('item.ItemQuality', 'item_quality.json'),
     ('item.ItemNew', 'item_new.json'),
