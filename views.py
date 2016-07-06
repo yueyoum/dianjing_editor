@@ -49,7 +49,6 @@ MODELS = (
 
     ('building.BuildingNew', 'building.json'),
 
-    ('task.RandomEvent', 'random_event.json'),
     ('task.TaskCondition', 'task_condition.json'),
     ('task.TaskMain', 'task_main.json'),
     ('task.TaskDaily', 'task_daily.json'),

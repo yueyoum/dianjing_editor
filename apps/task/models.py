@@ -1,72 +1,10 @@
 # -*- coding:utf-8 -*-
 from django.db import models
 
-
 POSITION_TYPE = (
         (1, '在左边'),
         (2, '在右边')
     )
-
-
-class RandomEvent(models.Model):
-    id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=255, verbose_name='名字')
-    icon = models.CharField(max_length=255, verbose_name='图标')
-    level_min = models.IntegerField(default=1, verbose_name='最低等级')
-    level_max = models.IntegerField(default=1, verbose_name='最高等级')
-    trig_name = models.CharField(max_length=255, verbose_name='触发节点')
-    package = models.ForeignKey('package.Package', verbose_name='奖励')
-
-    class Meta:
-        db_table = 'random_event'
-        verbose_name = '随机事件'
-        verbose_name_plural = '随机事件'
-
-    @classmethod
-    def patch_fixture(cls, fixture):
-        def make_dialog(dialog):
-            return {
-                'position': dialog.position,
-                'icon': dialog.icon,
-                'dialog': dialog.dialog
-            }
-
-        for f in fixture:
-            pk = f['pk']
-            dialog_before = RandomEventDialogBefore.objects.filter(random_event__id=pk)
-            dialog_after = RandomEventDialogAfter.objects.filter(random_event__id=pk)
-
-            f['fields']['dialog_before'] = [make_dialog(x) for x in dialog_before]
-            f['fields']['dialog_after'] = [make_dialog(x) for x in dialog_after]
-
-            if not f['fields']['package']:
-                f['fields']['package'] = 0
-
-        return fixture
-
-
-class RandomEventDialogBefore(models.Model):
-    random_event = models.ForeignKey(RandomEvent, related_name='dialog_before')
-    position = models.IntegerField(choices=POSITION_TYPE, verbose_name='对话者位置')
-    icon = models.CharField(max_length=255, verbose_name='对话者图标')
-    dialog = models.TextField()
-
-    class Meta:
-        db_table = 'random_event_dialog_before'
-        verbose_name = '随机事件前对话'
-        verbose_name_plural = '随机事件前对话'
-
-
-class RandomEventDialogAfter(models.Model):
-    random_event = models.ForeignKey(RandomEvent, related_name='dialog_after')
-    position = models.IntegerField(choices=POSITION_TYPE, verbose_name='对话者位置')
-    icon = models.CharField(max_length=255, verbose_name='对话者图标')
-    dialog = models.TextField()
-
-    class Meta:
-        db_table = 'random_event_dialog_after'
-        verbose_name = '随机事件后对话'
-        verbose_name_plural = '随机事件后对话'
 
 
 class TaskMain(models.Model):
