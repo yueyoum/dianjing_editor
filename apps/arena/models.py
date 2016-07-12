@@ -137,8 +137,8 @@ class MatchLogTemplate(models.Model):
 
 class SearchRange(models.Model):
     id = models.IntegerField(primary_key=True)
-    range_1 = models.IntegerField()
-    range_2 = models.IntegerField()
+    range_1 = models.FloatField()
+    range_2 = models.FloatField()
 
     score_win = models.IntegerField(default=0)
     score_lose = models.IntegerField(default=0)
