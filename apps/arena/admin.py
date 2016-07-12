@@ -3,7 +3,7 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from apps.arena.models import ArenaNPC, HonorReward, MatchReward, RankReward, BuyTimesCost, MatchLogTemplate, SearchRange
+from apps.arena.models import ArenaNPC, HonorReward, MatchReward, RankReward, BuyTimesCost, MatchLogTemplate, SearchRange, ResetCost
 
 class ResourceArenaNPC(resources.ModelResource):
     class Meta:
@@ -46,12 +46,18 @@ class ResourceSearchRange(resources.ModelResource):
         bulk_replace = True
 
 
+class ResourceResetCost(resources.ModelResource):
+    class Meta:
+        model = ResetCost
+        bulk_replace = True
+
+
 @admin.register(ArenaNPC)
 class AdminArenaNPC(ImportExportModelAdmin):
     resource_class = ResourceArenaNPC
 
     list_display = (
-        'id', 'npcs'
+        'id', 'score_low', 'score_high', 'npcs', 'amount'
     )
 
 @admin.register(HonorReward)
@@ -95,4 +101,10 @@ class AdminMatchLogTemplate(ImportExportModelAdmin):
 @admin.register(SearchRange)
 class AdminSearchRange(ImportExportModelAdmin):
     resource_class = ResourceSearchRange
-    list_display = ('id', 'range_1', 'range_2', 'range_3', 'range_4')
+    list_display = ('id', 'range_1', 'range_2', 'score_win', 'score_lose')
+
+
+@admin.register(ResetCost)
+class AdminResetCost(ImportExportModelAdmin):
+    resource_class = ResourceResetCost
+    list_display = ('id', 'diamond')

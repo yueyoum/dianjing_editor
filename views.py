@@ -94,6 +94,7 @@ MODELS = (
     ('arena.BuyTimesCost', 'arena_buy_times_cost.json'),
     ('arena.MatchLogTemplate', 'arena_match_log_template.json'),
     ('arena.SearchRange', 'arena_search_range.json'),
+    ('arena.ResetCost', 'arena_reset_cost.json'),
 
     ('training_tower.TowerSaleGoods', 'tower_sale_goods.json'),
     ('training_tower.TowerStarReward', 'tower_star_reward.json'),

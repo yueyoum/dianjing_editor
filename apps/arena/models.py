@@ -4,8 +4,11 @@ from __future__ import unicode_literals
 from django.db import models
 
 class ArenaNPC(models.Model):
-    id = models.IntegerField(primary_key=True, verbose_name='排名上限')
+    id = models.IntegerField(primary_key=True)
+    score_low = models.IntegerField(default=1000)
+    score_high = models.IntegerField(default=1000)
     npcs = models.CommaSeparatedIntegerField(max_length=255)
+    amount = models.IntegerField(default=0)
 
     class Meta:
         db_table = 'arena_npc'
@@ -133,13 +136,24 @@ class MatchLogTemplate(models.Model):
 
 
 class SearchRange(models.Model):
-    id = models.IntegerField(primary_key=True, verbose_name='排名上限')
+    id = models.IntegerField(primary_key=True)
     range_1 = models.IntegerField()
     range_2 = models.IntegerField()
-    range_3 = models.IntegerField()
-    range_4 = models.IntegerField()
+
+    score_win = models.IntegerField(default=0)
+    score_lose = models.IntegerField(default=0)
 
     class Meta:
         db_table = 'arena_search_range'
         verbose_name = '对手搜索范围'
         verbose_name_plural = '对手搜索范围'
+
+
+class ResetCost(models.Model):
+    id = models.IntegerField(primary_key=True)
+    diamond = models.IntegerField()
+
+    class Meta:
+        db_table = 'arena_reset_cost'
+        verbose_name = '重置花费'
+        verbose_name_plural = '重置花费'
