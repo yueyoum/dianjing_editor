@@ -45,8 +45,8 @@ class Formation(models.Model):
             for x in text.split(';'):
                 if not x:
                     continue
-                for a, b in x.split(','):
-                    result.append((int(a), int(b)))
+                a, b = x.split(',')
+                result.append((int(a), int(b)))
 
             return result
 
@@ -59,7 +59,7 @@ class Formation(models.Model):
             for lv in FormationLevel.objects.filter(formation_id=f['pk']):
                 levels[lv.level] = {
                     'level_up_need_star': lv.level_up_need_star,
-                    'talent_effects': [int(i) for i in lv.talent_effects],
+                    'talent_effects': [int(i) for i in lv.talent_effects.split(';')],
                     'side_attack_amount': lv.side_attack_amount,
                 }
 

@@ -58,8 +58,35 @@ class RankReward(models.Model):
 
     class Meta:
         db_table = 'arena_rank_reward'
-        verbose_name = '排名奖励'
-        verbose_name_plural = "排名奖励"
+        verbose_name = '排名奖励 - 日'
+        verbose_name_plural = "排名奖励 - 日"
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        def _parse_reward(text):
+            result = []
+            for x in text.split(';'):
+                _a, _b = x.split(',')
+                result.append((int(_a), int(_b)))
+
+            return result
+
+        for f in fixture:
+            f['fields']['reward'] = _parse_reward(f['fields']['reward'])
+
+        return fixture
+
+class RankRewardWeekly(models.Model):
+    id = models.IntegerField(primary_key=True, verbose_name='排名上限')
+    rank_des = models.CharField(blank=True, max_length=255)
+    reward = models.CharField(max_length=255, help_text='id,amount;id,amount')
+    mail_title = models.CharField(max_length=255)
+    mail_content = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'arena_rank_reward_weekly'
+        verbose_name = '排名奖励 - 周'
+        verbose_name_plural = "排名奖励 - 周"
 
     @classmethod
     def patch_fixture(cls, fixture):

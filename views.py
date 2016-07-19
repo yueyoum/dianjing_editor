@@ -90,6 +90,7 @@ MODELS = (
     ('arena.ArenaNPC', 'arena_npc.json'),
     ('arena.HonorReward', 'arena_honor_reward.json'),
     ('arena.RankReward', 'arena_rank_reward.json'),
+    ('arena.RankRewardWeekly', 'arena_rank_reward_weekly.json'),
     ('arena.MatchReward', 'arena_match_reward.json'),
     ('arena.BuyTimesCost', 'arena_buy_times_cost.json'),
     ('arena.MatchLogTemplate', 'arena_match_log_template.json'),
