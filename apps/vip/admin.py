@@ -26,4 +26,5 @@ class AdminVIP(ImportExportModelAdmin):
         'energy_buy_times',
         'store_refresh_times',
         'territory_help_times',
+        'arena_search_reset_times',
     )
