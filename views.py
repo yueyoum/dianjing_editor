@@ -119,6 +119,7 @@ MODELS = (
     ('energy.BuyCost', 'energy_buy_cost.json'),
 
     ('formation.Slot', 'formation_slot.json'),
+    ('formation.Formation', 'formation.json'),
 
     ('welfare.WelfareSignIn', 'welfare_signin.json'),
     ('welfare.WelfareNewPlayer', 'welfare_new_player.json'),
