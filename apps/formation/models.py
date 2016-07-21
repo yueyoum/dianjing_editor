@@ -59,6 +59,7 @@ class Formation(models.Model):
             for lv in FormationLevel.objects.filter(formation_id=f['pk']):
                 levels[lv.level] = {
                     'level_up_need_star': lv.level_up_need_star,
+                    'level_up_need_items': _parse_items(lv.level_up_need_items),
                     'talent_effects': [int(i) for i in lv.talent_effects.split(';')],
                     'side_attack_amount': lv.side_attack_amount,
                 }
@@ -73,6 +74,7 @@ class FormationLevel(models.Model):
     formation_id = models.IntegerField(db_index=True)
     level = models.IntegerField()
     level_up_need_star = models.IntegerField()
+    level_up_need_items = models.CharField(max_length=255)
     talent_effects = models.CharField(max_length=255)
 
     side_attack_amount = models.IntegerField()

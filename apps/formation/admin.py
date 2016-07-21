@@ -40,6 +40,7 @@ class AdminFormationLevel(ImportExportModelAdmin):
     resource_class = ResourceFormationLevel
     list_display = (
         'id', 'formation_id', 'level',
-        'level_up_need_star', 'talent_effects',
+        'level_up_need_star', 'level_up_need_items',
+        'talent_effects',
         'side_attack_amount'
     )
