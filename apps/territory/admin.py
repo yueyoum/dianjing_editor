@@ -136,5 +136,6 @@ class AdminTerritoryStore(ImportExportModelAdmin):
 class AdminEvent(ImportExportModelAdmin):
     resource_class = ResourceEvent
     list_display = (
-        'id', 'target_exp', 'reward_win', 'reward_lose', 'npc', 'des'
+        'id', 'target_exp', 'reward_win', 'reward_lose', 'npc', 'des',
+        'resource',
     )

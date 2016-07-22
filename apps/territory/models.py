@@ -273,7 +273,7 @@ class Event(models.Model):
 
     npc = models.IntegerField()
     des = models.TextField(blank=True)
-
+    resource = models.CharField(max_length=255)
 
     class Meta:
         db_table = 'territory_event'
