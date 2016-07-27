@@ -125,6 +125,9 @@ MODELS = (
     ('welfare.WelfareSignIn', 'welfare_signin.json'),
     ('welfare.WelfareNewPlayer', 'welfare_new_player.json'),
     ('welfare.WelfareLevelReward', 'welfare_level_reward.json'),
+
+    ('union.UnionLevel', 'union_level.json'),
+    ('union.UnionSignIn', 'union_signin.json'),
 )
 
 class InMemoryZip(object):
