@@ -72,6 +72,8 @@ class UnitNew(models.Model):
     effect_move = models.CharField(max_length=255, verbose_name='移动特效')
     effect_die = models.CharField(max_length=255, verbose_name='死亡特效')
 
+    des = models.TextField(blank=True)
+
     class Meta:
         db_table = 'unit_new'
         verbose_name = "兵种（新）"
