@@ -128,6 +128,9 @@ MODELS = (
 
     ('union.UnionLevel', 'union_level.json'),
     ('union.UnionSignIn', 'union_signin.json'),
+
+    ('purchase.PurchaseGoods', 'purchase_goods.json'),
+    ('purchase.PurchaseYueka', 'purchase_yueka.json'),
 )
 
 class InMemoryZip(object):

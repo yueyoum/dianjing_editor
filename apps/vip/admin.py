@@ -19,12 +19,5 @@ class AdminVIP(ImportExportModelAdmin):
         'id', 'exp',
         'item_id', 'diamond_original', 'diamond_now', 'item_preview',
         'des',
-        'challenge_reset_times',
-        'daily_dungeon_reset_times',
-        'tower_reset_times',
-        'arena_buy_times',
-        'energy_buy_times',
-        'store_refresh_times',
-        'territory_help_times',
-        'arena_search_reset_times',
+
     )
