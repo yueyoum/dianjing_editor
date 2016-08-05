@@ -21,7 +21,7 @@ class AdminNewPlayer(ImportExportModelAdmin):
     resource_class = ResourceNewPlayer
     list_display = (
         'id', 'day', 'name',
-        'condition_id', 'condition_param', 'condition_value',
+        'condition_id', 'condition_value',
         'rewards', 'show_progress'
     )
 

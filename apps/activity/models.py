@@ -20,7 +20,6 @@ class NewPlayerActivity(models.Model):
     name = models.CharField(max_length=255)
 
     condition_id = models.IntegerField()
-    condition_param = models.IntegerField()
     condition_value = models.IntegerField()
 
     rewards = models.TextField()
