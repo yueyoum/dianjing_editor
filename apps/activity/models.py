@@ -32,33 +32,10 @@ class NewPlayerActivity(models.Model):
 
     @classmethod
     def patch_fixture(cls, fixture):
-        data = {}
-
         for f in fixture:
-            xx = {
-                'id': f['pk'],
-                'name': f['fields']['name'],
-                'condition_id': f['fields']['condition_id'],
-                'condition_param': f['fields']['condition_param'],
-                'condition_value': f['fields']['condition_value'],
-                'rewards': _parse(f['fields']['rewards']),
-                'show_progress': f['fields']['show_progress'],
-            }
+            f['fields']['rewards'] = _parse(f['fields']['rewards'])
 
-            if f['day'] in data:
-                data[f['fields']['day']].append(xx)
-            else:
-                data[f['fields']['day']] = [xx]
-
-
-        new_fixture = []
-        for k, v in data.iteritems():
-            new_fixture.append({
-                'pk': k,
-                'fields': v
-            })
-
-        return new_fixture
+        return fixture
 
 
 class DailyBuy(models.Model):
