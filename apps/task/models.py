@@ -45,6 +45,7 @@ class TaskCondition(models.Model):
     scene = models.CharField(max_length=255, blank=True)
     ui = models.CharField(max_length=255, blank=True)
     server_module = models.CharField(max_length=255, blank=True)
+    time_limit = models.BooleanField(default=False)
 
     class Meta:
         db_table = 'task_condition'
