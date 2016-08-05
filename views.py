@@ -131,6 +131,9 @@ MODELS = (
 
     ('purchase.PurchaseGoods', 'purchase_goods.json'),
     ('purchase.PurchaseYueka', 'purchase_yueka.json'),
+
+    ('activity.NewPlayerActivity', 'activity_new_player.json'),
+    ('activity.DailyBuy', 'activity_daily_buy.json'),
 )
 
 class InMemoryZip(object):
