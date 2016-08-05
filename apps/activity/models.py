@@ -6,7 +6,7 @@ from django.db import models
 
 def _parse(text):
     res = []
-    for x in text:
+    for x in text.split(';'):
         if not x:
             continue
 
