@@ -3,7 +3,7 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from apps.purchase.models import PurchaseGoods,PurchaseYueka
+from apps.purchase.models import PurchaseGoods,PurchaseYueka, PurchaseFirstReward
 
 class ResourceGoods(resources.ModelResource):
     class Meta:
@@ -15,6 +15,10 @@ class ResourceYueka(resources.ModelResource):
         model = PurchaseYueka
         bulk_replace = True
 
+class ResourceFirstReward(resources.ModelResource):
+    class Meta:
+        model = PurchaseFirstReward
+        bulk_replace = True
 
 @admin.register(PurchaseGoods)
 class AdminGoods(ImportExportModelAdmin):
@@ -29,3 +33,8 @@ class AdminYueka(ImportExportModelAdmin):
     list_display = (
         'id', 'des', 'rmb', 'vip_exp', 'rewards', 'mail_title', 'mail_content'
     )
+
+@admin.register(PurchaseFirstReward)
+class AdminFirstReward(ImportExportModelAdmin):
+    resource_class = ResourceFirstReward
+    list_display = ('id', 'rewards')

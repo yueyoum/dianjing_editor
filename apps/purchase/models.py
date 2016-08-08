@@ -3,6 +3,34 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+class PurchaseFirstReward(models.Model):
+    id = models.IntegerField(primary_key=True)
+    rewards = models.TextField()
+
+    class Meta:
+        db_table = 'purchase_first_reward'
+        verbose_name = '首充奖励'
+        verbose_name_plural = '首充奖励'
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        def _parse(text):
+            res = []
+            for x in text.split(';'):
+                if not x:
+                    continue
+
+                a, b = x.split(',')
+                res.append((int(a), int(b)))
+
+            return res
+
+        for f in fixture:
+            f['fields']['rewards'] = _parse(f['fields']['rewards'])
+
+        return fixture
+
+
 class PurchaseGoods(models.Model):
     id = models.IntegerField(primary_key=True)
     des = models.TextField(blank=True)

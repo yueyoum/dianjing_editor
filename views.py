@@ -131,6 +131,7 @@ MODELS = (
 
     ('purchase.PurchaseGoods', 'purchase_goods.json'),
     ('purchase.PurchaseYueka', 'purchase_yueka.json'),
+    ('purchase.PurchaseFirstReward', 'purchase_first_reward.json'),
 
     ('activity.NewPlayerActivity', 'activity_new_player.json'),
     ('activity.DailyBuy', 'activity_daily_buy.json'),
