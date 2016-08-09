@@ -25,4 +25,4 @@ class ClubFlagAdmin(ImportExportModelAdmin):
 @admin.register(ClubLevel)
 class ClubLevelAdmin(ImportExportModelAdmin):
     resource_class = ResourceClubLevel
-    list_display = ('id', 'exp', 'des')
+    list_display = ('id', 'exp', 'energy', 'des')
