@@ -60,7 +60,7 @@ class ItemNewAdmin(ImportExportModelAdmin):
     resource_class = ResourceItemNew
 
     list_display = (
-        'id', 'name', 'des', 'icon', 'tp', 'quality', 'stack_max'
+        'id', 'name', 'des', 'icon', 'tp', 'sub_tp', 'quality', 'stack_max'
     )
 
     list_filter = ('tp',)

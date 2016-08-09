@@ -33,6 +33,7 @@ class ItemNew(models.Model):
     des = models.TextField()
     icon = models.CharField(max_length=255)
     tp = models.IntegerField(choices=TYPE)
+    sub_tp = models.IntegerField(default=0)
     quality = models.IntegerField()
     stack_max = models.IntegerField(verbose_name='堆叠上限')
 
