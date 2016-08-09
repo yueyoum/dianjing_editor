@@ -135,6 +135,9 @@ MODELS = (
 
     ('activity.NewPlayerActivity', 'activity_new_player.json'),
     ('activity.DailyBuy', 'activity_daily_buy.json'),
+
+    ('name.FirstName', 'first_name.json'),
+    ('name.LastName', 'last_name.json'),
 )
 
 class InMemoryZip(object):

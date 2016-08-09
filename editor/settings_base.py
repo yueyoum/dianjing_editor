@@ -75,6 +75,7 @@ INSTALLED_APPS = (
     'apps.union',
     'apps.purchase',
     'apps.activity',
+    'apps.name',
 )
 
 MIDDLEWARE_CLASSES = (
