@@ -19,6 +19,7 @@ class StoreType(models.Model):
     name = models.CharField(max_length=255)
     money_id = models.IntegerField()
     refresh_hour_interval = models.IntegerField(verbose_name='自动刷新间隔小时数')
+    show_refresh = models.BooleanField(default=True)
 
     class Meta:
         db_table = 'store_type'

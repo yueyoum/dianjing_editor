@@ -34,7 +34,7 @@ class ResourceSR(resources.ModelResource):
 class AdminStoreType(ImportExportModelAdmin):
     resource_class = ResourceStoreType
     list_display = (
-        'id', 'name', 'money_id', 'refresh_hour_interval'
+        'id', 'name', 'money_id', 'refresh_hour_interval', 'show_refresh'
     )
 
 
