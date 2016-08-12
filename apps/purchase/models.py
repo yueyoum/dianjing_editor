@@ -33,6 +33,7 @@ class PurchaseFirstReward(models.Model):
 
 class PurchaseGoods(models.Model):
     id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255)
     des = models.TextField(blank=True)
 
     rmb = models.IntegerField()
@@ -48,6 +49,7 @@ class PurchaseGoods(models.Model):
 
 class PurchaseYueka(models.Model):
     id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255)
     des = models.TextField(blank=True)
 
     rmb = models.IntegerField()
