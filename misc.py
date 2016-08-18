@@ -59,3 +59,17 @@ def create_fixture(model, ins):
 
     print "GET FROM MYSQL\t{0}".format(model)
     return data
+
+
+def parse_text(text, num):
+    res = []
+    for x in text.split(';'):
+        if not x:
+            continue
+
+        xlist = x.split(',')
+
+        a, b = xlist[:num]
+        res.append((int(a), int(b)))
+
+    return res

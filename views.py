@@ -138,6 +138,10 @@ MODELS = (
 
     ('name.FirstName', 'first_name.json'),
     ('name.LastName', 'last_name.json'),
+
+    ('plunder.BaseStationLevel', 'base_station_level.json'),
+    ('plunder.PlunderIncome', 'plunder_income.json'),
+    ('plunder.PlunderBuyTimesCost', 'plunder_buy_times_cost.json'),
 )
 
 class InMemoryZip(object):

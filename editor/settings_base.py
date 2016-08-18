@@ -76,6 +76,7 @@ INSTALLED_APPS = (
     'apps.purchase',
     'apps.activity',
     'apps.name',
+    'apps.plunder',
 )
 
 MIDDLEWARE_CLASSES = (
