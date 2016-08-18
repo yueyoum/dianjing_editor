@@ -19,7 +19,7 @@ class BaseStationLevel(models.Model):
     @classmethod
     def patch_fixture(cls, fixture):
         for f in fixture:
-            f['fields']['product'] = parse_text(f['fields']['product'])
+            f['fields']['product'] = parse_text(f['fields']['product'], 2)
 
         return fixture
 
