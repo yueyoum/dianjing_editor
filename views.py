@@ -78,6 +78,12 @@ MODELS = (
     ('item.EquipmentBase', 'equipment_new.json'),
     ('item.ItemExp', 'item_exp.json'),
 
+    ('item.EquipmentSpecial', 'equipment_special.json'),
+    ('item.EquipmentSpecialGrowingProperty', 'equipment_special_growing_property.json'),
+    ('item.EquipmentSpecialGenerate', 'equipment_special_generate.json'),
+    ('item.EquipmentSpecialScoreToGrowing', 'equipment_special_score_to_growing.json'),
+    ('item.EquipmentSpecialLevel', 'equipment_special_level.json'),
+
     ('talent.Talent', 'talent.json'),
     ('vip.VIP', 'vip.json'),
 

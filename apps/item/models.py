@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+from misc import parse_text
 
 class ItemQuality(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -204,3 +205,140 @@ class ItemExp(models.Model):
 
     class Meta:
         db_table = 'item_exp'
+
+
+def _parse_common_split_text(text):
+    if not text:
+        return []
+
+    result = []
+    for x in text.split(','):
+        if not x:
+            continue
+
+        result.append(int(x))
+
+    return result
+
+
+class EquipmentSpecial(models.Model):
+    id = models.IntegerField(primary_key=True)
+
+    staff_attack = models.IntegerField()
+    staff_defense = models.IntegerField()
+    staff_manage = models.IntegerField()
+
+    staff_attack_percent = models.FloatField()
+    staff_defense_percent = models.FloatField()
+    staff_manage_percent = models.FloatField()
+
+    unit_attack_percent = models.FloatField(verbose_name='攻击百分比')
+    unit_defense_percent = models.FloatField(verbose_name='防御百分比')
+    unit_hp_percent = models.FloatField(verbose_name='生命百分比')
+
+    unit_hit_rate = models.FloatField(verbose_name='命中率')
+    unit_dodge_rate = models.FloatField(verbose_name='闪避率')
+    unit_crit_rate = models.FloatField(verbose_name='暴击率')
+    unit_toughness_rate = models.FloatField(verbose_name='韧性')
+    unit_crit_multiple = models.FloatField(verbose_name='暴击被率')
+
+    unit_hurt_addition_to_terran = models.FloatField(verbose_name='对人族伤害加成')
+    unit_hurt_addition_to_protoss = models.FloatField(verbose_name='对神族伤害加成')
+    unit_hurt_addition_to_zerg = models.FloatField(verbose_name='对虫族伤害加成')
+
+    unit_hurt_addition_by_terran = models.FloatField(verbose_name='受到人族伤害加成')
+    unit_hurt_addition_by_protoss = models.FloatField(verbose_name='受到神族伤害加成')
+    unit_hurt_addition_by_zerg = models.FloatField(verbose_name='受到虫族伤害加成')
+
+    skills = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'equipment_special'
+        verbose_name = '特殊装备'
+        verbose_name_plural = '特殊装备'
+
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            f['fields']['skills'] = _parse_common_split_text(f['fields']['skills'])
+
+        return fixture
+
+
+class EquipmentSpecialGrowingProperty(models.Model):
+    id = models.IntegerField(primary_key=True)
+    growing_low = models.IntegerField()
+    growing_high = models.IntegerField()
+    property_active_levels = models.CharField(max_length=255, blank=True)
+    skill_active_levels = models.CharField(max_length=255, blank=True)
+
+    class Meta:
+        db_table = 'equipment_special_growing_property'
+        verbose_name = '特殊装备成长率属性'
+        verbose_name_plural = '特殊装备成长率属性'
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            f['fields']['property_active_levels'] = _parse_common_split_text(f['fields']['property_active_levels'])
+            f['fields']['skill_active_levels'] = _parse_common_split_text(f['fields']['skill_active_levels'])
+
+        return fixture
+
+
+class EquipmentSpecialGenerate(models.Model):
+    id = models.IntegerField(primary_key=True)
+    normal_cost = models.TextField()
+    normal_generate = models.TextField()
+    advance_cost = models.TextField()
+    advance_generate = models.TextField()
+
+    minutes = models.IntegerField()
+
+    class Meta:
+        db_table = 'equipment_special_generate'
+        verbose_name = '特殊装备制造'
+        verbose_name_plural = '特殊装备制造'
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            f['fields']['normal_cost'] = parse_text(f['fields']['normal_cost'], 2)
+            f['fields']['normal_generate'] = _parse_common_split_text(f['fields']['normal_generate'])
+            f['fields']['advance_cost'] = parse_text(f['fields']['advance_cost'], 2)
+            f['fields']['advance_generate'] = _parse_common_split_text(f['fields']['advance_generate'])
+
+        return fixture
+
+class EquipmentSpecialScoreToGrowing(models.Model):
+    id = models.IntegerField(primary_key=True)
+    tp = models.IntegerField()
+
+    score_low = models.IntegerField()
+    score_high = models.IntegerField()
+
+    growing_low = models.IntegerField()
+    growing_high = models.IntegerField()
+
+    class Meta:
+        db_table = 'equipment_special_score_to_growing'
+        verbose_name = '特殊装备分数成长率'
+        verbose_name_plural = '特殊装备分数成长率'
+
+
+class EquipmentSpecialLevel(models.Model):
+    id = models.IntegerField(primary_key=True)
+    items = models.TextField()
+
+    class Meta:
+        db_table = 'equipment_special_level'
+        verbose_name = '特殊装备等级'
+        verbose_name_plural = '特殊装备等级'
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            f['fields']['items'] = parse_text(f['fields']['items'], 2)
+
+        return fixture
