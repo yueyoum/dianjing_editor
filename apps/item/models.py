@@ -57,6 +57,7 @@ class EquipmentBase(models.Model):
         (2, '键盘'),
         (3, '显示器'),
         (4, '饰品'),
+        (5, '特殊'),
     )
 
     id = models.IntegerField(primary_key=True)

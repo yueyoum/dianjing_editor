@@ -151,7 +151,7 @@ class ResourceESGP(resources.ModelResource):
 
 @admin.register(EquipmentSpecialGrowingProperty)
 class AdminESGP(ImportExportModelAdmin):
-    resource_class = EquipmentSpecialGrowingProperty
+    resource_class = ResourceESGP
     list_display = (
         'id',
         'growing_low', 'growing_high',
