@@ -54,3 +54,35 @@ class PlunderBuyTimesCost(models.Model):
         db_table = 'plunder_buy_times_cost'
         verbose_name = '掠夺购买次数花费'
         verbose_name_plural = '掠夺购买次数花费'
+
+class PlunderNPC(models.Model):
+    id = models.IntegerField(primary_key=True)
+    level_low = models.IntegerField()
+    level_high = models.IntegerField()
+    way_one = models.CommaSeparatedIntegerField(max_length=255)
+    way_two = models.CommaSeparatedIntegerField(max_length=255)
+    way_three = models.CommaSeparatedIntegerField(max_length=255)
+
+    class Meta:
+        db_table = 'plunder_npc'
+        verbose_name = '掠夺NPC'
+        verbose_name_plural = '掠夺NPC'
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        def _parse(text):
+            result = []
+            for i in text.split(','):
+                if not i:
+                    continue
+
+                result.append(int(i))
+
+            return result
+
+        for f in fixture:
+            f['fields']['way_one'] = _parse(f['fields']['way_one'])
+            f['fields']['way_two'] = _parse(f['fields']['way_two'])
+            f['fields']['way_three'] = _parse(f['fields']['way_three'])
+
+        return fixture

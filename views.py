@@ -148,6 +148,7 @@ MODELS = (
     ('plunder.BaseStationLevel', 'base_station_level.json'),
     ('plunder.PlunderIncome', 'plunder_income.json'),
     ('plunder.PlunderBuyTimesCost', 'plunder_buy_times_cost.json'),
+    ('plunder.PlunderNPC', 'plunder_npc.json'),
 )
 
 class InMemoryZip(object):
