@@ -74,3 +74,13 @@ def parse_text(text, num):
         res.append(item)
 
     return res
+
+def parse_text_split_by_comma(text):
+    res = []
+    for x in text.split(','):
+        if not x:
+            continue
+
+        res.append(int(x))
+
+    return res
