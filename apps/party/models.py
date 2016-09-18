@@ -47,3 +47,13 @@ class PartyBuyItem(models.Model):
             f['fields']['reward'] = parse_text(f['fields']['reward'], 2)
 
         return fixture
+
+
+class PartyMessageTemplate(models.Model):
+    id = models.IntegerField(primary_key=True)
+    template = models.TextField()
+
+    class Meta:
+        db_table = 'party_message_template'
+        verbose_name = '宴会消息模板'
+        verbose_name_plural = '宴会消息模板'

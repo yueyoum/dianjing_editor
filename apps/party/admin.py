@@ -3,7 +3,7 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from apps.party.models import PartyBuyItem, PartyLevel
+from apps.party.models import PartyBuyItem, PartyLevel, PartyMessageTemplate
 
 class ResourcePL(resources.ModelResource):
     class Meta:
@@ -15,6 +15,10 @@ class ResourcePBI(resources.ModelResource):
         model = PartyBuyItem
         bulk_replace = True
 
+class ResourcePMT(resources.ModelResource):
+    class Meta:
+        model = PartyMessageTemplate
+        bulk_replace = True
 
 @admin.register(PartyLevel)
 class AdminPL(ImportExportModelAdmin):
@@ -30,3 +34,8 @@ class AdminPBI(ImportExportModelAdmin):
     list_display = (
         'id', 'name', 'cost', 'reward',
     )
+
+@admin.register(PartyMessageTemplate)
+class AdminPMT(ImportExportModelAdmin):
+    resource_class = ResourcePMT
+    list_display = ('id', 'template')

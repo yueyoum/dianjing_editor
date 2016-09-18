@@ -152,6 +152,7 @@ MODELS = (
 
     ('party.PartyLevel', 'party_level.json'),
     ('party.PartyBuyItem', 'party_buy_item.json'),
+    ('party.PartyMessageTemplate', 'party_message_template.json'),
 )
 
 class InMemoryZip(object):
