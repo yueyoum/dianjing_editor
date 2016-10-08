@@ -162,24 +162,42 @@ class ItemUse(models.Model):
                 if not group_text:
                     continue
                     
-                group_data = []
+                group = []
 
                 for item_text in group_text.split(';'):
                     if not item_text:
                         continue
 
                     _id, _amount, _prob = item_text.split(',')
-                    group_data.append(
-                        (int(_id), int(_amount), int(_prob))
+                    group.append(
+                        [int(_id), int(_amount), int(_prob)]
                     )
 
-                result.append(group_data)
+                for i in range(1, len(group)):
+                    group[i][-1] += group[i-1][-1]
+
+                result.append(group)
+            return result
+
+        def parse_special(result_text):
+            result = []
+
+            for x in result_text.split(';'):
+                if not x:
+                    continue
+
+                a, b  = x.split(',')
+                result.append((int(a), int(b)))
 
             return result
 
         for f in fixture:
             result = f['fields']['result']
-            f['fields']['result'] = parse_result(result)
+            
+            if f['fields']['use_item_id'] == -1:
+                f['fields']['result'] = parse_special(result)
+            else:
+                f['fields']['result'] = parse_result(result)
 
         return fixture
 

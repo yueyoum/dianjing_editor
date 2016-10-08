@@ -10,6 +10,7 @@ class Buff(models.Model):
     # 1 增益 2 减益
     mode = models.IntegerField()
     icon = models.CharField(max_length=255)
+    stack = models.IntegerField(default=1)
 
     class Meta:
         db_table = 'buff'
