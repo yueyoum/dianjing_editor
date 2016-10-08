@@ -193,9 +193,9 @@ class ItemUse(models.Model):
 
         for f in fixture:
             result = f['fields']['result']
-            
+
             if f['fields']['use_item_id'] == -1:
-                f['fields']['result'] = parse_special(result)
+                f['fields']['result'] = [parse_special(result)]
             else:
                 f['fields']['result'] = parse_result(result)
 
