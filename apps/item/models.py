@@ -187,8 +187,7 @@ class ItemUse(models.Model):
                     continue
 
                 a, b  = x.split(',')
-                result.append((int(a), int(b)))
-
+                result.append((int(a), int(b), 0))
             return result
 
         for f in fixture:
