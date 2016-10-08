@@ -25,3 +25,16 @@ class Function(models.Model):
         db_table = 'function'
         verbose_name = "功能"
         verbose_name_plural = "功能"
+
+
+class FunctionTips(models.Model):
+    id = models.IntegerField(primary_key=True)
+    level = models.IntegerField()
+    tp = models.IntegerField()
+    target = models.CharField(max_length=255)
+    des = models.TextField()
+
+    class Meta:
+        db_table = 'function_tips'
+        verbose_name = "功能开放提示"
+        verbose_name_plural = "功能开放提示"

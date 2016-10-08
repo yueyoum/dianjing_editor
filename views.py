@@ -57,6 +57,8 @@ MODELS = (
     ('notification.Notification', 'notification.json'),
 
     ('function.Function', 'function.json'),
+    ('function.FunctionTips', 'function_tips.json'),
+
     ('resources.Resource', 'resource.json'),
 
     ('emoticon.Emoticon', 'emoticon.json'),
