@@ -10,6 +10,7 @@ class ErrorMsg(models.Model):
     error_index = models.CharField(max_length=64, unique=True)
     text_zh = models.CharField(max_length=255)
     is_retry = models.BooleanField(default=True)
+    jump_to = models.CharField(max_length=255, blank=True)
 
     des = models.CharField(max_length=255, default="", blank=True)
 
