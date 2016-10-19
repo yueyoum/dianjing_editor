@@ -8,6 +8,7 @@ from apps.plunder.models import (
     PlunderIncome,
     PlunderBuyTimesCost,
     PlunderNPC,
+    PlunderDayReward,
 )
 
 class ResourceBaseStation(resources.ModelResource):
@@ -30,6 +31,10 @@ class ResourcePlunderNPC(resources.ModelResource):
         model = PlunderNPC
         bulk_replace = True
 
+class ResourcePlunderDayReward(resources.ModelResource):
+    class Meta:
+        model = PlunderDayReward
+        bulk_replace = True
 
 @admin.register(BaseStationLevel)
 class AdminBaseStation(ImportExportModelAdmin):
@@ -50,3 +55,8 @@ class AdminPlunderBuyTimesCost(ImportExportModelAdmin):
 class AdminPlunderNPC(ImportExportModelAdmin):
     resource_class = ResourcePlunderNPC
     list_display = ('id', 'level_low', 'level_high', 'way_one', 'way_two', 'way_three')
+
+@admin.register(PlunderDayReward)
+class AdminPlunderDayReward(ImportExportModelAdmin):
+    resource_class = ResourcePlunderDayReward
+    list_display = ('id', 'reward')

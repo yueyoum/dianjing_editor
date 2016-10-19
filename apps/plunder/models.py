@@ -86,3 +86,20 @@ class PlunderNPC(models.Model):
             f['fields']['way_three'] = _parse(f['fields']['way_three'])
 
         return fixture
+
+
+class PlunderDayReward(models.Model):
+    id = models.IntegerField(primary_key=True)
+    reward = models.TextField()
+
+    class Meta:
+        db_table = 'plunder_day_reward'
+        verbose_name = '掠夺每日奖励'
+        verbose_name_plural = '掠夺每日奖励'
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            f['fields']['rewards'] = parse_text(f['fields']['rewards'], 2)
+
+        return fixture
