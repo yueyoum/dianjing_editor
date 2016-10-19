@@ -151,7 +151,7 @@ MODELS = (
     ('plunder.PlunderIncome', 'plunder_income.json'),
     ('plunder.PlunderBuyTimesCost', 'plunder_buy_times_cost.json'),
     ('plunder.PlunderNPC', 'plunder_npc.json'),
-    ('plunder.PlunderDayReward', 'plunder_day_reward.json'),
+    ('plunder.PlunderDayReward', 'plunder_daily_reward.json'),
 
     ('party.PartyLevel', 'party_level.json'),
     ('party.PartyBuyItem', 'party_buy_item.json'),
