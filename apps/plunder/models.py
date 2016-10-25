@@ -100,6 +100,6 @@ class PlunderDayReward(models.Model):
     @classmethod
     def patch_fixture(cls, fixture):
         for f in fixture:
-            f['fields']['rewards'] = parse_text(f['fields']['rewards'], 2)
+            f['fields']['reward'] = parse_text(f['fields']['reward'], 2)
 
         return fixture
