@@ -72,6 +72,10 @@ class UnitNew(models.Model):
     effect_move = models.CharField(max_length=255, verbose_name='移动特效')
     effect_die = models.CharField(max_length=255, verbose_name='死亡特效')
 
+    param_a = models.FloatField(default=0)
+    param_b = models.FloatField(default=0)
+    param_c = models.FloatField(default=0)
+
     des = models.TextField(blank=True)
 
     class Meta:
