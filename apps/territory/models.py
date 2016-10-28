@@ -58,7 +58,7 @@ class TerritoryBuilding(models.Model):
                 lv = i.pop('building_level')
 
                 levels[lv] = i
-                inspire = Inspire.objects.get(Q(building_id=k) & Q(building_level=lv))
+                inspire = Territorynspire.objects.get(Q(building_id=k) & Q(building_level=lv))
                 levels[lv]['inspire'] = {
                     'exp': inspire.exp,
                     'max_times': inspire.max_times,
@@ -165,7 +165,7 @@ class StaffSpecialProduct(models.Model):
 
         return fixture
 
-class Inspire(models.Model):
+class Territorynspire(models.Model):
     id = models.IntegerField(primary_key=True)
     building_id = models.IntegerField()
     building_level = models.IntegerField()
@@ -194,7 +194,7 @@ class Inspire(models.Model):
         return result
 
 
-class InspireCost(models.Model):
+class TerritoryInspireCost(models.Model):
     id = models.IntegerField(primary_key=True)
     diamond = models.IntegerField()
 

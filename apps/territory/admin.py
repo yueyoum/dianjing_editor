@@ -8,8 +8,8 @@ from apps.territory.models import (
     BuildingSlot,
     BuildingSlotExtraProduct,
     StaffSpecialProduct,
-    Inspire,
-    InspireCost,
+    Territorynspire,
+    TerritoryInspireCost,
     ReportTemplate,
     TerritoryStore,
     Event,
@@ -41,13 +41,13 @@ class ResourceStaffSpecialProduct(resources.ModelResource):
 
 class ResourceInspire(resources.ModelResource):
     class Meta:
-        model = Inspire
+        model = Territorynspire
         bulk_replace = True
 
 
 class ResourceInspireCost(resources.ModelResource):
     class Meta:
-        model = InspireCost
+        model = TerritoryInspireCost
         bulk_replace = True
 
 
@@ -107,14 +107,14 @@ class AdminStaffSpecialProduct(ImportExportModelAdmin):
         'id', 'product_1', 'product_2', 'product_3'
     )
 
-@admin.register(Inspire)
+@admin.register(Territorynspire)
 class AdminInspire(ImportExportModelAdmin):
     resource_class = ResourceInspire
     list_display = (
         'id', 'building_id', 'building_level', 'exp', 'max_times', 'reward'
     )
 
-@admin.register(InspireCost)
+@admin.register(TerritoryInspireCost)
 class AdminInspireCost(ImportExportModelAdmin):
     resource_class = ResourceInspireCost
     list_display = ('id', 'diamond')
