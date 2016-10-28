@@ -40,6 +40,9 @@ MODELS = (
     ('club.ClubLevel', 'club_level.json'),
 
     ('qianban.QianBan', 'qianban.json'),
+    ('qianban.Inspire', 'inspire.json'),
+    ('qianban.InspireLevelAddition', 'inspire_level_addition.json'),
+    ('qianban.InspireStepAddition', 'inspire_step_addition.json'),
 
     ('match.ChallengeArea', 'challenge_area.json'),
     ('match.ChallengeChapter', 'challenge_chapter.json'),

@@ -5,6 +5,7 @@ from django.db import models
 class QianBan(models.Model):
     CONDITION_TYPE = (
         (1, "装配兵种"),
+        (2, "选手同时上阵")
     )
 
     id = models.IntegerField(primary_key=True)
@@ -60,3 +61,70 @@ class QianBan(models.Model):
             new_fixture.append(f)
 
         return new_fixture
+
+
+# 助威
+class Inspire(models.Model):
+    id = models.IntegerField(primary_key=True, verbose_name='孔位ID')
+    challenge_id = models.IntegerField(verbose_name='开启需要通过关卡')
+    des = models.TextField()
+
+    class Meta:
+        db_table = 'inspire'
+        verbose_name = '助威'
+        verbose_name_plural = '助威'
+
+
+class InspireLevelAddition(models.Model):
+    id = models.IntegerField(primary_key=True)
+    des = models.TextField()
+
+    level = models.IntegerField()
+
+    attack = models.IntegerField()
+    attack_percent = models.FloatField()
+
+    defense = models.IntegerField()
+    defense_percent = models.FloatField()
+
+    manage = models.IntegerField()
+    manage_percent = models.FloatField()
+
+    operation = models.IntegerField()
+    operation_percent = models.FloatField()
+
+    class Meta:
+        db_table = 'inspire_level_addition'
+        verbose_name = '助威等级加成'
+        verbose_name_plural = '助威等级加成'
+
+
+class InspireStepAddition(models.Model):
+    id = models.IntegerField(primary_key=True)
+    des = models.TextField()
+
+    step = models.IntegerField()
+
+    attack_percent = models.FloatField(verbose_name='攻击百分比')
+    defense_percent = models.FloatField(verbose_name='防御百分比')
+    hp_percent = models.FloatField(verbose_name='生命百分比')
+
+    hit_rate = models.FloatField(verbose_name='命中率')
+    dodge_rate = models.FloatField(verbose_name='闪避率')
+    crit_rate = models.FloatField(verbose_name='暴击率')
+    toughness_rate = models.FloatField(verbose_name='韧性')
+    crit_multiple = models.FloatField(verbose_name='暴击被率')
+
+    hurt_addition_to_terran = models.FloatField(verbose_name='对人族伤害加成')
+    hurt_addition_to_protoss = models.FloatField(verbose_name='对神族伤害加成')
+    hurt_addition_to_zerg = models.FloatField(verbose_name='对虫族伤害加成')
+
+    hurt_addition_by_terran = models.FloatField(verbose_name='受到人族伤害加成')
+    hurt_addition_by_protoss = models.FloatField(verbose_name='受到神族伤害加成')
+    hurt_addition_by_zerg = models.FloatField(verbose_name='受到虫族伤害加成')
+
+
+    class Meta:
+        db_table = 'inspire_step_addition'
+        verbose_name = '助威等阶加成'
+        verbose_name_plural = '助威等阶加成'
