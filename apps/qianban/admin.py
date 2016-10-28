@@ -43,11 +43,11 @@ class AdminInspire(ImportExportModelAdmin):
 @admin.register(InspireLevelAddition)
 class AdminInspireLA(ImportExportModelAdmin):
     resource_class = ResourceInspireLA
-    list_display = ('id', 'des', 'level')
+    list_display = ('id', 'des')
     ordering = ('id',)
 
 @admin.register(InspireStepAddition)
 class AdminInspireSA(ImportExportModelAdmin):
     resource_class = ResourceInspireSA
-    list_display = ('id', 'des', 'step')
+    list_display = ('id', 'des')
     ordering = ('id',)

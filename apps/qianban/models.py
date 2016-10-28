@@ -79,8 +79,6 @@ class InspireLevelAddition(models.Model):
     id = models.IntegerField(primary_key=True)
     des = models.TextField()
 
-    level = models.IntegerField()
-
     attack = models.IntegerField()
     attack_percent = models.FloatField()
 
@@ -102,8 +100,6 @@ class InspireLevelAddition(models.Model):
 class InspireStepAddition(models.Model):
     id = models.IntegerField(primary_key=True)
     des = models.TextField()
-
-    step = models.IntegerField()
 
     attack_percent = models.FloatField(verbose_name='攻击百分比')
     defense_percent = models.FloatField(verbose_name='防御百分比')
