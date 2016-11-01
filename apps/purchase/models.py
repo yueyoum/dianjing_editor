@@ -41,6 +41,8 @@ class PurchaseGoods(models.Model):
     diamond = models.IntegerField()
     diamond_extra = models.IntegerField()
 
+    ios_product_id = models.TextField(max_length=255)
+
     class Meta:
         db_table = 'purchase_goods'
         verbose_name = '充值商品'
@@ -58,6 +60,8 @@ class PurchaseYueka(models.Model):
     rewards = models.CharField(max_length=255)
     mail_title = models.CharField(max_length=255)
     mail_content = models.CharField(max_length=255)
+
+    ios_product_id = models.TextField(max_length=255)
 
     class Meta:
         db_table = 'purchase_yueka'

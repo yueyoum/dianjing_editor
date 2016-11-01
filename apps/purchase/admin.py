@@ -24,14 +24,16 @@ class ResourceFirstReward(resources.ModelResource):
 class AdminGoods(ImportExportModelAdmin):
     resource_class = ResourceGoods
     list_display = (
-        'id', 'name', 'des', 'rmb', 'vip_exp', 'diamond', 'diamond_extra'
+        'id', 'name', 'des', 'rmb', 'vip_exp', 'diamond', 'diamond_extra',
+        'ios_product_id',
     )
 
 @admin.register(PurchaseYueka)
 class AdminYueka(ImportExportModelAdmin):
     resource_class = ResourceYueka
     list_display = (
-        'id', 'name', 'des', 'rmb', 'vip_exp', 'rewards', 'mail_title', 'mail_content'
+        'id', 'name', 'des', 'rmb', 'vip_exp', 'rewards', 'mail_title', 'mail_content',
+        'ios_product_id',
     )
 
 @admin.register(PurchaseFirstReward)
