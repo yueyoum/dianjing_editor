@@ -91,6 +91,7 @@ class PlunderNPC(models.Model):
 class PlunderDayReward(models.Model):
     id = models.IntegerField(primary_key=True)
     reward = models.TextField()
+    des = models.TextField()
 
     class Meta:
         db_table = 'plunder_day_reward'

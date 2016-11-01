@@ -59,4 +59,4 @@ class AdminPlunderNPC(ImportExportModelAdmin):
 @admin.register(PlunderDayReward)
 class AdminPlunderDayReward(ImportExportModelAdmin):
     resource_class = ResourcePlunderDayReward
-    list_display = ('id', 'reward')
+    list_display = ('id', 'reward', 'des')
