@@ -12,7 +12,7 @@ from cStringIO import StringIO
 import redis
 from django.core import management
 
-r = redis.Redis()
+r = redis.Redis(db=1)
 
 def make_cache_key(model):
     return 'dianjing:editor:cache:{0}'.format(model)
