@@ -15,5 +15,5 @@ class ResourceAdmin(ImportExportModelAdmin):
     resource_class = RR
 
     list_display = (
-        'id', 'name', 'icon'
+        'id', 'name', 'icon', 'num'
     )
