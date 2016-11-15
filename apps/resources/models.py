@@ -6,6 +6,7 @@ class Resource(models.Model):
     id = models.CharField(max_length=255, primary_key=True)
     name = models.CharField(max_length=255)
     icon = models.CharField(max_length=255, blank=True)
+    num = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.name
