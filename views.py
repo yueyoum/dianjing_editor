@@ -159,6 +159,11 @@ MODELS = (
     ('party.PartyLevel', 'party_level.json'),
     ('party.PartyBuyItem', 'party_buy_item.json'),
     ('party.PartyMessageTemplate', 'party_message_template.json'),
+
+    ('championship.WinScore', 'championship_win_score.json'),
+    ('championship.ScoreReward', 'championship_score_reward.json'),
+    ('championship.RankReward', 'championship_rank_reward.json'),
+    ('championship.Bet', 'championship_bet.json'),
 )
 
 class InMemoryZip(object):
