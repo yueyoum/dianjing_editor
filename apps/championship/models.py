@@ -5,7 +5,7 @@ from django.db import models
 from misc import parse_text
 
 
-class WinScore(models.Model):
+class ChampionshipWinScore(models.Model):
     id = models.IntegerField(primary_key=True)
     score = models.IntegerField()
 
@@ -15,7 +15,7 @@ class WinScore(models.Model):
         verbose_name_plural = '获取分数'
 
 
-class ScoreReward(models.Model):
+class ChampionshipScoreReward(models.Model):
     id = models.IntegerField(primary_key=True)
     mail_title = models.CharField(max_length=255)
     mail_content = models.TextField()
@@ -34,7 +34,7 @@ class ScoreReward(models.Model):
         return fixtures
 
 
-class RankReward(models.Model):
+class ChampionshipRankReward(models.Model):
     id = models.IntegerField(primary_key=True)
     mail_title = models.CharField(max_length=255)
     mail_content = models.TextField()
@@ -53,7 +53,7 @@ class RankReward(models.Model):
         return fixtures
 
 
-class Bet(models.Model):
+class ChampionshipBet(models.Model):
     ROUND = (
         (16, '16 进 8'),
         (8, '8 进 4'),
