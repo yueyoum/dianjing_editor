@@ -42,8 +42,8 @@ class ChampionshipRankReward(models.Model):
 
     class Meta:
         db_table = 'championship_rank_reward'
-        verbose_name = '小组排名奖励'
-        verbose_name_plural = '小组排名奖励'
+        verbose_name = '排名奖励'
+        verbose_name_plural = '排名奖励'
 
     @classmethod
     def patch_fixture(cls, fixtures):
