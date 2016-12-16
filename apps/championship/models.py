@@ -54,7 +54,7 @@ class ChampionshipRankReward(models.Model):
 
 
 class ChampionshipBet(models.Model):
-    ROUND = (
+    LEVEL = (
         (16, '16 进 8'),
         (8, '8 进 4'),
         (4, '4 进 2'),
@@ -64,7 +64,7 @@ class ChampionshipBet(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
 
-    round_num = models.IntegerField(choices=ROUND)
+    level = models.IntegerField(choices=LEVEL)
 
     cost = models.TextField()
 

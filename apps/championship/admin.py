@@ -49,7 +49,7 @@ class AdminRR(ImportExportModelAdmin):
 class AdminBet(ImportExportModelAdmin):
     resource_class = ResourceBet
     list_display = (
-        'id', 'name', 'round_num', 'cost',
+        'id', 'name', 'level', 'cost',
         'win_mail_title', 'win_mail_content', 'win_reward',
         'lose_mail_title', 'lose_mail_content', 'lose_reward',
     )
