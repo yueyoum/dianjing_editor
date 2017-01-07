@@ -24,7 +24,7 @@ from apps.item.models import (
 @admin.register(ItemQuality)
 class ItemQualityAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'name', 'color', 'icon', 'background',
+        'id', 'name', 'color', 'icon', 'staff_icon', 'background',
     )
 
 

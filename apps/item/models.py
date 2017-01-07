@@ -8,6 +8,7 @@ class ItemQuality(models.Model):
     name = models.CharField(max_length=32)
     color = models.CharField(max_length=32, blank=True)
     icon = models.CharField(max_length=255, blank=True)
+    staff_icon = models.CharField(max_length=255, blank=True)
     background = models.CharField(max_length=255, blank=True)
 
     def __unicode__(self):
