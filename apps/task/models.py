@@ -60,6 +60,7 @@ class TaskDaily(models.Model):
     des = models.TextField()
     club_level = models.IntegerField()
     vip_level = models.IntegerField()
+    challenge_id = models.IntegerField()
 
     condition_id = models.IntegerField()
     condition_value = models.IntegerField()

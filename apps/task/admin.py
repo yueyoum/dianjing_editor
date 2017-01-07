@@ -42,7 +42,8 @@ class AdminTaskMain(ImportExportModelAdmin):
 @admin.register(TaskDaily)
 class AdminTaskDaily(ImportExportModelAdmin):
     resource_class = ResourceTaskDaily
-    list_display = ('id', 'name', 'des', 'club_level', 'vip_level',
+    list_display = ('id', 'name', 'des',
+                    'club_level', 'vip_level', 'challenge_id',
                     'condition_id', 'condition_value',
                     'rewards',
                     )
