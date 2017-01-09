@@ -23,6 +23,7 @@ class VIP(models.Model):
     territory_help_times = models.IntegerField(default=0, verbose_name='领地帮助好友次数')
     arena_search_reset_times = models.IntegerField(default=5, verbose_name='竞技场搜索重置次数')
     plunder_buy_times = models.IntegerField(default=10, verbose_name='掠夺购买次数')
+    union_harass_buy_times = models.IntegerField(default=0, verbose_name='公会骚扰购买次数')
 
     class Meta:
         db_table = "vip"
