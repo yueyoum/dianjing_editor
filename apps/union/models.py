@@ -110,9 +110,9 @@ class UnionSkill(models.Model):
     skill_id = models.IntegerField()
     level = models.IntegerField()
     name = models.CharField(max_length=255)
-    des = models.TextField()
+    des = models.TextField(blank=True)
 
-    level_up_cost = models.TextField()
+    level_up_cost = models.TextField(blank=True)
     talent_id = models.IntegerField()
 
     class Meta:
@@ -128,7 +128,10 @@ class UnionSkill(models.Model):
             sid = meta_data.pop('skill_id')
             lv = meta_data.pop('level')
 
-            meta_data['level_up_cost'] = parse_text(meta_data['level_up_cost'], 2)
+            if not meta_data['level_up_cost']:
+                meta_data['level_up_cost'] = []
+            else:
+                meta_data['level_up_cost'] = parse_text(meta_data['level_up_cost'], 2)
 
             if sid not in skills:
                 skills[sid] = {'levels': {lv: meta_data}}
