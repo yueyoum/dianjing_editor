@@ -139,6 +139,10 @@ MODELS = (
 
     ('union.UnionLevel', 'union_level.json'),
     ('union.UnionSignIn', 'union_signin.json'),
+    ('union.UnionExplore', 'union_explore.json'),
+    ('union.UnionExploreRankReward', 'union_explore_rank_reward.json'),
+    ('union.UnionMemberExploreRankReward', 'union_member_explore_rank_reward.json'),
+    ('union.UnionSkill', 'union_skill.json'),
 
     ('purchase.PurchaseGoods', 'purchase_goods.json'),
     ('purchase.PurchaseYueka', 'purchase_yueka.json'),
