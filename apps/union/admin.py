@@ -9,6 +9,7 @@ from apps.union.models import (
     UnionExplore,
     UnionExploreRankReward,
     UnionMemberExploreRankReward,
+    UnionHarassBuyTimesCost,
     UnionSkill,
 )
 
@@ -64,6 +65,16 @@ class ResourceUMERR(resources.ModelResource):
 class AdminUMERR(ImportExportModelAdmin):
     resource_class = ResourceUMERR
     list_display = ('id', 'rank_des', 'reward', 'mail_title', 'mail_content')
+
+class ResourceUHB(resources.ModelResource):
+    class Meta:
+        model = UnionHarassBuyTimesCost
+        bulk_replace = True
+
+@admin.register(UnionHarassBuyTimesCost)
+class AdminUHB(ImportExportModelAdmin):
+    resource_class = ResourceUHB
+    list_display = ('id', 'diamond')
 
 class ResourceUSkill(resources.ModelResource):
     class Meta:

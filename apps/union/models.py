@@ -104,6 +104,15 @@ class UnionMemberExploreRankReward(models.Model):
 
         return fixture
 
+class UnionHarassBuyTimesCost(models.Model):
+    id = models.IntegerField(primary_key=True, verbose_name='购买次数')
+    diamond = models.IntegerField()
+
+    class Meta:
+        db_table = 'union_harass_buy_times_cost'
+        verbose_name = '骚扰购买次数消费'
+        verbose_name_plural = "骚扰购买次数消费"
+
 
 class UnionSkill(models.Model):
     id = models.IntegerField(primary_key=True)

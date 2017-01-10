@@ -142,6 +142,7 @@ MODELS = (
     ('union.UnionExplore', 'union_explore.json'),
     ('union.UnionExploreRankReward', 'union_explore_rank_reward.json'),
     ('union.UnionMemberExploreRankReward', 'union_member_explore_rank_reward.json'),
+    ('union.UnionHarassBuyTimesCost', 'union_harass_buy_times_cost.json'),
     ('union.UnionSkill', 'union_skill.json'),
 
     ('purchase.PurchaseGoods', 'purchase_goods.json'),
