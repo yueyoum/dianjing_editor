@@ -12,7 +12,8 @@ class ClientConfig(models.Model):
 
 class GlobalConfig(models.Model):
     id = models.CharField(max_length=255, primary_key=True)
-    value = models.CharField(max_length=255)
+    value = models.IntegerField()
+    value_string = models.CharField(max_length=255, blank=True)
     mean = models.CharField(max_length=255, blank=True)
 
     class Meta:

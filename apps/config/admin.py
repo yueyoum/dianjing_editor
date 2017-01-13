@@ -22,4 +22,4 @@ class ClientConfigAdmin(ImportExportModelAdmin):
 @admin.register(GlobalConfig)
 class GlobalConfigAdmin(ImportExportModelAdmin):
     resource_class = ResourceGC
-    list_display = ('id', 'value', 'mean')
+    list_display = ('id', 'value', 'value_string', 'mean')
