@@ -85,6 +85,6 @@ class ResourceUSkill(resources.ModelResource):
 class AdminUSkill(ImportExportModelAdmin):
     resource_class = ResourceUSkill
     list_display = (
-        'id', 'skill_id', 'level', 'name', 'des',
+        'id', 'skill_id', 'level', 'name', 'icon', 'des',
         'level_up_cost', 'talent_id'
     )

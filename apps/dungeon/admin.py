@@ -35,7 +35,7 @@ class DungeonGradeAdmin(ImportExportModelAdmin):
     resource_class = ResourceDungeonGrade
 
     list_display = (
-        "id", "name", "belong", "power", "need_level",
+        "id", "name", "icon", "belong", "power", "need_level",
         "npc", "des"
     )
 

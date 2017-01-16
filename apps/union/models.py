@@ -119,6 +119,7 @@ class UnionSkill(models.Model):
     skill_id = models.IntegerField()
     level = models.IntegerField()
     name = models.CharField(max_length=255)
+    icon = models.CharField(max_length=255, blank=True)
     des = models.TextField(blank=True)
 
     level_up_cost = models.TextField(blank=True)

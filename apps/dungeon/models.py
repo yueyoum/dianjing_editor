@@ -36,6 +36,7 @@ class Dungeon(models.Model):
 class DungeonGrade(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="副本等级ID")
     name = models.CharField(max_length=32, verbose_name="副本等级名")
+    icon = models.CharField(max_length=255, blank=True)
     belong = models.IntegerField(verbose_name="副本所属")
     power = models.IntegerField(verbose_name="参考战力")
     need_level = models.IntegerField(verbose_name="等级限制")

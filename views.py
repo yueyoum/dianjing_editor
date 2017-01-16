@@ -18,6 +18,7 @@ from misc import get_fixture
 MODELS = (
     ('config.ClientConfig', 'client_config.json'),
     ('config.GlobalConfig', 'global_config.json'),
+    ('ui.UI', 'ui.json'),
 
     ('errormsg.ErrorMsg', 'errormsg.json'),
 
