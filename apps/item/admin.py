@@ -20,9 +20,14 @@ from apps.item.models import (
     EquipmentSpecialScoreToGrowing,
 )
 
+class ResourceIQ(resources.ModelResource):
+    class Meta:
+        model = ItemQuality
+        bulk_replace = True
 
 @admin.register(ItemQuality)
-class ItemQualityAdmin(admin.ModelAdmin):
+class ItemQualityAdmin(ImportExportModelAdmin):
+    resource_class = ResourceIQ
     list_display = (
         'id', 'name', 'color', 'icon', 'staff_icon', 'background',
     )
