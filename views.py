@@ -68,13 +68,8 @@ MODELS = (
     ('emoticon.Emoticon', 'emoticon.json'),
     ('guide.Guide', 'guide.json'),
 
-    ('template.SponsorLogTemplate', 'sponsor_template.json'),
     ('template.BroadcastTemplate', 'broadcast_template.json'),
 
-
-    ('client_npc.ClientNPC', 'client_npc.json'),
-
-    ('conversation.Conversation', 'conversation.json'),
     ('conversation.ChallengeConversation', 'challenge_conversation.json'),
 
     ('item.ItemQuality', 'item_quality.json'),

@@ -3,20 +3,7 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from apps.conversation.models import Conversation, ConversationInfo, ChallengeConversation
-
-
-class ConversationInLine(admin.TabularInline):
-    model = ConversationInfo
-
-
-@admin.register(Conversation)
-class ConversationAdmin(admin.ModelAdmin):
-    list_display = (
-        'id', 'tp', 'condition_value', 'is_loop', 'time_tp'
-    )
-
-    inlines = [ConversationInLine]
+from apps.conversation.models import  ChallengeConversation
 
 
 class ResourceCC(resources.ModelResource):

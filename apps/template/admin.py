@@ -2,12 +2,7 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from apps.template.models import SponsorLogTemplate, BroadcastTemplate
-
-@admin.register(SponsorLogTemplate)
-class SponsorLogTemplateAdmin(admin.ModelAdmin):
-    list_display = ('id', 'template')
-
+from apps.template.models import BroadcastTemplate
 
 class ResourceBT(resources.ModelResource):
     class Meta:
