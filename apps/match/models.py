@@ -25,7 +25,6 @@ class ChallengeChapter(models.Model):
     des = models.TextField()
     star_reward = models.CharField(max_length=255, help_text='星数,奖励ID,奖励数量;...')
     area = models.IntegerField()
-    map_name = models.CharField(max_length=255, blank=True)
 
     def __unicode__(self):
         return self.name
@@ -73,6 +72,8 @@ class ChallengeMatch(models.Model):
     condition_challenge = models.IntegerField(db_index=True, verbose_name='前置关卡ID')
     times_limit = models.IntegerField(verbose_name='每日限制次数')
     show_item_id = models.IntegerField(default=0)
+    map_name = models.CharField(max_length=255, blank=True)
+
 
     def __unicode__(self):
         return self.name
