@@ -2,17 +2,8 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from misc import parse_text
 
-
-def _parse(text):
-    res = []
-    for x in text.split(';'):
-        if not x:
-            continue
-
-        a, b = x.split(',')
-        res.append((int(a), int(b)))
-    return res
 
 class NewPlayerActivity(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -33,7 +24,7 @@ class NewPlayerActivity(models.Model):
     @classmethod
     def patch_fixture(cls, fixture):
         for f in fixture:
-            f['fields']['rewards'] = _parse(f['fields']['rewards'])
+            f['fields']['rewards'] = parse_text(f['fields']['rewards'], 2)
 
         return fixture
 
@@ -52,6 +43,42 @@ class DailyBuy(models.Model):
     @classmethod
     def patch_fixture(cls, fixture):
         for f in fixture:
-            f['fields']['items'] = _parse(f['fields']['items'])
+            f['fields']['items'] = parse_text(f['fields']['items'], 2)
+
+        return fixture
+
+
+class OnlineTimeActivity(models.Model):
+    id = models.IntegerField(primary_key=True)
+    online_time = models.IntegerField()
+    des = models.TextField()
+    rewards = models.TextField()
+
+    class Meta:
+        db_table = 'online_time_activity'
+        verbose_name = '在线时长活动'
+        verbose_name_plural = '在线时长活动'
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            f['fields']['rewards'] = parse_text(f['fields']['rewards'], 2)
+
+        return fixture
+
+class ChallengeActivity(models.Model):
+    id = models.IntegerField(primary_key=True)
+    des = models.TextField()
+    rewards = models.TextField()
+
+    class Meta:
+        db_table = 'activity_challenge'
+        verbose_name = '冲关活动'
+        verbose_name_plural = '冲关活动'
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            f['fields']['rewards'] = parse_text(f['fields']['rewards'], 2)
 
         return fixture

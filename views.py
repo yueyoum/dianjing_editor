@@ -147,6 +147,8 @@ MODELS = (
 
     ('activity.NewPlayerActivity', 'activity_new_player.json'),
     ('activity.DailyBuy', 'activity_daily_buy.json'),
+    ('activity.OnlineTimeActivity', 'activity_online_time.json'),
+    ('activity.ChallengeActivity', 'activity_challenge.json'),
 
     ('name.FirstName', 'first_name.json'),
     ('name.LastName', 'last_name.json'),
