@@ -51,7 +51,7 @@ class DailyBuy(models.Model):
 class OnlineTimeActivity(models.Model):
     id = models.IntegerField(primary_key=True)
     online_time = models.IntegerField()
-    des = models.TextField()
+    des = models.TextField(blank=True)
     rewards = models.TextField()
 
     class Meta:
@@ -68,7 +68,7 @@ class OnlineTimeActivity(models.Model):
 
 class ChallengeActivity(models.Model):
     id = models.IntegerField(primary_key=True)
-    des = models.TextField()
+    des = models.TextField(blank=True)
     rewards = models.TextField()
 
     class Meta:
