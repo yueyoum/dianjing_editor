@@ -17,6 +17,10 @@ from misc import cache_set, create_fixture
 
 @receiver(post_import, dispatch_uid='xxx.post_import')
 def _post_import(model, **kwargs):
+    related_model_getter = getattr(model, 'get_related_model', None)
+    if related_model_getter:
+        model = related_model_getter()
+
     key_func = getattr(model, 'get_fixture_key', None)
     if key_func:
         # 期望cache住
@@ -28,6 +32,10 @@ def _post_import(model, **kwargs):
 
 @receiver(post_save, dispatch_uid='xxx.post_save')
 def _post_save(sender, **kwargs):
+    related_model_getter = getattr(sender, 'get_related_model', None)
+    if related_model_getter:
+        sender = related_model_getter()
+
     key_func = getattr(sender, 'get_fixture_key', None)
     if key_func:
         # 期望cache住

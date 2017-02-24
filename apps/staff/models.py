@@ -242,6 +242,9 @@ class StaffStep(models.Model):
         verbose_name = "选手升阶（新）"
         verbose_name_plural = "选手升阶（新）"
 
+    @classmethod
+    def get_related_model(cls):
+        return StaffNew
 
 class StaffStar(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name='星级')
