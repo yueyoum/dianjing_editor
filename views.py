@@ -19,6 +19,7 @@ MODELS = (
     ('config.ClientConfig', 'client_config.json'),
     ('config.GlobalConfig', 'global_config.json'),
     ('ui.UI', 'ui.json'),
+    ('ui.BackgroundImage', 'background_image.json'),
 
     ('errormsg.ErrorMsg', 'errormsg.json'),
 
