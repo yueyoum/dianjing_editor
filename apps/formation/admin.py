@@ -13,7 +13,7 @@ class ResourceSlot(resources.ModelResource):
 @admin.register(Slot)
 class AdminSlot(ImportExportModelAdmin):
     resource_class = ResourceSlot
-    list_display = ('id', 'club_level', 'des')
+    list_display = ('id', 'challenge_id', 'des')
 
 
 class ResourceFormation(resources.ModelResource):

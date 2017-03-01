@@ -5,7 +5,7 @@ from django.db import models
 
 class Slot(models.Model):
     id = models.IntegerField(primary_key=True)
-    club_level = models.IntegerField()
+    challenge_id = models.IntegerField()
     des = models.TextField()
 
     class Meta:
