@@ -45,6 +45,7 @@ class Guide(models.Model):
     position = models.IntegerField(default=1, choices=POSITION)
     icon = models.CharField(max_length=255, blank=True)
     des = models.TextField(blank=True)
+    delay = models.IntegerField(default=0)
 
     class Meta:
         db_table = 'guide'
