@@ -82,3 +82,38 @@ class ChallengeActivity(models.Model):
             f['fields']['rewards'] = parse_text(f['fields']['rewards'], 2)
 
         return fixture
+
+class PurchaseContinuesActivity(models.Model):
+    id = models.IntegerField(primary_key=True)
+    des = models.TextField()
+    rewards = models.TextField()
+
+    class Meta:
+        db_table = 'purchase_continues_activity'
+        verbose_name = '连续充值活动'
+        verbose_name_plural = '连续充值活动'
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            f['fields']['rewards'] = parse_text(f['fields']['rewards'], 2)
+
+        return fixture
+
+
+class LevelGrowingActivity(models.Model):
+    id = models.IntegerField(primary_key=True)
+    des = models.TextField()
+    rewards = models.TextField()
+
+    class Meta:
+        db_table = 'level_growing_activity'
+        verbose_name = '等级成长活动'
+        verbose_name_plural = '等级成长活动'
+
+    @classmethod
+    def patch_fixture(cls, fixture):
+        for f in fixture:
+            f['fields']['rewards'] = parse_text(f['fields']['rewards'], 2)
+
+        return fixture

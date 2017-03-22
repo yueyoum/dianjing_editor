@@ -150,6 +150,8 @@ MODELS = (
     ('activity.DailyBuy', 'activity_daily_buy.json'),
     ('activity.OnlineTimeActivity', 'activity_online_time.json'),
     ('activity.ChallengeActivity', 'activity_challenge.json'),
+    ('activity.PurchaseContinuesActivity', 'activity_purchase_continues.json'),
+    ('activity.LevelGrowingActivity', 'activity_level_growing.json'),
 
     ('name.FirstName', 'first_name.json'),
     ('name.LastName', 'last_name.json'),

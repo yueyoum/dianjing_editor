@@ -8,6 +8,8 @@ from apps.activity.models import (
     DailyBuy,
     OnlineTimeActivity,
     ChallengeActivity,
+    PurchaseContinuesActivity,
+    LevelGrowingActivity,
 )
 
 class ResourceNewPlayer(resources.ModelResource):
@@ -28,6 +30,16 @@ class ResourceOTA(resources.ModelResource):
 class ResourceCA(resources.ModelResource):
     class Meta:
         model = ChallengeActivity
+        bulk_replace = True
+
+class ResourcePCA(resources.ModelResource):
+    class Meta:
+        model = PurchaseContinuesActivity
+        bulk_replace = True
+
+class ResourceLGA(resources.ModelResource):
+    class Meta:
+        model = LevelGrowingActivity
         bulk_replace = True
 
 
@@ -57,4 +69,14 @@ class AdminOTA(ImportExportModelAdmin):
 @admin.register(ChallengeActivity)
 class AdminCA(ImportExportModelAdmin):
     resource_class = ResourceCA
+    list_display = ('id', 'des', 'rewards')
+
+@admin.register(PurchaseContinuesActivity)
+class AdminPCA(ImportExportModelAdmin):
+    resource_class = ResourcePCA
+    list_display = ('id', 'des', 'rewards')
+
+@admin.register(LevelGrowingActivity)
+class AdminLGA(ImportExportModelAdmin):
+    resource_class = ResourceLGA
     list_display = ('id', 'des', 'rewards')
